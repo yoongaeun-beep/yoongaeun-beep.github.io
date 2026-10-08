@@ -77,6 +77,13 @@ window.SITE_MAIN = [
     links: [
       { label: { ko: "GitHub 저장소", en: "GitHub repository" }, href: "https://github.com/jgi0117/2team_project" }
     ],
+    // 서버 없이 사이트 안에서 돌아가는 메인 화면 재현본 (demo\build_demo.ps1로 생성)
+    demo: {
+      link: "projects/dashboard-demo/index.html",
+      label: { ko: "▶ 대시보드 직접 눌러보기", en: "▶ Try the dashboard" },
+      note: { ko: "웹 재현본 · 원본 코드로 계산한 2015-10-05 기준 데이터", en: "Web replica · data computed by the original code (as of 2015-10-05)" },
+      title: { ko: "설비보전 대시보드 · 웹 재현본", en: "Maintenance dashboard · web replica" }
+    },
     images: [
       { src: "assets/main/dashboard-main.png", alt: { ko: "대시보드 메인 화면: AI 한 줄 요약, 경고 KPI, To-Do 달력, 위험 TOP3, 재고 × 위험 교차표", en: "Dashboard home: AI summary, KPIs, to-do calendar, top-3 risk, stock × risk table" } }
     ]

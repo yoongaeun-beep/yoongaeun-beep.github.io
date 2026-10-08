@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설비보전 대시보드 · 웹 재현본</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;600;700;800&display=swap">
+<style>
+/* 원본 Dash 앱(src/ui/assets/00_tokens.css, 20_main.css)의 색과 배치를 따른 재현본 */
+:root {
+  --navy: #003566; --navy-dark: #001d3d; --navy-ink: #0f1a2b; --yellow: #ffc300; --yellow-soft: #fff4cc;
+  --bg: #f3f5f8; --card: #ffffff; --line: #e3e7ed; --muted: #6b7686; --muted-2: #8a94a6;
+  --danger: #e03131; --warn: #f2a900; --ok: #2b8a3e; --part: #e8eef6; --anomaly: #fff1c2;
+  --font: "Gothic A1", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--navy-ink); font-family: var(--font); font-size: 14px; line-height: 1.5; word-break: keep-all; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.app { display: grid; grid-template-columns: 200px minmax(0, 1fr); min-height: 100%; }
+/* 사이드바 */
+.side { background: var(--navy-dark); color: #fff; padding: 20px 14px; display: flex; flex-direction: column; gap: 18px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; }
+.logo i { width: 30px; height: 30px; border-radius: 8px; background: var(--yellow); color: var(--navy-dark); display: grid; place-items: center; font-style: normal; font-size: 16px; }
+.user { background: #0b2a4f; border-radius: 12px; padding: 12px; display: flex; gap: 10px; align-items: center; }
+.user .av { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--yellow); display: grid; place-items: center; color: var(--yellow); font-weight: 800; flex: none; }
+.user b { display: block; font-size: 15px; }
+.user small { color: #b8c4d6; font-size: 11px; }
+.user em { display: inline-block; margin-top: 2px; background: var(--yellow); color: var(--navy-dark); font-style: normal; font-size: 10px; font-weight: 800; border-radius: 4px; padding: 0 5px; }
+.asof span { font-size: 11px; color: #b8c4d6; }
+.asof div { margin-top: 4px; background: var(--navy); border-radius: 8px; padding: 9px 12px; font-weight: 800; font-size: 16px; }
+.nav { display: flex; flex-direction: column; gap: 4px; }
+.nav a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; color: #c9d3e1; text-decoration: none; font-weight: 600; }
+.nav a.on { background: var(--navy); color: #fff; box-shadow: inset 3px 0 0 var(--yellow); }
+.nav a.off { opacity: .55; cursor: not-allowed; }
+.side-note { margin-top: auto; font-size: 11px; color: #9fb3cc; line-height: 1.5; }
+/* 본문 */
+.main { padding: 20px 22px 32px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.replica { background: #fff; border: 1px dashed #c3ccd9; border-radius: 10px; padding: 8px 12px; font-size: 12px; color: var(--muted); }
+.replica b { color: var(--navy); }
+.f03 { background: linear-gradient(120deg, var(--navy-dark), var(--navy)); color: #fff; border-radius: 14px; padding: 16px 20px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 14px; align-items: start; }
+.f03-badge { background: var(--yellow); color: var(--navy-dark); font-weight: 800; font-size: 12px; border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+.f03-text { font-size: 15px; font-weight: 600; line-height: 1.55; }
+.f03-meta { grid-column: 2; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: #b8c4d6; align-items: center; }
+.f03-meta button { background: rgba(255,195,0,.18); color: var(--yellow); border: 0; border-radius: 999px; padding: 2px 10px; font-weight: 700; font-size: 12px; }
+.row { display: grid; gap: 16px; }
+.row-mid { grid-template-columns: 220px minmax(0, 1fr); align-items: start; }
+.row-mid.top5-open { grid-template-columns: 220px minmax(0, 1fr) 340px; }
+.row-ins { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.block { background: var(--card); border-radius: 14px; padding: 16px 18px; box-shadow: 0 1px 2px rgba(15,26,43,.06); min-width: 0; }
+.head { display: flex; align-items: baseline; gap: 10px; margin: 0 0 10px; }
+.head h2 { margin: 0; font-size: 17px; font-weight: 800; padding-left: 10px; border-left: 3px solid var(--navy); line-height: 1.2; }
+.head small { color: var(--muted-2); font-size: 12px; }
+.head .r { margin-left: auto; }
+.sub { margin: -4px 0 10px; color: var(--muted); font-size: 12px; }
+/* KPI */
+.kpis { display: flex; flex-direction: column; gap: 10px; }
+.kpi { text-align: left; background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--navy); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; transition: transform .15s, box-shadow .15s; }
+.kpi:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(15,26,43,.1); }
+.kpi--danger { border-top-color: var(--danger); } .kpi--warn { border-top-color: var(--warn); } .kpi--neutral { border-top-color: var(--navy); }
+.kpi-head { display: flex; gap: 6px; align-items: center; font-weight: 700; font-size: 13px; }
+.kpi-head .more { margin-left: auto; color: var(--muted-2); }
+.kpi-val strong { font-size: 26px; font-weight: 800; }
+.kpi--danger .kpi-val strong { color: var(--danger); }
+.kpi-val span { margin-left: 4px; color: var(--muted); font-size: 12px; }
+/* 달력 */
+.hero { background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(15,26,43,.06); min-width: 0; }
+.hero-head { background: var(--navy-dark); color: #fff; padding: 12px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.hero-head h2 { margin: 0; font-size: 18px; font-weight: 800; }
+.hero-head h2 span { color: var(--yellow); margin-left: 8px; font-size: 15px; }
+.legend { display: flex; gap: 12px; font-size: 12px; color: #c9d3e1; margin-left: auto; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+.toggle { background: var(--yellow); color: var(--navy-dark); border: 0; border-radius: 999px; padding: 7px 14px; font-weight: 800; font-size: 13px; }
+.cal-wrap { padding: 12px 16px 6px; }
+.week, .cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.week div { text-align: center; font-weight: 700; font-size: 12px; padding: 6px 0; background: #eef2f7; color: var(--navy); }
+.week div:first-child { color: var(--danger); border-radius: 8px 0 0 8px; } .week div:last-child { color: var(--danger); border-radius: 0 8px 8px 0; }
+.day { min-height: 84px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); padding: 4px 5px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.day:nth-child(7n) { border-right: 0; }
+.day--blank { background: #fafbfc; }
+.day--past .num { color: #b0b8c4; }
+.day--today { outline: 2px solid var(--yellow); outline-offset: -2px; background: #fffdf3; }
+.day-head { display: flex; align-items: center; gap: 4px; font-size: 12px; }
+.today-tag { background: var(--yellow); color: var(--navy-dark); font-weight: 800; font-size: 10px; border-radius: 999px; padding: 0 6px; }
+.more-btn { margin-left: auto; border: 0; background: none; color: var(--navy); font-weight: 800; font-size: 11px; padding: 0; }
+.chip { display: flex; align-items: center; gap: 4px; width: 100%; border: 0; border-radius: 6px; padding: 2px 5px; font-size: 11px; text-align: left; min-width: 0; }
+.chip--part { background: var(--part); } .chip--anomaly { background: var(--anomaly); }
+.chip .rk { flex: none; width: 15px; height: 15px; border-radius: 50%; background: var(--navy-dark); color: #fff; display: grid; place-items: center; font-size: 9px; font-weight: 800; }
+.chip.rest .rk { display: none; }
+.chip .tx { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip:hover { filter: brightness(.95); }
+.hint { display: block; padding: 6px 16px 12px; color: var(--muted-2); font-size: 11px; }
+/* TOP5 */
+.top5 { display: none; }
+.top5-open .top5 { display: block; }
+.sort { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px; color: var(--muted); }
+.sort select { flex: 1; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font: inherit; }
+.card { width: 100%; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 6px; }
+.card.first { border-color: var(--yellow); box-shadow: 0 0 0 2px var(--yellow-soft); }
+.card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.card-rank { width: 22px; height: 22px; border-radius: 50%; background: var(--navy-dark); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 12px; }
+.issue { font-size: 11px; font-weight: 700; border-radius: 4px; padding: 1px 6px; }
+.issue--part { background: var(--part); color: var(--navy); } .issue--anomaly { background: var(--anomaly); color: #8a6200; }
+.card-date { margin-left: auto; font-size: 11px; color: var(--muted); }
+.card-note { margin: 0; font-size: 12px; color: var(--muted); }
+.metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 10px; font-size: 11px; }
+.metrics span { color: var(--muted-2); display: block; }
+.metrics strong { font-size: 13px; }
+.metrics .alert strong { color: var(--danger); }
+.bar { height: 5px; background: #eef2f7; border-radius: 3px; overflow: hidden; margin-top: 2px; }
+.bar i { display: block; height: 100%; background: var(--navy); }
+/* 표 */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: #f5f7fa; color: var(--muted); font-weight: 700; font-size: 12px; padding: 8px 10px; text-align: center; }
+td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: center; }
+tr.now td { background: var(--yellow-soft); }
+.status { display: inline-block; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 800; }
+.status--now { background: var(--danger); color: #fff; } .status--watch { background: #ffe8a3; color: #8a6200; } .status--ok { background: #e7eef8; color: var(--navy); }
+.safety-btn { border: 0; background: #e7eef8; color: var(--navy); border-radius: 999px; font-size: 11px; font-weight: 800; padding: 1px 8px; margin-left: 6px; }
+.link { border: 0; background: none; color: var(--navy); font-weight: 800; padding: 0; }
+.alert-num { color: var(--danger); font-weight: 800; }
+/* 과거 대응률 */
+.seg { display: inline-flex; background: #eef2f7; border-radius: 999px; padding: 3px; gap: 2px; }
+.seg button { border: 0; background: none; border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; color: var(--muted); }
+.seg button.on { background: var(--navy); color: #fff; }
+.hist-kpis { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 10px; }
+.hk { border-radius: 10px; padding: 8px 14px; border: 1px solid var(--line); display: flex; align-items: baseline; gap: 8px; font-size: 12px; color: var(--muted); }
+.hk strong { font-size: 22px; color: var(--navy); }
+.hk.accent { background: var(--navy-dark); color: #c9d3e1; border-color: var(--navy-dark); }
+.hk.accent strong { color: var(--yellow); }
+svg text { font-family: var(--font); }
+.foot-note { color: var(--muted-2); font-size: 11px; }
+/* 모달 */
+.modal { position: fixed; inset: 0; background: rgba(0,29,61,.45); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 10; }
+.modal.open { display: flex; }
+.modal-box { background: #fff; border-radius: 14px; width: min(760px, 100%); max-height: 86vh; display: flex; flex-direction: column; overflow: hidden; }
+.modal-box.sm { width: min(380px, 100%); }
+.modal-head { display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-weight: 800; font-size: 16px; }
+.modal-head button { margin-left: auto; border: 0; background: none; font-size: 18px; color: var(--muted); }
+.modal-body { padding: 14px 18px 18px; overflow: auto; }
+.modal-body p { margin: 0 0 10px; color: var(--muted); font-size: 13px; }
+.modal-body h4 { margin: 10px 0 6px; font-size: 14px; }
+.modal-body ul { margin: 0; padding-left: 18px; font-size: 13px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin-top: 12px; }
+.stats div { background: #f5f7fa; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--muted); }
+.stats strong { display: block; font-size: 16px; color: var(--navy-ink); }
+.toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--navy-dark); color: #fff; border-radius: 999px; padding: 10px 18px; font-size: 13px; display: none; z-index: 11; }
+@media (max-width: 1100px) {
+  .row-mid, .row-mid.top5-open { grid-template-columns: minmax(0, 1fr); }
+  .kpis { flex-direction: row; flex-wrap: wrap; } .kpi { flex: 1 1 150px; }
+  .row-ins { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .side { flex-direction: row; flex-wrap: wrap; align-items: center; padding: 12px; }
+  .user, .side-note { display: none; }
+  .nav { flex-direction: row; }
+  .day { min-height: 64px; }
+  .chip .tx { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="logo"><i>⚙</i>설비보전</div>
+    <div class="user"><div class="av">홍</div><div><b>홍길동</b><small>설비보전팀 · 과장</small><br><em>관리자</em></div></div>
+    <div class="asof"><span>기준일</span><div id="asof"></div></div>
+    <nav class="nav">
+      <a class="on">🏠 메인화면</a>
+      <a class="off" data-off>🛠 설비별</a>
+      <a class="off" data-off>📊 통계</a>
+      <a class="off" data-off>📦 발주</a>
+    </nav>
+    <p class="side-note">웹 재현본에는 메인 화면만 들어 있어요. 설비별·통계·발주 화면은 원본 앱에 있습니다.</p>
+  </aside>
+
+  <main class="main">
+    <div class="replica"><b>웹 재현본</b> · 원본은 Python Dash 앱입니다. 원래 코드로 계산한 기준일 2015-10-05의 결과를 그대로 넣어, 서버 없이 클릭해 볼 수 있게 옮겼습니다.</div>
+    <section class="f03">
+      <span class="f03-badge">AI 한 줄 요약</span>
+      <span class="f03-text" id="f03-text"></span>
+      <div class="f03-meta" id="f03-meta"></div>
+    </section>
+
+    <div class="row row-mid" id="mid">
+      <section class="block">
+        <div class="head"><h2>오늘 요약</h2><small>카드를 누르면 상세</small></div>
+        <div class="kpis" id="kpis"></div>
+      </section>
+      <section class="hero">
+        <div class="hero-head">
+          <h2>To-Do 달력<span id="cal-month"></span></h2>
+          <div class="legend"><span><i style="background:var(--part)"></i>부품 교체</span><span><i style="background:var(--anomaly)"></i>이상 신호</span><span><i style="background:var(--navy-dark);border-radius:50%"></i>우선순위</span></div>
+          <button class="toggle" id="top5-toggle">우선 확인 TOP5 보기</button>
+        </div>
+        <div class="cal-wrap"><div class="week" id="week"></div><div class="cal" id="cal"></div></div>
+        <small class="hint" id="cal-hint"></small>
+      </section>
+      <section class="block top5">
+        <div class="head"><h2>우선 확인 설비 TOP5</h2><button class="r link" id="top5-close" aria-label="TOP5 닫기">✕</button></div>
+        <div class="sort"><label for="sort">정렬 기준</label><select id="sort"></select></div>
+        <div id="top5"></div>
+      </section>
+    </div>
+
+    <div class="row row-ins">
+      <section class="block">
+        <div class="head"><h2>고장 확률 급상승 알림</h2><button class="r link" id="f01-more">전체보기 →</button></div>
+        <p class="sub">전일 대비 7일 고장 위험 점수가 크게 오른 위험 설비 TOP 3</p>
+        <div id="f01"></div>
+      </section>
+      <section class="block">
+        <div class="head"><h2>재고 × 위험 교차</h2></div>
+        <p class="sub">부품별 위험 상위 5% 설비 수와 현재 가용 재고 · 즉시 = 발주 마감 도래</p>
+        <div id="f02"></div>
+      </section>
+    </div>
+
+    <section class="block">
+      <div class="head"><h2>과거 대응률</h2><div class="r seg" id="seg"></div></div>
+      <div class="hist-kpis" id="hist-kpis"></div>
+      <p class="sub" style="margin:0">월별 예방 대응률 · 그 달 부품 교체 중 고장 전에 미리 교체(예방)한 비율</p>
+      <div id="hist-chart"></div>
+    </section>
+    <small class="foot-note">위험 점수는 미보정 상대 점수(확률 아님)이며, 재고·조달·비용은 가상 운영 데이터 기반입니다. 원천 데이터: Azure Predictive Maintenance 공개 시뮬레이션 데이터.</small>
+  </main>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="modal-box" id="modal-box"><div class="modal-head"><span id="modal-title"></span><button id="modal-close" aria-label="닫기">✕</button></div><div class="modal-body" id="modal-body"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+var S = {
+ "as_of": "2015-10-05",
+ "kpis": [
+  {
+   "key": "warning",
+   "title": "경고 설비",
+   "icon": "🚨",
+   "value": "8",
+   "unit": "대",
+   "change": "",
+   "state": "danger"
+  },
+  {
+   "key": "replace",
+   "title": "교체기한 임박",
+   "icon": "⏰",
+   "value": "5",
+   "unit": "건",
+   "change": "",
+   "state": "warn"
+  },
+  {
+   "key": "overdue",
+   "title": "기한 초과",
+   "icon": "⛔",
+   "value": "0",
+   "unit": "건",
+   "change": "",
+   "state": "danger"
+  },
+  {
+   "key": "order",
+   "title": "이번 주 발주 필요",
+   "icon": "📦",
+   "value": "1",
+   "unit": "건",
+   "change": "",
+   "state": "neutral"
+  }
+ ],
+ "kpi_detail": {
+  "warning": {
+   "desc": "경고 기준: 미보정 위험 점수 상위 5% 또는 IF 경고.",
+   "columns": [
+    "설비",
+    "위험 부품",
+    "위험도",
+    "판정",
+    "사유"
+   ],
+   "rows": [
+    [
+     16,
+     "comp3",
+     57,
+     "now",
+     "고장 위험 상위 5% · 센서 IF 경고"
+    ],
+    [
+     21,
+     "comp3",
+     20,
+     "watch",
+     "고장 위험 상위 5%"
+    ],
+    [
+     23,
+     "comp4",
+     70,
+     "now",
+     "고장 위험 상위 5% · 센서 IF 경고"
+    ],
+    [
+     40,
+     "comp3",
+     38,
+     "watch",
+     "고장 위험 상위 5%"
+    ],
+    [
+     47,
+     "comp4",
+     6,
+     "now",
+     "고장 위험 상위 5% · 센서 IF 경고"
+    ],
+    [
+     71,
+     "comp4",
+     97,
+     "watch",
+     "고장 위험 상위 5%"
+    ],
+    [
+     81,
+     "comp4",
+     9,
+     "now",
+     "고장 위험 상위 5% · 센서 IF 경고"
+    ],
+    [
+     97,
+     "comp4",
+     100,
+     "watch",
+     "고장 위험 상위 5%"
+    ]
+   ]
+  },
+  "replace": {
+   "desc": "정비 목표일이 14일 안에 오는 위험 상위 설비·부품입니다.",
+   "columns": [
+    "설비",
+    "부품",
+    "발주 마감",
+    "정비 목표일",
+    "대응 여유",
+    "사유"
+   ],
+   "rows": [
+    [
+     19,
+     "comp1",
+     "2015-10-05",
+     "2015-10-13",
+     "8일",
+     "현재 가용재고로 대응 가능"
+    ],
+    [
+     54,
+     "comp1",
+     "2015-10-05",
+     "2015-10-13",
+     "8일",
+     "현재 가용재고로 대응 가능"
+    ],
+    [
+     61,
+     "comp1",
+     "2015-10-05",
+     "2015-10-13",
+     "8일",
+     "현재 가용재고로 대응 가능"
+    ],
+    [
+     70,
+     "comp1",
+     "2015-10-05",
+     "2015-10-13",
+     "8일",
+     "현재 가용재고로 대응 가능"
+    ],
+    [
+     77,
+     "comp1",
+     "2015-10-05",
+     "2015-10-13",
+     "7일",
+     "가용재고가 없어 발주 마감 도래"
+    ]
+   ]
+  },
+  "overdue": {
+   "desc": "부품 준비 완료 예정일이 계획 정비일보다 늦은 건입니다.",
+   "columns": [
+    "설비",
+    "부품",
+    "발주 마감",
+    "정비 목표일",
+    "대응 여유",
+    "사유"
+   ],
+   "rows": []
+  },
+  "order": {
+   "desc": "이번 주 안에 발주 마감이 오는 건입니다.",
+   "columns": [
+    "설비",
+    "부품",
+    "발주 마감",
+    "정비 목표일",
+    "대응 여유",
+    "사유"
+   ],
+   "rows": [
+    [
+     77,
+     "comp1",
+     "2015-10-05",
+     "2015-10-13",
+     "7일",
+     "가용재고가 없어 발주 마감 도래"
+    ]
+   ]
+  }
+ },
+ "todo": [
+  {
+   "key": "97-comp4",
+   "machine": 97,
+   "issue": "part",
+   "component": "comp4",
+   "action": "교체 준비",
+   "date": "2015-10-29",
+   "risk": 100,
+   "deadline": "2015-10-05",
+   "loss": 4900,
+   "stock": 13,
+   "slack": 24,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "71-comp4",
+   "machine": 71,
+   "issue": "part",
+   "component": "comp4",
+   "action": "교체 준비",
+   "date": "2015-10-29",
+   "risk": 97,
+   "deadline": "2015-10-05",
+   "loss": 4900,
+   "stock": 13,
+   "slack": 24,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "81-if",
+   "machine": 81,
+   "issue": "anomaly",
+   "action": "점검",
+   "date": "2015-10-05",
+   "risk": 89,
+   "note": "센서 IF 이상 점수 0.578 (기준 0.50 초과)"
+  },
+  {
+   "key": "16-if",
+   "machine": 16,
+   "issue": "anomaly",
+   "action": "점검",
+   "date": "2015-10-05",
+   "risk": 80,
+   "note": "센서 IF 이상 점수 0.520 (기준 0.50 초과)"
+  },
+  {
+   "key": "23-if",
+   "machine": 23,
+   "issue": "anomaly",
+   "action": "점검",
+   "date": "2015-10-05",
+   "risk": 79,
+   "note": "센서 IF 이상 점수 0.517 (기준 0.50 초과)"
+  },
+  {
+   "key": "47-if",
+   "machine": 47,
+   "issue": "anomaly",
+   "action": "점검",
+   "date": "2015-10-05",
+   "risk": 78,
+   "note": "센서 IF 이상 점수 0.508 (기준 0.50 초과)"
+  },
+  {
+   "key": "49-comp4",
+   "machine": 49,
+   "issue": "part",
+   "component": "comp4",
+   "action": "교체 준비",
+   "date": "2015-10-29",
+   "risk": 77,
+   "deadline": "2015-10-05",
+   "loss": 4900,
+   "stock": 13,
+   "slack": 24,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "23-comp4",
+   "machine": 23,
+   "issue": "part",
+   "component": "comp4",
+   "action": "교체 준비",
+   "date": "2015-10-29",
+   "risk": 70,
+   "deadline": "2015-10-05",
+   "loss": 4900,
+   "stock": 13,
+   "slack": 24,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "95-comp4",
+   "machine": 95,
+   "issue": "part",
+   "component": "comp4",
+   "action": "교체 준비",
+   "date": "2015-10-29",
+   "risk": 67,
+   "deadline": "2015-10-05",
+   "loss": 4900,
+   "stock": 13,
+   "slack": 24,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "16-comp3",
+   "machine": 16,
+   "issue": "part",
+   "component": "comp3",
+   "action": "교체 준비",
+   "date": "2015-10-21",
+   "risk": 57,
+   "deadline": "2015-10-05",
+   "loss": 3500,
+   "stock": 22,
+   "slack": 16,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "24-comp3",
+   "machine": 24,
+   "issue": "part",
+   "component": "comp3",
+   "action": "교체 준비",
+   "date": "2015-10-21",
+   "risk": 57,
+   "deadline": "2015-10-05",
+   "loss": 3500,
+   "stock": 22,
+   "slack": 16,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "92-comp3",
+   "machine": 92,
+   "issue": "part",
+   "component": "comp3",
+   "action": "교체 준비",
+   "date": "2015-10-21",
+   "risk": 48,
+   "deadline": "2015-10-05",
+   "loss": 3500,
+   "stock": 22,
+   "slack": 16,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "98-comp3",
+   "machine": 98,
+   "issue": "part",
+   "component": "comp3",
+   "action": "교체 준비",
+   "date": "2015-10-21",
+   "risk": 47,
+   "deadline": "2015-10-05",
+   "loss": 3500,
+   "stock": 22,
+   "slack": 16,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "90-comp3",
+   "machine": 90,
+   "issue": "part",
+   "component": "comp3",
+   "action": "교체 준비",
+   "date": "2015-10-21",
+   "risk": 43,
+   "deadline": "2015-10-05",
+   "loss": 3500,
+   "stock": 22,
+   "slack": 16,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "19-comp1",
+   "machine": 19,
+   "issue": "part",
+   "component": "comp1",
+   "action": "교체 준비",
+   "date": "2015-10-13",
+   "risk": 27,
+   "deadline": "2015-10-05",
+   "loss": 2100,
+   "stock": 4,
+   "slack": 8,
+   "note": "현재 가용재고로 대응 가능"
+  },
+  {
+   "key": "54-comp1",
+   "machine": 54,
+   "issue": "part",
+   "component": "comp1",
+   "action": "교체 준비",
+   "date": "2015-10-13",
+   "risk": 24,
+   "deadline": "2015-10-05",
+   "loss": 2128,
+   "stock": 4,
+   "slack": 8,
+   "note": "현재 가용재고로 대응 가능"
+  }
+ ],
+ "sorts": {
+  "risk": "설비 위험도 높은 순",
+  "stock": "재고 적은 순",
+  "deadline": "발주 마감 빠른 순",
+  "loss": "예상 손실 큰 순",
+  "slack": "대응 여유 적은 순"
+ },
+ "f01": [
+  {
+   "machine": 5,
+   "component": null,
+   "before": 11,
+   "after": 43
+  },
+  {
+   "machine": 21,
+   "component": null,
+   "before": 65,
+   "after": 84
+  },
+  {
+   "machine": 47,
+   "component": null,
+   "before": 13,
+   "after": 29
+  }
+ ],
+ "f02": [
+  {
+   "component": "comp1",
+   "stock": 4,
+   "risky": 5,
+   "status": "now",
+   "adopted": true
+  },
+  {
+   "component": "comp4",
+   "stock": 13,
+   "risky": 5,
+   "status": "ok",
+   "adopted": true
+  },
+  {
+   "component": "comp3",
+   "stock": 22,
+   "risky": 5,
+   "status": "ok",
+   "adopted": true
+  },
+  {
+   "component": "comp2",
+   "stock": 39,
+   "risky": 5,
+   "status": "ok",
+   "adopted": false
+  }
+ ],
+ "months": [
+  "2015-01",
+  "2015-02",
+  "2015-03",
+  "2015-04",
+  "2015-05",
+  "2015-06",
+  "2015-07",
+  "2015-08",
+  "2015-09",
+  "2015-10"
+ ],
+ "history": [
+  {
+   "month": "1월",
+   "key": "2015-01",
+   "due": 196,
+   "on_time": 118,
+   "saved": 557274,
+   "current": false
+  },
+  {
+   "month": "2월",
+   "key": "2015-02",
+   "due": 204,
+   "on_time": 154,
+   "saved": 804182,
+   "current": false
+  },
+  {
+   "month": "3월",
+   "key": "2015-03",
+   "due": 238,
+   "on_time": 179,
+   "saved": 902208,
+   "current": false
+  },
+  {
+   "month": "4월",
+   "key": "2015-04",
+   "due": 238,
+   "on_time": 169,
+   "saved": 845796,
+   "current": false
+  },
+  {
+   "month": "5월",
+   "key": "2015-05",
+   "due": 267,
+   "on_time": 203,
+   "saved": 1101076,
+   "current": false
+  },
+  {
+   "month": "6월",
+   "key": "2015-06",
+   "due": 253,
+   "on_time": 195,
+   "saved": 1043866,
+   "current": false
+  },
+  {
+   "month": "7월",
+   "key": "2015-07",
+   "due": 268,
+   "on_time": 204,
+   "saved": 1068916,
+   "current": false
+  },
+  {
+   "month": "8월",
+   "key": "2015-08",
+   "due": 252,
+   "on_time": 188,
+   "saved": 947166,
+   "current": false
+  },
+  {
+   "month": "9월",
+   "key": "2015-09",
+   "due": 238,
+   "on_time": 179,
+   "saved": 938224,
+   "current": false
+  },
+  {
+   "month": "10월",
+   "key": "2015-10",
+   "due": 46,
+   "on_time": 34,
+   "saved": 139182,
+   "current": true
+  }
+ ],
+ "safety_comp2": {
+  "component": "comp2",
+  "decision_days": 42,
+  "lead": 35,
+  "prep": 7,
+  "shelf_life": 30,
+  "target_stock": 25,
+  "stock": 39,
+  "recommended": 0,
+  "daily_demand": 2.19,
+  "coverage_days": 17,
+  "next_receipt": "2015-10-07",
+  "auc": 0.6245,
+  "lift": 1.0338,
+  "base_rate": 0.3125
+ },
+ "f03": {
+  "text": "설비 32의 comp2 부품 발주 진행 여부를 우선 확인하세요; 향후 7일 미보정 고장 위험 점수 0.157; 현재 재고 39개는 상위 위험 설비 대응분으로 배정 · 기존 발주 입고 예정 2015-10-07.",
+  "as_of": "2015-10-05",
+  "horizon_days": 7,
+  "targets": [
+   32
+  ]
+ }
+};
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function ml(m) { return "M-" + String(m).padStart(3, "0"); }
+  var STATUS = { now: "즉시", watch: "주의", ok: "관찰" }, ISSUE = { part: "부품 교체", anomaly: "이상 신호" };
+  function badge(s) { return el("span", "status status--" + s, STATUS[s]); }
+  function dday(date) { var d = Math.round((new Date(date) - new Date(S.as_of)) / 86400000); return d === 0 ? "D-day" : d > 0 ? "D-" + d : "D+" + (-d); }
+  var dismissed = {}, sort = "risk", histRange = "6";
+  function toast(msg) { var t = $("toast"); t.textContent = msg; t.style.display = "block"; clearTimeout(t._h); t._h = setTimeout(function () { t.style.display = "none"; }, 2200); }
+  document.querySelectorAll("[data-off]").forEach(function (a) { a.addEventListener("click", function () { toast("웹 재현본에는 메인 화면만 들어 있어요"); }); });
+
+  // 모달
+  function openModal(title, body, small) {
+    $("modal-title").textContent = title; var b = $("modal-body"); b.textContent = ""; b.appendChild(body);
+    $("modal-box").className = "modal-box" + (small ? " sm" : ""); $("modal").classList.add("open");
+  }
+  function closeModal() { $("modal").classList.remove("open"); }
+  $("modal-close").onclick = closeModal;
+  $("modal").addEventListener("click", function (e) { if (e.target === $("modal")) closeModal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+  function table(columns, rows, cell) {
+    var t = el("table"), hr = el("tr");
+    columns.forEach(function (c) { hr.appendChild(el("th", null, c)); });
+    var th = el("thead"); th.appendChild(hr); t.appendChild(th);
+    var tb = el("tbody");
+    rows.forEach(function (r) { var tr = el("tr"); r.forEach(function (v, i) { var td = el("td"); var c = cell ? cell(columns[i], v) : null; if (c) td.appendChild(c); else td.textContent = v; tr.appendChild(td); }); tb.appendChild(tr); });
+    t.appendChild(tb); return t;
+  }
+
+  // 사이드·AI 요약
+  $("asof").textContent = S.as_of;
+  $("f03-text").textContent = S.f03.text;
+  var meta = $("f03-meta");
+  meta.appendChild(el("span", null, "예측 기준 " + S.f03.as_of));
+  meta.appendChild(el("span", null, "향후 " + S.f03.horizon_days + "일 고장 위험"));
+  S.f03.targets.forEach(function (m) { var b = el("button", null, ml(m) + " 상세 →"); b.onclick = function () { toast("설비 상세 화면은 원본 앱에 있어요"); }; meta.appendChild(b); });
+
+  // KPI
+  S.kpis.forEach(function (k) {
+    var b = el("button", "kpi kpi--" + k.state);
+    var h = el("div", "kpi-head"); h.appendChild(el("span", null, k.icon)); h.appendChild(el("span", null, k.title)); h.appendChild(el("span", "more", "›"));
+    var v = el("div", "kpi-val"); v.appendChild(el("strong", null, k.value)); v.appendChild(el("span", null, k.unit));
+    b.appendChild(h); b.appendChild(v);
+    b.onclick = function () {
+      var d = S.kpi_detail[k.key] || { desc: "", columns: [], rows: [] }, box = el("div");
+      box.appendChild(el("p", null, d.desc));
+      if (d.rows.length) box.appendChild(table(d.columns, d.rows, function (c, v) { if (c === "설비") return el("b", null, ml(v)); if (c === "판정") return badge(v); return null; }));
+      else box.appendChild(el("p", null, "해당 건이 없습니다."));
+      openModal(k.title + " " + k.value + k.unit, box);
+    };
+    $("kpis").appendChild(b);
+  });
+
+  // 할 일 정렬
+  var SORT_KEY = {
+    risk: function (i) { return -i.risk; }, stock: function (i) { return i.stock == null ? Infinity : i.stock; },
+    deadline: function (i) { return i.deadline || "9999"; }, loss: function (i) { return i.loss == null ? Infinity : -i.loss; },
+    slack: function (i) { return i.slack == null ? Infinity : i.slack; }
+  };
+  Object.keys(S.sorts).forEach(function (k) { var o = el("option", null, S.sorts[k]); o.value = k; $("sort").appendChild(o); });
+  $("sort").onchange = function () { sort = this.value; renderTodo(); };
+  function items() {
+    var f = SORT_KEY[sort] || SORT_KEY.risk;
+    return S.todo.filter(function (i) { return !dismissed[i.key]; }).slice().sort(function (a, b) {
+      var x = f(a), y = f(b); if (x < y) return -1; if (x > y) return 1; return b.risk - a.risk;
+    });
+  }
+  function itemTitle(i) { return [ml(i.machine), i.component, i.action].filter(Boolean).join(" · "); }
+  function openItem(i) {
+    var box = el("div");
+    box.appendChild(el("h4", null, itemTitle(i)));
+    box.appendChild(el("p", null, ISSUE[i.issue] + " · " + i.date + " (" + dday(i.date) + ")"));
+    box.appendChild(el("p", null, i.note));
+    var del = el("button", "toggle", "처리 완료 · 삭제"); del.onclick = function () { dismissed[i.key] = 1; closeModal(); renderTodo(); toast("처리 완료로 지웠어요"); };
+    box.appendChild(del);
+    openModal("할 일", box, true);
+  }
+  function renderTodo() {
+    var list = items(), top = list.slice(0, 5), ranks = {};
+    top.forEach(function (i, n) { ranks[i.key] = n + 1; });
+    // 달력
+    var y = +S.as_of.slice(0, 4), m = +S.as_of.slice(5, 7);
+    $("cal-month").textContent = y + "년 " + m + "월";
+    var first = new Date(y, m - 1, 1).getDay(), days = new Date(y, m, 0).getDate(), cal = $("cal"); cal.textContent = "";
+    var by = {}; list.forEach(function (i) { (by[i.date] = by[i.date] || []).push(i); });
+    for (var b = 0; b < first; b++) cal.appendChild(el("div", "day day--blank"));
+    for (var d = 1; d <= days; d++) {
+      var date = y + "-" + String(m).padStart(2, "0") + "-" + String(d).padStart(2, "0");
+      var cls = "day" + (date === S.as_of ? " day--today" : date < S.as_of ? " day--past" : "");
+      var cell = el("div", cls), head = el("div", "day-head");
+      head.appendChild(el("span", "num", String(d)));
+      if (date === S.as_of) head.appendChild(el("span", "today-tag", "오늘"));
+      var di = (by[date] || []).sort(function (a, b) { return (ranks[a.key] || 99) - (ranks[b.key] || 99); });
+      if (di.length > 2) {
+        var more = el("button", "more-btn", "+" + (di.length - 2));
+        more.onclick = (function (date, di) { return function () {
+          var box = el("div"); di.forEach(function (i) { var r = el("button", "chip chip--" + i.issue + (ranks[i.key] ? "" : " rest")); r.appendChild(el("span", "rk", String(ranks[i.key] || ""))); r.appendChild(el("span", "tx", itemTitle(i) + " — " + i.note)); r.style.marginBottom = "6px"; r.onclick = function () { openItem(i); }; box.appendChild(r); });
+          openModal((+date.slice(5, 7)) + "월 " + (+date.slice(8)) + "일 할 일 " + di.length + "건", box);
+        }; })(date, di);
+        head.appendChild(more);
+      }
+      cell.appendChild(head);
+      di.slice(0, 2).forEach(function (i) {
+        var c = el("button", "chip chip--" + i.issue + (ranks[i.key] ? "" : " rest"));
+        c.title = itemTitle(i) + " — " + i.note;
+        c.appendChild(el("span", "rk", String(ranks[i.key] || "")));
+        c.appendChild(el("span", "tx", ml(i.machine) + " · " + [i.component, i.action].filter(Boolean).join(" · ")));
+        c.onclick = function () { openItem(i); };
+        cell.appendChild(c);
+      });
+      cal.appendChild(cell);
+    }
+    $("cal-hint").textContent = "기준일 " + S.as_of + " · 항목을 누르면 상세 보기 · 처리 완료(삭제)를 선택할 수 있어요";
+    // TOP5
+    var box = $("top5"); box.textContent = "";
+    top.forEach(function (i, n) {
+      var c = el("button", "card" + (n === 0 ? " first" : ""));
+      var h = el("div", "card-head");
+      h.appendChild(el("span", "card-rank", String(n + 1)));
+      h.appendChild(el("strong", null, ml(i.machine)));
+      h.appendChild(el("span", "issue issue--" + i.issue, ISSUE[i.issue] + (i.component ? " · " + i.component : "")));
+      h.appendChild(el("span", "card-date", i.date.slice(5).replace("-", "/") + " " + i.action + " · " + dday(i.date)));
+      c.appendChild(h);
+      c.appendChild(el("p", "card-note", i.note));
+      if (i.issue === "part") {
+        var mt = el("div", "metrics");
+        var r = el("div"); r.appendChild(el("span", null, "고장 위험도")); r.appendChild(el("strong", null, String(i.risk))); var bar = el("div", "bar"); var fill = el("i"); fill.style.width = i.risk + "%"; bar.appendChild(fill); r.appendChild(bar); mt.appendChild(r);
+        var dl = el("div", i.slack <= 3 ? "alert" : ""); dl.appendChild(el("span", null, "발주 마감")); dl.appendChild(el("strong", null, i.deadline.slice(5).replace("-", "/") + " (" + dday(i.deadline) + ")")); mt.appendChild(dl);
+        var ls = el("div"); ls.appendChild(el("span", null, "지연 시 손실")); ls.appendChild(el("strong", null, (i.loss || 0).toLocaleString() + "만원")); mt.appendChild(ls);
+        var st = el("div", i.stock === 0 ? "alert" : ""); st.appendChild(el("span", null, "재고")); st.appendChild(el("strong", null, i.stock + "개")); mt.appendChild(st);
+        c.appendChild(mt);
+      }
+      c.onclick = function () { openItem(i); };
+      box.appendChild(c);
+    });
+    if (!top.length) box.appendChild(el("p", "card-note", "남은 우선 확인 항목이 없습니다"));
+  }
+  function setTop5(open) { $("mid").classList.toggle("top5-open", open); $("top5-toggle").textContent = open ? "우선 확인 TOP5 닫기" : "우선 확인 TOP5 보기"; }
+  $("top5-toggle").onclick = function () { setTop5(!$("mid").classList.contains("top5-open")); };
+  $("top5-close").onclick = function () { setTop5(false); };
+  "일월화수목금토".split("").forEach(function (d) { $("week").appendChild(el("div", null, d)); });
+  renderTodo();
+
+  // F01 막대 (SVG)
+  function svg(tag, attrs) { var n = document.createElementNS("http://www.w3.org/2000/svg", tag); for (var k in attrs) n.setAttribute(k, attrs[k]); return n; }
+  (function () {
+    var rows = S.f01.slice(0, 3), W = 520, H = 220, pad = 36, rises = rows.map(function (r) { return r.after - r.before; });
+    var max = Math.max.apply(null, rises.concat([1])) * 1.3, step = Math.ceil(max / 4 / 10) * 10;
+    var s = svg("svg", { viewBox: "0 0 " + W + " " + H, width: "100%", role: "img", "aria-label": "급상승 설비 막대그래프" });
+    for (var g = 0; g <= max; g += step) { var y = H - pad - (g / max) * (H - pad - 16); s.appendChild(svg("line", { x1: 40, x2: W - 10, y1: y, y2: y, stroke: "#e3e7ed" })); var t = svg("text", { x: 32, y: y + 4, "text-anchor": "end", "font-size": 11, fill: "#8a94a6" }); t.textContent = g; s.appendChild(t); }
+    rows.forEach(function (r, i) {
+      var bw = 60, x = 40 + (i + .5) * ((W - 50) / rows.length) - bw / 2, rise = rises[i], h = (rise / max) * (H - pad - 16), y = H - pad - h;
+      var rect = svg("rect", { x: x, y: y, width: bw, height: h, rx: 6, fill: i === 0 ? "#ffc300" : "#003566" }); rect.style.cursor = "pointer";
+      var tip = svg("title", {}); tip.textContent = ml(r.machine) + " · 전일 " + r.before + " → 오늘 " + r.after; rect.appendChild(tip);
+      s.appendChild(rect);
+      var tv = svg("text", { x: x + bw / 2, y: y - 6, "text-anchor": "middle", "font-size": 14, "font-weight": 700, fill: "#0f1a2b" }); tv.textContent = "+" + rise; s.appendChild(tv);
+      var tl = svg("text", { x: x + bw / 2, y: H - pad + 18, "text-anchor": "middle", "font-size": 13, fill: "#0f1a2b" }); tl.textContent = ml(r.machine); s.appendChild(tl);
+    });
+    $("f01").appendChild(s);
+    $("f01-more").onclick = function () {
+      var top = Math.max.apply(null, S.f01.map(function (r) { return r.after - r.before; }).concat([1])), box = el("div");
+      box.appendChild(el("p", null, "전일 대비 7일 고장 위험 점수(×100) 상승폭 · 위험 상위 5% 설비만"));
+      box.appendChild(table(["순위", "설비", "전일", "오늘", "상승"], S.f01.map(function (r, i) { return [i + 1, ml(r.machine), r.before, r.after, "▲ " + (r.after - r.before)]; })));
+      openModal("고장 확률 급상승 알림 · 전체", box);
+    };
+  })();
+
+  // F02 표
+  (function () {
+    var cols = ["순위", "부품", "재고", "위험 설비", "판정"], t = el("table"), hr = el("tr");
+    cols.forEach(function (c) { hr.appendChild(el("th", null, c)); });
+    var th = el("thead"); th.appendChild(hr); t.appendChild(th);
+    var tb = el("tbody");
+    S.f02.forEach(function (r, i) {
+      var tr = el("tr", r.status === "now" ? "now" : "");
+      tr.appendChild(el("td", null, String(i + 1)));
+      var c = el("td", null, r.component);
+      if (!r.adopted) { var b = el("button", "safety-btn", "안전재고 ⓘ"); b.onclick = safety; c.appendChild(b); }
+      tr.appendChild(c);
+      tr.appendChild(el("td", r.stock === 0 ? "alert-num" : "", r.stock + "개"));
+      tr.appendChild(el("td", null, r.risky + "대"));
+      var s = el("td"); s.appendChild(badge(r.status)); tr.appendChild(s);
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb); $("f02").appendChild(t);
+  })();
+  function safety() {
+    var x = S.safety_comp2, box = el("div");
+    if (x.error) { box.appendChild(el("p", null, x.error)); return openModal("comp2 · 안전재고", box); }
+    var lead = el("p"); lead.innerHTML = "<b>" + x.component + "는 고장 시점을 미리 맞히기 어려워, 고장 예측 대신 재고를 미리 쌓아 두고 대응합니다.</b> 이 방식을 안전재고라고 부릅니다.";
+    box.appendChild(lead);
+    box.appendChild(el("h4", null, "왜 예측을 쓰지 않나요?"));
+    var u1 = el("ul");
+    [x.decision_days + "일 안에 고장날 설비를 골라내는 능력이 무작위와 거의 같습니다 — 위험 상위 10%를 골라도 실제 고장 비율이 평균의 " + x.lift.toFixed(2) + "배입니다.",
+     x.decision_days + "일 동안 설비 " + Math.round(x.base_rate * 100) + "%가 이 부품 고장을 겪을 만큼 고장이 흔해서, 특정 설비를 골라 대비하는 의미가 작습니다.",
+     "조달 " + x.lead + "일 + 준비 " + x.prep + "일 = " + x.decision_days + "일이 필요해서, 고장 조짐을 보고 주문하면 이미 늦습니다."].forEach(function (s) { u1.appendChild(el("li", null, s)); });
+    box.appendChild(u1);
+    box.appendChild(el("h4", null, "그래서 어떻게 대응하나요?"));
+    var u2 = el("ul");
+    ["공용 창고에 목표 " + x.target_stock + "개를 유지합니다 (최근 90일 하루 평균 " + x.daily_demand + "개 사용).",
+     "사용 기한이 입고 후 " + x.shelf_life + "일로 짧아, 너무 많이 쌓으면 폐기됩니다 — 그래서 조금씩 자주 보충합니다.",
+     "설비별 발주 시점을 따로 계산하지 않고, 재고가 목표보다 줄면 보충 발주합니다."].forEach(function (s) { u2.appendChild(el("li", null, s)); });
+    box.appendChild(u2);
+    var st = el("div", "stats");
+    [["현재 가용 재고", x.stock + "개"], ["목표 재고", x.target_stock + "개"], ["버틸 수 있는 기간", x.coverage_days != null ? "약 " + x.coverage_days + "일" : "—"], ["다음 입고 예정", x.next_receipt || "없음"], ["보충 권장 수량", x.recommended + "개"]].forEach(function (p) { var d = el("div"); d.appendChild(el("span", null, p[0])); d.appendChild(el("strong", null, p[1])); st.appendChild(d); });
+    box.appendChild(st);
+    openModal(x.component + " · 안전재고로 대응하는 이유", box);
+  }
+
+  // 과거 대응률
+  var RANGES = [["3", "최근 3개월"], ["6", "최근 6개월"], ["all", "전체"]];
+  RANGES.forEach(function (r) { var b = el("button", r[0] === histRange ? "on" : "", r[1]); b.onclick = function () { histRange = r[0]; $("seg").querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); renderHist(); }; $("seg").appendChild(b); });
+  function renderHist() {
+    var all = S.history, rows = histRange === "all" ? all : all.slice(-Number(histRange));
+    var due = 0, on = 0; rows.forEach(function (r) { due += r.due; on += r.on_time; });
+    var k = $("hist-kpis"); k.textContent = "";
+    var a = el("div", "hk accent"); a.appendChild(el("span", null, "예방 대응률 · " + rows[0].key + " ~ " + rows[rows.length - 1].key)); a.appendChild(el("strong", null, (due ? Math.round(100 * on / due) : 0) + "%")); k.appendChild(a);
+    var b = el("div", "hk"); b.appendChild(el("span", null, "미리 대응")); b.appendChild(el("strong", null, on + "건")); b.appendChild(el("span", null, "/ 대응 필요 " + due + "건")); k.appendChild(b);
+    var W = 900, H = 260, L = 44, R = 30, T = 20, B = 34, s = svg("svg", { viewBox: "0 0 " + W + " " + H, width: "100%", role: "img", "aria-label": "월별 예방 대응률" });
+    [0, 20, 40, 60, 80, 100].forEach(function (v) { var y = T + (1 - v / 100) * (H - T - B); s.appendChild(svg("line", { x1: L, x2: W - R, y1: y, y2: y, stroke: "#e3e7ed" })); var t = svg("text", { x: L - 8, y: y + 4, "text-anchor": "end", "font-size": 11, fill: "#8a94a6" }); t.textContent = v + "%"; s.appendChild(t); });
+    var pts = rows.map(function (r, i) { var rate = r.due ? Math.round(100 * r.on_time / r.due) : 0; return { x: L + (rows.length === 1 ? (W - L - R) / 2 : i * (W - L - R) / (rows.length - 1)), y: T + (1 - rate / 100) * (H - T - B), rate: rate, r: r }; });
+    var live = rows[rows.length - 1].current, done = live ? pts.length - 1 : pts.length;
+    if (done > 1) s.appendChild(svg("polyline", { points: pts.slice(0, done).map(function (p) { return p.x + "," + p.y; }).join(" "), fill: "none", stroke: "#003566", "stroke-width": 2 }));
+    if (live && pts.length > 1) s.appendChild(svg("polyline", { points: pts.slice(done - 1).map(function (p) { return p.x + "," + p.y; }).join(" "), fill: "none", stroke: "#003566", "stroke-width": 2, "stroke-dasharray": "4 4" }));
+    pts.forEach(function (p, i) {
+      var cur = live && i === pts.length - 1;
+      var c = svg("circle", { cx: p.x, cy: p.y, r: cur ? 6 : 5, fill: cur ? "#fff" : "#003566", stroke: cur ? "#ffc300" : "#fff", "stroke-width": cur ? 3 : 2 });
+      var tip = svg("title", {}); tip.textContent = p.r.month + " · 교체 " + p.r.due + "건 중 예방 교체 " + p.r.on_time + "건 · " + p.rate + "%"; c.appendChild(tip); s.appendChild(c);
+      var t = svg("text", { x: p.x, y: p.y - 12, "text-anchor": "middle", "font-size": 12, fill: "#0f1a2b" }); t.textContent = p.rate + "%" + (cur ? " (진행 중)" : ""); s.appendChild(t);
+      var m = svg("text", { x: p.x, y: H - 10, "text-anchor": "middle", "font-size": 12, fill: "#0f1a2b" }); m.textContent = p.r.month; s.appendChild(m);
+    });
+    var box = $("hist-chart"); box.textContent = ""; box.appendChild(s);
+  }
+  renderHist();
+})();
+</script>
+</body>
+</html>

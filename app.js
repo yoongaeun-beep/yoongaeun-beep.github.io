@@ -453,6 +453,13 @@
           if (im.alt) fig.appendChild(el("figcaption", null, L(im.alt)));
           figs.appendChild(fig);
         });
+        if (m.demo) {
+          var demo = el("button", "btn btn-primary mc-demo"); demo.type = "button";
+          demo.appendChild(el("span", "mc-demo-label", L(m.demo.label)));
+          demo.appendChild(el("span", "mc-demo-note mono", L(m.demo.note)));
+          demo.addEventListener("click", function () { openPlayer({ title: m.demo.title, link: m.demo.link }); });
+          figs.appendChild(demo);
+        }
         grid.appendChild(figs);
       }
       var dl = el("dl", "mc-dl");
