@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>윤가은 실험 노트</title>
+<meta name="description" content="윤가은 — 바이오·제약 도메인, 해외 커뮤니케이션, AI 자동화 포트폴리오. 매일 새벽 2시에 스스로 업데이트됩니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@500;700;800;900&family=Hahmlet:wght@300;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top" data-i18n="name"></a>
+    <nav class="nav" aria-label="섹션">
+      <a href="#about" data-i18n="nav.about"></a>
+      <a href="#experience" data-i18n="nav.experience"></a>
+      <a href="#activities" data-i18n="nav.activities"></a>
+      <a href="#projects" data-i18n="nav.projects"></a>
+      <a href="#contact" data-i18n="nav.contact"></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-ko" data-lang="ko">KO</button>
+      <button type="button" id="lang-en" data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="top" class="page">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="kicker mono" data-i18n="kicker"></p>
+      <h1 class="hero-name-big" data-i18n="name"></h1>
+      <p class="identity" id="identity"></p>
+      <p class="headline" id="headline"></p>
+      <ul class="kw-chips" id="keywords"></ul>
+      <ul class="highlights" id="highlights"></ul>
+      <div class="cta">
+        <a class="btn btn-primary" href="#contact" data-i18n="cta.contact"></a>
+        <a class="btn" href="#projects" data-i18n="cta.projects"></a>
+      </div>
+    </div>
+    <aside class="profile" aria-label="프로필 요약">
+      <dl class="profile-facts" id="glance"></dl>
+      <div class="profile-mail">
+        <span class="mono profile-k" data-i18n="profile.mail"></span>
+        <span class="profile-email" id="profile-email"></span>
+      </div>
+      <a class="auto-badge" href="#projects">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span id="auto-badge"></span>
+      </a>
+    </aside>
+  </section>
+
+  <section id="about" class="section">
+    <h2 class="label mono" data-i18n="nav.about.n"></h2>
+    <div class="body">
+      <p class="lead" id="about-lead"></p>
+      <ul class="figures" id="strengths"></ul>
+    </div>
+  </section>
+
+  <section id="experience" class="section">
+    <h2 class="label mono" data-i18n="nav.experience.n2"></h2>
+    <div class="body">
+      <ol class="jobs" id="exp-work"></ol>
+      <div class="school" id="school"></div>
+    </div>
+  </section>
+
+  <section id="activities" class="section">
+    <h2 class="label mono" data-i18n="nav.activities.n"></h2>
+    <div class="body">
+      <div class="feature-card" id="act-featured"></div>
+      <ol class="rows" id="activity-list"></ol>
+      <p class="fine mono" id="edu-langs"></p>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <h2 class="label mono" data-i18n="nav.projects.n"></h2>
+    <div class="body">
+    <div class="auto">
+      <div class="auto-intro">
+        <div class="clock" aria-hidden="true"><span class="moon"></span><span class="clock-time mono">02:00</span></div>
+        <h3 class="auto-hook" id="hook"></h3>
+        <p class="auto-sub" id="hook-sub"></p>
+        <details class="how">
+          <summary data-i18n="how.q"></summary>
+          <ol id="how"></ol>
+        </details>
+      </div>
+      <aside class="log" aria-labelledby="log-title">
+        <div class="log-head">
+          <span class="log-title mono" id="log-title"></span>
+          <span class="live mono"><span class="live-dot" aria-hidden="true"></span>LIVE</span>
+        </div>
+        <ol class="log-list mono" id="log"></ol>
+      </aside>
+    </div>
+    <div class="shelf-wrap">
+      <div class="shelf-head">
+        <div class="shelf-title">
+          <span class="mono accent" data-i18n="shelf.kicker"></span>
+          <h3><span data-i18n="shelf.title"></span> <span class="mono accent shelf-count" id="shelf-count"></span></h3>
+          <p data-i18n="shelf.lede"></p>
+        </div>
+        <div class="shelf-controls">
+          <div class="tabs" id="tabs" role="group" aria-label="묶음"></div>
+          <button type="button" class="arrow" id="prev" aria-label="이전 프로젝트">←</button>
+          <button type="button" class="arrow arrow-on" id="next" aria-label="다음 프로젝트">→</button>
+        </div>
+      </div>
+      <div class="shelf">
+        <div class="shelf-row" id="shelf-row"></div>
+        <div class="plank" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="detail" id="detail" aria-live="polite"></div>
+      <div class="story" id="story"></div>
+    </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2 class="label mono" data-i18n="nav.contact.n"></h2>
+    <div class="body contact">
+      <p class="contact-lede" data-i18n="contact.lede"></p>
+      <span class="mail-addr" id="email"></span>
+      <div class="contact-actions">
+        <button type="button" class="copy" id="copy-email" data-i18n="contact.copy"></button>
+        <a class="copy ghost-btn" id="mail-link" data-i18n="contact.write"></a>
+      </div>
+      <p class="copy-note mono" id="copy-note" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot mono"><span id="foot"></span></footer>
+
+<div class="player" id="player" hidden role="dialog" aria-modal="true" aria-labelledby="player-title">
+  <div class="player-bar">
+    <span class="player-title" id="player-title"></span>
+    <button type="button" class="player-close" id="player-close" data-i18n="player.close"></button>
+  </div>
+  <div class="player-stage" id="player-stage"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="projects.js"></script>
+<script src="feature.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

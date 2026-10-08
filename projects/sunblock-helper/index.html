@@ -1,0 +1,470 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>선블럭 결정 도우미</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#FAF9F5; --fg:#141413; --muted:#66655F; --line:#E8E6DC; --soft:#EFEDE4; --clay:#D97757; --hero:#FBEBC4; --serif:'Newsreader',Georgia,serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family:system-ui,'Pretendard','Malgun Gothic',sans-serif; -webkit-font-smoothing:antialiased; }
+  main { max-width:420px; margin:0 auto; padding:20px 18px 28px; display:flex; flex-direction:column; gap:12px; }
+  button { font:inherit; color:inherit; cursor:pointer; }
+  svg { display:block; }
+  .muted { color:var(--muted); font-size:13px; }
+  .hero .now { margin-top:8px; font-size:13px; color:#444441; }
+  .reapply { margin-top:10px; background:var(--bg); border-radius:12px; padding:9px 12px; font-size:13px; color:#444441; line-height:1.5; }
+  .remind { margin-top:10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .remind button { display:flex; align-items:center; gap:6px; border:1px solid var(--line); background:#fff; border-radius:99px; padding:6px 12px; font-size:13px; font-weight:600; }
+  .src { margin-top:12px; padding-top:10px; border-top:1px solid var(--line); font-size:13px; }
+  .src ul { font-size:13px; color:#444441; } .src a { color:#1F4F7F; }
+
+  header { display:flex; justify-content:space-between; align-items:baseline; padding:0 4px; }
+  header h1 { font-family:var(--serif); font-weight:500; font-size:24px; margin:0; letter-spacing:-.01em; }
+  header span { font-size:13px; color:#5F5E5A; }
+
+  /* hero */
+  .hero { background:var(--hero); border-radius:24px; padding:20px 20px 18px; display:flex; flex-direction:column; gap:14px; transition:background .3s; }
+  .hero .row { display:flex; justify-content:space-between; align-items:center; }
+  .eyebrow { font-size:12px; letter-spacing:.12em; font-weight:600; color:#5F5E5A; }
+  .uv { font-family:var(--serif); font-size:76px; line-height:1; letter-spacing:-.03em; margin-top:2px; }
+  .lvl { display:inline-block; margin-top:8px; background:var(--fg); color:var(--bg); border-radius:99px; padding:4px 12px; font-size:13px; font-weight:600; }
+  .hero h2 { margin:0; font-size:24px; font-weight:700; line-height:1.25; letter-spacing:-.01em; }
+  .hero p { margin:2px 0 0; font-size:14px; color:#444441; }
+  .gauge { position:relative; height:6px; border-radius:99px; background:linear-gradient(90deg,#7FA68A 0 27%,#E3B93C 27% 55%,#E39A4A 55% 73%,#C8553D 73%); }
+  .gauge i { position:absolute; top:-4px; width:14px; height:14px; border-radius:50%; background:var(--bg); border:3px solid var(--fg); transform:translateX(-50%); transition:left .5s; }
+  .warn { background:#fff; color:#8A3B1E; border-radius:12px; padding:8px 12px; font-size:13px; }
+
+  /* controls */
+  .controls { display:flex; align-items:center; flex-wrap:wrap; gap:8px; padding:0 2px; }
+  .seg { display:flex; background:var(--soft); border-radius:99px; padding:3px; }
+  .seg button { border:0; background:transparent; border-radius:99px; padding:6px 14px; font-size:13px; color:#5F5E5A; }
+  .seg button.on { background:var(--fg); color:var(--bg); font-weight:600; }
+  select { font:inherit; font-size:13px; background:var(--soft); border:0; border-radius:99px; padding:7px 10px; color:var(--fg); }
+  .controls label { margin-left:auto; display:flex; align-items:center; gap:5px; font-size:13px; color:#5F5E5A; }
+  input[type=checkbox] { accent-color:var(--clay); width:16px; height:16px; }
+
+  .card { background:#fff; border:1px solid var(--line); border-radius:20px; padding:14px 16px; }
+  .head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .head h3 { margin:0; font-size:15px; font-weight:700; }
+  .head h3 span { color:var(--muted); font-weight:400; }
+  .bell { display:flex; align-items:center; gap:6px; background:#F6E0D5; color:#8A3B1E; border:0; border-radius:99px; padding:5px 12px; font-size:12px; font-weight:600; }
+  .bell.on { background:var(--clay); color:#fff; }
+
+  /* check pills */
+  .pills { display:flex; gap:10px; flex-wrap:wrap; }
+  .pill { flex:1 1 130px; display:flex; align-items:center; gap:10px; text-align:left; border:1px solid var(--line); background:var(--bg); border-radius:16px; padding:10px 12px; transition:.15s; }
+  .pill .dot { width:26px; height:26px; flex:none; border-radius:50%; border:2px solid #B4B2A9; display:grid; place-items:center; }
+  .pill .dot svg { opacity:0; }
+  .pill b { display:block; font-family:var(--serif); font-size:22px; line-height:1; font-weight:400; }
+  .pill small { font-size:13px; color:var(--muted); }
+  .pill.next { border:2px solid var(--clay); background:#fff; }
+  .pill.next .dot { border-color:var(--clay); }
+  .pill.done { background:#F6E0D5; border-color:transparent; }
+  .pill.done .dot { background:var(--clay); border-color:var(--clay); }
+  .pill.done .dot svg { opacity:1; }
+  .pill.done b { text-decoration:line-through; color:var(--muted); }
+  .pill:active { transform:scale(.97); }
+  .done-msg { margin:10px 0 0; font-size:13px; font-weight:600; color:#2F5A3E; }
+
+  /* boost */
+  .boost { background:#E4EFE6; border-radius:20px; padding:14px 16px; }
+  .boost h3 { margin:0 0 10px; font-size:13px; font-weight:700; color:#2F5A3E; }
+  .tiles { display:flex; justify-content:space-around; gap:6px; }
+  .tile { display:flex; flex-direction:column; align-items:center; gap:6px; font-size:13px; font-weight:600; text-align:center; max-width:100px; }
+  .tile i { width:52px; height:52px; border-radius:50%; background:#fff; display:grid; place-items:center; }
+
+  /* type */
+  .type { width:100%; text-align:left; border:0; background:#E3EDF7; border-radius:20px; padding:14px 16px; display:flex; align-items:center; gap:14px; }
+  .type .ico { width:56px; height:56px; flex:none; border-radius:16px; background:#fff; display:grid; place-items:center; }
+  .type { padding:18px 18px; gap:16px; align-items:flex-start; }
+  .type .txt { flex:1; display:flex; flex-direction:column; gap:8px; }
+  .type .eb { font-size:12px; font-weight:700; color:#1F4F7F; letter-spacing:.06em; }
+  .type .pick { font-family:var(--serif); font-size:28px; line-height:1.15; }
+  .type .why { font-size:13.5px; color:#444441; line-height:1.65; }
+  .type .chev { align-self:center; }
+  .type .chev { transition:.2s; }
+  .type.open .chev { transform:rotate(90deg); }
+  .compare { display:flex; gap:10px; margin-top:-2px; }
+  .compare > div { flex:1; background:#fff; border:1px solid var(--line); border-radius:20px; padding:14px; font-size:13px; }
+  .compare > div.me { border:2px solid #1F4F7F; }
+  .compare h4 { margin:0 0 8px; font-size:16px; display:flex; align-items:center; gap:8px; }
+  .compare dt { font-size:11px; font-weight:700; color:var(--muted); }
+  .compare dd { margin:0 0 8px; }
+  .compare dd:last-child { margin:0; }
+  .mix { background:#F6E0D5; border-radius:16px; padding:12px 14px; font-size:12.5px; color:#444441; margin-top:10px; }
+  .mix b { display:block; font-size:14px; color:var(--fg); }
+
+  /* tabs */
+  .tabs { display:flex; gap:8px; }
+  .tabs button { flex:1; border:1px solid var(--line); background:#fff; border-radius:99px; padding:10px 0; font-size:13px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:6px; }
+  .tabs button.on { background:var(--fg); color:var(--bg); border-color:var(--fg); }
+  .tabs button.on svg { stroke:var(--bg); }
+
+  /* cardnews */
+  .toons { position:relative; overflow:hidden; border-radius:22px; touch-action:pan-y; user-select:none; }
+  .track { display:flex; transition:transform .35s ease; }
+  .toon { flex:0 0 100%; padding:6px; }
+  .toon .frame { border:1px solid var(--line); border-radius:20px; overflow:hidden; background:#fff; }
+  .toon .top { display:flex; align-items:center; gap:10px; padding:12px 14px; border-bottom:1px solid var(--line); }
+  .toon .ep { background:var(--fg); color:var(--bg); border-radius:99px; padding:3px 10px; font-size:12px; font-weight:700; letter-spacing:.04em; }
+  .toon .top h4 { margin:0; font-size:18px; font-weight:800; letter-spacing:-.01em; }
+  .toon svg.scene { width:100%; height:auto; }
+  .toon .cap { border-top:1px solid var(--line); padding:12px 14px; font-size:14.5px; line-height:1.55; font-weight:600; background:#FFF6D6; }
+  .toonnav { display:flex; align-items:center; justify-content:center; gap:14px; margin-top:12px; }
+  .toonnav button { width:40px; height:40px; border-radius:50%; border:2px solid var(--fg); background:#fff; display:grid; place-items:center; padding:0; }
+  .toonnav button:disabled { opacity:.3; cursor:default; }
+  .dots { display:flex; gap:6px; } .dots i { width:8px; height:8px; border-radius:50%; background:var(--line); transition:.2s; }
+  .dots i.on { width:22px; border-radius:99px; background:var(--clay); }
+
+  .days { display:flex; gap:8px; }
+  .day { flex:1; text-align:center; border-radius:16px; padding:10px 4px; font-size:12px; }
+  .day b { display:block; font-family:var(--serif); font-size:28px; font-weight:400; line-height:1.1; }
+  .hours { display:flex; align-items:flex-end; gap:2px; height:48px; margin-top:12px; }
+  .hours i { flex:1; min-height:2px; border-radius:2px; opacity:.3; }
+  .hours i.in { opacity:1; }
+  .why ul { margin:0; padding-left:18px; font-size:14px; line-height:1.55; }
+
+  footer { text-align:center; padding-top:4px; }
+  footer a { color:var(--muted); }
+  #toast { position:fixed; left:50%; bottom:20px; transform:translate(-50%,100px); background:var(--fg); color:var(--bg); padding:10px 18px; border-radius:99px; font-size:14px; transition:.3s; z-index:9; max-width:90vw; }
+  #toast.show { transform:translate(-50%,0); }
+</style>
+<main>
+  <header><h1>Sunscreen</h1><span id="date">서울</span></header>
+  <div id="status" class="card muted">날씨 불러오는 중…</div>
+
+  <div id="app" hidden style="flex-direction:column;gap:12px">
+    <section class="hero" id="hero"></section>
+
+    <div class="controls">
+      <select id="city" aria-label="도시"></select>
+      <div class="seg" id="placeSeg"><button data-v="outdoor" class="on">야외</button><button data-v="indoor">실내 위주</button></div>
+      <span id="timeBox"><select id="start" aria-label="야외 시작 시각"></select> ~ <select id="end" aria-label="야외 끝 시각"></select></span>
+      <label title="땀을 많이 흘리거나 물에 들어가는 날"><input type="checkbox" id="wet"> 땀·물놀이 있음</label>
+    </div>
+
+    <section class="card" id="todoCard"></section>
+    <section class="boost" id="boost"></section>
+    <div id="typeBox"></div>
+
+    <div class="tabs" id="tabs">
+      <button data-t="news"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h6a2 2 0 012 2v12a2 2 0 00-2-2H4z"/><path d="M20 5h-6a2 2 0 00-2 2v12a2 2 0 012-2h6z"/></svg>바르는 법</button>
+      <button data-t="days"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V4M19 20v-6"/></svg>사흘 UV</button>
+      <button data-t="why"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg>판단 근거</button>
+    </div>
+    <div id="panel"></div>
+  </div>
+
+  <footer class="muted">Weather data: <a href="https://open-meteo.com/">Open-Meteo.com</a> (CC BY 4.0)<br>참고용 안내이며 의료 조언이 아니에요.</footer>
+</main>
+<div id="toast"></div>
+
+<script src="judge.js"></script>
+<script>
+const CITIES = {
+  "서울": [37.5665, 126.978], "인천": [37.4563, 126.7052], "대전": [36.3504, 127.3845], "광주": [35.1595, 126.8526],
+  "대구": [35.8714, 128.6014], "부산": [35.1796, 129.0756], "제주": [33.4996, 126.5312],
+};
+const FIXTURE = "fixture/날씨_서울.json"; // 서울 기준 연습용 고정 파일
+const CAN_ICS = !window.claude; // Claude 아티팩트 안에서는 .ics 저장이 막혀 있어 버튼을 숨긴다
+const $ = id => document.getElementById(id);
+const store = {
+  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+const saved = store.get("sunscreen_settings", {});
+const city = CITIES[saved.city] ? saved.city : "서울";
+const apiUrl = () => `https://api.open-meteo.com/v1/forecast?latitude=${CITIES[city][0]}&longitude=${CITIES[city][1]}`
+  + "&current=uv_index,cloud_cover&hourly=uv_index&daily=uv_index_max,sunrise,sunset&timezone=Asia%2FSeoul&forecast_days=3";
+
+// ---- 아이콘 (직접 그린 SVG) ----
+const ico = (body, s = 28, c = "#2F5A3E", w = 1.8) =>
+  `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
+const P = {
+  hat: '<path d="M5 15a7 7 0 0114 0"/><path d="M3 15h14l4 2"/>',
+  glasses: '<circle cx="7" cy="14" r="3.5"/><circle cx="17" cy="14" r="3.5"/><path d="M10.5 14h3M3.5 14L5 8M20.5 14L19 8"/>',
+  tree: '<path d="M12 21v-6"/><path d="M12 3l6 8h-3l4 6H5l4-6H6z"/>',
+  home: '<path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/>',
+  shirt: '<path d="M8 3l-5 4 3 3 2-1v12h8V9l2 1 3-3-5-4a4 4 0 01-8 0z"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  drop: '<path d="M12 3c3 4 6 6.5 6 10a6 6 0 01-12 0c0-3.5 3-6 6-10z"/>',
+  tube: '<path d="M8 3h8l1 4H7z"/><rect x="7" y="7" width="10" height="14" rx="2"/><path d="M10 12h4"/>',
+  shield: '<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/>',
+  check: '<path d="M5 12l5 5 9-10"/>',
+  bell: '<path d="M6 17V11a6 6 0 0112 0v6l1.5 2h-15z"/><path d="M10 21h4"/>',
+  chev: '<path d="M9 6l6 6-6 6"/>',
+};
+const EMOJI_ICON = { "🧢": "hat", "🕶️": "glasses", "🌳": "tree", "🏠": "home", "👕": "shirt", "⏱️": "clock", "💦": "drop" };
+const HERO_BG = { "낮음": "#E4EFE6", "보통": "#FBEBC4", "높음": "#FAD9B5", "매우 높음": "#F6D0C8", "위험": "#E6D9F2" };
+
+const sun = `<svg width="116" height="116" viewBox="0 0 100 100" aria-hidden="true">
+  <g stroke="#D97757" stroke-width="5" stroke-linecap="round">
+    <line x1="50" y1="6" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="94"/><line x1="6" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="94" y2="50"/>
+    <line x1="19" y1="19" x2="26" y2="26"/><line x1="74" y1="74" x2="81" y2="81"/><line x1="81" y1="19" x2="74" y2="26"/><line x1="26" y1="74" x2="19" y2="81"/></g>
+  <circle cx="50" cy="50" r="22" fill="#F2B63D"/>
+  <circle cx="43" cy="45" r="2.6" fill="#141413"/><circle cx="57" cy="45" r="2.6" fill="#141413"/>
+  <path d="M42 56q8 7 16 0" fill="none" stroke="#141413" stroke-width="2.6" stroke-linecap="round"/></svg>`;
+
+// ---- 입력 (바꿀 때마다 저장해서 새로고침해도 유지) ----
+for (let h = 0; h <= 24; h++) {
+  if (h < 24) $("start").add(new Option(h + "시", h));
+  if (h > 0) $("end").add(new Option(h + "시", h));
+}
+Object.keys(CITIES).forEach(c => $("city").add(new Option(c, c)));
+$("city").value = city;
+// 기본 야외 시간대는 하루 활동 시간(9~18시). 지난 시간은 judge가 알아서 "지금"부터 계산한다.
+let place = saved.place === "indoor" ? "indoor" : "outdoor", weather = null, fixtureNote = "", timers = [], tab = null, typeOpen = false, lastR = null;
+$("start").value = saved.start ?? 9; $("end").value = saved.end ?? 18; $("wet").checked = !!saved.wet;
+[...$("placeSeg").children].forEach(b => b.classList.toggle("on", b.dataset.v === place));
+const opts = () => ({ place, start: +$("start").value, end: +$("end").value, wet: $("wet").checked });
+const saveSettings = () => store.set("sunscreen_settings", { city, place, start: +$("start").value, end: +$("end").value, wet: $("wet").checked });
+
+$("placeSeg").onclick = e => {
+  if (!e.target.dataset.v) return;
+  place = e.target.dataset.v;
+  [...$("placeSeg").children].forEach(b => b.classList.toggle("on", b.dataset.v === place));
+  saveSettings(); render();
+};
+["start", "end", "wet"].forEach(id => $(id).onchange = () => { saveSettings(); weather && render(); });
+$("city").onchange = () => { store.set("sunscreen_settings", { ...store.get("sunscreen_settings", {}), city: $("city").value }); location.reload(); };
+$("tabs").onclick = e => {
+  const b = e.target.closest("button"); if (!b) return;
+  tab = tab === b.dataset.t ? null : b.dataset.t; renderPanel();
+};
+
+function toast(msg) {
+  $("toast").textContent = msg; $("toast").classList.add("show");
+  setTimeout(() => $("toast").classList.remove("show"), 3500);
+}
+
+// ---- 체크 & 알림 ----
+const today = () => weather.current.time.slice(0, 10);
+const doneKey = m => `${today()}_${m}`;
+const doneMap = () => store.get("sunscreen_done", {});
+function toggleDone(m) {
+  const d = doneMap(), k = doneKey(m);
+  if (d[k]) delete d[k]; else d[k] = 1;
+  store.set("sunscreen_done", d); render();
+  if (d[k]) toast("체크했어요");
+}
+const notifyOn = () => store.get("sunscreen_notify", false) && "Notification" in window && Notification.permission === "granted";
+async function toggleNotify() {
+  if (store.get("sunscreen_notify", false)) { store.set("sunscreen_notify", false); render(); return toast("알림을 껐어요"); }
+  if (!("Notification" in window)) return toast("이 브라우저는 알림을 지원하지 않아요");
+  let p; try { p = Notification.permission === "granted" ? "granted" : await Notification.requestPermission(); } catch { p = "denied"; }
+  if (p !== "granted") return toast("알림이 차단돼 있어요. 브라우저 설정에서 허용해 주세요");
+  store.set("sunscreen_notify", true); render(); toast("알림을 켰어요 · 이 탭을 열어 둬야 울려요");
+}
+// 앱을 닫아도 울리도록 캘린더(.ics) 알림 파일을 만든다 (서버 없이 가능한 방법). 시각은 기기 현지 시간 기준.
+function downloadIcs(schedule) {
+  const day = today().replace(/-/g, ""), stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+  const t = m => day + "T" + String(Math.floor(m / 60)).padStart(2, "0") + String(m % 60).padStart(2, "0") + "00";
+  const ev = schedule.map((s, i) => ["BEGIN:VEVENT", `UID:sunscreen-${day}-${i}@local`, `DTSTAMP:${stamp}`, `DTSTART:${t(s.min)}`, `DTEND:${t(s.min + 10)}`,
+    `SUMMARY:선크림 ${s.label}`, "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY", "DESCRIPTION:선크림 바를 시간이에요", "END:VALARM", "END:VEVENT"].join("\r\n"));
+  const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//sunscreen-helper//KO", ...ev, "END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" })); a.download = `선크림_${day}.ics`;
+  a.click(); URL.revokeObjectURL(a.href);
+  toast("캘린더 파일을 받았어요. 열어서 추가해 주세요");
+}
+function scheduleAlerts(schedule) {
+  timers.forEach(clearTimeout); timers = [];
+  if (!notifyOn()) return;
+  const n = new Date(), nowMin = n.getHours() * 60 + n.getMinutes() + n.getSeconds() / 60, d = doneMap();
+  schedule.filter(s => !d[doneKey(s.min)] && s.min > nowMin).forEach(s => timers.push(setTimeout(() => {
+    new Notification("선크림 시간이에요", { body: `${hhmm(s.min)} ${s.label} — 바르고 체크해 주세요` });
+    toast(`${hhmm(s.min)} ${s.label}`);
+  }, (s.min - nowMin) * 60000)));
+}
+
+// ---- 인스타툰 (바르는 법) ----
+const INK = "#141413";
+// 마스코트 '썬이': 해 얼굴. mood = smile | shock | sweat | cool
+function sunny(cx, cy, r, mood = "smile") {
+  let rays = "";
+  for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6, x1 = cx + Math.cos(a) * (r + 5), y1 = cy + Math.sin(a) * (r + 5), x2 = cx + Math.cos(a) * (r + 15), y2 = cy + Math.sin(a) * (r + 15); rays += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`; }
+  const ey = cy - r * 0.12, ex = r * 0.38;
+  const eyes = mood === "cool"
+    ? `<rect x="${cx - ex - 9}" y="${ey - 7}" width="18" height="12" rx="4" fill="${INK}"/><rect x="${cx + ex - 9}" y="${ey - 7}" width="18" height="12" rx="4" fill="${INK}"/><line x1="${cx - ex + 9}" y1="${ey - 2}" x2="${cx + ex - 9}" y2="${ey - 2}" stroke="${INK}" stroke-width="2.5"/>`
+    : `<circle cx="${cx - ex}" cy="${ey}" r="${mood === "shock" ? 5 : 3.6}" fill="${INK}"/><circle cx="${cx + ex}" cy="${ey}" r="${mood === "shock" ? 5 : 3.6}" fill="${INK}"/>`;
+  const my = cy + r * 0.38;
+  const mouth = mood === "shock" ? `<ellipse cx="${cx}" cy="${my + 2}" rx="6" ry="8" fill="${INK}"/>`
+    : `<path d="M${cx - 11} ${my - 3}q11 13 22 0" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>`;
+  const blush = `<ellipse cx="${cx - r * 0.62}" cy="${cy + r * 0.2}" rx="6" ry="3.6" fill="#F08A6B" opacity=".6"/><ellipse cx="${cx + r * 0.62}" cy="${cy + r * 0.2}" rx="6" ry="3.6" fill="#F08A6B" opacity=".6"/>`;
+  const sweat = mood === "sweat" ? `<path d="M${cx + r + 4} ${cy - r * 0.5}c4 6 6 9 0 12-6-3-4-6 0-12z" fill="#8FC1EA" stroke="${INK}" stroke-width="2"/><path d="M${cx + r - 6} ${cy - r * 0.95}c3 5 4.5 7 0 9-4.5-2-3-4 0-9z" fill="#8FC1EA" stroke="${INK}" stroke-width="2"/>` : "";
+  return `<g stroke="#D97757" stroke-width="5" stroke-linecap="round">${rays}</g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#F7C94B" stroke="${INK}" stroke-width="2.5"/>${blush}${eyes}${mouth}${sweat}`;
+}
+// 말풍선: (x,y)에서 시작하는 w 폭, 아래 꼬리가 (tx,ty)를 가리킨다
+function bubble(x, y, w, lines, tx, ty) {
+  const h = lines.length * 22 + 16, bx = Math.min(Math.max(tx, x + 22), x + w - 22);
+  return `<polygon points="${bx - 9},${y + h - 1} ${bx + 9},${y + h - 1} ${tx},${ty}" fill="#fff" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/>
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="14" fill="#fff" stroke="${INK}" stroke-width="2.5"/>
+    <line x1="${bx - 8}" y1="${y + h}" x2="${bx + 8}" y2="${y + h}" stroke="#fff" stroke-width="4"/>
+    ${lines.map((l, i) => `<text x="${x + w / 2}" y="${y + 24 + i * 22}" text-anchor="middle" font-size="16" font-weight="800" fill="${INK}" font-family="system-ui,'Malgun Gothic',sans-serif">${l}</text>`).join("")}`;
+}
+const tubeSvg = (x, y, rot = 0) => `<g transform="translate(${x} ${y}) rotate(${rot})"><path d="M-9 -26h18l3 9h-24z" fill="#F4F1E8" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/><rect x="-12" y="-17" width="24" height="38" rx="5" fill="#D97757" stroke="${INK}" stroke-width="2.5"/><text x="0" y="5" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" font-family="system-ui,sans-serif">SUN</text></g>`;
+const clockSvg = (x, y, r, hand = "30") => `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${INK}" stroke-width="2.5"/><line x1="${x}" y1="${y}" x2="${x}" y2="${y - r * 0.6}" stroke="${INK}" stroke-width="3" stroke-linecap="round"/><line x1="${x}" y1="${y}" x2="${x + r * 0.45}" y2="${y + r * 0.2}" stroke="#D97757" stroke-width="3" stroke-linecap="round"/><circle cx="${x}" cy="${y}" r="3" fill="${INK}"/>`;
+const label = (x, y, t) => `<g><rect x="${x}" y="${y}" width="${t.length * 15 + 18}" height="26" rx="13" fill="#fff" stroke="${INK}" stroke-width="2.5"/><text x="${x + (t.length * 15 + 18) / 2}" y="${y + 18}" text-anchor="middle" font-size="14" font-weight="800" fill="${INK}" font-family="system-ui,'Malgun Gothic',sans-serif">${t}</text></g>`;
+
+const TOONS = [
+  { bg: "#FFF1C9", t: "나가기 전에 미리!", cap: "외출 15~30분 전에 바르세요. 바르고 바로 나가면 아직 보호가 안 돼요.",
+    scene: `${clockSvg(238, 62, 30)}<text x="238" y="112" text-anchor="middle" font-size="13" font-weight="800" fill="${INK}" font-family="system-ui,'Malgun Gothic',sans-serif">30분 전!</text>
+      ${bubble(14, 14, 168, ["나가기 전에", "미리 발라야지!"], 92, 128)}
+      ${sunny(92, 168, 36, "smile")}${tubeSvg(160, 190, 18)}<line x1="14" y1="236" x2="286" y2="236" stroke="${INK}" stroke-width="2.5" stroke-linecap="round"/>` },
+  { bg: "#FBE3D6", t: "양은 500원 동전만큼", cap: "얼굴 전체에 500원 동전 크기만큼! 적게 바르면 표시된 SPF만큼 막지 못해요.",
+    scene: `${bubble(14, 14, 178, ["얼굴엔 500원", "동전만큼 듬뿍!"], 90, 122)}
+      ${sunny(90, 164, 36, "cool")}
+      <circle cx="226" cy="168" r="44" fill="#E6C86A" stroke="${INK}" stroke-width="2.5"/><circle cx="226" cy="168" r="35" fill="none" stroke="${INK}" stroke-width="2" stroke-dasharray="3 4"/>
+      <text x="226" y="178" text-anchor="middle" font-size="26" font-weight="800" fill="${INK}" font-family="Georgia,serif">500</text>
+      <path d="M150 168h22" stroke="${INK}" stroke-width="2.5" stroke-linecap="round"/><path d="M166 160l8 8-8 8" fill="none" stroke="${INK}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>` },
+  { bg: "#E2F0E5", t: "여기도 바르는 거 알지?", cap: "귀, 목, 손등! 제일 많이 타는 곳은 늘 빼먹는 곳이에요.",
+    scene: `${sunny(150, 120, 40, "shock")}
+      <circle cx="108" cy="126" r="9" fill="#F7C94B" stroke="${INK}" stroke-width="2.5"/><circle cx="192" cy="126" r="9" fill="#F7C94B" stroke="${INK}" stroke-width="2.5"/>
+      <rect x="138" y="158" width="24" height="26" rx="6" fill="#F7C94B" stroke="${INK}" stroke-width="2.5"/>
+      <rect x="226" y="176" width="46" height="30" rx="14" fill="#F7C94B" stroke="${INK}" stroke-width="2.5"/>
+      <circle cx="108" cy="126" r="16" fill="none" stroke="#D97757" stroke-width="3" stroke-dasharray="4 4"/><circle cx="150" cy="171" r="20" fill="none" stroke="#D97757" stroke-width="3" stroke-dasharray="4 4"/><circle cx="249" cy="191" r="30" fill="none" stroke="#D97757" stroke-width="3" stroke-dasharray="4 4"/>
+      ${label(14, 40, "귀")}<line x1="40" y1="66" x2="94" y2="116" stroke="${INK}" stroke-width="2.5"/>
+      ${label(40, 200, "목")}<line x1="76" y1="206" x2="132" y2="178" stroke="${INK}" stroke-width="2.5"/>
+      ${label(212, 138, "손등")}<line x1="244" y1="164" x2="248" y2="160" stroke="${INK}" stroke-width="2.5"/>` },
+  { bg: "#E0ECF8", t: "2시간 지났어요!", cap: "밖에선 2시간마다 덧바르기. 땀·물·수건질 뒤에는 바로 다시 발라요.",
+    scene: `${clockSvg(60, 70, 34)}<text x="60" y="124" text-anchor="middle" font-size="16" font-weight="800" fill="${INK}" font-family="system-ui,'Malgun Gothic',sans-serif">2시간 뒤</text>
+      ${bubble(112, 14, 168, ["벌써 2시간?", "덧발라야겠다!"], 188, 120)}
+      ${sunny(188, 170, 36, "sweat")}${tubeSvg(250, 196, -16)}` },
+  { bg: "#2A2926", dark: true, t: "구름 뒤에서도 방심 금지", cap: "선선하고 흐려도 자외선은 구름을 상당 부분 통과해요. 더위(열)와 UV는 별개예요.",
+    scene: `${sunny(150, 92, 36, "smile")}
+      <path d="M62 150a30 30 0 0138-28 40 40 0 0176 6 28 28 0 010 52H78a26 26 0 01-16-30z" fill="#fff" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round" transform="translate(0 -4)"/>
+      <g stroke="#D97757" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 8"><line x1="100" y1="178" x2="100" y2="228"/><line x1="150" y1="178" x2="150" y2="228"/><line x1="200" y1="178" x2="200" y2="228"/></g>
+      <text x="150" y="246" text-anchor="middle" font-size="15" font-weight="800" fill="#F7C94B" font-family="system-ui,'Malgun Gothic',sans-serif">UV는 통과 중</text>
+      ${bubble(196, 14, 96, ["구름 뒤에도", "와요!"], 176, 78)}` },
+];
+let toonIdx = 0;
+function renderToons() {
+  $("panel").innerHTML = `<div class="toons" id="toons"><div class="track" id="track" style="transform:translateX(-${toonIdx * 100}%)">${TOONS.map((s, i) => `<div class="toon"><div class="frame">
+      <div class="top" style="background:${s.bg}"><span class="ep">EP.${i + 1}</span><h4 style="${s.dark ? "color:#FAF9F5" : ""}">${s.t}</h4></div>
+      <svg class="scene" viewBox="0 0 300 250" role="img" aria-label="${s.t}" style="background:${s.dark ? "#3A3835" : "#fff"}">${s.scene}</svg>
+      <div class="cap">${s.cap}</div></div></div>`).join("")}</div></div>
+    <div class="toonnav"><button id="prevT" aria-label="이전">${ico('<path d="M15 6l-6 6 6 6"/>', 18, INK, 2.2)}</button>
+      <div class="dots">${TOONS.map((_, i) => `<i class="${i === toonIdx ? "on" : ""}"></i>`).join("")}</div>
+      <button id="nextT" aria-label="다음">${ico(P.chev, 18, INK, 2.2)}</button></div>`;
+  const go = n => { toonIdx = Math.max(0, Math.min(TOONS.length - 1, n)); renderToons(); };
+  $("prevT").disabled = toonIdx === 0; $("nextT").disabled = toonIdx === TOONS.length - 1;
+  $("prevT").onclick = () => go(toonIdx - 1); $("nextT").onclick = () => go(toonIdx + 1);
+  let x0 = null; const box = $("toons");
+  box.onpointerdown = e => { x0 = e.clientX; };
+  box.onpointerup = e => { if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) go(toonIdx + (dx < 0 ? 1 : -1)); };
+  box.onpointercancel = () => { x0 = null; };
+}
+function renderPanel() {
+  [...$("tabs").children].forEach(b => b.classList.toggle("on", b.dataset.t === tab));
+  const r = lastR;
+  if (!tab || !r) { $("panel").innerHTML = ""; return; }
+  if (tab === "news") {
+    renderToons();
+  } else if (tab === "days") {
+    const o = opts(), dn = ["오늘", "내일", "모레"];
+    $("panel").innerHTML = `<div class="card"><div class="days">${r.days.map((x, i) => `<div class="day" style="background:${HERO_BG[x.level.name]}">${dn[i] ?? x.date}<b>${x.max.toFixed(1)}</b>${x.level.name}</div>`).join("")}</div>
+      <div class="hours">${r.hours.map((v, h) => `<i class="${place === "indoor" || (h >= o.start && h < o.end) ? "in" : ""}" title="${h}시 UV ${v}" style="height:${Math.min(v / 11, 1) * 100}%;background:${levelOf(v).color}"></i>`).join("")}</div>
+      <div class="muted" style="display:flex;justify-content:space-between"><span>0시</span><span>12시</span><span>23시</span></div></div>`;
+  } else {
+    $("panel").innerHTML = `<div class="card why"><div class="head"><h3>오늘 이 결과가 나온 근거</h3></div>
+      <p class="muted" style="margin:0 0 8px;font-size:13px">위 결론(바를지, 몇 시에 바를지, 선크림 타입)을 정한 이유예요.</p>
+      <ul>${r.reasons.map(x => `<li>${x}</li>`).join("")}</ul>
+      <div class="src"><b>출처와 한계</b>
+        <ul>
+          <li>UV 등급: <a href="https://www.who.int/publications/i/item/9241590076" target="_blank" rel="noopener">WHO 자외선 지수 가이드</a>의 낮음~위험 구간을 사용해요.</li>
+          <li>덧바르기 약 2시간, 15분 전 도포, 놓치기 쉬운 부위: <a href="https://www.fda.gov/drugs/understanding-over-counter-medicines/sunscreen-how-help-protect-your-skin-sun" target="_blank" rel="noopener">미국 FDA 안내</a>를 참고했어요.</li>
+          <li>UV 8 이상에서 1.5시간 간격, 500원 동전 비유, 무기·유기자차 추천 규칙은 <b>이 앱이 일반 상식을 단순화한 것</b>이라 공식 기준이 아니에요.</li>
+        </ul></div></div>`;
+  }
+}
+
+// ---- 렌더 ----
+function render() {
+  const o = opts();
+  $("timeBox").hidden = place === "indoor";
+  if (place === "outdoor" && o.end <= o.start) { $("todoCard").innerHTML = '<p class="muted" style="margin:0;font-size:14px">끝나는 시각을 시작보다 뒤로 골라 주세요.</p>'; return; }
+  const r = judge(weather, o);
+  if (!r) { $("status").hidden = false; $("status").textContent = "아직 날씨 데이터가 없어요."; return; }
+  lastR = r;
+
+  $("date").textContent = `${city} · ${today().slice(5, 7)}월 ${today().slice(8, 10)}일`;
+  $("hero").style.background = HERO_BG[r.lv.name];
+  const sub = r.verdict === "skip" ? "오늘은 쉬어가도 돼요" : `추천 ${r.lv.spf}`;
+  const span = place === "indoor" ? "오늘 최고" : `${o.start}~${o.end}시 최고`;
+  $("hero").innerHTML = (fixtureNote ? `<div class="warn">${fixtureNote}</div>` : "") +
+    `<div class="row"><div><div class="eyebrow">UV · ${span}</div><div class="uv">${r.peak.toFixed(1)}</div><span class="lvl">${r.lv.name}</span>
+       <div class="now">지금 UV ${r.uvNow.toFixed(1)}</div></div>${sun}</div>
+     <div><h2>${r.headline}</h2><p>${sub}</p></div>
+     <div class="gauge"><i style="left:${Math.min(r.peak / 12, 1) * 100}%"></i></div>`;
+
+  // 체크리스트
+  const d = doneMap();
+  let todo = "";
+  const items = r.verdict === "once" ? [{ min: 0, label: "아침 1회" }] : r.schedule;
+  if (items.length) {
+    const done = items.filter(s => d[doneKey(s.min)]).length, next = items.findIndex(s => !d[doneKey(s.min)]);
+    const bell = r.verdict === "once" ? "" : `<button class="bell${notifyOn() ? " on" : ""}" id="bellBtn">${ico(P.bell, 14, "currentColor", 2)}${notifyOn() ? "탭 알림 켜짐" : "이 탭에서 알림"}</button>`;
+    todo = `<div class="head"><h3>오늘 바를 시간 <span>${done}/${items.length}</span></h3>${bell}</div>
+      <div class="pills">${items.map((s, i) => `<button class="pill${d[doneKey(s.min)] ? " done" : ""}${i === next ? " next" : ""}" data-m="${s.min}">
+        <span class="dot">${ico(P.check, 14, "#fff", 3)}</span><span><b>${s.min ? hhmm(s.min) : "아침"}</b><small>${s.label}</small></span></button>`).join("")}</div>` +
+      (done === items.length ? '<p class="done-msg">오늘 미션 완료</p>' : "") +
+      (r.schedule.length > 1 ? `<div class="reapply"><b>화장했다면?</b> 덧바를 땐 선스틱·쿠션·선파우더·선스프레이로 톡톡 얹어요.</div>` : "") +
+      (r.verdict === "once" || !CAN_ICS ? "" : `<div class="remind"><button id="icsBtn">${ico(P.clock, 14, "currentColor", 2)}캘린더 알림 파일 받기</button>
+        <span class="muted">폰 캘린더에 등록하면 앱을 닫아도 울려요</span></div>`);
+  } else if (r.verdict === "skip") {
+    todo = `<div class="head"><h3>오늘은 패스</h3></div><p class="muted" style="margin:0;font-size:14px">이 시간대는 UV가 낮아 꼭 바르지 않아도 돼요.</p>`;
+  } else {
+    const tm = r.days[1];
+    todo = `<div class="head"><h3>오늘은 끝났어요</h3></div><p class="muted" style="margin:0;font-size:14px">${tm ? `내일 UV 최고 ${tm.max.toFixed(1)}(${tm.level.name}). ${tm.max >= 3 ? "내일은 바르는 날이에요." : "내일은 쉬어가도 돼요."}` : "시간대를 바꿔 보세요."}</p>`;
+  }
+  $("todoCard").innerHTML = todo;
+  $("icsBtn") && ($("icsBtn").onclick = () => downloadIcs(r.schedule));
+  $("todoCard").querySelectorAll(".pill").forEach(b => b.onclick = () => toggleDone(+b.dataset.m));
+  $("bellBtn") && ($("bellBtn").onclick = toggleNotify);
+  scheduleAlerts(r.schedule);
+
+  // 같이 하면 좋아요
+  const extra = [...r.extra]; if (o.wet) extra.unshift({ icon: "💦", text: "젖으면 바로 덧바르기" });
+  if (r.verdict !== "skip" && o.place === "outdoor") // 야외에선 기본 보호 용품도 함께 보여준다
+    [{ icon: "🧢", text: "모자 쓰기" }, { icon: "🕶️", text: "선글라스 끼기" }].forEach(x => { if (extra.length < 3 && !extra.some(e => e.icon === x.icon)) extra.push(x); });
+  $("boost").innerHTML = `<h3>같이 하면 좋아요</h3><div class="tiles">` +
+    extra.slice(0, 4).map(x => `<div class="tile"><i>${ico(P[EMOJI_ICON[x.icon]] || P.check)}</i>${x.text}</div>`).join("") + `</div>`;
+
+  // 타입
+  const t = suggestType(r);
+  $("typeBox").innerHTML = "";
+  if (t) {
+    const inorg = t.pick === "무기자차" || t.pick === "혼합자차", org = t.pick === "유기자차" || t.pick === "혼합자차";
+    $("typeBox").innerHTML = `<button class="type${typeOpen ? " open" : ""}" id="typeBtn">
+        <span class="ico">${ico(P.tube, 32, "#1F4F7F")}</span>
+        <span class="txt"><div class="eb">오늘의 선크림 타입</div><div class="pick">${t.pick}</div><div class="why">${t.why}</div></span>
+        <span class="chev">${ico(P.chev, 18, "#1F4F7F", 2)}</span></button>` +
+      (typeOpen ? `<div class="compare" style="margin-top:10px">
+        <div class="${inorg ? "me" : ""}"><h4>${ico(P.shield, 22, "#1F4F7F")}무기자차</h4><dl style="margin:0"><dt>원리</dt><dd>빛을 반사해요</dd><dt>좋은 점</dt><dd>바르자마자 작동, 자극 적음</dd><dt>아쉬운 점</dt><dd>백탁, 뻑뻑함</dd><dt>이럴 때</dt><dd>민감성, 급한 외출, 땀</dd></dl></div>
+        <div class="${org && !inorg ? "me" : ""}"><h4>${ico(P.drop, 22, "#8A3B1E")}유기자차</h4><dl style="margin:0"><dt>원리</dt><dd>빛을 흡수해요</dd><dt>좋은 점</dt><dd>가볍고 백탁 없음</dd><dt>아쉬운 점</dt><dd>20분 뒤부터, 땀에 눈 시림</dd><dt>이럴 때</dt><dd>실내, 평소, 메이크업 전</dd></dl></div></div>
+        <div class="mix"><b>UV 8 이상이면 혼합자차</b>무기·유기 성분이 함께 든 제품이 한쪽에만 기대지 않아 안전해요.</div>` : "");
+    $("typeBtn").onclick = () => { typeOpen = !typeOpen; render(); };
+  }
+  renderPanel();
+}
+
+// ---- 데이터: 로딩 / 없음 / 실패(고정 파일) ----
+function show(w, note) {
+  if (!w?.current || !w?.hourly) { $("status").textContent = "아직 날씨 데이터가 없어요."; return; }
+  weather = w; fixtureNote = note || "";
+  $("status").hidden = true; $("app").hidden = false; $("app").style.display = "flex";
+  render();
+}
+async function main() {
+  try {
+    const res = await fetch(apiUrl());
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    show(await res.json());
+  } catch (e) {
+    try { show(await (await fetch(FIXTURE)).json(), "날씨를 못 읽었어요 — (연습용 고정 파일 값, 서울 기준, 실제 날씨 아님)"); }
+    catch (e2) { $("status").textContent = "날씨를 못 읽었어요. 잠시 후 새로고침해 주세요."; }
+  }
+}
+main(); // 페이지 로드당 1회, 폴링 없음
+</script>
+
+</body></html>

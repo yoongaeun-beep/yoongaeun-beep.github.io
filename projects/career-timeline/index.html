@@ -1,0 +1,257 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>윤가은 커리어 타임라인</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+/* Layout: 세로 연표. 왼쪽 날짜 열, 오른쪽 항목. 항목을 누르면 아래로 상세가 펼쳐진다. */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --fg: #1c2330;
+  --muted: #5b6577;
+  --line: #d8dde6;
+  --accent: #2c4a7a;
+  --accent-soft: #e6ecf6;
+  --t-edu: #5a4fa3;
+  --t-work: #2c4a7a;
+  --t-res: #1f7a6d;
+  --t-act: #a35a1f;
+  --t-lang: #6b7280;
+  --t-goal: #b0304a;
+  --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161d; --surface: #1a202a; --fg: #e6e9ef; --muted: #9aa5b8; --line: #2c3442;
+    --accent: #8fb0e8; --accent-soft: #212c40;
+    --t-edu: #b0a6f0; --t-work: #8fb0e8; --t-res: #6fd0c0; --t-act: #e8a870; --t-lang: #a3abb9; --t-goal: #f08aa0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161d; --surface: #1a202a; --fg: #e6e9ef; --muted: #9aa5b8; --line: #2c3442;
+  --accent: #8fb0e8; --accent-soft: #212c40;
+  --t-edu: #b0a6f0; --t-work: #8fb0e8; --t-res: #6fd0c0; --t-act: #e8a870; --t-lang: #a3abb9; --t-goal: #f08aa0;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 15px; line-height: 1.65; padding-inline: 16px; padding-block: 28px 64px; }
+.wrap { max-width: 780px; margin-inline: auto; }
+h1 { font-size: 24px; line-height: 1.3; margin: 0 0 6px; font-weight: 600; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0 0 20px; max-width: 62ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 12px 0; border-block: 1px solid var(--line); margin-bottom: 18px; font-size: 13px; }
+.facts div { min-width: 0; }
+.facts b { font-family: var(--f-mono); font-weight: 500; color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; display: block; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1 1 auto; min-width: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.ghost { border: 0; background: none; color: var(--accent); font-size: 13px; padding: 4px 2px; text-decoration: underline; text-underline-offset: 3px; }
+button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.era { margin-top: 30px; }
+.era h2 { font-size: 13px; font-family: var(--f-mono); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.era h2 span { color: var(--fg); letter-spacing: 0; text-transform: none; font-family: var(--f-body); font-weight: 600; font-size: 15px; margin-right: 8px; }
+.item { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 0 14px; border-bottom: 1px solid var(--line); }
+.when { font-family: var(--f-mono); font-size: 12px; color: var(--muted); padding-top: 15px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+details { min-width: 0; }
+summary { list-style: none; cursor: pointer; padding: 12px 0; display: flex; gap: 10px; align-items: flex-start; }
+summary::-webkit-details-marker { display: none; }
+.dot { flex: none; width: 9px; height: 9px; border-radius: 50%; margin-top: 8px; background: var(--c); }
+.head { min-width: 0; flex: 1; }
+.title { font-weight: 600; display: block; text-wrap: balance; }
+.sub { display: block; font-size: 13px; color: var(--muted); }
+.tag { flex: none; font-size: 11px; border: 1px solid var(--c); color: var(--c); border-radius: 4px; padding: 0 6px; line-height: 18px; margin-top: 4px; }
+.caret { flex: none; width: 8px; height: 8px; border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted); transform: rotate(-45deg); margin-top: 9px; transition: transform .15s; }
+details[open] .caret { transform: rotate(45deg); }
+.body { padding: 0 0 16px 19px; max-width: 64ch; }
+.body p { margin: 0 0 10px; }
+.body ul { margin: 0 0 10px; padding-left: 18px; }
+.body li { margin-bottom: 5px; }
+.note { font-size: 13px; background: var(--accent-soft); border-radius: 6px; padding: 8px 12px; margin: 0; }
+.goal-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 6px 0 10px; }
+.tbl { overflow-x: auto; }
+.goal-table th, .goal-table td { text-align: left; padding: 5px 10px 5px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.goal-table th { font-weight: 500; color: var(--muted); font-size: 12px; }
+.goal-table td:first-child { font-family: var(--f-mono); white-space: nowrap; }
+.foot { margin-top: 36px; font-size: 12px; color: var(--muted); max-width: 70ch; }
+@media (max-width: 560px) {
+  .item { grid-template-columns: minmax(0, 1fr); }
+  .when { padding: 12px 0 0 19px; }
+  summary { padding-top: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { .caret { transition: none; } }
+</style>
+
+<div class="wrap">
+  <h1>윤가은 커리어 타임라인</h1>
+  <p class="lede">학교, 연구실, 제약사, 화장품 연구소를 거쳐 AI 부트캠프까지. 항목을 누르면 그 시기에 한 일이 펼쳐집니다.</p>
+  <div class="facts">
+    <div><b>경력</b>코스맥스 2년 1개월 · 사노피 인턴 7개월</div>
+    <div><b>학력</b>경희대학교 유전생명공학과</div>
+    <div><b>어학</b>TOEIC 975 / OPIc AL</div>
+    <div><b>지금</b>LS Jump Up AI 부트캠프</div>
+  </div>
+  <div class="bar">
+    <div class="chips" id="chips" role="group" aria-label="분류 필터"></div>
+    <button class="ghost" id="openAll" type="button">모두 펼치기</button>
+    <button class="ghost" id="closeAll" type="button">모두 접기</button>
+  </div>
+  <div id="root"></div>
+  <p class="foot">이력서와 경력 문서에 적힌 사실만 모았습니다. 이 페이지는 Claude로 만들었습니다.</p>
+</div>
+
+<script>
+var TAGS = {
+  edu: { name: "학력", c: "var(--t-edu)" },
+  work: { name: "경력", c: "var(--t-work)" },
+  res: { name: "연구", c: "var(--t-res)" },
+  act: { name: "활동", c: "var(--t-act)" },
+  lang: { name: "교육·어학", c: "var(--t-lang)" }
+};
+
+var ERAS = [
+  { title: "학부", range: "2018 – 2024", items: [
+    { when: "2018.03 –\n2024.02", t: "경희대학교 유전생명공학과", s: "2024.02 졸업 · 학점 3.75 / 4.5", tag: "edu",
+      pts: ["주요 과목: 바이오 임상설계, 분자생물학, 인체생리학, 유기화학",
+            "졸업논문, 유전공학종합설계, 단기현장실습(전공) 이수"] },
+    { when: "2020.03 –\n2021.02", t: "교내 방송국 VOU", s: "기술실 정국원 6개월, 기술실 실장 6개월", tag: "act",
+      pts: ["학교 축제와 홈페이지용 영상 촬영, 편집, 장비 구매와 AS 등 장비 운영 관리 총괄",
+            "3년째 매 학기 반복되던 부원 이탈의 원인을 개별 면담으로 두 가지로 좁힘. 신입은 교육 체계가 없어 적응이 어려웠고, 기존 부원은 기술실에 몰린 업무로 지쳐 있었음",
+            "교재와 단계별 커리큘럼으로 자습형 교육 체계를 신설하고, 타 부서와 업무를 나눠 맡는 구조로 개편",
+            "결과: 이탈자 0명, 다음 기수 지원율 4~5배 증가"] },
+    { when: "2020.04 –\n2020.11", t: "온애드 광고 동아리", s: "동원 F&B 실제 제품 광고 기획", tag: "act",
+      pts: ["동원샘물: 시장 분석 후 타겟 선정, MZ세대 대상 굿즈와 캠페인 기획, 동아리 내부 경쟁 PT 발표",
+            "동원홍차밀크티: 영상 광고 제작 담당"] },
+    { when: "2020.04 –\n2020.11", t: "유엔해비타트 한국위원회 청년위원단", s: "2020 UN 세계 청년의 날 행사 기획 참여", tag: "act",
+      pts: ["청년위원단 브랜딩 총괄: 네이밍(버플리), 로고, 청년의 날 굿즈 제작",
+            "카드뉴스, 기사 번역, 홍보 영상 등 콘텐츠 제작 전반 담당",
+            "다문화와 글로벌 청년 대상 네트워킹 행사 기획과 운영"] },
+    { when: "2020.05 –\n2020.08", t: "메이크어위시 한국지부", s: "난치병 환아 소원 성취 봉사", tag: "act", pts: [] },
+    { when: "2021.07 –\n2022.01", t: "사노피 파스퇴르", s: "백신 마케팅 인턴, PMED Franchise", tag: "work",
+      pts: ["독감과 PMED(폐렴, 수막염, 풍토병) 백신 판촉 자료의 문구 작성과 디자인, 근거 자료 조사, 유관부서 커뮤니케이션",
+            "웨비나와 워크숍 기획 참여",
+            "판촉 자료 12종 기획과 제작(목표 10종 초과). 총 약 50개 제작 및 배포 관리",
+            "사수와 일하는 방식이 달라 일정이 밀리자 병목을 정리해 역할 재편을 제안. 사수가 뼈대를 잡고 본인이 근거 조사와 문구 검증으로 마무리하는 방식으로 바꿔 12종 완성",
+            "독감 백신 동시접종 메시지를 담은 신규 마케팅 자료를 직접 제안해 완성"],
+      note: "영업 현장 워크숍에 자원해 참석하고 영업사원과 대화한 내용을 자료 제작에 반영함" },
+    { when: "2022.07 –\n2022.11", t: "같이에듀 그루터기 학습멘토링", s: "청소년그루터기재단, 55시간 봉사", tag: "act",
+      pts: ["활동우수상 수상"] },
+    { when: "2022.08 –\n2022.12", t: "경희대 줄기세포 및 암 연구실", s: "학부연구생", tag: "res",
+      pts: ["암 미세환경에서 줄기세포의 영향을 보는 실험을 맡아 수행",
+            "세포배양, qRT-PCR, RNA isolation, Western blot 등을 배우고 직접 수행"] },
+    { when: "2022.12 –\n2023.05", t: "KIST 뇌과학연구소 뇌질환연구단", s: "학부연구생", tag: "res",
+      pts: ["TTYH 채널 연구 보조. gene knock-down 후 병리적 변화를 조직학 수준에서 관찰하는 실험을 주체적으로 계획하고 수행",
+            "Perfusion, Cryosection, Immunohistochemistry, Confocal microscopy, 마우스 뇌 virus injection"] },
+    { when: "2024.01", t: "바이오 미래인재스쿨 4기 고급과정", s: "충북창조경제혁신센터, 10시간", tag: "lang",
+      pts: ["제약·바이오 가치사슬, 글로벌 주요 제약기업 분석, M&A 트렌드 분석"] },
+    { when: "2024.02 –\n2024.03", t: "KTL GMP 전문가 양성과정", s: "한국산업기술시험원, 192시간", tag: "lang",
+      pts: ["GMP 규정, 품질관리시스템, CSV와 DI, 밸리데이션 이론과 분석 장비 실습"] }
+  ]},
+  { title: "코스맥스", range: "2024 – 2026", items: [
+    { when: "2024.06 –\n2026.04", t: "코스맥스 연구경영", s: "연구소 경영관리, 사원 (R&I Management Associate)", tag: "work",
+      pts: ["유럽(프랑스, 이탈리아) 화장품 기술 트렌드를 조사해 R&D 방향 검토용 리포트를 매월 작성하고 전 연구소에 배포. 베스트셀러 2개 플랫폼의 제품 100여 개를 분석했고, 임원과 회장 보고에 쓰임",
+            "제품 특징 정리를 엑셀 VBA와 AI 크롤링으로 자동화해 작업 시간을 3시간으로 단축. 프롬프트를 직접 설계하고 무작위 검증으로 정확도 확인",
+            "국문 전용이던 연구소 투어에 영문 투어를 신설하고 운영. 3년간 24팀이던 방문이 연 100팀 이상으로 늘어 해외 고객 필수 코스로 정착",
+            "인도네시아 연구소 커뮤니케이션 단독 담당. 연수연구원 교육과 기술 이관 조율, 본사 크리에이터팀과 현지 연구원을 잇는 영상 교육 기획, 양국 연구원 미팅 주선. 선크림 공동 기획을 성공적으로 완성하고 현지 연구소장에게 앞으로도 함께 일하고 싶다는 평가를 받음",
+            "연구소 8개층 전시공간 기획 주도(2024.11 ~ 2025.11). 방문객을 3개 유형으로 나누고 기술 공개 범위를 계층화. 반려 사유를 두 기준으로 분류해 같은 사유의 반려가 반복되지 않게 함",
+            "소비자 리포트를 분석해 신사업팀과 헤어사업팀에 직접 PT (2025.12)",
+            "기관생명윤리위원회(IRB) 행정간사, 월간 연구개발 데이터 정제와 시스템 등록"] },
+    { when: "2025.12", t: "OPIc AL", s: "영어 말하기 최고 등급", tag: "lang", pts: [] },
+    { when: "2026.02", t: "TOEIC 975 / 990", s: "", tag: "lang", pts: [] },
+    { when: "2026.05 –\n2026.07", t: "코스맥스 해외영업팀", s: "사내 이동", tag: "work",
+      pts: ["사내 이동으로 해외영업팀에서 근무"] },
+    { when: "2026.07 –\n2026.08", t: "인허가(RA) 기본교육", s: "한국제약바이오협회, 6시간", tag: "lang",
+      pts: ["약사법 등 규제 법령, 의약품 인허가와 심사, 임상시험, 품질관리, 허가-특허 연계제도"] }
+  ]},
+  { title: "지금", range: "2026 –", items: [
+    { when: "진행 중\n~ 2026.11", t: "LS Jump Up AI 부트캠프", s: "약 4개월 집중 과정", tag: "lang",
+      pts: ["제조업 디지털 전환, 데이터 분석과 시각화, 바이브 코딩 웹 개발, 생성형 AI 업무 자동화, AI 에이전트 구축",
+            "설비 고장 예측 AI와 예지보전 대시보드 (3인 팀, 조장). 정비 담당자가 어려워하는 것은 고장 예측 자체가 아니라 부품 발주 시점 판단이라는 점을 확인하고, 발주 시점을 함께 제시하도록 설계 변경",
+            "본인은 고장 예측 모델 담당. 센서 데이터 87만 건으로 LightGBM 모델 36개, AUC 0.88 ~ 0.95"] }
+  ]}
+];
+
+var root = document.getElementById("root");
+var chips = document.getElementById("chips");
+var active = "all";
+
+function el(tag, cls, text) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+function render() {
+  root.textContent = "";
+  ERAS.forEach(function (era) {
+    var items = era.items.filter(function (it) { return active === "all" || it.tag === active; });
+    if (!items.length) return;
+    var sec = el("section", "era");
+    var h = el("h2");
+    h.appendChild(el("span", null, era.title));
+    h.appendChild(document.createTextNode(era.range));
+    sec.appendChild(h);
+    items.forEach(function (it) {
+      var row = el("div", "item");
+      var when = el("div", "when");
+      it.when.split("\n").forEach(function (line, i) {
+        if (i) when.appendChild(document.createElement("br"));
+        when.appendChild(document.createTextNode(line));
+      });
+      row.appendChild(when);
+      var d = document.createElement("details");
+      if (it.t === "코스맥스 연구경영" && active === "all") d.open = true;
+      d.style.setProperty("--c", TAGS[it.tag].c);
+      var sm = document.createElement("summary");
+      sm.appendChild(el("span", "dot"));
+      var head = el("span", "head");
+      head.appendChild(el("span", "title", it.t));
+      if (it.s) head.appendChild(el("span", "sub", it.s));
+      sm.appendChild(head);
+      sm.appendChild(el("span", "tag", TAGS[it.tag].name));
+      sm.appendChild(el("span", "caret"));
+      d.appendChild(sm);
+      var body = el("div", "body");
+      if (it.pts && it.pts.length) {
+        var ul = document.createElement("ul");
+        it.pts.forEach(function (p) { ul.appendChild(el("li", null, p)); });
+        body.appendChild(ul);
+      } else {
+        body.appendChild(el("p", null, it.s || "세부 내용 없음"));
+      }
+      if (it.note) body.appendChild(el("p", "note", it.note));
+      d.appendChild(body);
+      row.appendChild(d);
+      sec.appendChild(row);
+    });
+    root.appendChild(sec);
+  });
+}
+
+function drawChips() {
+  chips.textContent = "";
+  ["all"].concat(Object.keys(TAGS)).forEach(function (k) {
+    var b = el("button", "chip", k === "all" ? "전체" : TAGS[k].name);
+    b.type = "button";
+    b.setAttribute("aria-pressed", String(active === k));
+    b.addEventListener("click", function () { active = k; drawChips(); render(); });
+    chips.appendChild(b);
+  });
+}
+
+document.getElementById("openAll").addEventListener("click", function () {
+  root.querySelectorAll("details").forEach(function (d) { d.open = true; });
+});
+document.getElementById("closeAll").addEventListener("click", function () {
+  root.querySelectorAll("details").forEach(function (d) { d.open = false; });
+});
+
+drawChips();
+render();
+</script>
+
+</body></html>

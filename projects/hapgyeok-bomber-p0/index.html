@@ -1,0 +1,233 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>합격 폭격기 P0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@400;700;900&display=swap">
+<style>
+/* Layout: one-screen rhythm cabinet. Compact header with controls on top, 4-lane canvas playfield fills the rest. Night-show identity shared with the game. */
+:root{
+  --bg:#17135c; --bg2:#231c8a; --ink:#0a0830; --paper:#fff6e0;
+  --yellow:#ffe14d; --pink:#ff3d8b; --mint:#38f2c0; --violet:#9b8cff; --muted:#aaa4ea;
+  --display:'Black Han Sans','Gothic A1','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --body:'Gothic A1','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--paper);font-family:var(--body);margin:0;overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1.5px,transparent 1.6px);background-size:18px 18px}
+.app{height:100%;max-width:520px;margin:0 auto;box-sizing:border-box;padding-block:12px;padding-inline:16px;display:flex;flex-direction:column;gap:10px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.chip{background:var(--ink);color:var(--mint);font-weight:900;font-size:11px;letter-spacing:.06em;padding:5px 10px;border-radius:999px;white-space:nowrap}
+.status{font-size:12px;font-weight:900;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+h1{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(26px,8vw,34px);line-height:1.05;color:var(--yellow);
+  text-shadow:-2px -2px 0 var(--ink),2px -2px 0 var(--ink),-2px 2px 0 var(--ink),2px 2px 0 var(--ink),4px 5px 0 var(--pink)}
+.lead{margin:0;font-size:13px;line-height:1.55;color:var(--paper)}
+.lead b{color:var(--yellow)}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.play{font-family:var(--display);font-size:20px;color:var(--ink);background:var(--yellow);border:3px solid var(--ink);border-radius:14px;padding:8px 20px;box-shadow:0 5px 0 var(--ink);cursor:pointer}
+.play:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
+.play[aria-pressed="true"]{background:var(--pink);color:var(--paper)}
+.seg{display:flex;border:3px solid var(--ink);border-radius:12px;overflow:hidden}
+.seg button{font:inherit;font-size:12px;font-weight:900;background:var(--bg2);color:var(--paper);border:0;padding:8px 10px;cursor:pointer;line-height:1.25}
+.seg button small{display:block;font-size:10px;font-weight:700;color:var(--muted)}
+.seg button+button{border-left:2px solid var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--mint);color:var(--ink)}
+.seg button[aria-pressed="true"] small{color:var(--ink)}
+.seg button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
+.offset{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:900;color:var(--muted)}
+.offset input{width:100px;accent-color:var(--mint)}
+.offset output{min-width:46px;font-variant-numeric:tabular-nums;color:var(--paper)}
+.field{position:relative;flex:1;min-height:260px;border-radius:18px;border:3px solid var(--ink);background:var(--bg2);overflow:hidden;touch-action:none}
+canvas{display:block;width:100%;height:100%}
+</style>
+
+<div class="app">
+  <div class="top">
+    <span class="chip">P0 · ③ 박자 기준 + ④ 노트 내려오기</span>
+    <span class="status" id="status">대기 중</span>
+  </div>
+  <h1>캉캉 노트 싱크 확인</h1>
+  <p class="lead">지금은 <b>자동 재생</b>이에요. 노트가 노란 선에 닿는 순간 소리와 함께 터지면 정상이에요. 판정은 다음 단계에서 붙여요. 아래 칸을 탭하거나 키보드 D F J K로 줄이 켜지는지도 볼 수 있어요.</p>
+  <div class="controls">
+    <button class="play" id="play" type="button" aria-pressed="false">재생</button>
+    <div class="seg" role="group" aria-label="난이도">
+      <button type="button" data-diff="easy" aria-pressed="false">쉬움<small>BPM 120</small></button>
+      <button type="button" data-diff="normal" aria-pressed="true">보통<small>BPM 155</small></button>
+      <button type="button" data-diff="hard" aria-pressed="false">어려움<small>BPM 185</small></button>
+    </div>
+    <label class="offset" for="offset">싱크 보정 <input id="offset" type="range" min="-150" max="150" step="10" value="0"><output id="offsetOut">0ms</output></label>
+  </div>
+  <div class="field" id="field"><canvas id="cv"></canvas></div>
+</div>
+
+<script>
+/* ---------- 곡 데이터: 캉캉 주제 (다장조 2/4, 길이 단위 = 8분음표) ---------- */
+const BARS = [
+  [['C4',4]], [['D4',1],['F4',1],['E4',1],['D4',1]], [['G4',2],['G4',2]], [['G4',1],['A4',1],['E4',1],['F4',1]],
+  [['D4',2],['D4',2]], [['D4',1],['F4',1],['E4',1],['D4',1]], [['C4',1],['C5',1],['B4',1],['A4',1]], [['G4',1],['F4',1],['E4',1],['D4',1]],
+  [['C4',4]], [['D4',1],['F4',1],['E4',1],['D4',1]], [['G4',2],['G4',2]], [['G4',1],['A4',1],['E4',1],['F4',1]],
+  [['D4',2],['D4',2]], [['D4',1],['F4',1],['E4',1],['D4',1]], [['C4',1],['G4',1],['D4',1],['E4',1]], [['C4',4]]
+];
+const CHORDS = ['C','G','C','C','G','G','C','G','C','G','C','C','G','G','G','C'];
+const BASS = {C:['C3','G2'], G:['G2','D3']};
+const STAB = {C:['E4','G4','C5'], G:['D4','G4','B4']};
+const SOLFA = {C:'도',D:'레',E:'미',F:'파',G:'솔',A:'라',B:'시'};
+const SEMI = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+const freq = n => 440*Math.pow(2,(SEMI[n[0]]+12*(+n[1]+1)-69)/12);
+// 음 높이 → 줄 (낮은 음은 왼쪽, 높은 음은 오른쪽)
+const LANE_OF = {C4:0,D4:0,E4:1,F4:1,G4:2,A4:2,B4:3,C5:3};
+const LANE_COL = ['#ff3d8b','#ffe14d','#38f2c0','#9b8cff'];
+const KEYS = ['d','f','j','k'];
+const ROUNDS = 3, COUNTIN = 8;
+const DIFF = {
+  easy:   {bpm:120, lead:1.7,  keep:n=>n.t8%2===0},  // 정박 음만
+  normal: {bpm:155, lead:1.35, keep:()=>true},
+  hard:   {bpm:185, lead:1.05, keep:()=>true}
+};
+
+// 3절 반복: 1~2절은 그대로, 3절은 한 옥타브 겹쳐서 클라이맥스
+function buildSong(){
+  const mel=[], bars=[]; let t8=COUNTIN;
+  for(let r=0;r<ROUNDS;r++) BARS.forEach((bar,bi)=>{
+    bars.push({t8, chord:CHORDS[bi], r});
+    bar.forEach(([n,len])=>{ mel.push({n,t8,len,r}); t8+=len; });
+  });
+  return {mel, bars, end:t8};
+}
+const SONG = buildSong();
+
+/* ---------- 소리 (오디오 시계가 모든 타이밍의 기준) ---------- */
+let ctx=null, master=null;
+function initAudio(){
+  if(ctx) return;
+  try{ const AC=window.AudioContext||window.webkitAudioContext; ctx=new AC(); }catch(e){}
+}
+function newMaster(){ master=ctx.createGain(); master.gain.value=.45; master.connect(ctx.destination); }
+function voice(f,t,dur,type,vol){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  o.type=type; o.frequency.setValueAtTime(f,t);
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+.008);
+  g.gain.setValueAtTime(vol,t+dur*.7); g.gain.exponentialRampToValueAtTime(.001,t+dur);
+  o.connect(g); g.connect(master); o.start(t); o.stop(t+dur+.02);
+}
+function buildAudioEvents(e){
+  const ev=[];
+  for(let i=0;i<4;i++) ev.push({t:i*2*e, play:at=>voice(i===0?1760:1320,at,.05,'square',.12)});
+  for(const m of SONG.mel) ev.push({t:m.t8*e, play:at=>{
+    const f=freq(m.n)*2;
+    voice(f,at,m.len*e*.92,'square',.15);
+    voice(f*2,at,m.len*e*.5,'triangle',m.r===2?.09:.04);
+  }});
+  for(const b of SONG.bars) ev.push({t:b.t8*e, play:at=>{
+    const [root,fifth]=BASS[b.chord];
+    voice(freq(root),at,e*.9,'triangle',.3);
+    voice(freq(fifth),at+2*e,e*.9,'triangle',.3);
+    [1,3].forEach(o=>STAB[b.chord].forEach(n=>voice(freq(n),at+o*e,e*.4,'square',b.r===2?.04:.025)));
+  }});
+  return ev.sort((a,b)=>a.t-b.t);
+}
+
+/* ---------- 상태 ---------- */
+let diff='normal', playing=false, t0=0, e=0, events=[], ai=0, pumpTimer=0, notes=[], flashes=[], endAt=0;
+const press=[0,0,0,0];
+let offsetMs=0;
+const statusEl=document.getElementById('status'), playBtn=document.getElementById('play');
+
+function songTime(){ // 화면에 쓰는 곡 시간: 출력 지연을 빼고 사용자 보정을 더함
+  const lat=(ctx.outputLatency||ctx.baseLatency||0);
+  return ctx.currentTime-lat-t0+offsetMs/1000;
+}
+function start(){
+  initAudio(); if(!ctx) { statusEl.textContent='이 브라우저는 소리를 지원하지 않아요'; return; }
+  ctx.resume && ctx.resume(); newMaster();
+  const D=DIFF[diff]; e=30/D.bpm;
+  events=buildAudioEvents(e); ai=0;
+  notes=SONG.mel.filter(D.keep).map(m=>({time:m.t8*e, lane:LANE_OF[m.n], label:SOLFA[m.n[0]], done:false}));
+  flashes=[]; t0=ctx.currentTime+.15; endAt=SONG.end*e+.6;
+  playing=true; playBtn.textContent='정지'; playBtn.setAttribute('aria-pressed','true');
+  document.querySelectorAll('.seg button').forEach(b=>b.disabled=true);
+  pump(); pumpTimer=setInterval(pump,25);
+}
+function stop(label){
+  playing=false; clearInterval(pumpTimer);
+  if(master){ master.disconnect(); master=null; }
+  playBtn.textContent='재생'; playBtn.setAttribute('aria-pressed','false');
+  document.querySelectorAll('.seg button').forEach(b=>b.disabled=false);
+  statusEl.textContent=label||'대기 중';
+}
+function pump(){ // 0.2초 앞까지 미리 예약
+  const horizon=ctx.currentTime+.2;
+  while(ai<events.length && t0+events[ai].t<horizon){ events[ai].play(t0+events[ai].t); ai++; }
+}
+
+/* ---------- 그리기 ---------- */
+const cv=document.getElementById('cv'), g=cv.getContext('2d'), fieldEl=document.getElementById('field');
+let W=0,H=0;
+function resize(){ const dpr=Math.min(2,devicePixelRatio||1), r=fieldEl.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; g.setTransform(dpr,0,0,dpr,0,0); }
+addEventListener('resize',resize); resize();
+const PAD=72;
+function rr(x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+function fmt(s){ s=Math.max(0,s); return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'); }
+
+function frame(){
+  const lw=W/4, lineY=H-PAD-8, now=performance.now();
+  g.clearRect(0,0,W,H);
+  for(let i=0;i<4;i++){
+    g.fillStyle=i%2?'rgba(255,255,255,.035)':'rgba(255,255,255,.0)'; g.fillRect(i*lw,0,lw,H);
+    const lit=Math.max(0,1-(now-press[i])/160);
+    if(lit>0){ const gr=g.createLinearGradient(0,lineY,0,lineY-H*.6); gr.addColorStop(0,LANE_COL[i]+'88'); gr.addColorStop(1,LANE_COL[i]+'00'); g.globalAlpha=lit; g.fillStyle=gr; g.fillRect(i*lw,0,lw,lineY); g.globalAlpha=1; }
+  }
+  // 판정선
+  g.fillStyle='#ffe14d'; g.fillRect(0,lineY-2,W,4);
+  // 패드
+  for(let i=0;i<4;i++){
+    const lit=Math.max(0,1-(now-press[i])/160);
+    rr(i*lw+6,lineY+10,lw-12,PAD-14,12); g.fillStyle=lit>0?LANE_COL[i]:'rgba(255,255,255,.08)'; g.fill();
+    g.fillStyle=lit>0?'#0a0830':'rgba(255,246,224,.55)'; g.font='900 14px "Gothic A1",sans-serif'; g.textAlign='center'; g.textBaseline='middle';
+    g.fillText(KEYS[i].toUpperCase(), i*lw+lw/2, lineY+10+(PAD-14)/2);
+  }
+  if(playing){
+    pump();
+    const st=songTime(), lead=DIFF[diff].lead;
+    // 카운트인
+    if(st<COUNTIN*e){ const beat=Math.floor(Math.max(0,st)/(2*e)); g.fillStyle='#fff6e0'; g.font='64px "Black Han Sans",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText(st<0?'':String(4-Math.min(3,beat)), W/2, H*.38); }
+    for(const n of notes){
+      if(n.done) continue;
+      const dt=n.time-st;
+      if(dt<=0){ n.done=true; flashes.push({lane:n.lane,t:now}); press[n.lane]=now; continue; }
+      if(dt>lead) break;
+      const y=lineY-dt/lead*lineY;
+      rr(n.lane*lw+8,y-11,lw-16,22,8); g.fillStyle=LANE_COL[n.lane]; g.fill();
+      g.lineWidth=3; g.strokeStyle='#0a0830'; g.stroke();
+      g.fillStyle='#0a0830'; g.font='900 13px "Gothic A1",sans-serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText(n.label, n.lane*lw+lw/2, y);
+    }
+    const total=SONG.end*e, round=Math.min(ROUNDS,Math.max(1,Math.floor((st-COUNTIN*e)/(16*8*e))+1));
+    statusEl.textContent=`${st<COUNTIN*e?'준비':round+'절 / '+ROUNDS} · ${fmt(st)} / ${fmt(total)} · 노트 ${notes.length}개`;
+    if(st>endAt) stop('끝! 다시 재생해 보세요');
+  }
+  // 터지는 효과
+  flashes=flashes.filter(f=>now-f.t<320);
+  for(const f of flashes){
+    const p=(now-f.t)/320, cx=f.lane*lw+lw/2;
+    g.globalAlpha=1-p; g.strokeStyle=LANE_COL[f.lane]; g.lineWidth=5*(1-p)+1;
+    g.beginPath(); g.arc(cx,lineY,10+p*lw*.45,0,Math.PI*2); g.stroke(); g.globalAlpha=1;
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* ---------- 입력 (이번 단계는 줄이 켜지는 것만) ---------- */
+function hitLane(i){ press[i]=performance.now(); }
+fieldEl.addEventListener('pointerdown',ev=>{ const r=fieldEl.getBoundingClientRect(); hitLane(Math.min(3,Math.max(0,Math.floor((ev.clientX-r.left)/(r.width/4))))); });
+addEventListener('keydown',ev=>{ const i=KEYS.indexOf(ev.key.toLowerCase()); if(i>=0 && !ev.repeat) hitLane(i); });
+
+playBtn.addEventListener('click',()=> playing?stop():start());
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{
+  diff=b.dataset.diff; document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+}));
+const off=document.getElementById('offset'), offOut=document.getElementById('offsetOut');
+off.addEventListener('input',()=>{ offsetMs=+off.value; offOut.textContent=(offsetMs>0?'+':'')+offsetMs+'ms'; });
+</script>
+
+</body></html>
