@@ -1,66 +1,84 @@
 // 메인 프로젝트 — 사람이 직접 관리하는 파일. 매일 자동 수집은 이 파일을 건드리지 않습니다.
 // 사이드 프로젝트(projects.js, 서가)보다 크게, 프로젝트 섹션 맨 위에 나옵니다.
-// 근거: github.com/jgi0117/2team_project (README, src/, data/processed/model_metrics.csv, model_comparison.csv, 커밋 기록)
+// 근거: 윤가은_포트폴리오(260930).doc, github.com/jgi0117/2team_project
 window.SITE_MAIN = [
   {
     id: "predictive-maintenance",
-    period: "2026.09",
-    team: { ko: "LS Jump Up 2팀 · 조장", en: "LS Jump Up Team 2 · team lead" },
-    title: { ko: "설비 고장 예측 기반 정비·발주 의사결정 지원 시스템", en: "Failure prediction for maintenance and parts-ordering decisions" },
+    period: "2026.09.14 – 09.30",
+    team: { ko: "LS Jump Up 2팀 (4인) · 조장 · 기여도 35%", en: "LS Jump Up Team 2 (4 people) · team lead · 35% contribution" },
+    title: { ko: "센서 데이터 기반 설비 고장 예측 및 정비·발주 의사결정 지원 시스템", en: "Sensor-based failure prediction and maintenance/ordering decision support" },
     oneLiner: {
-      ko: "고장이 날지 맞히는 데서 멈추지 않고, '지금 발주해야 부품을 제때 받을 수 있는가'까지 답하는 예지보전 대시보드입니다.",
-      en: "A predictive-maintenance dashboard that goes past 'will it fail?' to answer 'do we need to order parts now to have them in time?'"
+      ko: "부품 고장을 예측하고, 그 결과를 '고장 확률 0.7'이 아니라 'D-8, 재고 없음, 오늘 발주 필요'라는 행동 단위로 바꿔 보여주는 정비 대시보드입니다.",
+      en: "Predicts part failures and turns them into actions: not 'failure probability 0.7' but 'D-8, no stock, order today'."
     },
     stats: [
-      { v: { ko: "87.6만", en: "876k" }, l: { ko: "센서 데이터 (설비 100대, 1년)", en: "sensor records (100 machines, 1 year)" } },
-      { v: { ko: "36개", en: "36" }, l: { ko: "예측 모델 (부품 4 × 예측 기간 9)", en: "models (4 parts × 9 horizons)" } },
-      { v: { ko: "0.88–0.95", en: "0.88–0.95" }, l: { ko: "AUC · 채택 부품 3개, 결정 기간 기준", en: "AUC · 3 adopted parts at decision horizon" } },
-      { v: { ko: "4.2–6.5배", en: "4.2–6.5×" }, l: { ko: "상위 10% 위험군 적중 (Lift)", en: "top-10% lift" } }
+      { v: { ko: "0.727 → 0.88–0.94", en: "0.727 → 0.88–0.94" }, l: { ko: "AUC · 기존 경과일 규칙 대비 (채택 부품 3종)", en: "AUC vs. the age-based rule (3 adopted parts)" } },
+      { v: { ko: "4.4배", en: "4.4×" }, l: { ko: "상위 위험군에 실제 고장이 몰린 정도 (Lift)", en: "failures concentrated in the top-risk group (lift)" } },
+      { v: { ko: "87.6만", en: "876k" }, l: { ko: "센서 데이터 (설비 100대, 부품 4종)", en: "sensor records (100 machines, 4 parts)" } },
+      { v: { ko: "0원", en: "₩0" }, l: { ko: "AI 요약 API 비용 (로컬 sLLM)", en: "API cost for AI summaries (local sLLM)" } }
     ],
     problem: {
-      ko: "정비·자재 담당자에게 어려운 것은 고장 예측 자체보다 '언제 부품을 발주해야 정비에 맞출 수 있는가'였습니다. 부품마다 조달 기간이 7일에서 35일까지 달라, 같은 위험 점수라도 대응 시점이 달라야 했습니다.",
-      en: "For maintenance and materials staff, the hard part was less predicting failure than knowing when to order parts in time. Lead times range from 7 to 35 days, so the same risk score needs different timing per part."
+      ko: "정비는 부품을 쓴 날짜가 기준을 넘으면 바꾸는 경과일 규칙에 의존했고, 실제 교체 3,286건 중 22.7%가 고장 후 긴급 교체였습니다. 센서·정비·고장·재고 데이터가 따로 있어 '지금 어느 설비의 어느 부품을 먼저 봐야 하는가'를 한 화면에서 판단할 수 없었고, 예측을 해도 부품이 없으면 정비가 늦어졌습니다.",
+      en: "Maintenance relied on an age-based replacement rule, and 22.7% of 3,286 replacements were emergency fixes after failure. Sensor, maintenance, failure and stock data lived apart, so no one could see which part to check first, and even a good prediction was useless without parts in stock."
     },
     approach: {
       ko: [
-        "부품별 예측 기간을 '조달 기간 + 정비 준비 기간'(8·16·24·42일)으로 맞추고, 발주 마감일을 역산하도록 설계",
-        "센서 4종의 기간별 통계, 에러 빈도, 교체 후 경과일로 피처를 만들고 5개 모델을 비교. 정확도가 비슷한 랜덤포레스트 대신 학습이 2.5배 빠른 LightGBM 채택",
-        "미래 값이 섞이는 누수(결측 뒤채움)를 제거하고, 설비 ID 피처를 빼서 '고장 잘 나는 설비'를 외우는 대신 '언제' 고장 나는지를 학습하게 함",
-        "예측력이 낮은 부품(AUC 0.62)은 모델을 억지로 쓰지 않고 안전재고로 관리하도록 결정"
+        "시간 단위 87.6만 행을 설비·일 단위 3.36만 행으로 정리하고, 미래로 과거를 맞히지 않도록 시점 기준으로 학습·테스트 분할",
+        "설비마다 정상 범위가 달라 센서 절대값 대신 이동평균·추세·z점수 사용. '원래 진동이 큰 기종은 항상 위험'이라는 오학습을 막음",
+        "5개 후보를 같은 조건으로 비교해 LightGBM 채택. 랜덤포레스트와 AUC 차이는 0.004인데 학습은 2.5배 빨라, 부품 × 기간별 반복 재학습에 유리",
+        "부품별 결정 시한(조달 + 준비: 8·16·24일)으로 D-day와 발주 시한을 역산하고, 한정된 재고를 위험도 순으로 배정",
+        "Isolation Forest로 급성 센서 이상을 보완(Lift 8.45, 고장 약 19.6시간 전 신호)하고, 설비 데이터를 밖으로 보내지 않도록 로컬 sLLM으로 한 줄 요약 생성"
       ],
       en: [
-        "Set each part's horizon to lead time + preparation time (8, 16, 24, 42 days) and back-calculate the order deadline",
-        "Built features from rolling sensor stats, error counts and days since replacement; compared 5 models and chose LightGBM over a similarly accurate random forest for 2.5× faster retraining",
-        "Removed future-value leakage (backfilling) and dropped machine-ID features so the model learns when, not which machine",
-        "For the part the model couldn't predict well (AUC 0.62), chose safety stock instead of forcing a model"
+        "Condensed 876k hourly rows into 33.6k machine-day rows and split train/test by time so the future never predicts the past",
+        "Used rolling means, trends and z-scores instead of raw values, since each machine has its own normal range",
+        "Compared 5 models under the same conditions and chose LightGBM: within 0.004 AUC of random forest but 2.5× faster to retrain across parts and horizons",
+        "Back-calculated D-day and order deadlines from each part's lead time (8, 16, 24 days) and allocated limited stock by risk",
+        "Added Isolation Forest for sudden sensor anomalies (lift 8.45, ~19.6 h lead) and a local sLLM for one-line summaries so plant data never leaves the site"
+      ]
+    },
+    trouble: {
+      ko: [
+        "AUC 0.98이 나와 오히려 의심 → 미래값 보간(bfill)과 설비 ID가 정답을 새게 하고 있었음 → 과거값 보간과 ID 제거로 0.88–0.94, 신뢰할 수 있는 성능으로",
+        "comp2는 AUC 0.58로 기존 규칙(0.597)보다도 낮음 → 억지로 쓰지 않고 채택 제외를 명시, 화면에는 예측 대신 안전재고 안내",
+        "화면은 28일, 모델은 부품별 8·16·24일을 써서 D-day가 서로 다름 → 공통 상수를 한 파일로 모으고 테스트로 검출, 불일치 0건",
+        "노트북 해상도에서 그래프가 잘리고 카드가 겹침 → 576–1920px 반응형으로 재구성, 겹침 0건"
+      ],
+      en: [
+        "AUC 0.98 looked too good → found leakage from backfilling and machine IDs → forward-fill and ID removal gave a trustworthy 0.88–0.94",
+        "comp2 scored 0.58, below the old rule (0.597) → excluded it explicitly and showed safety-stock guidance instead",
+        "Screen used 28 days while models used 8/16/24 → centralized constants in one file with tests; zero mismatches",
+        "Layout broke on laptops → rebuilt responsive from 576 to 1920 px; zero overlaps"
       ]
     },
     result: {
       ko: [
-        "Dash 대시보드: 위험이 가장 많이 오른 설비 Top 3, 발주 마감 달력, 부품별 위험과 최근 72시간 센서 그래프, 발주 지연일별 비용 시나리오, 설비별 위험 히트맵, 로컬 LLM 한 줄 요약",
-        "채택 3개 부품에서 단순 규칙(교체 후 경과일) 대비 AUC 0.75–0.80 → 0.88–0.95"
+        "메인(AI 한 줄 요약, 경고 KPI, To-Do 달력, 위험 TOP3, 재고 × 위험 교차표)·설비 상세·통계 히트맵·발주·설정 5개 화면의 Dash 대시보드",
+        "자동 테스트 47건 통과, 브라우저 콘솔 에러 0건, 커밋 61회·브랜치 통합 5회로 F01–F10 기능 병행 완성"
       ],
       en: [
-        "Dash dashboard: top-3 rising-risk machines, order-deadline calendar, per-part risk with 72-hour sensor charts, cost scenarios by order delay, risk heatmap, one-line local-LLM summary",
-        "For the 3 adopted parts, AUC rose from 0.75–0.80 (days-since-replacement rule) to 0.88–0.95"
+        "Dash dashboard with five screens: home (AI summary, KPIs, to-do calendar, top-3 risk, stock × risk table), machine detail, statistics heatmap, ordering, settings",
+        "47 automated tests passing, zero console errors; 61 commits and 5 branch merges across features F01–F10"
       ]
     },
     role: {
       ko: [
-        "조장, 고장 예측 모델 담당",
-        "미래값 누수 수정, 5개 모델 비교, 위험 상승 시점 계산 보정과 상태 분류(정상·관찰·주의·즉시)",
-        "대시보드 UI 리디자인: 설비 도면 화면, 발주 화면 신설, 발주 비용 곡선 검토"
+        "조장. 데이터 전처리 파이프라인, 부품별 고장 예측 모델 학습·평가, 대시보드 화면 통합과 반응형 UI를 맡음",
+        "4명이 충돌 없이 병행하도록 공통 상수 파일, 기능 번호(F01–F10), 화면 ID 접두사 규칙(54개)과 테스트 47건을 통합 조건으로 정함",
+        "Claude Code로 Dash 콜백 연결과 반응형 CSS를 구현하고, 콜백 누락을 찾는 점검 스크립트를 만들어 반복 검증"
       ],
       en: [
-        "Team lead; owned the failure prediction model",
-        "Fixed leakage, ran the 5-model comparison, corrected risk-rise timing and added status levels",
-        "Redesigned the dashboard UI: equipment-drawing view, new ordering screen, cost-curve review"
+        "Team lead; owned the preprocessing pipeline, per-part failure models and dashboard integration with responsive UI",
+        "Set the rules that let four people work in parallel: shared constants, feature numbers F01–F10, 54 ID prefixes and 47 tests as merge gates",
+        "Used Claude Code for Dash callbacks and responsive CSS, plus a script that checks for broken callback wiring"
       ]
     },
-    stack: ["Python", "pandas", "scikit-learn", "LightGBM", "PyTorch (GRU)", "Isolation Forest", "Dash", "Plotly", "MySQL", "Qwen3-1.7B"],
+    stack: ["Python", "pandas", "scikit-learn", "LightGBM", "Isolation Forest", "Dash", "Plotly", "SQLite · SQLAlchemy", "pytest", "Qwen sLLM", "Claude Code"],
     links: [
       { label: { ko: "GitHub 저장소", en: "GitHub repository" }, href: "https://github.com/jgi0117/2team_project" }
     ],
-    images: []
+    images: [
+      { src: "assets/main/dashboard-main.png", alt: { ko: "대시보드 메인 화면: AI 한 줄 요약, 경고 KPI, To-Do 달력, 위험 TOP3, 재고 × 위험 교차표", en: "Dashboard home: AI summary, KPIs, to-do calendar, top-3 risk, stock × risk table" } }
+    ]
   }
 ];

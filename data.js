@@ -17,7 +17,7 @@ window.SITE_DATA = {
   highlights: [
     { v: { ko: "24 → 100+", en: "24 → 100+" }, l: { ko: "연간 해외 방문팀", en: "overseas visiting teams a year" }, s: { ko: "영문 연구소 투어 신설 · 코스맥스", en: "launched English R&D tours · COSMAX" } },
     { v: { ko: "12종", en: "12" }, l: { ko: "백신 판촉 자료 (목표 10종)", en: "vaccine promo pieces (target 10)" }, s: { ko: "총 50여 개 제작·배포 · 사노피", en: "50+ produced in total · Sanofi" } },
-    { v: { ko: "AUC 0.88–0.95", en: "AUC 0.88–0.95" }, l: { ko: "설비 고장 예측 모델", en: "failure prediction model" }, s: { ko: "채택 부품 기준 · LS Jump Up 조장", en: "adopted parts · LS Jump Up team lead" } }
+    { v: { ko: "AUC 0.88–0.94", en: "AUC 0.88–0.94" }, l: { ko: "설비 고장 예측 모델", en: "failure prediction model" }, s: { ko: "채택 부품 기준 · LS Jump Up 조장", en: "adopted parts · LS Jump Up team lead" } }
   ],
   // 첫 화면 "한눈에 보기" 줄
   glance: [
@@ -154,19 +154,19 @@ window.SITE_DATA = {
         stats: [
           { v: { ko: "87만", en: "870k" }, l: { ko: "센서 데이터", en: "sensor records" } },
           { v: { ko: "36", en: "36" }, l: { ko: "모델", en: "models" } },
-          { v: { ko: "0.88–0.95", en: "0.88–0.95" }, l: { ko: "AUC (채택 부품)", en: "AUC (adopted parts)" } }
+          { v: { ko: "0.88–0.94", en: "0.88–0.94" }, l: { ko: "AUC (채택 부품)", en: "AUC (adopted parts)" } }
         ]
       },
       points: {
         ko: [
           "데이터 분석·시각화, 바이브코딩 웹 개발, 생성형 AI 업무 자동화, AI 에이전트 구축 학습",
-          "팀 프로젝트 '설비 고장 예측 AI와 예지보전 대시보드'(3인 팀, 조장): 정비 담당자가 어려워하는 것이 고장 예측이 아니라 부품 발주 시점이라는 점을 확인하고 발주 시점까지 제시하도록 설계 변경",
-          "고장 예측 모델 담당: 센서 데이터 87만 건으로 LightGBM 모델 36개 구축, 채택 부품 3개의 결정 기간 기준 AUC 0.88–0.95"
+          "팀 프로젝트 '설비 고장 예측 기반 정비·발주 의사결정 지원 시스템'(4인 팀, 조장): 예측만 해도 부품이 없으면 무의미하다고 보고, 고장 확률을 D-day와 발주 시한으로 바꿔 보여주도록 설계",
+          "고장 예측 모델 담당: 센서 데이터 87만 건으로 LightGBM 모델 36개 구축, 채택 부품 3개의 결정 기간 기준 AUC 0.88–0.94"
         ],
         en: [
           "Data analysis and visualization, vibe-coded web development, generative-AI workflow automation, AI agents",
           "Team project 'Equipment failure prediction AI and predictive maintenance dashboard' (team of 3, team lead): found that technicians struggle less with predicting failure than with timing part orders, and redesigned the output to recommend order timing",
-          "Owned the prediction model: 36 LightGBM models on 870k sensor records; AUC 0.88–0.95 for the 3 adopted parts at their decision horizons"
+          "Owned the prediction model: 36 LightGBM models on 870k sensor records; AUC 0.88–0.94 for the 3 adopted parts at their decision horizons"
         ]
       }
     },

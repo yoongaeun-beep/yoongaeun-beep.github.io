@@ -12,7 +12,7 @@
       "log.title": "최근 수집 기록 · {date}", "log.go": "서가 보러 가기 ↓", "log.count": "서가 {n}권",
       "shelf.kicker": "서가", "shelf.title": "사이드 프로젝트", "shelf.count": "{n}권",
       "side.kicker": "SIDE PROJECTS", "side.lede": "교육 중 Claude로 빠르게 만들어 본 작은 실험들입니다. 매일 새벽 자동으로 한 권씩 늘어납니다.",
-      "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.stack": "기술", "main.team": "팀",
+      "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.trouble": "막힌 곳 → 해결", "main.zoom": "크게 보기 ↗", "main.stack": "기술", "main.team": "팀",
       "shelf.lede": "책등을 누르면 표지가 뽑혀 나옵니다.",
       "shelf.all": "전체", "shelf.next": "다음 한 권 · 오늘 새벽 2시", "shelf.open": "{t} 표지 보기",
       "play": "▶ 이 페이지에서 바로 실행", "player.close": "닫기 ✕", "player.loading": "불러오는 중…",
@@ -32,7 +32,7 @@
       "log.title": "Latest collection · {date}", "log.go": "See the shelf ↓", "log.count": "{n} on the shelf",
       "shelf.kicker": "SHELF", "shelf.title": "Side projects", "shelf.count": "{n}",
       "side.kicker": "SIDE PROJECTS", "side.lede": "Small experiments built quickly with Claude during the course. One more arrives every night.",
-      "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.stack": "Stack", "main.team": "Team",
+      "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.trouble": "Stuck → solved", "main.zoom": "View full size ↗", "main.stack": "Stack", "main.team": "Team",
       "shelf.lede": "Click a spine to pull out its cover.",
       "shelf.all": "All", "shelf.next": "Next one · tonight 2 a.m.", "shelf.open": "Open {t}",
       "play": "▶ Run it on this page", "player.close": "Close ✕", "player.loading": "Loading…",
@@ -289,6 +289,19 @@
     document.body.classList.add("no-scroll");
     document.getElementById("player-close").focus();
   }
+  // 이미지를 플레이어 창에 원본 크기로 띄움 (스크롤 가능)
+  function openImage(src, title) {
+    lastFocus = document.activeElement;
+    document.getElementById("player-title").textContent = title;
+    stage.textContent = "";
+    var box = el("div", "player-image");
+    var img = el("img"); img.src = src; img.alt = title;
+    box.appendChild(img);
+    stage.appendChild(box);
+    player.hidden = false;
+    document.body.classList.add("no-scroll");
+    document.getElementById("player-close").focus();
+  }
   function closePlayer() {
     player.hidden = true; stage.textContent = ""; // iframe를 지워 소리와 애니메이션을 멈춤
     document.body.classList.remove("no-scroll");
@@ -431,14 +444,19 @@
         m.images.forEach(function (im) {
           var fig = el("figure", "mc-fig");
           var img = el("img"); img.src = im.src; img.alt = L(im.alt); img.loading = "lazy";
-          fig.appendChild(img);
+          var zoom = el("button", "mc-zoom"); zoom.type = "button";
+          zoom.setAttribute("aria-label", L(im.alt) + " " + t("main.zoom"));
+          zoom.appendChild(img);
+          zoom.appendChild(el("span", "mc-zoom-hint mono", t("main.zoom")));
+          zoom.addEventListener("click", function () { openImage(im.src, L(m.title)); });
+          fig.appendChild(zoom);
           if (im.alt) fig.appendChild(el("figcaption", null, L(im.alt)));
           figs.appendChild(fig);
         });
         grid.appendChild(figs);
       }
       var dl = el("dl", "mc-dl");
-      [["main.problem", m.problem], ["main.approach", m.approach], ["main.result", m.result], ["main.role", m.role]].forEach(function (r) {
+      [["main.problem", m.problem], ["main.approach", m.approach], ["main.trouble", m.trouble], ["main.result", m.result], ["main.role", m.role]].forEach(function (r) {
         if (!r[1]) return;
         var row = el("div");
         row.appendChild(el("dt", "mono", t(r[0])));

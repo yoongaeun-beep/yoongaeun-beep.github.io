@@ -222,7 +222,7 @@ button { font: inherit; color: inherit; }
 .mc-kicker { font-size: 12px; letter-spacing: .1em; color: var(--accent); }
 .mc-title { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.25; letter-spacing: -.03em; }
 .mc-one { margin: 0; color: var(--soft-2); font-size: 16.5px; max-width: 64ch; }
-.mc-stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); }
+.mc-stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); }
 .mc-stats li { padding: 14px 16px 14px 0; display: flex; flex-direction: column; gap: 2px; }
 .mc-stats li + li { padding-left: 16px; border-left: 1px solid var(--line-2); }
 .mc-v { font: 500 clamp(24px, 2.6vw, 30px)/1.1 var(--f-mono); color: var(--accent); letter-spacing: -.03em; }
@@ -231,6 +231,11 @@ button { font: inherit; color: inherit; }
 .mc-figs { flex: 1 1 360px; min-width: 0; display: grid; gap: 12px; }
 .mc-fig { margin: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--line-2); background: #fff; }
 .mc-fig img { display: block; width: 100%; height: auto; }
+.mc-zoom { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.mc-zoom-hint { position: absolute; right: 10px; bottom: 10px; background: #0E1428E6; color: var(--fg); border-radius: 999px; padding: 5px 10px; font-size: 12px; }
+.mc-zoom:hover .mc-zoom-hint { background: var(--accent); color: var(--on-accent); }
+.player-image { height: 100%; overflow: auto; border-radius: 10px; background: #fff; }
+.player-image img { display: block; width: 100%; max-width: 1500px; height: auto; margin: 0 auto; }
 .mc-fig figcaption { background: var(--panel); color: var(--soft); font-size: 12.5px; padding: 8px 12px; }
 .mc-dl { flex: 999 1 420px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
 .mc-dl > div { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; }
@@ -330,6 +335,7 @@ button { font: inherit; color: inherit; }
   .side-block .shelf-row > .spine-btn, .side-block .shelf-row > .ghost, .side-block .shelf-row > .bookend { zoom: .6; }
   .side-block .pulled { zoom: .74; }
   .mc-dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .mc-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mc-stats li + li { padding-left: 0; border-left: 0; }
   /* 휴대폰: 책 크기를 줄여 한 화면에 책등 몇 권과 표지가 같이 보이게 */
   .shelf-row { min-height: 0; padding: 16px 8px 0; gap: 5px; }
