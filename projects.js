@@ -11,14 +11,14 @@
 window.SITE_PROJECTS = [
   {
     id: "hapgyeok-bomber",
-    label: { ko: "취준생 미니게임 시제품", en: "Mini-game prototype" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
+    label: { ko: "AI로 기획서 쓰고 만든 게임", en: "Game built from an AI-written plan" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "games",
     design: "bomber", spineH: 404, cover: "assets/covers/bomber.jpg",
     date: "2026-10-06",
     title: { ko: "합격 폭격기", en: "Offer Bomber" },
     summary: {
-      ko: "취준생이 3분 동안 대기업 수십 곳에 합격하며 스트레스를 푸는 게임입니다. Claude가 먼저 나를 인터뷰해 재미 요소와 대상을 정리하고, 그 기획서를 바탕으로 첫 프로토타입을 만들었습니다.",
-      en: "A stress-relief game where job seekers land offers from dozens of big companies in three minutes. Claude interviewed me first to pin down the fun and the audience, then built the first prototype from that plan."
+      ko: "수업 주제는 'Claude로 기획서 만들기'였습니다. 바로 코딩을 시키지 않고, Claude가 질문 카드로 저를 인터뷰하게 해 기획서를 먼저 썼습니다(계획 모드). 그 기획서를 개발 단계(Phase)로 나눈 뒤 첫 프로토타입까지 만들었습니다. 결과물은 취준생이 3분 동안 합격을 쓸어 담으며 스트레스를 푸는 게임입니다.",
+      en: "The class was about writing a product plan with Claude. Instead of asking for code, I had Claude interview me with question cards and write the plan first (plan mode), split it into phases, then build the first prototype: a 3-minute stress-relief game where job seekers land offer after offer."
     },
     tools: ["질문 카드", "계획 모드", "아티팩트"],
     role: { ko: "대상(취준생)과 목표 감정(도파민)을 정하고, Claude의 인터뷰 질문에 답하며 기획 방향을 결정", en: "Set the audience (job seekers) and target feeling (a dopamine hit), and steered the plan through Claude's interview" },
@@ -26,22 +26,23 @@ window.SITE_PROJECTS = [
     story: {
       why: { ko: "취업 준비가 길어지면 불합격 메일만 쌓입니다. 게임에서라도 시원하게 합격해 보면 기분이 풀리지 않을까 해서, '도파민이 터지는' 3분짜리 게임을 목표로 잡았습니다.", en: "Job hunting piles up rejection emails. I wanted a 3-minute game where you get hired everywhere, purely for the dopamine." },
       steps: [
-        { ko: "바로 만들지 않고 Claude가 나를 인터뷰하게 해서 대상·감정·플레이 시간을 먼저 정함", en: "Had Claude interview me first to fix the audience, feeling and play time" },
-        { ko: "기획서를 단계(Phase)로 나누고, 데이터베이스 없는 가벼운 구조로 한정", en: "Split the plan into phases, with no database or backend" },
-        { ko: "미니게임 11판짜리 첫 프로토타입을 만들어 링크로 공유", en: "Built a first prototype with 11 mini-games and shared it as a link" }
+        { ko: "인터뷰: Claude가 질문 카드 3라운드로 대상·핵심 재미·판 구조·실패 처리·엔딩을 물어봄", en: "Interview: Claude asked three rounds of question cards on audience, core fun, rounds, failure and endings" },
+        { ko: "기획서: 계획 모드로 답을 기획서 한 장에 정리하고, 확인 후 승인", en: "Plan: plan mode turned the answers into a one-page plan, which I reviewed and approved" },
+        { ko: "단계 나누기: 기획서를 Phase로 나누고 데이터베이스·서버 없는 구조로 한정", en: "Phasing: split the plan into phases, with no database or server" },
+        { ko: "구현: 기획서대로 미니게임 11판짜리 첫 프로토타입을 만들어 링크로 공유", en: "Build: made an 11-round first prototype from the plan and shared it as a link" }
       ],
       trouble: [
         { problem: { ko: "아는 K-pop 노래를 넣고 싶었지만 저작권 때문에 불가", en: "Wanted K-pop songs, but copyright ruled them out" }, fix: { ko: "저작권이 끝난 '운동회 클래식'(캉캉, 윌리엄 텔 서곡 등)으로 바꿔 누구나 아는 신남은 유지", en: "Switched to public-domain 'sports-day classics' everyone in Korea knows" } },
         { problem: { ko: "기능이 늘어나 기획이 무거워짐", en: "The plan grew too heavy" }, fix: { ko: "P0를 다시 정의: '3판짜리로 성공의 기분이 나는지만 확인'하고 나머지는 다음 단계로 미룸", en: "Redefined P0 as 'does winning 3 rounds feel good?' and deferred the rest" } }
       ],
-      special: { ko: "엔딩 수집형 구성과 '틀려도 괜찮아, 어차피 합격이야'라는 톤. 실패가 없는 게임을 일부러 설계했습니다.", en: "Collectible endings and a 'you can't fail' tone, designed on purpose." }
+      special: { ko: "배운 점: AI에게 바로 만들게 하는 것보다, AI가 먼저 질문하게 해서 기획서를 쓰는 편이 원하는 결과에 훨씬 빨리 닿았습니다. 게임은 엔딩 수집형에 '틀려도 괜찮아, 어차피 합격이야' 톤으로, 실패가 없도록 일부러 설계했습니다.", en: "Lesson: letting the AI ask questions and write a plan first got me to what I wanted far faster than asking it to build right away. The game itself has collectible endings and a deliberate 'you can't fail' tone." }
     },
     link: "projects/hapgyeok-bomber/index.html",
     source: "desktop"
   },
   {
     id: "hapgyeok-bomber-p0",
-    label: { ko: "리듬게임 엔진 검증", en: "Rhythm engine test" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
+    label: { ko: "기획서 1단계(P0) 구현", en: "Plan phase 1 (P0) build" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "games",
     design: "p0", spineH: 372,
     date: "2026-10-06",
@@ -153,7 +154,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "sunblock-helper",
-    label: { ko: "자외선 맞춤 추천 앱", en: "UV-based advice app" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
+    label: { ko: "날씨 API 연동 웹앱", en: "Weather-API web app" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "life",
     design: "generic", spineH: 388,
     palette: { bg: "#FFE9A8", ink: "#2B2118", accent: "#F26B1D" },
@@ -161,17 +162,22 @@ window.SITE_PROJECTS = [
     date: "2026-10-07",
     title: { ko: "선블럭 결정 도우미", en: "Sunscreen Decision Helper" },
     summary: {
-      ko: "날씨 API의 자외선 지수로 오늘 선크림을 얼마나 자주 덧발라야 하는지 정해 주는 웹앱입니다. UV 단계마다 결과가 달라지도록 판정 기준을 따로 만들어 경계값을 테스트했고, 무기자차·유기자차 추천과 접었다 펴는 사용법 카드뉴스를 넣었습니다.",
-      en: "A web app that uses a weather API's UV index to decide how often to reapply sunscreen today. Rules differ per UV level and were boundary-tested; it also recommends mineral vs. chemical filters and has collapsible card-news usage tips."
+      ko: "수업 주제는 '실시간 날씨 API를 웹페이지에 연결하기'였습니다. 공개 날씨 API(Open-Meteo)에서 지금 자외선 지수와 시간별 예보를 받아 오고, 그 값으로 판단하는 함수를 직접 설계했습니다. 그 결과 오늘 선크림을 몇 시에 얼마나 자주 발라야 하는지 정해 주는 웹앱을 만들었습니다. 불러오는 중·데이터 없음·읽기 실패 세 가지 상태를 모두 처리했고, 실패하면 연습용 고정 데이터로 바꾸면서 '실제 날씨 아님'을 표시합니다.",
+      en: "The class was about wiring a live weather API into a web page. The app pulls the current UV index and hourly forecast from a public weather API (Open-Meteo), and a decision function I designed turns it into when and how often to apply sunscreen today. It handles loading, no-data and fetch-failure states, falling back to a practice data file clearly marked 'not real weather'."
     },
-    tools: ["웹 검색", "계획 모드", "내장 브라우저", "디자인 캔버스", "아티팩트"],
+    tools: ["날씨 API", "웹 검색", "계획 모드", "내장 브라우저", "디자인 캔버스", "아티팩트"],
     role: {
       ko: "'가을엔 안 더워서 선크림을 안 바르니 아예 정해 주는 걸 만들자'는 목적을 정하고, UV 8이어도 같은 간격이냐고 짚어 단계별 판정으로 바꾸게 함. 글이 많다·너무 어둡다는 피드백으로 카드뉴스·접기 UI와 밝은 디자인을 이끌어냄",
       en: "Set the goal (people skip sunscreen in cool autumn sun, so just decide for them), pushed for per-UV-level rules, and drove the card-news, collapsible and brighter design through feedback"
     },
     time: { ko: "약 5시간(대화 기준)", en: "About 5 h (conversation time)" },
     story: {
-      why: { ko: "가을엔 햇볕은 따가운데 덥지 않아서 선크림을 잘 안 바릅니다. 알려 주는 데서 그치지 않고 바를 시간과 살지 말지까지 정해 주는 도구를 만들고 싶었습니다.", en: "Autumn sun is strong but not hot, so people skip sunscreen. I wanted a tool that decides for them, not just informs." },
+      why: { ko: "과제는 '날씨 데이터로 판단해 주는 앱 20가지 중 하나 만들기'였습니다. 가을엔 햇볕은 따가운데 덥지 않아서 선크림을 잘 안 바르기 때문에, 자외선 지수를 골라 바를 시간까지 정해 주는 앱으로 정했습니다.", en: "The assignment: pick one of 20 apps that make a decision from weather data. Autumn sun is strong but not hot, so people skip sunscreen; I chose the UV index and made the app decide for them." },
+      steps: [
+        { ko: "API 확인: 실제로 API를 호출해 자외선 값(현재 4.35, 최고 5.3)이 오는지 먼저 확인", en: "API check: called the API to confirm real UV values came back" },
+        { ko: "판단 함수: 받은 날씨 데이터를 넣으면 '지금 바르세요/몇 시간마다' 결론을 내는 함수를 따로 설계", en: "Decision function: designed a separate function that turns the weather data into a verdict" },
+        { ko: "예외 처리: 불러오는 중·데이터 없음·읽기 실패 화면을 만들고, 출처를 표시하고, 페이지당 1회만 호출", en: "Edge cases: loading, no-data and failure states, source credit, one call per page load" }
+      ],
       trouble: [
         { problem: { ko: "UV가 8이어도 2시간 간격으로만 안내하는 등 결과가 단계별로 구분되지 않음", en: "Advice was the same at UV 8 as at lower levels" }, fix: { ko: "UV 단계별 판정 로직을 따로 만들고 경계값 테스트 페이지로 확인", en: "Built per-level logic and a boundary-value test page" } },
         { problem: { ko: "글이 너무 많고 화면이 어둡고 답답함", en: "Too much text and too dark" }, fix: { ko: "사용법을 카드뉴스로 바꿔 접고 펼 수 있게 하고, 디자인 캔버스로 시안을 받아 밝은 방향으로 수정", en: "Turned tips into collapsible card news and redesigned brighter via the design canvas" } }

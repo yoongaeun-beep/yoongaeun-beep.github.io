@@ -81,7 +81,7 @@ window.SITE_MAIN = [
     demo: {
       link: "projects/dashboard-demo/index.html",
       label: { ko: "▶ 대시보드 직접 눌러보기", en: "▶ Try the dashboard" },
-      note: { ko: "웹 재현본 · 원본 코드로 계산한 2015-10-05 기준 데이터", en: "Web replica · data computed by the original code (as of 2015-10-05)" },
+      note: { ko: "웹 재현본 · 메인·설비별·통계·발주 4개 화면 · 설비 100대 (원본 코드로 계산한 2015-10-05 데이터)", en: "Web replica · all 4 screens, 100 machines · data computed by the original code (as of 2015-10-05)" },
       title: { ko: "설비보전 대시보드 · 웹 재현본", en: "Maintenance dashboard · web replica" }
     },
     images: [
