@@ -12,7 +12,7 @@
       "log.title": "최근 수집 기록 · {date}", "log.go": "서가 보러 가기 ↓", "log.count": "서가 {n}권",
       "shelf.kicker": "서가", "shelf.title": "사이드 프로젝트", "shelf.count": "{n}권",
       "side.kicker": "SIDE PROJECTS", "side.lede": "교육 중 Claude로 빠르게 만들어 본 작은 실험들입니다. 매일 새벽 자동으로 한 권씩 늘어납니다.",
-      "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.trouble": "막힌 곳 → 해결", "main.zoom": "크게 보기 ↗", "main.stack": "기술", "main.team": "팀",
+      "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.trouble": "막힌 곳 → 해결", "main.zoom": "크게 보기 ↗", "main.stack": "기술", "main.team": "팀", "main.outcome": "결과물", "main.stuck": "막힌 곳", "main.fix": "해결", "main.dialHint": "숫자에 마우스를 올리거나 눌러 보세요", "main.prev": "이전 단계", "main.next": "다음 단계", "main.process": "이렇게 풀었습니다",
       "shelf.lede": "책등을 누르면 표지가 뽑혀 나옵니다.",
       "shelf.all": "전체", "shelf.next": "다음 한 권 · 오늘 새벽 2시", "shelf.open": "{t} 표지 보기",
       "play": "▶ 이 페이지에서 바로 실행", "player.close": "닫기 ✕", "player.loading": "불러오는 중…",
@@ -32,7 +32,7 @@
       "log.title": "Latest collection · {date}", "log.go": "See the shelf ↓", "log.count": "{n} on the shelf",
       "shelf.kicker": "SHELF", "shelf.title": "Side projects", "shelf.count": "{n}",
       "side.kicker": "SIDE PROJECTS", "side.lede": "Small experiments built quickly with Claude during the course. One more arrives every night.",
-      "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.trouble": "Stuck → solved", "main.zoom": "View full size ↗", "main.stack": "Stack", "main.team": "Team",
+      "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.trouble": "Stuck → solved", "main.zoom": "View full size ↗", "main.stack": "Stack", "main.team": "Team", "main.outcome": "Outcome", "main.stuck": "Stuck", "main.fix": "Solved", "main.dialHint": "Hover or tap a number", "main.prev": "Previous step", "main.next": "Next step", "main.process": "How I solved it",
       "shelf.lede": "Click a spine to pull out its cover.",
       "shelf.all": "All", "shelf.next": "Next one · tonight 2 a.m.", "shelf.open": "Open {t}",
       "play": "▶ Run it on this page", "player.close": "Close ✕", "player.loading": "Loading…",
@@ -428,67 +428,159 @@
     wrap.hidden = !list.length;
     list.forEach(function (m) {
       var a = el("article", "mc");
-      var head = el("header", "mc-head");
-      head.appendChild(el("span", "mc-kicker mono", [t("main.kicker"), m.period, L(m.team)].filter(Boolean).join(" · ")));
-      head.appendChild(el("h3", "mc-title", L(m.title)));
-      if (m.oneLiner) head.appendChild(el("p", "mc-one", L(m.oneLiner)));
+      // ① 제목: 왼쪽 큰 한 줄 메시지, 오른쪽 설명
+      var head = el("header", "mc-top");
+      var hl = el("div", "mc-top-l");
+      hl.appendChild(el("span", "mc-kicker mono", [t("main.kicker"), m.period].filter(Boolean).join(" · ")));
+      hl.appendChild(el("h3", "mc-title", L(m.headline || m.title)));
+      head.appendChild(hl);
+      var hr = el("div", "mc-top-r");
+      if (m.oneLiner) hr.appendChild(el("p", "mc-one", L(m.oneLiner)));
+      hr.appendChild(el("span", "mc-meta", L(m.team)));
+      if (m.headline) hr.appendChild(el("span", "mc-meta mc-formal", L(m.title)));
+      head.appendChild(hr);
       a.appendChild(head);
+
+      // ② 대시보드: 화면(누르면 실행) + 결과 숫자 + 실행 버튼
+      var frame = el("section", "mc-frame");
+      var im = (m.images || [])[0];
+      if (im) {
+        var shot = el("button", "mc-shot"); shot.type = "button";
+        shot.setAttribute("aria-label", L(m.demo ? m.demo.label : im.alt));
+        var img = el("img"); img.src = im.src; img.alt = L(im.alt); img.loading = "lazy";
+        shot.appendChild(img);
+        if (m.demo) {
+          var play = el("span", "mc-play");
+          play.innerHTML = '<svg width="20" height="20" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>';
+          shot.appendChild(play);
+        }
+        shot.addEventListener("click", function () { if (m.demo) openPlayer({ title: m.demo.title, link: m.demo.link }); else openImage(im.src, L(m.title)); });
+        frame.appendChild(shot);
+      }
+      var side = el("div", "mc-side");
+      side.appendChild(el("span", "mc-label mono", t("main.outcome")));
       if (m.stats && m.stats.length) {
         var st = el("ul", "mc-stats");
         m.stats.forEach(function (s) { var li = el("li"); li.appendChild(el("span", "mc-v", L(s.v))); li.appendChild(el("span", "mc-l", L(s.l))); st.appendChild(li); });
-        a.appendChild(st);
+        side.appendChild(st);
       }
-      var grid = el("div", "mc-grid");
-      if (m.images && m.images.length) {
-        var figs = el("div", "mc-figs");
-        m.images.forEach(function (im) {
-          var fig = el("figure", "mc-fig");
-          var img = el("img"); img.src = im.src; img.alt = L(im.alt); img.loading = "lazy";
-          var zoom = el("button", "mc-zoom"); zoom.type = "button";
-          zoom.setAttribute("aria-label", L(im.alt) + " " + t("main.zoom"));
-          zoom.appendChild(img);
-          zoom.appendChild(el("span", "mc-zoom-hint mono", t("main.zoom")));
-          zoom.addEventListener("click", function () { openImage(im.src, L(m.title)); });
-          fig.appendChild(zoom);
-          if (im.alt) fig.appendChild(el("figcaption", null, L(im.alt)));
-          figs.appendChild(fig);
-        });
-        if (m.demo) {
-          var demo = el("button", "btn btn-primary mc-demo"); demo.type = "button";
-          demo.appendChild(el("span", "mc-demo-label", L(m.demo.label)));
-          demo.appendChild(el("span", "mc-demo-note mono", L(m.demo.note)));
-          demo.addEventListener("click", function () { openPlayer({ title: m.demo.title, link: m.demo.link }); });
-          figs.appendChild(demo);
-        }
-        grid.appendChild(figs);
+      if (m.demo) {
+        var demo = el("button", "btn btn-primary mc-demo"); demo.type = "button";
+        demo.innerHTML = '<svg width="13" height="13" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>';
+        demo.appendChild(document.createTextNode(L(m.demo.label)));
+        demo.addEventListener("click", function () { openPlayer({ title: m.demo.title, link: m.demo.link }); });
+        side.appendChild(demo);
+        side.appendChild(el("span", "mc-demo-note", L(m.demo.note)));
       }
-      var dl = el("dl", "mc-dl");
-      [["main.problem", m.problem], ["main.approach", m.approach], ["main.trouble", m.trouble], ["main.result", m.result], ["main.role", m.role]].forEach(function (r) {
-        if (!r[1]) return;
-        var row = el("div");
-        row.appendChild(el("dt", "mono", t(r[0])));
-        var dd = el("dd");
-        var v = r[1][lang] || r[1].ko;
-        if (Array.isArray(v)) { var ul = el("ul"); v.forEach(function (x) { ul.appendChild(el("li", null, x)); }); dd.appendChild(ul); }
-        else dd.textContent = v;
-        row.appendChild(dd);
-        dl.appendChild(row);
-      });
-      grid.appendChild(dl);
-      a.appendChild(grid);
+      if (im) {
+        var zoom = el("button", "mc-zoomlink", t("main.zoom")); zoom.type = "button";
+        zoom.addEventListener("click", function () { openImage(im.src, L(m.title)); });
+        side.appendChild(zoom);
+      }
+      frame.appendChild(side);
+      a.appendChild(frame);
+
+      // ③ 단계 다이얼: 원호를 따라 01–05, 숫자에 마우스를 올리면 그 단계로 회전
+      if (m.steps && m.steps.length) a.appendChild(renderDial(m.steps));
+
+      // ④ 역할 · 기술 · 링크
       var foot = el("div", "mc-foot");
+      if (m.role) {
+        var role = el("div", "mc-role");
+        role.appendChild(el("span", "mc-label mono", t("main.role")));
+        var ul = el("ul"); (m.role[lang] || m.role.ko).forEach(function (x) { ul.appendChild(el("li", null, x)); });
+        role.appendChild(ul);
+        foot.appendChild(role);
+      }
+      var tech = el("div", "mc-tech");
+      tech.appendChild(el("span", "mc-label mono", t("main.stack")));
       if (m.stack && m.stack.length) {
         var sk = el("ul", "methods");
         m.stack.forEach(function (x) { sk.appendChild(el("li", "tag", x)); });
-        foot.appendChild(sk);
+        tech.appendChild(sk);
       }
       (m.links || []).forEach(function (lk) {
         var ln = el("a", "btn mc-link", L(lk.label) + " ↗"); ln.href = lk.href; ln.target = "_blank"; ln.rel = "noopener";
-        foot.appendChild(ln);
+        tech.appendChild(ln);
       });
+      foot.appendChild(tech);
       a.appendChild(foot);
       wrap.appendChild(a);
     });
+  }
+  function renderDial(steps) {
+    var n = steps.length, active = 0;
+    var box = el("section", "dial");
+    box.appendChild(el("h4", "dial-title", t("main.process")));
+    var stage = el("div", "dial-stage");
+    var arc = el("div", "dial-arc");
+    var ring = el("span", "dial-ring"); arc.appendChild(ring);
+    var ticks = [], orbs = [], tabs = el("div", "dial-tabs");
+    steps.forEach(function (s, i) {
+      var tk = el("span", "dial-tick"); arc.appendChild(tk); ticks.push(tk);
+      var no = String(i + 1).padStart(2, "0");
+      var ob = el("button", "dial-orb mono", no); ob.type = "button";
+      ob.setAttribute("aria-label", no + " " + L(s.title));
+      ob.addEventListener("mouseenter", function () { go(i); });
+      ob.addEventListener("focus", function () { go(i); });
+      ob.addEventListener("click", function () { go(i); });
+      arc.appendChild(ob); orbs.push(ob);
+      var tb = el("button", "dial-tab mono", no); tb.type = "button";
+      tb.setAttribute("aria-label", no + " " + L(s.title));
+      tb.addEventListener("click", function () { go(i); });
+      tabs.appendChild(tb);
+    });
+    stage.appendChild(arc);
+    var body = el("div", "dial-body");
+    body.appendChild(tabs);
+    var top = el("div", "dial-top");
+    var big = el("span", "dial-big mono"); top.appendChild(big);
+    var txt = el("div", "dial-txt");
+    var tag = el("span", "dial-tag mono"), ttl = el("span", "dial-name"), line = el("p", "dial-line"), key = el("span", "dial-key mono");
+    txt.appendChild(tag); txt.appendChild(ttl); txt.appendChild(line); txt.appendChild(key);
+    top.appendChild(txt); body.appendChild(top);
+    var pair = el("div", "dial-pair");
+    var c1 = el("div", "dial-card"), c2 = el("div", "dial-card fix");
+    c1.appendChild(el("span", "mono", t("main.stuck"))); var stuck = el("p"); c1.appendChild(stuck);
+    c2.appendChild(el("span", "mono", t("main.fix"))); var fix = el("p"); c2.appendChild(fix);
+    pair.appendChild(c1); pair.appendChild(c2); body.appendChild(pair);
+    var nav = el("div", "dial-nav");
+    var prev = el("button", "dial-arrow"); prev.type = "button"; prev.setAttribute("aria-label", t("main.prev"));
+    prev.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>';
+    var next = el("button", "dial-arrow"); next.type = "button"; next.setAttribute("aria-label", t("main.next"));
+    next.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+    prev.addEventListener("click", function () { go(active - 1); });
+    next.addEventListener("click", function () { go(active + 1); });
+    var count = el("span", "dial-count mono");
+    nav.appendChild(prev); nav.appendChild(next); nav.appendChild(count);
+    body.appendChild(nav);
+    stage.appendChild(body);
+    box.appendChild(stage);
+
+    // 원 중심(-240, 320), 반지름 600 — 원호의 오른쪽 끝(x=360)에 지금 단계가 옴
+    var CX = -240, CY = 320, R = 600, LR = 652, STEP = 0.26;
+    function go(i) {
+      active = (i + n) % n;
+      var s = steps[active], no = String(active + 1).padStart(2, "0");
+      orbs.forEach(function (ob, k) {
+        var th = (k - active) * STEP, on = k === active;
+        ob.style.left = Math.round(CX + LR * Math.cos(th)) + "px";
+        ob.style.top = Math.round(CY + LR * Math.sin(th)) + "px";
+        ob.style.transform = "translate(-50%, -50%) rotate(" + Math.round(th * 180 / Math.PI) + "deg)";
+        ob.style.opacity = on ? "0" : String(Math.max(0.3, 1 - Math.abs(k - active) * 0.25));
+        ob.tabIndex = on ? -1 : 0;
+        ticks[k].style.left = Math.round(CX + R * Math.cos(th)) + "px";
+        ticks[k].style.top = Math.round(CY + R * Math.sin(th)) + "px";
+        ticks[k].classList.toggle("on", on);
+      });
+      Array.prototype.forEach.call(tabs.children, function (tb, k) { tb.classList.toggle("on", k === active); tb.setAttribute("aria-pressed", k === active ? "true" : "false"); });
+      big.textContent = no; tag.textContent = s.tag; ttl.textContent = L(s.title);
+      line.textContent = L(s.line); key.textContent = L(s.key);
+      stuck.textContent = L(s.stuck); fix.textContent = L(s.fix);
+      count.textContent = no + " / " + String(n).padStart(2, "0") + " · " + t("main.dialHint");
+    }
+    go(0);
+    return box;
   }
 
   /* ---------- 첫 화면 ---------- */

@@ -215,41 +215,83 @@ button { font: inherit; color: inherit; }
 .d-facts { margin: 8px 0 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; font-size: 14px; }
 .d-facts dt { font: 500 12px/1.75 var(--f-mono); color: var(--accent); }
 .d-facts dd { margin: 0; color: var(--soft-2); }
-/* 메인 프로젝트: 크게 */
+/* 메인 프로젝트: 제목 → 대시보드 → 단계 다이얼 → 역할·기술 (디자인 캔버스 B안) */
 .main-projects { display: flex; flex-direction: column; gap: 28px; }
-.mc { background: linear-gradient(160deg, var(--panel-2) 0%, var(--panel) 60%); border: 1px solid var(--line-3); border-radius: 22px; padding: clamp(22px, 3vw, 36px); display: flex; flex-direction: column; gap: 22px; box-shadow: 0 30px 60px -36px #000000AA; }
-.mc-head { display: flex; flex-direction: column; gap: 8px; }
-.mc-kicker { font-size: 12px; letter-spacing: .1em; color: var(--accent); }
-.mc-title { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.25; letter-spacing: -.03em; }
-.mc-one { margin: 0; color: var(--soft-2); font-size: 16.5px; max-width: 64ch; }
-.mc-stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); }
-.mc-stats li { padding: 14px 16px 14px 0; display: flex; flex-direction: column; gap: 2px; }
-.mc-stats li + li { padding-left: 16px; border-left: 1px solid var(--line-2); }
-.mc-v { font: 500 clamp(24px, 2.6vw, 30px)/1.1 var(--f-mono); color: var(--accent); letter-spacing: -.03em; }
-.mc-l { font-size: 13px; color: var(--soft); line-height: 1.45; }
-.mc-grid { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
-.mc-figs { flex: 1 1 360px; min-width: 0; display: grid; gap: 12px; }
-.mc-fig { margin: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--line-2); background: #fff; }
-.mc-fig img { display: block; width: 100%; height: auto; }
-.mc-zoom { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
-.mc-zoom-hint { position: absolute; right: 10px; bottom: 10px; background: #0E1428E6; color: var(--fg); border-radius: 999px; padding: 5px 10px; font-size: 12px; }
-.mc-zoom:hover .mc-zoom-hint { background: var(--accent); color: var(--on-accent); }
-.mc-demo { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; padding: 12px 16px; text-align: left; }
-.mc-demo-label { font-size: 16px; font-weight: 800; }
-.mc-demo-note { font-size: 11px; opacity: .8; }
+.mc { background: linear-gradient(160deg, var(--panel-2) 0%, var(--panel) 55%, var(--bg) 100%); border: 1px solid var(--line-3); border-radius: 26px; padding: clamp(22px, 4vw, 52px); display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px); box-shadow: 0 30px 60px -36px #000000AA; overflow: hidden; }
+.mc-top { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 20px 44px; align-items: end; }
+.mc-top-l, .mc-top-r { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.mc-kicker { font-size: 12px; letter-spacing: .14em; color: var(--accent); }
+.mc-title { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: clamp(28px, 3.8vw, 46px); line-height: 1.2; letter-spacing: -.035em; white-space: pre-line; text-wrap: balance; }
+.mc-one { margin: 0; color: var(--soft-2); font-size: 15.5px; line-height: 1.7; }
+.mc-meta { font-size: 13px; color: var(--soft); }
+.mc-formal { font-size: 12px; opacity: .8; }
+.mc-label { font-size: 11.5px; letter-spacing: .14em; color: var(--accent); }
+.mc-frame { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); border: 1px solid var(--line-3); border-radius: 22px; overflow: hidden; background: #121A34; }
+.mc-shot { position: relative; display: block; padding: 0; border: 0; background: #F3F5F8; min-height: 300px; height: 100%; max-height: 440px; overflow: hidden; cursor: pointer; }
+.mc-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top left; transition: transform .5s ease; }
+.mc-shot:hover img { transform: scale(1.03); }
+.mc-play { position: absolute; left: 50%; top: 50%; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; box-shadow: 0 10px 30px #0E142899; transition: transform .2s ease; padding-left: 4px; box-sizing: border-box; }
+.mc-shot:hover .mc-play { transform: scale(1.08); }
+.mc-side { padding: clamp(20px, 3vw, 34px); display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.mc-stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 14px; }
+.mc-stats li { display: flex; flex-direction: column; gap: 3px; }
+.mc-v { font: 500 clamp(19px, 1.9vw, 24px)/1.1 var(--f-mono); color: var(--fg); letter-spacing: -.04em; white-space: nowrap; }
+.mc-l { font-size: 12.5px; color: var(--soft); line-height: 1.45; }
+.mc-demo { margin-top: auto; justify-content: center; gap: 10px; min-height: 52px; font-size: 16px; font-weight: 800; }
+.mc-demo-note { font-size: 12px; color: var(--soft); text-align: center; margin-top: -8px; }
+.mc-zoomlink { align-self: center; border: 0; background: none; color: var(--soft); font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 4px; }
+.mc-zoomlink:hover { color: var(--fg); }
 .player-image { height: 100%; overflow: auto; border-radius: 10px; background: #fff; }
 .player-image img { display: block; width: 100%; max-width: 1500px; height: auto; margin: 0 auto; }
-.mc-fig figcaption { background: var(--panel); color: var(--soft); font-size: 12.5px; padding: 8px 12px; }
-.mc-dl { flex: 999 1 420px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
-.mc-dl > div { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; }
-.mc-dl dt { font-size: 12px; letter-spacing: .06em; color: var(--accent); padding-top: 3px; }
-.mc-dl dd { margin: 0; color: var(--soft-2); font-size: 15px; line-height: 1.7; }
-.mc-dl dd ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
-.mc-dl dd li::marker { color: var(--accent); }
-.mc-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
-.mc-foot .methods { margin: 0; flex: 1 1 auto; }
-.mc-link { min-height: 40px; font-size: 14px; }
-
+/* 단계 다이얼 */
+.dial { display: flex; flex-direction: column; gap: 6px; }
+.dial-title { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: clamp(22px, 2.4vw, 28px); letter-spacing: -.02em; }
+.dial-stage { position: relative; display: grid; grid-template-columns: 440px minmax(0, 1fr); min-height: 660px; border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); margin: 0 calc(-1 * clamp(22px, 4vw, 52px)); padding-right: clamp(22px, 4vw, 52px); }
+.dial-arc { position: relative; overflow: hidden; }
+.dial-ring { position: absolute; left: -840px; top: -280px; width: 1200px; height: 1200px; border-radius: 50%; border: 1.5px solid var(--line-3); }
+.dial-tick { position: absolute; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--line-3); transition: left .55s cubic-bezier(.2,.8,.2,1), top .55s cubic-bezier(.2,.8,.2,1), background .3s; }
+.dial-tick.on { width: 15px; height: 15px; margin: -7.5px 0 0 -7.5px; background: var(--accent); box-shadow: 0 0 0 6px #F2B84B2E; }
+.dial-orb { position: absolute; border: 0; background: none; padding: 4px 8px; font-weight: 600; font-size: 52px; letter-spacing: -.04em; color: #3A4470; cursor: pointer; transition: left .55s cubic-bezier(.2,.8,.2,1), top .55s cubic-bezier(.2,.8,.2,1), transform .55s cubic-bezier(.2,.8,.2,1), opacity .4s, color .25s; }
+.dial-orb:hover, .dial-orb:focus-visible { color: var(--accent); opacity: 1 !important; }
+.dial-body { display: flex; flex-direction: column; gap: 20px; padding: 56px 0 44px 24px; min-width: 0; }
+.dial-tabs { display: none; }
+.dial-top { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 32px; align-items: start; }
+.dial-big { font-weight: 600; font-size: clamp(72px, 9vw, 120px); line-height: .9; letter-spacing: -.06em; color: var(--fg); }
+.dial-txt { display: flex; flex-direction: column; gap: 10px; padding-top: 4px; min-width: 0; }
+.dial-tag { font-size: 12px; letter-spacing: .14em; color: var(--accent); }
+.dial-name { font-family: var(--f-display); font-weight: 800; font-size: clamp(22px, 2.4vw, 28px); letter-spacing: -.02em; }
+.dial-line { margin: 0; font-size: 15.5px; line-height: 1.75; color: var(--soft-2); }
+.dial-key { align-self: flex-start; font-size: 14px; color: var(--accent); border: 1px solid #4A3B17; background: #1E1A0E; border-radius: 999px; padding: 5px 14px; }
+.dial-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.dial-card { border-radius: 16px; border: 1px solid var(--line-2); background: #121A34; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+.dial-card span { font-size: 11px; letter-spacing: .12em; color: var(--soft); }
+.dial-card p { margin: 0; font-size: 14.5px; line-height: 1.65; color: var(--soft-2); }
+.dial-card.fix { border-color: #4A3B17; background: #1E1A0E; }
+.dial-card.fix span { color: #C9973A; } .dial-card.fix p { color: #F5E3BC; }
+.dial-nav { display: flex; align-items: center; gap: 10px; }
+.dial-arrow { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-3); background: none; color: var(--fg); display: grid; place-items: center; cursor: pointer; transition: border-color .2s, background .2s; }
+.dial-arrow:hover { border-color: var(--accent); background: #1A2342; }
+.dial-count { font-size: 12.5px; color: var(--soft); margin-left: 6px; }
+.mc-foot { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px 36px; align-items: start; }
+.mc-role, .mc-tech { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.mc-role ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; color: var(--soft-2); font-size: 14.5px; line-height: 1.65; }
+.mc-role li::marker { color: var(--accent); }
+.mc-tech .methods { margin: 0; }
+.mc-link { align-self: flex-start; min-height: 44px; font-size: 14px; }
+@media (max-width: 900px) {
+  .mc-top, .mc-frame, .mc-foot { grid-template-columns: minmax(0, 1fr); }
+  .mc-shot { max-height: 300px; }
+  .dial-stage { grid-template-columns: minmax(0, 1fr); min-height: 0; margin: 0; padding: 0; border: 0; }
+  .dial-arc { display: none; }
+  .dial-body { padding: 8px 0 0; }
+  .dial-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .dial-tab { min-width: 48px; min-height: 44px; border-radius: 999px; border: 1px solid var(--line-3); background: none; color: var(--soft); font-size: 14px; cursor: pointer; }
+  .dial-tab.on { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .dial-top { gap: 14px; }
+  .dial-big { font-size: 56px; }
+  .dial-pair { grid-template-columns: minmax(0, 1fr); }
+  .dial-count { display: none; }
+}
 /* 사이드 프로젝트: 작게 */
 .side-block { margin-top: 24px; padding-top: 28px; border-top: 1px dashed var(--line-3); display: flex; flex-direction: column; gap: 18px; }
 .side-label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; color: var(--soft); font-size: 14px; }
@@ -337,9 +379,6 @@ button { font: inherit; color: inherit; }
 
   .side-block .shelf-row > .spine-btn, .side-block .shelf-row > .ghost, .side-block .shelf-row > .bookend { zoom: .6; }
   .side-block .pulled { zoom: .74; }
-  .mc-dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
-  .mc-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mc-stats li + li { padding-left: 0; border-left: 0; }
   /* 휴대폰: 책 크기를 줄여 한 화면에 책등 몇 권과 표지가 같이 보이게 */
   .shelf-row { min-height: 0; padding: 16px 8px 0; gap: 5px; }
   .shelf-row > .spine-btn, .shelf-row > .ghost, .shelf-row > .bookend { zoom: .68; }
