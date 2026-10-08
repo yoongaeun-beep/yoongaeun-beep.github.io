@@ -10,8 +10,10 @@
       "nav.about": "소개", "nav.experience": "경력", "nav.activities": "대외활동", "nav.projects": "프로젝트", "nav.contact": "연락",
       "nav.about.n": "01 · 소개", "nav.experience.n": "02 · 경력", "nav.activities.n": "03 · 대외활동", "nav.projects.n": "04 · 프로젝트", "nav.contact.n": "05 · 연락",
       "log.title": "최근 수집 기록 · {date}", "log.go": "서가 보러 가기 ↓", "log.count": "서가 {n}권",
-      "shelf.kicker": "PROJECTS · 서가", "shelf.title": "Claude로 만든 것들", "shelf.count": "{n}권",
-      "shelf.lede": "책등을 누르면 표지가 뽑혀 나옵니다. 매일 새벽 2시에 한 권씩 늘어나고, 서가는 옆으로 길어집니다.",
+      "shelf.kicker": "서가", "shelf.title": "사이드 프로젝트", "shelf.count": "{n}권",
+      "side.kicker": "SIDE PROJECTS", "side.lede": "교육 중 Claude로 빠르게 만들어 본 작은 실험들입니다. 매일 새벽 자동으로 한 권씩 늘어납니다.",
+      "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.stack": "기술", "main.team": "팀",
+      "shelf.lede": "책등을 누르면 표지가 뽑혀 나옵니다.",
       "shelf.all": "전체", "shelf.next": "다음 한 권 · 오늘 새벽 2시", "shelf.open": "{t} 표지 보기",
       "play": "▶ 이 페이지에서 바로 실행", "player.close": "닫기 ✕", "player.loading": "불러오는 중…",
       "edu": "교육", "lang": "영어",
@@ -28,8 +30,10 @@
       "nav.about": "About", "nav.experience": "Experience", "nav.activities": "Activities", "nav.projects": "Projects", "nav.contact": "Contact",
       "nav.about.n": "01 · About", "nav.experience.n": "02 · Experience", "nav.activities.n": "03 · Activities", "nav.projects.n": "04 · Projects", "nav.contact.n": "05 · Contact",
       "log.title": "Latest collection · {date}", "log.go": "See the shelf ↓", "log.count": "{n} on the shelf",
-      "shelf.kicker": "PROJECTS · SHELF", "shelf.title": "Things I built with Claude", "shelf.count": "{n}",
-      "shelf.lede": "Click a spine to pull out its cover. A new one arrives every night at 2 a.m., and the shelf grows sideways.",
+      "shelf.kicker": "SHELF", "shelf.title": "Side projects", "shelf.count": "{n}",
+      "side.kicker": "SIDE PROJECTS", "side.lede": "Small experiments built quickly with Claude during the course. One more arrives every night.",
+      "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.stack": "Stack", "main.team": "Team",
+      "shelf.lede": "Click a spine to pull out its cover.",
       "shelf.all": "All", "shelf.next": "Next one · tonight 2 a.m.", "shelf.open": "Open {t}",
       "play": "▶ Run it on this page", "player.close": "Close ✕", "player.loading": "Loading…",
       "edu": "Training", "lang": "English",
@@ -94,25 +98,25 @@
   };
 
   function spineHTML(p) {
-    var h = p.spineH || 400, title = esc(L(p.title)), no = esc(p._no);
+    var h = p.spineH || 400, title = esc(L(p.label) || L(p.title)), no = esc(p._no); // 책등에는 누구나 알아볼 분류명(label)
     var box = SPINE_BOX + "height:" + h + "px;";
     switch (p.design) {
       case "bomber":
         return '<div class="spine" style="' + box + 'display:flex;flex-direction:column;background:#24206B">' +
           '<div style="height:70px;flex:none;background:#FF3D8B;display:flex;align-items:center;justify-content:center"><span style="width:44px;height:44px;border-radius:50%;border:2.5px solid #FFD43B;color:#FFD43B;display:flex;align-items:center;justify-content:center;font:400 14px/1 ' + HAN + ';transform:rotate(-12deg)">合格</span></div>' +
-          '<div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0"><span style="' + V + 'font:400 25px/1 ' + HAN + ';color:#FFD43B;text-shadow:2px 2px 0 #FF3D8B;letter-spacing:.04em">' + title + '</span></div>' +
+          '<div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0"><span style="' + V + 'font:400 20px/1 ' + HAN + ';color:#FFD43B;text-shadow:2px 2px 0 #FF3D8B;letter-spacing:.02em">' + title + '</span></div>' +
           '<div style="height:54px;flex:none;' + PATTERNS.dots("#FFD43B") + 'border-top:2px solid #FFD43B"></div>' +
           '<div style="height:34px;flex:none;background:#FFD43B;color:#24206B;display:flex;align-items:center;justify-content:center;font:500 12px/1 ' + MONO + '">' + no + '</div></div>';
       case "p0":
         return '<div class="spine" style="' + box + 'display:flex;flex-direction:column;background-color:#1C1859;' + PATTERNS.lanes("#38F2C0") + '">' +
           '<div style="height:110px;flex:none;position:relative;border-bottom:2px solid #FFE14D">' +
           '<span style="position:absolute;left:4px;top:14px;width:12px;height:7px;border-radius:2px;background:#FF3D8B"></span><span style="position:absolute;left:22px;top:38px;width:12px;height:7px;border-radius:2px;background:#FFE14D"></span><span style="position:absolute;left:40px;top:24px;width:12px;height:7px;border-radius:2px;background:#38F2C0"></span><span style="position:absolute;left:58px;top:64px;width:12px;height:7px;border-radius:2px;background:#9B8CFF"></span><span style="position:absolute;left:22px;top:84px;width:12px;height:7px;border-radius:2px;background:#FF3D8B"></span></div>' +
-          '<div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0"><span style="' + V + 'font:900 19px/1 ' + GOTHIC + ';letter-spacing:.02em">' + (lang === "en" ? "Can-can " : "캉캉 리듬 ") + '<span style="color:#38F2C0">P0</span></span></div>' +
+          '<div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0"><span style="' + V + 'font:900 19px/1 ' + GOTHIC + ';letter-spacing:.02em">' + title + '</span></div>' +
           '<div style="height:40px;flex:none;display:flex;align-items:center;justify-content:center;color:#38F2C0;font:500 12px/1 ' + MONO + '">♪ ' + no + '</div></div>';
       case "beat":
         return '<div class="spine" style="' + box + 'display:flex;flex-direction:column;background:#121528">' +
           '<div style="height:76px;flex:none;display:flex;align-items:center;justify-content:center"><span style="width:48px;height:48px;border-radius:50%;border:3px solid #E5483A;color:#E5483A;box-shadow:inset 0 0 0 2px #121528, inset 0 0 0 3.5px #E5483A;display:flex;align-items:center;justify-content:center;font:400 15px/1 ' + HAN + '">合格</span></div>' +
-          '<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:4px;min-height:0"><span style="' + V + 'font:400 27px/1 ' + HAN + ';color:#FFE14D">' + title + '</span><span style="' + V + 'font:500 9.5px/1 ' + MONO + ';color:#8E93C2;letter-spacing:.2em">PASS BEAT</span></div>' +
+          '<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:4px;min-height:0"><span style="' + V + 'font:400 21px/1 ' + HAN + ';color:#FFE14D">' + title + '</span><span style="' + V + 'font:500 9.5px/1 ' + MONO + ';color:#8E93C2;letter-spacing:.2em">PASS BEAT</span></div>' +
           '<div style="height:46px;flex:none;' + PATTERNS.hazard("#FFE14D", "#121528") + '"></div>' +
           '<div style="height:32px;flex:none;display:flex;align-items:center;justify-content:center;color:#FFE14D;font:500 12px/1 ' + MONO + '">' + no + '</div></div>';
       case "inbox":
@@ -132,8 +136,8 @@
       case "daily":
         return '<div class="spine" style="' + box + 'display:flex;flex-direction:column;align-items:center;background-color:#0F1A3A;' + PATTERNS.stars() + 'padding:18px 0 14px;gap:14px">' +
           '<span style="width:30px;height:30px;border-radius:50%;box-shadow:inset 9px -5px 0 0 #F2C14E;transform:rotate(-20deg);flex:none"></span>' +
-          '<span style="flex:1;' + V + 'font:500 30px/1 ' + MONO + ';color:#F2C14E">02:00</span>' +
-          '<span style="' + V + 'font:700 13px/1 ' + GOTHIC + '">' + (lang === "en" ? "Auto archive" : "자동 수집") + '</span>' +
+          '<span style="flex:1;' + V + 'font:800 18px/1 ' + GOTHIC + ';letter-spacing:.02em">' + title + '</span>' +
+          '<span style="font:500 11px/1 ' + MONO + ';color:#F2C14E">02:00</span>' +
           '<span style="font:500 11px/1 ' + MONO + ';color:#F2C14E">' + no + '</span></div>';
       default:
         var pal = p.palette || { bg: "#2A2F55", ink: "#F4F1EA", accent: "#F2B84B" };
@@ -153,7 +157,37 @@
     return p.cover ? '<img src="' + esc(p.cover) + '" alt="" style="display:block;' + style + '">' : '<span style="display:block;' + style + 'background:linear-gradient(135deg,#3B3591,#24206B)"></span>';
   }
 
+  // 실행 가능한 결과물의 표지: 꾸민 그림 대신 실제 화면(라이브 축소본)을 보여줌
+  var COVER_COLORS = {
+    bomber: { bg: "#24206B", ink: "#FFFFFF", accent: "#FFD43B" },
+    p0: { bg: "#1C1859", ink: "#FFFFFF", accent: "#38F2C0" },
+    beat: { bg: "#121528", ink: "#FFFFFF", accent: "#FFE14D" },
+    timeline: { bg: "#262A5E", ink: "#EDE3C8", accent: "#C9A55C" }
+  };
+  function liveCoverHTML(p) {
+    var c = COVER_COLORS[p.design] || p.palette || { bg: "#1B2550", ink: "#FFFFFF", accent: "#F2B84B" };
+    return '<div class="cover cover-live" style="' + COVER_BOX + 'background:' + c.bg + ';color:' + c.ink + ';display:flex;flex-direction:column;cursor:pointer">' +
+      '<div style="padding:16px 18px 10px 26px;display:flex;justify-content:space-between;gap:8px;font:500 10.5px/1.3 ' + MONO + ';letter-spacing:.06em;color:' + c.accent + '"><span>' + esc(L(p.label) || "") + '</span><span>No.' + esc(p._no) + '</span></div>' +
+      '<div class="cover-screen" style="position:relative;margin:0 14px 0 22px;height:236px;border-radius:8px;overflow:hidden;background:#000;border:2px solid ' + c.accent + '"></div>' +
+      '<div style="padding:14px 18px 16px 26px;display:flex;flex-direction:column;gap:6px;flex:1">' +
+      '<div style="font:900 24px/1.25 ' + GOTHIC + ';letter-spacing:-.02em">' + esc(L(p.title)) + '</div>' +
+      '<div style="font:500 11px/1.4 ' + MONO + ';opacity:.75">' + esc(dot(p.date)) + '</div>' +
+      '<div style="margin-top:auto;font:600 12.5px/1.3 ' + GOTHIC + ';color:' + c.accent + '">' + (lang === "en" ? "▶ Click the screen to run" : "▶ 화면을 누르면 실행") + '</div></div></div>';
+  }
+  function mountCoverScreen(wrap, p) {
+    var box = wrap.querySelector(".cover-screen");
+    if (!box) return;
+    var f = document.createElement("iframe");
+    var w = box.clientWidth || 280, scale = w / 1280;
+    f.setAttribute("aria-hidden", "true"); f.tabIndex = -1;
+    f.style.cssText = "position:absolute;top:0;left:0;border:0;width:1280px;height:" + Math.round(236 / scale) + "px;transform:scale(" + scale + ");transform-origin:0 0;pointer-events:none;background:#000";
+    loadDoc(p.link).then(function (html) { f.srcdoc = html; }, function () { f.src = p.link; });
+    box.appendChild(f);
+    wrap.addEventListener("click", function () { openPlayer(p); });
+  }
+
   function coverHTML(p) {
+    if (isLocal(p.link)) return liveCoverHTML(p);
     var title = esc(L(p.title)), no = esc(p._no), date = esc(dot(p.date));
     var head = function (left, color) { return '<div style="display:flex;justify-content:space-between;font:500 10.5px/1.3 ' + MONO + ';letter-spacing:.08em;color:' + color + '"><span>' + left + '</span><span>No.' + no + '</span></div>'; };
     switch (p.design) {
@@ -297,6 +331,7 @@
     l.forEach(function (p) {
       if (p.id === shelf.sel) {
         var wrap = el("div", "pulled"); wrap.innerHTML = coverHTML(p); row.appendChild(wrap); selEl = wrap;
+        if (isLocal(p.link)) mountCoverScreen(wrap, p);
       } else {
         var b = el("button", "spine-btn"); b.type = "button";
         b.setAttribute("aria-label", t("shelf.open", { t: L(p.title) }));
@@ -322,7 +357,7 @@
     var cur = P.filter(function (p) { return p.id === shelf.sel; })[0];
     if (!cur) return;
     var main = el("div", "d-main");
-    main.appendChild(el("span", "d-meta", "No." + cur._no + " · " + catOf(cur) + " · " + dot(cur.date)));
+    main.appendChild(el("span", "d-meta", "No." + cur._no + " · " + (L(cur.label) || catOf(cur)) + " · " + dot(cur.date)));
     main.appendChild(el("span", "d-title", L(cur.title)));
     main.appendChild(el("span", "d-sum", L(cur.summary)));
     if (cur.tools && cur.tools.length) {
@@ -371,6 +406,64 @@
       d.appendChild(ul);
     }
     box.appendChild(d);
+  }
+
+  /* ---------- 메인 프로젝트 (main.js) ---------- */
+  function renderMain() {
+    var wrap = document.getElementById("main-projects"); wrap.textContent = "";
+    var list = window.SITE_MAIN || [];
+    wrap.hidden = !list.length;
+    list.forEach(function (m) {
+      var a = el("article", "mc");
+      var head = el("header", "mc-head");
+      head.appendChild(el("span", "mc-kicker mono", [t("main.kicker"), m.period, L(m.team)].filter(Boolean).join(" · ")));
+      head.appendChild(el("h3", "mc-title", L(m.title)));
+      if (m.oneLiner) head.appendChild(el("p", "mc-one", L(m.oneLiner)));
+      a.appendChild(head);
+      if (m.stats && m.stats.length) {
+        var st = el("ul", "mc-stats");
+        m.stats.forEach(function (s) { var li = el("li"); li.appendChild(el("span", "mc-v", L(s.v))); li.appendChild(el("span", "mc-l", L(s.l))); st.appendChild(li); });
+        a.appendChild(st);
+      }
+      var grid = el("div", "mc-grid");
+      if (m.images && m.images.length) {
+        var figs = el("div", "mc-figs");
+        m.images.forEach(function (im) {
+          var fig = el("figure", "mc-fig");
+          var img = el("img"); img.src = im.src; img.alt = L(im.alt); img.loading = "lazy";
+          fig.appendChild(img);
+          if (im.alt) fig.appendChild(el("figcaption", null, L(im.alt)));
+          figs.appendChild(fig);
+        });
+        grid.appendChild(figs);
+      }
+      var dl = el("dl", "mc-dl");
+      [["main.problem", m.problem], ["main.approach", m.approach], ["main.result", m.result], ["main.role", m.role]].forEach(function (r) {
+        if (!r[1]) return;
+        var row = el("div");
+        row.appendChild(el("dt", "mono", t(r[0])));
+        var dd = el("dd");
+        var v = r[1][lang] || r[1].ko;
+        if (Array.isArray(v)) { var ul = el("ul"); v.forEach(function (x) { ul.appendChild(el("li", null, x)); }); dd.appendChild(ul); }
+        else dd.textContent = v;
+        row.appendChild(dd);
+        dl.appendChild(row);
+      });
+      grid.appendChild(dl);
+      a.appendChild(grid);
+      var foot = el("div", "mc-foot");
+      if (m.stack && m.stack.length) {
+        var sk = el("ul", "methods");
+        m.stack.forEach(function (x) { sk.appendChild(el("li", "tag", x)); });
+        foot.appendChild(sk);
+      }
+      (m.links || []).forEach(function (lk) {
+        var ln = el("a", "btn mc-link", L(lk.label) + " ↗"); ln.href = lk.href; ln.target = "_blank"; ln.rel = "noopener";
+        foot.appendChild(ln);
+      });
+      a.appendChild(foot);
+      wrap.appendChild(a);
+    });
   }
 
   /* ---------- 첫 화면 ---------- */
@@ -495,7 +588,7 @@
     document.title = lang === "en" ? "Gaeun Yoon · Lab Notes" : "윤가은 실험 노트";
     document.querySelectorAll("[data-i18n]").forEach(function (n) { n.textContent = t(n.getAttribute("data-i18n")); });
     document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
-    renderHero(); renderAbout(); renderExperience(); renderActivities(); renderShelf(false);
+    renderHero(); renderAbout(); renderExperience(); renderActivities(); renderMain(); renderShelf(false);
     document.getElementById("email").textContent = D.email;
     document.getElementById("mail-link").href = "mailto:" + D.email;
     document.getElementById("foot").textContent = t("foot", { date: dot(window.SITE_UPDATED) });

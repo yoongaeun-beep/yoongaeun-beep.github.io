@@ -1,7 +1,7 @@
 // 프로젝트 목록 — 매일 자동화가 "올려" 승인 후 이 파일을 다시 씁니다. 직접 고쳐도 됩니다.
 // 서가에는 오래된 것이 왼쪽, 새것이 오른쪽에 꽂힙니다. 항목 형식:
 // { id, date: "YYYY-MM-DD", title: {ko, en}, summary: {ko, en}, tools: ["아티팩트", ...],
-//   category: feature.js의 categories id,
+//   category: feature.js의 categories id, label: {ko, en} 책등에 쓰는 분류명(누구나 알아볼 수 있게, 제목은 표지와 상세에),
 //   design: 책등·표지 디자인. 전용 디자인("bomber" | "p0" | "beat" | "inbox" | "timeline" | "daily") 또는 "generic",
 //   spineH: 책등 높이(340–440, 이웃과 다르게), cover: "assets/covers/<id>.jpg"(선택, 표지에 넣을 화면),
 //   generic일 때: palette: {bg, ink, accent}, pattern: "dots"|"stripes"|"lanes"|"grid"|"stars"|"hazard"|"airmail"|"none",
@@ -11,6 +11,7 @@
 window.SITE_PROJECTS = [
   {
     id: "hapgyeok-bomber",
+    label: { ko: "취준생 미니게임 시제품", en: "Mini-game prototype" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "games",
     design: "bomber", spineH: 404, cover: "assets/covers/bomber.jpg",
     date: "2026-10-06",
@@ -40,6 +41,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "hapgyeok-bomber-p0",
+    label: { ko: "리듬게임 엔진 검증", en: "Rhythm engine test" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "games",
     design: "p0", spineH: 372,
     date: "2026-10-06",
@@ -69,6 +71,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "hapgyeok-beat",
+    label: { ko: "채용 테마 리듬게임", en: "Hiring-themed rhythm game" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "games",
     design: "beat", spineH: 428, cover: "assets/covers/beat.jpg",
     date: "2026-10-06",
@@ -85,6 +88,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "inbox-diagnosis",
+    label: { ko: "메일함 데이터 분석", en: "Inbox data analysis" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "automation",
     design: "inbox", spineH: 392,
     date: "2026-10-06",
@@ -100,6 +104,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "career-timeline",
+    label: { ko: "경력 연표 시각화", en: "Career timeline viz" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "automation",
     design: "timeline", spineH: 356,
     date: "2026-10-06",
@@ -114,6 +119,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "daily-update",
+    label: { ko: "포트폴리오 자동화", en: "Portfolio automation" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "automation",
     design: "daily", spineH: 416,
     date: "2026-10-07",
@@ -147,6 +153,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "sunblock-helper",
+    label: { ko: "자외선 맞춤 추천 앱", en: "UV-based advice app" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "life",
     design: "generic", spineH: 388,
     palette: { bg: "#FFE9A8", ink: "#2B2118", accent: "#F26B1D" },
