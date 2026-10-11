@@ -6,7 +6,7 @@ window.SITE_MAIN = [
   {
     id: "predictive-maintenance",
     period: "2026.09.14 – 09.30",
-    team: { ko: "LS Jump Up 2팀 (4인) · 조장 · 기여도 35%", en: "LS Jump Up Team 2 (4 people) · team lead · 35% contribution" },
+    team: { ko: "LS Jump Up 2팀 (3인) · 조장 · 기여도 35%", en: "LS Jump Up Team 2 (3 people) · team lead · 35% contribution" },
     headline: { ko: "고장 확률을\n오늘 할 일로 바꾸는 정비 대시보드", en: "A maintenance dashboard that turns\nfailure scores into today's tasks" },
     title: { ko: "센서 데이터 기반 설비 고장 예측 및 정비·발주 의사결정 지원 시스템", en: "Sensor-based failure prediction and maintenance/ordering decision support" },
     oneLiner: {
@@ -51,7 +51,7 @@ window.SITE_MAIN = [
       },
       {
         tag: "PRODUCT", title: { ko: "대시보드 · 검증", en: "Dashboard" },
-        line: { ko: "메인·설비 상세·통계·발주·설정 5개 화면을 Dash로 만들었습니다. 설비 데이터가 밖으로 나가지 않도록 AI 한 줄 요약은 로컬 sLLM으로 만들었고, 커밋 61회·브랜치 통합 5회로 4명이 기능 F01–F10을 동시에 완성했습니다.", en: "Built five Dash screens (home, machine detail, statistics, ordering, settings), with a local sLLM for summaries so plant data never leaves the site; 61 commits and 5 merges across features F01–F10." },
+        line: { ko: "메인·설비 상세·통계·발주·설정 5개 화면을 Dash로 만들었습니다. 설비 데이터가 밖으로 나가지 않도록 AI 한 줄 요약은 로컬 sLLM으로 만들었고, 커밋 61회·브랜치 통합 5회로 3명이 기능 F01–F10을 동시에 완성했습니다.", en: "Built five Dash screens (home, machine detail, statistics, ordering, settings), with a local sLLM for summaries so plant data never leaves the site; 61 commits and 5 merges across features F01–F10." },
         key: { ko: "테스트 47건 · 콘솔 에러 0", en: "47 tests · 0 console errors" },
         stuck: { ko: "노트북 해상도에서 그래프가 잘리고 카드가 겹쳤습니다.", en: "Charts clipped and cards overlapped on laptop screens." },
         fix: { ko: "576–1920px 반응형으로 다시 짜서 겹침을 0건으로 만들었습니다.", en: "Rebuilt the layout responsive from 576 to 1920 px: zero overlaps." }
@@ -60,12 +60,12 @@ window.SITE_MAIN = [
     role: {
       ko: [
         "조장. 데이터 전처리, 부품별 고장 예측 모델, 대시보드 화면 통합과 반응형 UI",
-        "4명이 충돌 없이 일하도록 공통 상수 파일, 기능 번호 F01–F10, 화면 ID 규칙 54개, 테스트 47건을 합치는 조건으로 정함",
+        "3명이 충돌 없이 일하도록 공통 상수 파일, 기능 번호 F01–F10, 화면 ID 규칙 54개, 테스트 47건을 합치는 조건으로 정함",
         "Claude Code로 Dash 콜백과 반응형 CSS를 구현하고, 콜백 누락을 찾는 점검 스크립트로 반복 검증"
       ],
       en: [
         "Team lead; owned preprocessing, per-part failure models and dashboard integration with responsive UI",
-        "Set the rules that let four people work in parallel: shared constants, features F01–F10, 54 ID prefixes and 47 tests as merge gates",
+        "Set the rules that let three people work in parallel: shared constants, features F01–F10, 54 ID prefixes and 47 tests as merge gates",
         "Used Claude Code for Dash callbacks and responsive CSS, plus a script that checks for broken callback wiring"
       ]
     },
