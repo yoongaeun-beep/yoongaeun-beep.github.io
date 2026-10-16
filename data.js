@@ -56,26 +56,29 @@ window.SITE_DATA = {
   },
   strengths: [
     {
+      where: { ko: "코스맥스 연구소 경영", en: "COSMAX R&D Management" },
       figure: { ko: "100+", en: "100+" },
       title: { ko: "기술을 문서로", en: "Technology into documents" },
       body: {
-        ko: "유럽 베스트셀러 100여 개를 분석해 매달 기술 트렌드 리포트를 썼습니다.\n전 연구소에 배포됐고 임원 보고에 쓰였습니다.",
+        ko: "유럽 베스트셀러 100여 개를 분석해 매달 기술 트렌드 리포트 작성\n전 연구소에 배포, 임원 보고 자료로 활용",
         en: "Analyzed 100+ European best-sellers for a monthly technology trend report.\nIt went to every lab and fed into executive reporting."
       }
     },
     {
+      where: { ko: "코스맥스 연구소 경영", en: "COSMAX R&D Management" },
       figure: { ko: "단독 담당", en: "Solo lead" },
       title: { ko: "해외와 연구소를 잇기", en: "Connecting R&D with the world" },
       body: {
-        ko: "인도네시아 연구소와의 소통을 혼자 맡아 기술 이관을 조율하고 선크림 공동 기획을 완성했습니다.\n국문뿐이던 연구소 투어에 영문 투어도 만들었습니다.",
+        ko: "인도네시아 연구소와의 소통을 혼자 맡아 기술 이관 조율, 선크림 공동 기획 완성\n국문뿐이던 연구소 투어에 영문 투어 신설",
         en: "Ran communication with the Indonesian R&D center on my own, coordinating technology transfer and completing a joint sunscreen project.\nI also created an English version of the R&D tour."
       }
     },
     {
+      where: { ko: "코스맥스 연구소 경영", en: "COSMAX R&D Management" },
       figure: { ko: "3시간", en: "3 hrs" },
       title: { ko: "반복을 구조로 바꾸기", en: "Turning repetition into systems" },
       body: {
-        ko: "최대 이틀 걸리던 제품 정리를 엑셀 매크로와 AI로 자동화해 3시간으로 줄였습니다.\n같은 문제가 반복되면 일하는 방식부터 바꿉니다.",
+        ko: "최대 이틀 걸리던 제품 정리를 엑셀 매크로와 AI로 자동화해 3시간으로 단축\n같은 문제가 반복되면 일하는 방식부터 바꿈",
         en: "Automated product summaries that took up to two days with Excel macros and AI, cutting them to three hours.\nWhen a problem repeats, I change how the work is done."
       }
     }
@@ -91,13 +94,13 @@ window.SITE_DATA = {
           role: { ko: "연구소 경영", en: "R&D Management" },
           points: {
             ko: [
-              "유럽 화장품 기술 트렌드를 조사해 R&D 방향을 검토하는 월간 리포트를 쓰고 전 연구소에 배포했습니다.\n베스트셀러 100여 개를 분석했고 임원 보고에 쓰였습니다.",
-              "국문으로만 하던 연구소 투어에 영문 투어를 새로 만들어 운영했습니다.\n3년간 24팀이던 방문이 연 100팀 이상으로 늘어 해외 고객이 꼭 들르는 코스가 됐습니다.",
-              "인도네시아 연구소와의 소통을 혼자 맡았습니다.\n연수연구원 교육과 기술 이관을 조율하고 선크림 공동 기획을 완성했습니다.",
-              "제품 특징 정리를 엑셀 VBA와 AI로 자동화해 3시간으로 줄였습니다.\nAI에게 줄 질문을 직접 설계하고, 무작위로 뽑아 원문과 대조해 정확도를 확인했습니다.",
-              "연구소 8개 층 전시공간 기획을 이끌었습니다.\n방문객을 세 유형으로 나누고 유형별로 기술을 어디까지 공개할지 정했습니다.",
-              "소비자 리포트를 분석해 신사업팀과 헤어사업팀에 직접 발표했습니다.",
-              "기관생명윤리위원회(IRB) 행정간사를 맡고, 매달 연구개발 데이터를 정리해 시스템에 등록했습니다."
+              "유럽 화장품 기술 트렌드를 조사해 R&D 방향 검토용 월간 리포트 작성, 전 연구소 배포\n베스트셀러 100여 개 분석, 임원 보고 자료로 활용",
+              "국문으로만 하던 연구소 투어에 영문 투어를 신설해 운영\n3년간 24팀이던 방문이 연 100팀 이상으로 늘어 해외 고객 필수 방문 코스로 정착",
+              "인도네시아 연구소와의 소통 단독 담당\n연수연구원 교육과 기술 이관 조율, 선크림 공동 기획 완성",
+              "제품 특징 정리를 엑셀 VBA와 AI로 자동화해 3시간으로 단축\nAI에게 줄 질문을 직접 설계하고, 무작위 표본을 원문과 대조해 정확도 확인",
+              "연구소 8개 층 전시공간 기획 주도\n방문객을 세 유형으로 나누고 유형별 기술 공개 범위 설계",
+              "소비자 리포트를 분석해 신사업팀과 헤어사업팀에 직접 발표",
+              "기관생명윤리위원회(IRB) 행정간사, 월간 연구개발 데이터 정리와 시스템 등록"
             ],
             en: [
               "Researched European cosmetics technology trends and wrote a monthly R&D direction report for every lab.\nAnalyzed 100+ best-sellers; the report was used in executive reporting.",
@@ -114,7 +117,7 @@ window.SITE_DATA = {
           period: "2026.05 ~ 2026.07",
           role: { ko: "해외영업", en: "Overseas Sales" },
           points: {
-            ko: ["사내 이동으로 해외영업팀에서 근무했습니다."],
+            ko: ["사내 이동으로 해외영업팀에서 근무"],
             en: ["Internal transfer to the overseas sales team."]
           }
         }
@@ -129,10 +132,10 @@ window.SITE_DATA = {
           role: { ko: "백신 마케팅 인턴", en: "Vaccine Marketing Intern" },
           points: {
             ko: [
-              "독감과 폐렴구균 등 백신 판촉 자료 12종을 기획하고 만들었습니다(목표 10종).\n모두 50여 개의 제작과 배포를 관리했습니다.",
-              "사수와 일하는 방식이 달라 일정이 밀리자 역할을 다시 나누자고 제안했습니다.\n사수가 뼈대를 잡고, 제가 근거 조사와 문구 검증으로 마무리했습니다.",
-              "독감 백신 동시접종 메시지를 담은 새 자료를 직접 제안해 완성했습니다.",
-              "영업 현장 워크숍에 자원해 참석하고, 영업사원에게 들은 의견을 자료에 반영했습니다."
+              "독감과 폐렴구균 등 백신 판촉 자료 12종 기획과 제작 (목표 10종)\n총 50여 개의 제작과 배포 관리",
+              "사수와 일하는 방식이 달라 일정이 밀리자 역할 재분배를 제안\n사수가 뼈대를 잡고, 근거 조사와 문구 검증으로 마무리하는 방식으로 12종 완성",
+              "독감 백신 동시접종 메시지를 담은 신규 자료를 직접 제안해 완성",
+              "영업 현장 워크숍에 자원해 참석, 영업사원에게 들은 의견을 자료에 반영"
             ],
             en: [
               "Planned and produced 12 vaccine promotional pieces (target: 10).\nManaged 50+ materials in total.",

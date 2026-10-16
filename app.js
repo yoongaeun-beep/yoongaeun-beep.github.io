@@ -631,6 +631,7 @@
     var st = document.getElementById("strengths"); st.textContent = "";
     D.strengths.forEach(function (s) {
       var li = el("li", "fig");
+      if (s.where) li.appendChild(el("span", "fig-w", L(s.where)));
       if (s.figure) li.appendChild(el("span", "fig-n", L(s.figure)));
       li.appendChild(el("span", "fig-t", L(s.title)));
       li.appendChild(el("span", "fig-b", L(s.body)));
