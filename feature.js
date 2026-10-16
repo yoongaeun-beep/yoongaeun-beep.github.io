@@ -1,4 +1,4 @@
-﻿// 첫 화면 훅 · 키워드 · 수집 기록 · 서가 묶음 — 매일 수집 작업이 "와우 포인트 검토"를 거쳐 제안하고, "올려" 승인 후 갱신합니다.
+// 첫 화면 훅, 키워드, 수집 기록, 서가 묶음: 매일 수집 작업이 "와우 포인트 검토"를 거쳐 제안하고, "올려" 승인 후 갱신합니다.
 // 판단 기록은 pipeline\hook-review.md 에 남깁니다.
 window.SITE_FEATURE = {
   // 첫 화면 한 문장. 줄바꿈은 \n
@@ -8,14 +8,14 @@ window.SITE_FEATURE = {
     en: "This shelf fills itself while I sleep."
   },
   sub: {
-    ko: "Claude로 만든 결과물을 매일 새벽 2시에 자동으로 모아 한 권씩 꽂습니다. 저는 아침에 확인하고 \"올려\" 한 마디로 승인만 합니다. 이 장치 자체가 제가 AI로 일하는 방식입니다.",
+    ko: "Claude로 만든 결과물을 매일 새벽 2시에 자동으로 모아 한 권씩 꽂습니다.\n저는 아침에 확인하고 \"올려\" 한 마디로 승인만 합니다.\n이 장치 자체가 제가 AI로 일하는 방식입니다.",
     en: "Every night at 2 a.m., what I built with Claude is collected and shelved automatically. In the morning I review it and approve with one word. The setup itself is how I work with AI."
   },
   // 키워드 3개와 근거. {projects}, {days}는 자동 계산
   keywords: [
     {
-      tag: { ko: "바이오·제약 도메인", en: "Bio & pharma domain" },
-      proof: { ko: "연구소 경영 2년 · 백신 마케팅 · 연구 2건", en: "2 yrs R&D management · vaccine marketing · 2 lab projects" }
+      tag: { ko: "바이오 제약 도메인", en: "Bio & pharma domain" },
+      proof: { ko: "연구소 경영 2년, 백신 마케팅, 연구 2건", en: "2 yrs R&D management, vaccine marketing, 2 lab projects" }
     },
     {
       tag: { ko: "해외 커뮤니케이션", en: "Global communication" },
@@ -30,16 +30,16 @@ window.SITE_FEATURE = {
   logDate: "2026-10-08",
   log: [
     { time: "08:39", text: { ko: "대화 6개를 보관함으로 복사", en: "Copied 6 conversations to the archive" } },
-    { time: "08:42", text: { ko: "새 결과물 3개 · 서가 후보로 정리", en: "3 new outputs drafted for the shelf" } },
-    { time: "08:43", text: { ko: "포트폴리오 시안 · 개인정보 우려로 제외", en: "Portfolio studies: excluded for privacy" } },
+    { time: "08:42", text: { ko: "새 결과물 3개, 서가 후보로 정리", en: "3 new outputs drafted for the shelf" } },
+    { time: "08:43", text: { ko: "포트폴리오 시안, 개인정보 우려로 제외", en: "Portfolio studies: excluded for privacy" } },
     { time: "08:46", text: { ko: "블로그 초안 1편 작성", en: "Drafted 1 blog post" } },
-    { time: "승인", text: { ko: "선블럭 1권 공개 · 나머지 2권은 보류", en: "Published 1 book; 2 held back" }, hi: true }
+    { time: "승인", text: { ko: "선블럭 1권 공개, 나머지 2권은 보류", en: "Published 1 book; 2 held back" }, hi: true }
   ],
-  // 수집 기록 아래 "어떻게 동작하나요?" — 자동화가 실제로 하는 일
+  // 수집 기록 아래 "어떻게 동작하나요?": 자동화가 실제로 하는 일
   how: [
     { ko: "매일 새벽 2시, 그날 Claude와 나눈 대화와 결과물을 보관함으로 복사", en: "2 a.m.: copy the day's Claude conversations and outputs to an archive" },
     { ko: "결과물마다 소개 글과 책 표지 초안, 블로그 초안을 작성", en: "Draft a description, a book cover and a blog post for each output" },
-    { ko: "학교·연락처·기관명 같은 개인정보를 걸러내는 점검", en: "Check for and strip personal details" },
+    { ko: "학교, 연락처, 기관명 같은 개인정보를 걸러내는 점검", en: "Check for and strip personal details" },
     { ko: "아침에 제가 \"올려\"라고 승인해야 이 페이지에 반영", en: "Nothing goes live until I approve it in the morning" }
   ],
   featuredId: "hapgyeok-beat",

@@ -8,43 +8,43 @@
   var UI = {
     ko: {
       "nav.about": "소개", "nav.experience": "경력", "nav.activities": "대외활동", "nav.projects": "프로젝트", "nav.contact": "연락",
-      "nav.about.n": "01 · 소개", "nav.experience.n": "02 · 경력", "nav.activities.n": "03 · 대외활동", "nav.projects.n": "04 · 프로젝트", "nav.contact.n": "05 · 연락",
-      "log.title": "최근 수집 기록 · {date}", "log.go": "서가 보러 가기 ↓", "log.count": "서가 {n}권",
+      "nav.about.n": "01 소개", "nav.experience.n": "02 경력", "nav.activities.n": "03 대외활동", "nav.training": "교육", "nav.training.n": "04 교육 및 자격", "nav.projects.n": "05 프로젝트", "nav.contact.n": "06 연락", "more": "자세히", "less": "접기", "certs": "자격과 어학",
+      "log.title": "최근 수집 기록 ({date})", "log.go": "서가 보러 가기 ↓", "log.count": "서가 {n}권",
       "shelf.kicker": "서가", "shelf.title": "사이드 프로젝트", "shelf.count": "{n}권",
       "side.kicker": "SIDE PROJECTS", "side.lede": "교육 중 Claude로 빠르게 만들어 본 작은 실험들입니다. 매일 새벽 자동으로 한 권씩 늘어납니다.",
       "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.trouble": "막힌 곳 → 해결", "main.zoom": "크게 보기 ↗", "main.stack": "기술", "main.team": "팀", "main.outcome": "결과물", "main.stuck": "막힌 곳", "main.fix": "해결", "main.dialHint": "숫자에 마우스를 올리거나 눌러 보세요", "main.prev": "이전 단계", "main.next": "다음 단계", "main.process": "이렇게 풀었습니다",
       "shelf.lede": "책등을 누르면 표지가 뽑혀 나옵니다.",
-      "shelf.all": "전체", "shelf.next": "다음 한 권 · 오늘 새벽 2시", "shelf.open": "{t} 표지 보기",
+      "shelf.all": "전체", "shelf.next": "다음 한 권은 오늘 새벽 2시에", "shelf.open": "{t} 표지 보기",
       "play": "▶ 이 페이지에서 바로 실행", "player.close": "닫기 ✕", "player.loading": "불러오는 중…",
       "edu": "교육", "lang": "영어",
-      "nav.experience.n2": "02 · 경력·학력", "school": "학력", "how.q": "어떻게 동작하나요?",
+      "nav.experience.n2": "02 경력과 학력", "school": "학력", "how.q": "어떻게 동작하나요?",
       "kicker": "PORTFOLIO", "cta.contact": "연락하기", "cta.projects": "만든 것 보기 ↓", "profile.mail": "이메일",
-      "auto.badge": "이 페이지는 매일 새벽 2시에 스스로 업데이트됩니다 · 마지막 {date}",
+      "auto.badge": "이 페이지는 매일 새벽 2시에 스스로 업데이트됩니다.\n마지막 업데이트 {date}",
       "d.role": "내가 정한 것", "d.time": "걸린 시간",
       "story.open": "제작 과정 보기", "story.count": "막혔던 곳 {n}",
-      "contact.lede": "학력과 자격 상세가 담긴 이력서는 메일로 요청해 주시면 바로 보내드립니다.",
+      "contact.lede": "이력서가 필요하시면 메일로 요청해 주세요. 바로 보내드립니다.",
       "contact.copy": "주소 복사", "contact.write": "메일 쓰기", "contact.copied": "복사했습니다.", "contact.selected": "주소를 선택했습니다. Ctrl+C로 복사하세요.",
-      "foot": "이 페이지는 매일 새벽 2시에 스스로 업데이트됩니다 · 마지막 업데이트 {date} · 이 사이트도 Claude로 만들었습니다"
+      "foot": "이 페이지는 매일 새벽 2시에 스스로 업데이트됩니다. 마지막 업데이트 {date}. 이 사이트도 Claude로 만들었습니다."
     },
     en: {
       "nav.about": "About", "nav.experience": "Experience", "nav.activities": "Activities", "nav.projects": "Projects", "nav.contact": "Contact",
-      "nav.about.n": "01 · About", "nav.experience.n": "02 · Experience", "nav.activities.n": "03 · Activities", "nav.projects.n": "04 · Projects", "nav.contact.n": "05 · Contact",
-      "log.title": "Latest collection · {date}", "log.go": "See the shelf ↓", "log.count": "{n} on the shelf",
+      "nav.about.n": "01 About", "nav.experience.n": "02 Experience", "nav.activities.n": "03 Activities", "nav.training": "Training", "nav.training.n": "04 Training & certificates", "nav.projects.n": "05 Projects", "nav.contact.n": "06 Contact", "more": "More", "less": "Less", "certs": "Certificates & languages",
+      "log.title": "Latest collection ({date})", "log.go": "See the shelf ↓", "log.count": "{n} on the shelf",
       "shelf.kicker": "SHELF", "shelf.title": "Side projects", "shelf.count": "{n}",
       "side.kicker": "SIDE PROJECTS", "side.lede": "Small experiments built quickly with Claude during the course. One more arrives every night.",
       "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.trouble": "Stuck → solved", "main.zoom": "View full size ↗", "main.stack": "Stack", "main.team": "Team", "main.outcome": "Outcome", "main.stuck": "Stuck", "main.fix": "Solved", "main.dialHint": "Hover or tap a number", "main.prev": "Previous step", "main.next": "Next step", "main.process": "How I solved it",
       "shelf.lede": "Click a spine to pull out its cover.",
-      "shelf.all": "All", "shelf.next": "Next one · tonight 2 a.m.", "shelf.open": "Open {t}",
+      "shelf.all": "All", "shelf.next": "Next one tonight at 2 a.m.", "shelf.open": "Open {t}",
       "play": "▶ Run it on this page", "player.close": "Close ✕", "player.loading": "Loading…",
       "edu": "Training", "lang": "English",
-      "nav.experience.n2": "02 · Experience & education", "school": "Education", "how.q": "How does this work?",
+      "nav.experience.n2": "02 Experience & education", "school": "Education", "how.q": "How does this work?",
       "kicker": "PORTFOLIO", "cta.contact": "Get in touch", "cta.projects": "See what I built ↓", "profile.mail": "Email",
-      "auto.badge": "This page updates itself every night at 2 a.m. · last {date}",
+      "auto.badge": "This page updates itself every night at 2 a.m.\nLast update {date}",
       "d.role": "What I decided", "d.time": "Time",
       "story.open": "How it was made", "story.count": "{n} problems solved",
-      "contact.lede": "Email me for a full resume with education and certifications.",
+      "contact.lede": "Email me if you would like my full resume.",
       "contact.copy": "Copy address", "contact.write": "Write an email", "contact.copied": "Copied.", "contact.selected": "Address selected. Press Ctrl+C to copy.",
-      "foot": "This page updates itself every night at 2 a.m. · last update {date} · built with Claude, too"
+      "foot": "This page updates itself every night at 2 a.m. Last update {date}. Built with Claude, too."
     }
   };
 
@@ -246,7 +246,7 @@
           '<span style="font:500 10px/1 ' + MONO + ';color:#C9A55C">' + esc(p.note ? L(p.note) : (lang === "en" ? "Click any year to unfold" : "누르면 펼쳐지는 연표")) + '</span></div></div>';
       case "daily":
         return '<div class="cover" style="' + COVER_BOX + 'background-color:#0F1A3A;background-image:radial-gradient(#FFFFFF 1px, transparent 1.6px), radial-gradient(#FFFFFF99 .8px, transparent 1.4px), radial-gradient(ellipse at 70% 20%, #2A3B7A 0%, transparent 60%);background-size:41px 37px, 23px 19px, 100% 100%;background-position:7px 9px, 15px 4px, 0 0;padding:22px 22px 18px 28px;display:flex;flex-direction:column;gap:10px;color:#fff">' +
-          head(lang === "en" ? "Published nightly" : "매일 새벽 · 자동 발행", "#F2C14E") +
+          head(lang === "en" ? "Published nightly" : "매일 새벽 자동 발행", "#F2C14E") +
           '<span style="align-self:flex-end;width:92px;height:92px;border-radius:50%;box-shadow:inset 26px -14px 0 0 #F2C14E, 0 0 40px #F2C14E33;transform:rotate(-24deg);margin:6px 6px 0 0"></span>' +
           '<div style="font:500 76px/1 ' + MONO + ';color:#F2C14E;letter-spacing:-.04em">02:00</div>' +
           '<div style="font:900 24px/1.25 ' + GOTHIC + ';letter-spacing:-.02em">' + title + '</div>' +
@@ -370,7 +370,7 @@
     var cur = P.filter(function (p) { return p.id === shelf.sel; })[0];
     if (!cur) return;
     var main = el("div", "d-main");
-    main.appendChild(el("span", "d-meta", "No." + cur._no + " · " + (L(cur.label) || catOf(cur)) + " · " + dot(cur.date)));
+    main.appendChild(el("span", "d-meta", "No." + cur._no + " " + (L(cur.label) || catOf(cur)) + " " + dot(cur.date)));
     main.appendChild(el("span", "d-title", L(cur.title)));
     main.appendChild(el("span", "d-sum", L(cur.summary)));
     if (cur.tools && cur.tools.length) {
@@ -406,7 +406,7 @@
     if (!s) return;
     var n = (s.trouble || []).length;
     var d = el("details", "story-box");
-    d.appendChild(el("summary", null, t("story.open") + (n ? " · " + t("story.count", { n: n }) : "")));
+    d.appendChild(el("summary", null, t("story.open") + (n ? " (" + t("story.count", { n: n }) + ")" : "")));
     if (s.why) d.appendChild(el("p", "story-why", L(s.why)));
     if (n) {
       var ul = el("ul", "story-trouble");
@@ -431,7 +431,7 @@
       // ① 제목: 왼쪽 큰 한 줄 메시지, 오른쪽 설명
       var head = el("header", "mc-top");
       var hl = el("div", "mc-top-l");
-      hl.appendChild(el("span", "mc-kicker mono", [t("main.kicker"), m.period].filter(Boolean).join(" · ")));
+      hl.appendChild(el("span", "mc-kicker mono", [t("main.kicker"), m.period].filter(Boolean).join(" ")));
       hl.appendChild(el("h3", "mc-title", L(m.headline || m.title)));
       head.appendChild(hl);
       var hr = el("div", "mc-top-r");
@@ -577,7 +577,7 @@
       big.textContent = no; tag.textContent = s.tag; ttl.textContent = L(s.title);
       line.textContent = L(s.line); key.textContent = L(s.key);
       stuck.textContent = L(s.stuck); fix.textContent = L(s.fix);
-      count.textContent = no + " / " + String(n).padStart(2, "0") + " · " + t("main.dialHint");
+      count.textContent = no + " / " + String(n).padStart(2, "0") + " " + t("main.dialHint");
     }
     go(0);
     return box;
@@ -594,9 +594,10 @@
     var hl = document.getElementById("highlights"); hl.textContent = "";
     (D.highlights || []).forEach(function (h) {
       var li = el("li");
+      if (h.where) li.appendChild(el("span", "hl-w", L(h.where)));
       li.appendChild(el("span", "hl-v", L(h.v)));
       li.appendChild(el("span", "hl-l", L(h.l)));
-      li.appendChild(el("span", "hl-s", L(h.s)));
+      if (h.s) li.appendChild(el("span", "hl-s", L(h.s)));
       hl.appendChild(li);
     });
     var gl = document.getElementById("glance"); gl.textContent = "";
@@ -640,7 +641,7 @@
     var ol = document.getElementById("exp-work"); ol.textContent = "";
     D.experience.forEach(function (x) {
       var li = el("li", "job");
-      var per = el("div", "job-period", x.period.replace(" – ", "\n– "));
+      var per = el("div", "job-period", x.period.replace(" ~ ", "\n~ "));
       if (x.duration) per.appendChild(el("span", "job-dur", L(x.duration)));
       li.appendChild(per);
       var m = el("div", "job-main");
@@ -655,7 +656,7 @@
         var ul = el("ul");
         r.points[lang].forEach(function (p) { ul.appendChild(el("li", null, p)); });
         if (r.points[lang].length > 1 || x.roles.length === 1) m.appendChild(ul);
-        else head.appendChild(el("span", null, "· " + r.points[lang][0]));
+        else head.appendChild(el("span", null, r.points[lang][0]));
       });
       li.appendChild(m);
       ol.appendChild(li);
@@ -671,38 +672,63 @@
       sc.appendChild(sb);
     }
   }
-  function renderActivities() {
-    var fc = document.getElementById("act-featured"); fc.textContent = "";
-    var feat = D.activities.filter(function (a) { return a.featured; })[0];
-    fc.hidden = !feat;
-    if (feat) {
-      var f = feat.featured, main = el("div", "fc-main");
-      main.appendChild(el("span", "fc-badge", L(f.badge)));
-      main.appendChild(el("span", "fc-title", L(f.title)));
-      main.appendChild(el("span", "fc-line", L(f.line)));
-      fc.appendChild(main);
-      var stats = el("div", "fc-stats");
-      f.stats.forEach(function (s) { var d = el("div"); d.appendChild(el("span", "fc-v", L(s.v))); d.appendChild(el("span", "fc-l", L(s.l))); stats.appendChild(d); });
-      fc.appendChild(stats);
-    }
-    var ol = document.getElementById("activity-list"); ol.textContent = "";
-    D.activities.filter(function (a) { return !a.featured; }).forEach(function (a) {
+  // 대외활동, 교육: 닫힌 상태에는 요약(bullet), '자세히'를 누르면 세부 내용과 사용한 기법이 열림
+  function renderRows(list, target) {
+    var ol = document.getElementById(target); ol.textContent = "";
+    (list || []).forEach(function (a, k) {
       var li = el("li", "row");
-      li.appendChild(el("span", "row-period", lang === "en" && a.periodEn ? a.periodEn : a.period));
-      var body = el("span");
-      body.appendChild(el("b", null, L(a.title)));
-      if (a.sub) body.appendChild(el("span", "row-sub", " · " + L(a.sub)));
-      body.appendChild(el("span", "row-line", a.points[lang][0]));
+      li.appendChild(el("span", "row-period", a.period));
+      var body = el("div", "row-body");
+      var head = el("div", "row-head");
+      head.appendChild(el("b", "row-title", L(a.title)));
+      if (a.sub) head.appendChild(el("span", "row-sub", L(a.sub)));
+      body.appendChild(head);
+      var sum = el("ul", "row-sum");
+      ((a.summary && a.summary[lang]) || []).forEach(function (x) { sum.appendChild(el("li", null, x)); });
+      body.appendChild(sum);
+      var det = (a.details && a.details[lang]) || [];
+      if (det.length || (a.methods && a.methods.length)) {
+        var id = target + "-d" + k;
+        var more = el("div", "row-more"); more.id = id; more.hidden = true;
+        if (det.length) { var ul = el("ul", "row-det"); det.forEach(function (x) { ul.appendChild(el("li", null, x)); }); more.appendChild(ul); }
+        if (a.methods && a.methods.length) {
+          var m = el("ul", "methods");
+          a.methods.forEach(function (x) { m.appendChild(el("li", "tag", x)); });
+          more.appendChild(m);
+        }
+        var btn = el("button", "row-toggle", t("more") + " ＋"); btn.type = "button";
+        btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", id);
+        btn.addEventListener("click", function () {
+          var open = more.hidden; more.hidden = !open;
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.textContent = open ? t("less") + " －" : t("more") + " ＋";
+        });
+        head.appendChild(btn);
+        body.appendChild(more);
+      }
       li.appendChild(body);
       ol.appendChild(li);
     });
-    var edu = (D.education || []).map(function (e) { return e[lang]; }).join(" · ");
-    document.getElementById("edu-langs").textContent = t("edu") + " · " + edu + "  ／  " + t("lang") + " · " + D.languages.join(" · ");
+  }
+  function renderActivities() {
+    renderRows(D.activities, "activity-list");
+    renderRows(D.training, "training-list");
+    var c = document.getElementById("certs"); c.textContent = "";
+    c.appendChild(el("span", "certs-k mono", t("certs")));
+    var list = el("ul", "certs-list");
+    (D.certs || []).forEach(function (x) {
+      var li = el("li");
+      li.appendChild(el("b", null, x.name));
+      li.appendChild(el("span", "mono", x.date));
+      if (x.note) li.appendChild(el("span", "certs-n", L(x.note)));
+      list.appendChild(li);
+    });
+    c.appendChild(list);
   }
 
   function render() {
     document.documentElement.lang = lang;
-    document.title = lang === "en" ? "Gaeun Yoon · Lab Notes" : "윤가은 실험 노트";
+    document.title = lang === "en" ? "Gaeun Yoon, Lab Notes" : "윤가은 실험 노트";
     document.querySelectorAll("[data-i18n]").forEach(function (n) { n.textContent = t(n.getAttribute("data-i18n")); });
     document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
     renderHero(); renderAbout(); renderExperience(); renderActivities(); renderMain(); renderShelf(false);

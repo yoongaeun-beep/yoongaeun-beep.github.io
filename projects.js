@@ -1,11 +1,11 @@
-// 프로젝트 목록 — 매일 자동화가 "올려" 승인 후 이 파일을 다시 씁니다. 직접 고쳐도 됩니다.
+// 프로젝트 목록: 매일 자동화가 "올려" 승인 후 이 파일을 다시 씁니다. 직접 고쳐도 됩니다.
 // 서가에는 오래된 것이 왼쪽, 새것이 오른쪽에 꽂힙니다. 항목 형식:
 // { id, date: "YYYY-MM-DD", title: {ko, en}, summary: {ko, en}, tools: ["아티팩트", ...],
 //   category: feature.js의 categories id, label: {ko, en} 책등에 쓰는 분류명(누구나 알아볼 수 있게, 제목은 표지와 상세에),
-//   design: 책등·표지 디자인. 전용 디자인("bomber" | "p0" | "beat" | "inbox" | "timeline" | "daily") 또는 "generic",
-//   spineH: 책등 높이(340–440, 이웃과 다르게), cover: "assets/covers/<id>.jpg"(선택, 표지에 넣을 화면),
+//   design: 책등, 표지 디자인. 전용 디자인("bomber" | "p0" | "beat" | "inbox" | "timeline" | "daily") 또는 "generic",
+//   spineH: 책등 높이(340~440, 이웃과 다르게), cover: "assets/covers/<id>.jpg"(선택, 표지에 넣을 화면),
 //   generic일 때: palette: {bg, ink, accent}, pattern: "dots"|"stripes"|"lanes"|"grid"|"stars"|"hazard"|"airmail"|"none",
-//                 motif: 표지에 크게 쓸 짧은 글자(예: "02:00", "2,173"), stamp: 책등 위 도장 글자(1–2자, 선택),
+//                 motif: 표지에 크게 쓸 짧은 글자(예: "02:00", "2,173"), stamp: 책등 위 도장 글자(1~2자, 선택),
 //   role: {ko, en} 내가 직접 정한 것(대화 기록에 근거, 모르면 생략), time: {ko, en} 걸린 시간(대화 시작~끝 기준, 선택),
 //   link: "projects/<id>/index.html"(페이지 안에서 바로 실행) | null, note: {ko, en} (링크가 없을 때 사유), source }
 window.SITE_PROJECTS = [
@@ -26,9 +26,9 @@ window.SITE_PROJECTS = [
     story: {
       why: { ko: "취업 준비가 길어지면 불합격 메일만 쌓입니다. 게임에서라도 시원하게 합격해 보면 기분이 풀리지 않을까 해서, '도파민이 터지는' 3분짜리 게임을 목표로 잡았습니다.", en: "Job hunting piles up rejection emails. I wanted a 3-minute game where you get hired everywhere, purely for the dopamine." },
       steps: [
-        { ko: "인터뷰: Claude가 질문 카드 3라운드로 대상·핵심 재미·판 구조·실패 처리·엔딩을 물어봄", en: "Interview: Claude asked three rounds of question cards on audience, core fun, rounds, failure and endings" },
+        { ko: "인터뷰: Claude가 질문 카드 3라운드로 대상, 핵심 재미, 판 구조, 실패 처리, 엔딩을 물어봄", en: "Interview: Claude asked three rounds of question cards on audience, core fun, rounds, failure and endings" },
         { ko: "기획서: 계획 모드로 답을 기획서 한 장에 정리하고, 확인 후 승인", en: "Plan: plan mode turned the answers into a one-page plan, which I reviewed and approved" },
-        { ko: "단계 나누기: 기획서를 Phase로 나누고 데이터베이스·서버 없는 구조로 한정", en: "Phasing: split the plan into phases, with no database or server" },
+        { ko: "단계 나누기: 기획서를 Phase로 나누고 데이터베이스, 서버 없는 구조로 한정", en: "Phasing: split the plan into phases, with no database or server" },
         { ko: "구현: 기획서대로 미니게임 11판짜리 첫 프로토타입을 만들어 링크로 공유", en: "Build: made an 11-round first prototype from the plan and shared it as a link" }
       ],
       trouble: [
@@ -52,7 +52,7 @@ window.SITE_PROJECTS = [
       en: "Re-scoped a heavy plan into phases and built P0: transcribed 16 bars of the Can-can into note data, added four lanes and three difficulty levels, and synced notes to audio time rather than frame time."
     },
     tools: ["계획 모드", "아티팩트"],
-    role: { ko: "기획이 무겁다고 판단해 범위를 리듬게임으로 좁히고, 곡(캉캉)·줄 수(4줄)·난이도별 빠르기를 결정", en: "Judged the plan too heavy, narrowed it to a rhythm game, and chose the song, lane count and speeds" },
+    role: { ko: "기획이 무겁다고 판단해 범위를 리듬게임으로 좁히고, 곡(캉캉), 줄 수(4줄), 난이도별 빠르기를 결정", en: "Judged the plan too heavy, narrowed it to a rhythm game, and chose the song, lane count and speeds" },
     time: { ko: "합격 폭격기와 같은 작업 안에서", en: "Same session as Offer Bomber" },
     story: {
       why: { ko: "미니게임 여러 개를 다 만들기 전에, 핵심인 '음악에 맞춰 치는 손맛'이 되는지부터 확인하고 싶었습니다.", en: "Before building many mini-games, I wanted to prove the core: does hitting notes to music feel good?" },
@@ -111,7 +111,7 @@ window.SITE_PROJECTS = [
     date: "2026-10-06",
     title: { ko: "커리어 타임라인", en: "Career timeline" },
     summary: {
-      ko: "이력서와 경력 문서 여러 개에 흩어진 사실을 모아, 학력·경력·연구·활동별로 걸러 볼 수 있는 연표로 정리했습니다. 문서끼리 어긋나는 날짜와 숫자도 이 과정에서 바로잡았습니다.",
+      ko: "이력서와 경력 문서 여러 개에 흩어진 사실을 모아, 학력, 경력, 연구, 활동별로 걸러 볼 수 있는 연표로 정리했습니다. 문서끼리 어긋나는 날짜와 숫자도 이 과정에서 바로잡았습니다.",
       en: "Gathered facts scattered across several resumes and career documents into one timeline you can filter by education, work, research and activities, fixing dates and numbers that disagreed along the way."
     },
     tools: ["파일 읽기", "아티팩트"],
@@ -130,8 +130,8 @@ window.SITE_PROJECTS = [
       en: "The page you are reading. Every night it collects my Claude conversations and outputs, drafts project entries and a blog post, and publishes them here after a one-word approval, with a privacy check before anything goes live."
     },
     tools: ["예약 작업", "계획 모드", "노션 연결", "대화 목록 관리", "아티팩트"],
-    role: { ko: "\"시간을 따로 들이지 않고 보여주기\"라는 목표를 정하고, 공개 전 승인·개인정보 규칙·디자인 방향을 결정", en: "Defined the goal (show my work without extra effort) and set the approval step, privacy rules and design direction" },
-    time: { ko: "이틀(10.06–10.07)", en: "Two days (Oct 6–7)" },
+    role: { ko: "\"시간을 따로 들이지 않고 보여주기\"라는 목표를 정하고, 공개 전 승인, 개인정보 규칙, 디자인 방향을 결정", en: "Defined the goal (show my work without extra effort) and set the approval step, privacy rules and design direction" },
+    time: { ko: "이틀(10.06~10.07)", en: "Two days (Oct 6~7)" },
     story: {
       why: { ko: "교육 중 매일 결과물이 생기는데 여기저기 흩어졌습니다. 따로 시간을 들이지 않아도 모이고, 남에게 바로 보여줄 수 있는 곳이 필요했습니다.", en: "The course produced work every day, scattered everywhere. I wanted it gathered and shareable without spending extra time." },
       steps: [
@@ -162,12 +162,12 @@ window.SITE_PROJECTS = [
     date: "2026-10-07",
     title: { ko: "선블럭 결정 도우미", en: "Sunscreen Decision Helper" },
     summary: {
-      ko: "수업 주제는 '실시간 날씨 API를 웹페이지에 연결하기'였습니다. 공개 날씨 API(Open-Meteo)에서 지금 자외선 지수와 시간별 예보를 받아 오고, 그 값으로 판단하는 함수를 직접 설계했습니다. 그 결과 오늘 선크림을 몇 시에 얼마나 자주 발라야 하는지 정해 주는 웹앱을 만들었습니다. 불러오는 중·데이터 없음·읽기 실패 세 가지 상태를 모두 처리했고, 실패하면 연습용 고정 데이터로 바꾸면서 '실제 날씨 아님'을 표시합니다.",
+      ko: "수업 주제는 '실시간 날씨 API를 웹페이지에 연결하기'였습니다. 공개 날씨 API(Open-Meteo)에서 지금 자외선 지수와 시간별 예보를 받아 오고, 그 값으로 판단하는 함수를 직접 설계했습니다. 그 결과 오늘 선크림을 몇 시에 얼마나 자주 발라야 하는지 정해 주는 웹앱을 만들었습니다. 불러오는 중, 데이터 없음, 읽기 실패 세 가지 상태를 모두 처리했고, 실패하면 연습용 고정 데이터로 바꾸면서 '실제 날씨 아님'을 표시합니다.",
       en: "The class was about wiring a live weather API into a web page. The app pulls the current UV index and hourly forecast from a public weather API (Open-Meteo), and a decision function I designed turns it into when and how often to apply sunscreen today. It handles loading, no-data and fetch-failure states, falling back to a practice data file clearly marked 'not real weather'."
     },
     tools: ["날씨 API", "웹 검색", "계획 모드", "내장 브라우저", "디자인 캔버스", "아티팩트"],
     role: {
-      ko: "'가을엔 안 더워서 선크림을 안 바르니 아예 정해 주는 걸 만들자'는 목적을 정하고, UV 8이어도 같은 간격이냐고 짚어 단계별 판정으로 바꾸게 함. 글이 많다·너무 어둡다는 피드백으로 카드뉴스·접기 UI와 밝은 디자인을 이끌어냄",
+      ko: "'가을엔 안 더워서 선크림을 안 바르니 아예 정해 주는 걸 만들자'는 목적을 정하고, UV 8이어도 같은 간격이냐고 짚어 단계별 판정으로 바꾸게 함. 글이 많다, 너무 어둡다는 피드백으로 카드뉴스, 접기 UI와 밝은 디자인을 이끌어냄",
       en: "Set the goal (people skip sunscreen in cool autumn sun, so just decide for them), pushed for per-UV-level rules, and drove the card-news, collapsible and brighter design through feedback"
     },
     time: { ko: "약 5시간(대화 기준)", en: "About 5 h (conversation time)" },
@@ -176,7 +176,7 @@ window.SITE_PROJECTS = [
       steps: [
         { ko: "API 확인: 실제로 API를 호출해 자외선 값(현재 4.35, 최고 5.3)이 오는지 먼저 확인", en: "API check: called the API to confirm real UV values came back" },
         { ko: "판단 함수: 받은 날씨 데이터를 넣으면 '지금 바르세요/몇 시간마다' 결론을 내는 함수를 따로 설계", en: "Decision function: designed a separate function that turns the weather data into a verdict" },
-        { ko: "예외 처리: 불러오는 중·데이터 없음·읽기 실패 화면을 만들고, 출처를 표시하고, 페이지당 1회만 호출", en: "Edge cases: loading, no-data and failure states, source credit, one call per page load" }
+        { ko: "예외 처리: 불러오는 중, 데이터 없음, 읽기 실패 화면을 만들고, 출처를 표시하고, 페이지당 1회만 호출", en: "Edge cases: loading, no-data and failure states, source credit, one call per page load" }
       ],
       trouble: [
         { problem: { ko: "UV가 8이어도 2시간 간격으로만 안내하는 등 결과가 단계별로 구분되지 않음", en: "Advice was the same at UV 8 as at lower levels" }, fix: { ko: "UV 단계별 판정 로직을 따로 만들고 경계값 테스트 페이지로 확인", en: "Built per-level logic and a boundary-value test page" } },
