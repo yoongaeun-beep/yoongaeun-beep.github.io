@@ -1,4 +1,4 @@
-// 첫 화면 훅, 키워드, 수집 기록, 서가 묶음: 매일 수집 작업이 "와우 포인트 검토"를 거쳐 제안하고, "올려" 승인 후 갱신합니다.
+﻿// 첫 화면 훅, 키워드, 수집 기록, 서가 묶음: 매일 수집 작업이 "와우 포인트 검토"를 거쳐 제안하고, "올려" 승인 후 갱신합니다.
 // 판단 기록은 pipeline\hook-review.md 에 남깁니다.
 window.SITE_FEATURE = {
   // 첫 화면 한 문장. 줄바꿈은 \n
@@ -68,7 +68,14 @@ window.SITE_FEATURE = {
         ko: "선크림 깜빡, 첫음 놓침, 구조식 막힘. 내 불편의 원인을 먼저 찾고 도구로 만든 작업들.",
         en: "Skipped sunscreen, missed opening notes, stuck on structures: root causes first, then tools."
       }
+    },
+    {
+      id: "side",
+      title: { ko: "사이드 프로젝트", en: "Side projects" },
+      blurb: {
+        ko: "일하면서 겪은 불편을 도구로 만들어 본 작업. 문제 정의부터 개발까지 문서를 먼저 쓰고 만들었습니다.",
+        en: "Tools built from pain points at work, with the documents written first, from problem definition to development."
+      }
     }
   ]
 };
-

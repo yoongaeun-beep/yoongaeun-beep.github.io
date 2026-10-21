@@ -1,4 +1,4 @@
-// 프로젝트 목록: 매일 자동화가 "올려" 승인 후 이 파일을 다시 씁니다. 직접 고쳐도 됩니다.
+﻿// 프로젝트 목록: 매일 자동화가 "올려" 승인 후 이 파일을 다시 씁니다. 직접 고쳐도 됩니다.
 // 서가에는 오래된 것이 왼쪽, 새것이 오른쪽에 꽂힙니다. 항목 형식:
 // { id, date: "YYYY-MM-DD", title: {ko, en}, summary: {ko, en}, tools: ["아티팩트", ...],
 //   category: feature.js의 categories id, label: {ko, en} 책등에 쓰는 분류명(누구나 알아볼 수 있게, 제목은 표지와 상세에),
@@ -185,6 +185,37 @@ window.SITE_PROJECTS = [
     },
     link: "projects/sunblock-helper/index.html",
     source: "desktop"
+  },
+  {
+    id: "market-insight-site",
+    label: { ko: "AI 조사 브리프 사이트", en: "AI research brief site" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
+    category: "side",
+    design: "generic", spineH: 420, cover: "assets/covers/market-insight-site.jpg",
+    palette: { bg: "#E9ECFA", ink: "#1F2A5C", accent: "#4F63C4" },
+    pattern: "grid", motif: "조사 카드", stamp: "조",
+    date: "2026-10-19",
+    title: { ko: "시장조사 인사이트 사이트", en: "Market Insight Site" },
+    summary: {
+      ko: "회사에서 해외 시장조사를 할 때 AI 결과가 뻔하고 맞는지 확신하기 어려웠던 불편에서 시작한 사이드 프로젝트입니다.\n'마땅히 되어야 할 상태와 그렇지 못한 상태'로 문제를 정의하고, 해결책 우선순위, 정보 구조, 유저 저니, 요구사항, 개발 계획 문서를 AI 인터뷰로 차례로 만든 뒤 Phase 단위로 개발했습니다.\n결과물은 의뢰 질문을 적는 조사 카드에서 출발해, 한 줄 결론과 근거 번호, 확신도를 갖춘 트렌드 브리프를 읽는 사이트입니다. 로그인형이라 실제 주소는 공개하지 않고, 샘플 데이터로 띄운 5번째 버전 화면만 싣습니다.",
+      en: "A side project that started from a work pain point: AI market research on overseas markets felt obvious and hard to trust.\nI defined the problem as 'how it should be vs. how it is', then built the solution ranking, information architecture, user journey, requirements and dev plan through AI interviews, and developed it phase by phase.\nThe result is a site where a research card holds the client's question and a trend brief shows a one-line verdict, numbered evidence and a confidence scale. It is login-only, so the real URL stays private; the cover shows version 5 of a brief on sample data."
+    },
+    tools: ["스킬", "AI 인터뷰", "웹 검색", "Supabase", "GitHub", "구글 시트 연결"],
+    role: {
+      ko: "AI가 쓴 가설 5개를 직접 읽고 '다 뻔하다'고 판정한 뒤, 원하는 형식을 '지금 뜨는 것(출처) → 우리 상황 → 접근 제안(서브니치까지)'으로 정함. 기업마다 내용이 달라지도록 컨설턴트가 의뢰를 받는 틀로 설정하게 하고, 데이터는 로컬에서 Supabase로 옮기며 로그인을 넣기로 결정",
+      en: "Read the five AI hypotheses and judged them all obvious, then set the target format: what is trending (with sources), how it fits this client, and a suggested approach down to the sub-niche. Framed it as a consultant taking client requests, and decided to move data from local files to Supabase with login"
+    },
+    time: { ko: "약 2일(대화 기준)", en: "About 2 days (conversation time)" },
+    story: {
+      why: { ko: "해외 시장은 현지 언어와 플랫폼을 몰라 유료 보고서 한 곳에 기대게 되고, AI도 공개 자료와 남이 정의한 시장을 그대로 가져옵니다. 그래서 의뢰 기업의 상황에 맞는 인사이트를 근거와 함께 뽑아 주는 도구가 필요했습니다.", en: "For overseas markets I lacked local language and platform knowledge and leaned on one paid report, while AI repeated public data and other people's market definitions. I needed a tool that gives client-specific insight with sources." },
+      trouble: [
+        { problem: { ko: "시험용 사례로 만든 가설 5개가 모두 당연한 사실이라 뻔하다는 평가", en: "All five test hypotheses were judged obvious facts" }, fix: { ko: "결과 형식을 '뜨는 흐름과 출처, 우리 상황에서의 의미, 접근 제안'으로 바꿔 트렌드 브리프로 재설계", en: "Redesigned the output as a trend brief: trend with sources, fit for the client, suggested approach" } },
+        { problem: { ko: "가설 설계 스킬보다 점검 스킬이 엄격해 기준이 어긋남", en: "The hypothesis skill was looser than the review skill" }, fix: { ko: "가설 설계 스킬에도 도출 질문을 넣어 엄격도를 맞추고 다시 시험", en: "Added derivation questions to the hypothesis skill and re-tested it" } }
+      ]
+    },
+    link: null,
+    note: { ko: "로그인형 사이트라 실제 주소는 공개하지 않습니다. 표지는 샘플 데이터로 띄운 조사 화면입니다.", en: "Login-only site, so the real URL is private. The cover shows the research screen on sample data." },
+    source: "desktop"
   }
 ];
-window.SITE_UPDATED = "2026-10-08";
+window.SITE_UPDATED = "2026-10-21";
+

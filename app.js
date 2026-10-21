@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   var D = window.SITE_DATA;
   var F = window.SITE_FEATURE || { categories: [], keywords: [], log: [] };
   // 서가는 오래된 것이 왼쪽. 번호는 만든 순서
@@ -69,7 +69,7 @@
     "파일 읽기": "File reading", "내장 브라우저": "Built-in browser", "커넥터(Gmail)": "Gmail connector",
     "예약 작업": "Scheduled tasks", "노션 연결": "Notion connector", "대화 목록 관리": "Session management",
     "스킬": "Skills", "웹 검색": "Web search", "보조 에이전트": "Sub-agents", "기억": "Memory", "파일 고치기": "File editing",
-    "디자인 캔버스": "Design canvas"
+    "디자인 캔버스": "Design canvas", "AI 인터뷰": "AI interviews", "Supabase": "Supabase", "GitHub": "GitHub", "구글 시트 연결": "Google Sheets connector"
   };
   function toolName(x) { return lang === "en" && TOOL_EN[x] ? TOOL_EN[x] : x; }
   function catOf(p) { var c = (F.categories || []).filter(function (c) { return c.id === p.category; })[0]; return c ? L(c.title) : ""; }
@@ -759,3 +759,4 @@
 
   render();
 })();
+
