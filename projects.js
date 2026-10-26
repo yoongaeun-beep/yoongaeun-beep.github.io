@@ -190,8 +190,8 @@ window.SITE_PROJECTS = [
     id: "market-insight-site",
     label: { ko: "AI 조사 브리프 사이트", en: "AI research brief site" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "side",
-    design: "generic", spineH: 420, cover: "assets/covers/market-insight-site.jpg",
-    palette: { bg: "#E9ECFA", ink: "#1F2A5C", accent: "#4F63C4" },
+    design: "brief", spineH: 420, cover: "assets/covers/market-insight-site.jpg",
+    palette: { bg: "#14204A", ink: "#F5EFDF", accent: "#FFD94D" },
     pattern: "grid", motif: "조사 카드", stamp: "조",
     date: "2026-10-19",
     title: { ko: "시장조사 인사이트 사이트", en: "Market Insight Site" },
@@ -212,7 +212,7 @@ window.SITE_PROJECTS = [
         { problem: { ko: "가설 설계 스킬보다 점검 스킬이 엄격해 기준이 어긋남", en: "The hypothesis skill was looser than the review skill" }, fix: { ko: "가설 설계 스킬에도 도출 질문을 넣어 엄격도를 맞추고 다시 시험", en: "Added derivation questions to the hypothesis skill and re-tested it" } }
       ]
     },
-    link: null,
+    link: "projects/market-insight-site/index.html",
     note: { ko: "로그인형 사이트라 실제 주소는 공개하지 않습니다. 표지는 샘플 데이터로 띄운 조사 화면입니다.", en: "Login-only site, so the real URL is private. The cover shows the research screen on sample data." },
     source: "desktop"
   }

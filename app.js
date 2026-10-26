@@ -164,7 +164,22 @@
     beat: { bg: "#121528", ink: "#FFFFFF", accent: "#FFE14D" },
     timeline: { bg: "#262A5E", ink: "#EDE3C8", accent: "#C9A55C" }
   };
+  // 조사 브리프 사이트 전용 표지: 결론 카드와 숫자 칩을 크게 세운 디자인
+  function briefCoverHTML(p) {
+    var chip = function (n, s, bg, ink) { return '<div style="flex:1;background:' + bg + ';color:' + ink + ';border-radius:8px;padding:8px 6px;text-align:center"><div style="font:900 24px/1 ' + MONO + '">' + n + '</div><div style="font:600 10.5px/1.3 ' + GOTHIC + ';margin-top:3px">' + s + '</div></div>'; };
+    var en = lang === "en";
+    return '<div class="cover cover-live" style="' + COVER_BOX + 'background-color:#14204A;background-image:radial-gradient(#FFFFFF12 1.4px, transparent 1.8px), linear-gradient(160deg,#1B2C66 0%,#0F1838 70%);background-size:16px 16px,100% 100%;color:#F5EFDF;display:flex;flex-direction:column;cursor:pointer">' +
+      '<div style="padding:18px 20px 0 28px;display:flex;justify-content:space-between;font:500 10.5px/1.3 ' + MONO + ';letter-spacing:.08em;color:#FFD94D"><span>' + (en ? "TREND BRIEF" : "트렌드 브리프") + '</span><span>No.' + esc(p._no) + '</span></div>' +
+      '<div style="padding:12px 20px 0 28px;font:900 31px/1.2 ' + GOTHIC + ';letter-spacing:-.03em">' + (en ? "Is it obvious?<br>Show the evidence." : "뻔한 답 말고,<br><span style=\"color:#FFD94D\">근거</span>를 보여줘") + '</div>' +
+      '<div style="position:relative;margin:16px 16px 0 24px;transform:rotate(-1.6deg)">' +
+      '<div class="cover-screen" style="position:relative;height:198px;border-radius:8px;overflow:hidden;background:#fff;border:3px solid #FFD94D;box-shadow:6px 6px 0 #070C22"></div>' +
+      '<span style="position:absolute;right:-8px;top:-14px;background:#FFD94D;color:#14204A;border-radius:999px;padding:4px 11px;font:900 11px/1.2 ' + GOTHIC + ';transform:rotate(6deg);box-shadow:2px 2px 0 #070C22">' + (en ? "Sample data" : "샘플 데이터") + '</span></div>' +
+      '<div style="display:flex;gap:8px;margin:18px 18px 0 26px">' + chip("4", en ? "trends" : "트렌드", "#4F63C4", "#fff") + chip("13", en ? "sources" : "근거", "#F5EFDF", "#14204A") + chip("3", en ? "to verify" : "원문 확인", "#FFD94D", "#14204A") + '</div>' +
+      '<div style="padding:12px 18px 14px 28px;margin-top:auto"><div style="font:900 17px/1.25 ' + GOTHIC + '">' + esc(L(p.title)) + '</div>' +
+      '<div style="display:flex;justify-content:space-between;margin-top:6px;font:600 12px/1.3 ' + GOTHIC + ';color:#FFD94D"><span>' + (en ? "▶ Click to try" : "▶ 눌러서 직접 보기") + '</span><span style="font:500 10.5px/1.3 ' + MONO + ';color:#F5EFDF99">' + esc(dot(p.date)) + '</span></div></div></div>';
+  }
   function liveCoverHTML(p) {
+    if (p.design === "brief") return briefCoverHTML(p);
     var c = COVER_COLORS[p.design] || p.palette || { bg: "#1B2550", ink: "#FFFFFF", accent: "#F2B84B" };
     return '<div class="cover cover-live" style="' + COVER_BOX + 'background:' + c.bg + ';color:' + c.ink + ';display:flex;flex-direction:column;cursor:pointer">' +
       '<div style="padding:16px 18px 10px 26px;display:flex;justify-content:space-between;gap:8px;font:500 10.5px/1.3 ' + MONO + ';letter-spacing:.06em;color:' + c.accent + '"><span>' + esc(L(p.label) || "") + '</span><span>No.' + esc(p._no) + '</span></div>' +
