@@ -286,7 +286,7 @@
   function loadDoc(path) {
     // 한 파일짜리 사본(portfolio.html)에서는 결과물이 SITE_EMBED 안에 들어 있음
     if (window.SITE_EMBED && window.SITE_EMBED[path]) return Promise.resolve(window.SITE_EMBED[path]);
-    if (!docCache[path]) docCache[path] = fetch(path).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+    if (!docCache[path]) docCache[path] = fetch(path, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
     return docCache[path];
   }
   var player = document.getElementById("player"), stage = document.getElementById("player-stage"), lastFocus = null;
