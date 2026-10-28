@@ -410,3 +410,9 @@ button { font: inherit; color: inherit; }
   .shelf-head { gap: 12px; }
   .shelf-controls { justify-content: flex-start; }
 }
+
+/* 휴대폰: 작은 설명 글자를 14px 이상으로 (채용담당자가 휴대폰으로 열 때) */
+@media (max-width: 600px) {
+  .hl-w, .hl-l, .hl-s, .fig-w, .fig-b, .mc-l, .row-sub, .certs-n, .log-list { font-size: 14px; }
+  .row-sum, .row-det { font-size: 15px; }
+}

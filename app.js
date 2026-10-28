@@ -7,9 +7,9 @@
 
   var UI = {
     ko: {
-      "nav.about": "소개", "nav.experience": "경력", "nav.activities": "대외활동", "nav.projects": "프로젝트", "nav.contact": "연락",
-      "nav.about.n": "01 소개", "nav.experience.n": "02 경력", "nav.activities.n": "03 대외활동", "nav.training": "교육", "nav.training.n": "04 교육 및 자격", "nav.projects.n": "05 프로젝트", "nav.contact.n": "06 연락", "more": "자세히", "less": "접기", "certs": "자격과 어학",
-      "log.title": "최근 수집 기록 ({date})", "log.go": "서가 보러 가기 ↓", "log.count": "서가 {n}권",
+      "nav.about": "소개", "nav.experience": "경력", "nav.activities": "연구와 활동", "nav.projects": "프로젝트", "nav.contact": "연락",
+      "nav.about.n": "01 소개", "nav.experience.n": "02 경력", "nav.activities.n": "04 연구와 활동", "nav.training": "교육", "nav.training.n": "05 교육 및 자격", "nav.projects.n": "03 프로젝트", "nav.contact.n": "06 연락", "more": "자세히", "less": "접기", "certs": "자격과 어학",
+      "log.title": "최근 수집 기록 ({date})", "log.auto": "자동 수집", "log.go": "서가 보러 가기 ↓", "log.count": "서가 {n}권",
       "shelf.kicker": "서가", "shelf.title": "사이드 프로젝트", "shelf.count": "{n}권",
       "side.kicker": "SIDE PROJECTS", "side.lede": "교육 중 Claude로 빠르게 만들어 본 작은 실험들입니다. 매일 새벽 자동으로 한 권씩 늘어납니다.",
       "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.trouble": "막힌 곳 → 해결", "main.zoom": "크게 보기 ↗", "main.stack": "기술", "main.team": "팀", "main.outcome": "결과물", "main.stuck": "막힌 곳", "main.fix": "해결", "main.dialHint": "숫자에 마우스를 올리거나 눌러 보세요", "main.prev": "이전 단계", "main.next": "다음 단계", "main.process": "이렇게 풀었습니다",
@@ -27,9 +27,9 @@
       "foot": "이 페이지는 매일 새벽 2시에 스스로 업데이트됩니다. 마지막 업데이트 {date}. 이 사이트도 Claude로 만들었습니다."
     },
     en: {
-      "nav.about": "About", "nav.experience": "Experience", "nav.activities": "Activities", "nav.projects": "Projects", "nav.contact": "Contact",
-      "nav.about.n": "01 About", "nav.experience.n": "02 Experience", "nav.activities.n": "03 Activities", "nav.training": "Training", "nav.training.n": "04 Training & certificates", "nav.projects.n": "05 Projects", "nav.contact.n": "06 Contact", "more": "More", "less": "Less", "certs": "Certificates & languages",
-      "log.title": "Latest collection ({date})", "log.go": "See the shelf ↓", "log.count": "{n} on the shelf",
+      "nav.about": "About", "nav.experience": "Experience", "nav.activities": "Research & activities", "nav.projects": "Projects", "nav.contact": "Contact",
+      "nav.about.n": "01 About", "nav.experience.n": "02 Experience", "nav.activities.n": "04 Research & activities", "nav.training": "Training", "nav.training.n": "05 Training & certificates", "nav.projects.n": "03 Projects", "nav.contact.n": "06 Contact", "more": "More", "less": "Less", "certs": "Certificates & languages",
+      "log.title": "Latest collection ({date})", "log.auto": "auto", "log.go": "See the shelf ↓", "log.count": "{n} on the shelf",
       "shelf.kicker": "SHELF", "shelf.title": "Side projects", "shelf.count": "{n}",
       "side.kicker": "SIDE PROJECTS", "side.lede": "Small experiments built quickly with Claude during the course. One more arrives every night.",
       "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.trouble": "Stuck → solved", "main.zoom": "View full size ↗", "main.stack": "Stack", "main.team": "Team", "main.outcome": "Outcome", "main.stuck": "Stuck", "main.fix": "Solved", "main.dialHint": "Hover or tap a number", "main.prev": "Previous step", "main.next": "Next step", "main.process": "How I solved it",
@@ -623,7 +623,8 @@
       gl.appendChild(d);
     });
     document.getElementById("profile-email").textContent = D.email;
-    document.getElementById("auto-badge").textContent = t("auto.badge", { date: dot(window.SITE_UPDATED) });
+    var ab = document.getElementById("auto-badge");
+    if (ab) ab.textContent = t("auto.badge", { date: dot(window.SITE_UPDATED) });
 
     // 프로젝트 섹션 위: 자동 갱신 이야기와 실제 수집 기록
     document.getElementById("hook").textContent = L(F.hook);
@@ -634,7 +635,7 @@
     var log = document.getElementById("log"); log.textContent = "";
     (F.log || []).forEach(function (e) {
       var li = el("li", e.hi ? "hi" : null);
-      li.appendChild(el("span", "t", e.time));
+      li.appendChild(el("span", "t", typeof e.time === "object" ? L(e.time) : e.time));
       li.appendChild(el("span", null, L(e.text)));
       log.appendChild(li);
     });

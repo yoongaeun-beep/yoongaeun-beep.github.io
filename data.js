@@ -6,23 +6,23 @@ window.SITE_DATA = {
   name: { ko: "윤가은", en: "Gaeun Yoon" },
   // 어떤 사람인지: 첫 화면 맨 위에 표시 (특정 직무에 묶이지 않게)
   identity: {
-    ko: "과학을 이해하는 커뮤니케이터\n일하는 방식을 바꾸는 사람",
-    en: "A communicator who understands science\nSomeone who changes how work gets done"
+    ko: "생명공학 전공\n제약사 인턴과 화장품 연구소 2년",
+    en: "Genetic engineering graduate\nPharma internship, then two years at a cosmetics R&D center"
   },
   // 첫 화면 이름 아래 한 문단: 어떤 일을 해왔는지
   headline: {
-    ko: "생명공학을 전공하고 연구실, 제약사, 화장품 연구소를 거쳤습니다.\n복잡한 기술을 읽히는 문서로 바꾸고, 연구소와 해외를 잇는 일을 했습니다.\n지금은 AI로 일하는 방식을 바꾸는 법을 배우고 있습니다.",
-    en: "I studied genetic engineering and worked in research labs, a pharma company and a cosmetics R&D center.\nI turned complex technology into documents people could read and connected the lab with overseas partners.\nNow I am learning to change how work gets done with AI."
+    ko: "생명공학을 전공하고 연구실, 제약사, 화장품 연구소를 거쳤습니다.\n근거를 찾아 문서로 정리하고, 내보내기 전에 확인하는 일을 해 왔습니다.\n지금은 AI로 일하는 방식을 바꾸는 법을 배우고 있습니다.",
+    en: "I studied genetic engineering and have worked in research labs, at a pharma company and at a cosmetics R&D center.\nMy work has been to find evidence, write it up, and check it before it goes out.\nI am now learning how AI can change the way work gets done."
   },
   // 첫 화면 핵심 성과 3개: 어디서(where), 숫자(v), 무엇을(l)
   highlights: [
-    { where: { ko: "코스맥스 연구소 경영", en: "COSMAX R&D Management" }, v: { ko: "24 → 100+팀", en: "24 → 100+" }, l: { ko: "영문 연구소 투어를 새로 만든 뒤\n늘어난 연간 해외 방문팀", en: "overseas visiting teams a year\nafter I launched an English R&D tour" } },
-    { where: { ko: "사노피 파스퇴르 마케팅 인턴", en: "Sanofi Pasteur marketing intern" }, v: { ko: "12종", en: "12" }, l: { ko: "직접 기획하고 만든 백신 판촉 자료\n(목표 10종)", en: "vaccine promotional pieces I planned and made\n(target: 10)" } },
-    { where: { ko: "LS Jump Up AI 과정 팀 프로젝트", en: "LS Jump Up AI team project" }, v: { ko: "AUC 0.88~0.94", en: "AUC 0.88~0.94" }, l: { ko: "조장으로 만든 설비 고장 예측 모델\n(채택 부품 기준)", en: "equipment failure model I built as team lead\n(adopted parts)" } }
+    { where: { ko: "코스맥스 연구소 경영", en: "COSMAX R&D Management" }, v: { ko: "9건", en: "9" }, l: { ko: "유럽 시장 리포트 (월간 정기호와 특별판)\n리포트마다 베스트셀러 100개 이상 분석", en: "European market reports\neach analyzing 100+ best-sellers" } },
+    { where: { ko: "사노피 파스퇴르 마케팅 인턴", en: "Sanofi Pasteur marketing intern" }, v: { ko: "12종", en: "12" }, l: { ko: "목표 10종, 사수와 역할을 나눠 완성한 판촉 자료\nMedical과 RA 검토 통과", en: "vaccine promotional pieces against a target of 10\neach cleared Medical and RA review" } },
+    { where: { ko: "코스맥스 연구소 경영", en: "COSMAX R&D Management" }, v: { ko: "연 100팀+", en: "100+ a year" }, l: { ko: "영문 연구소 투어 신설 후 해외 방문팀\n(이전 3년간 24팀)", en: "overseas visiting teams after I launched the English R&D tour\n(up from 24 over the previous 3 years)" } }
   ],
   // 첫 화면 "한눈에 보기" 줄
   glance: [
-    { k: { ko: "총 경력", en: "Experience" }, v: { ko: "2년 1개월 + 인턴 7개월", en: "2 yrs 1 mo + 7-mo internship" } },
+    { k: { ko: "총 경력", en: "Experience" }, v: { ko: "2년 1개월 + 인턴 6개월", en: "2 yrs 1 mo + 6-mo internship" } },
     { k: { ko: "학력", en: "Education" }, v: { ko: "경희대 유전생명공학과", en: "Kyung Hee Univ., Genetic Engineering" } },
     { k: { ko: "어학", en: "English" }, v: { ko: "TOEIC 975, OPIc AL", en: "TOEIC 975, OPIc AL" } },
     { k: { ko: "지금", en: "Now" }, v: { ko: "LS Jump Up AI 과정 (2026.11 수료 예정)", en: "LS Jump Up AI program (until Nov 2026)" } }
@@ -32,8 +32,8 @@ window.SITE_DATA = {
     en: "R&D planning, global communication, AI vibe coding"
   },
   thesis: {
-    ko: "어려운 기술을 읽히는 문서로 바꿔왔고, 이제는 직접 만들어 보입니다.",
-    en: "I turn complex technology into documents people can read. Now I build things to show it."
+    ko: "근거를 찾고, 읽는 사람이 이해할 문서로 정리하고, 내보내기 전에 확인합니다.",
+    en: "I find the evidence, write it up for the reader, and check it before it goes out."
   },
   status: {
     ko: "LS Jump Up 과정에서 AI 바이브코딩 학습 중",
@@ -41,8 +41,8 @@ window.SITE_DATA = {
   },
   // 소개 첫 문단. *별표* 안은 강조색, \n은 줄바꿈
   aboutLead: {
-    ko: "생명공학을 전공하고 KIST와 대학 연구실에서 실험을 했습니다.\n사노피에서 백신 마케팅을 거쳐 코스맥스에서 연구소 경영과 해외영업을 맡았습니다.\n자리는 달라도 하는 일은 같았습니다.\n*복잡한 기술을 읽히는 문서로 바꾸고, 연구소와 해외를 잇는 일입니다.*",
-    en: "I studied genetic engineering and ran experiments at KIST and a university lab.\nI did vaccine marketing at Sanofi, then R&D management and overseas sales at COSMAX.\nThe roles changed, but the work did not.\n*I turn complex technology into documents people read, and connect the lab with the world.*"
+    ko: "생명공학을 전공하고 KIST와 대학 연구실에서 실험을 했습니다.\n사노피에서 백신 마케팅을 거쳐 코스맥스에서 연구소 경영과 해외영업을 맡았습니다.\n*인도네시아 연구소의 주 담당 창구를 맡았고, 영문 연구소 투어를 새로 만들었습니다.*",
+    en: "I studied genetic engineering and ran experiments at KIST and a university lab.\nI worked in vaccine marketing at Sanofi, then in R&D management and overseas sales at COSMAX.\n*I was the primary contact for the Indonesian R&D lab and created an English version of the R&D tour.*"
   },
   about: {
     ko: [
@@ -57,29 +57,29 @@ window.SITE_DATA = {
   strengths: [
     {
       where: { ko: "코스맥스 연구소 경영", en: "COSMAX R&D Management" },
-      figure: { ko: "100+", en: "100+" },
-      title: { ko: "기술을 문서로", en: "Technology into documents" },
+      figure: { ko: "9건", en: "9 reports" },
+      title: { ko: "시장 자료를 리포트로", en: "Market research into reports" },
       body: {
-        ko: "유럽 베스트셀러 100여 개를 분석해 매달 기술 트렌드 리포트 작성\n전 연구소에 배포, 임원 보고 자료로 활용",
-        en: "Analyzed 100+ European best-sellers for a monthly technology trend report.\nIt went to every lab and fed into executive reporting."
+        ko: "월간 정기호와 특별판을 합쳐 유럽 시장 리포트 9건 작성\n리포트마다 베스트셀러 100개 이상 분석, 연구원 300명 이상에게 배포",
+        en: "Wrote 9 European market reports, monthly issues plus special editions.\nEach analyzed 100+ best-sellers and went to 300+ R&D staff."
       }
     },
     {
       where: { ko: "코스맥스 연구소 경영", en: "COSMAX R&D Management" },
-      figure: { ko: "단독 담당", en: "Solo lead" },
-      title: { ko: "해외와 연구소를 잇기", en: "Connecting R&D with the world" },
+      figure: { ko: "주 담당 창구", en: "Primary contact" },
+      title: { ko: "해외 연구소와의 소통", en: "Communication with overseas labs" },
       body: {
-        ko: "인도네시아 연구소와의 소통을 혼자 맡아 기술 이관 조율, 선크림 공동 기획 완성\n국문뿐이던 연구소 투어에 영문 투어 신설",
-        en: "Ran communication with the Indonesian R&D center on my own, coordinating technology transfer and completing a joint sunscreen project.\nI also created an English version of the R&D tour."
+        ko: "인도네시아 연구소(60명)의 주 담당 창구, 문의 정리와 연수연구원 7명 지원\n국문뿐이던 연구소 투어에 영문 투어 신설",
+        en: "Primary contact for the Indonesian R&D lab (60 staff): organized enquiries and supported 7 trainees.\nCreated an English version of the Korean-only R&D tour."
       }
     },
     {
       where: { ko: "코스맥스 연구소 경영", en: "COSMAX R&D Management" },
       figure: { ko: "3시간", en: "3 hrs" },
-      title: { ko: "반복을 구조로 바꾸기", en: "Turning repetition into systems" },
+      title: { ko: "자동화와 검증", en: "Automation with a check" },
       body: {
-        ko: "최대 이틀 걸리던 제품 정리를 엑셀 매크로와 AI로 자동화해 3시간으로 단축\n같은 문제가 반복되면 일하는 방식부터 바꿈",
-        en: "Automated product summaries that took up to two days with Excel macros and AI, cutting them to three hours.\nWhen a problem repeats, I change how the work is done."
+        ko: "최대 이틀 걸리던 제품 정리를 엑셀 VBA와 AI로 자동화해 3시간으로 단축\nAI에게 줄 질문을 직접 설계하고, 무작위 표본을 원문과 대조해 정확도 확인",
+        en: "Automated product data processing with Excel VBA and AI, cutting up to two days of work to three hours.\nDesigned the prompts and checked random samples against the source."
       }
     }
   ],
@@ -91,55 +91,59 @@ window.SITE_DATA = {
       roles: [
         {
           period: "2024.06 ~ 2026.04",
-          role: { ko: "연구소 경영", en: "R&D Management" },
+          role: { ko: "연구소 경영", en: "R&I Management Associate, R&D Center" },
           points: {
             ko: [
-              "유럽 화장품 기술 트렌드를 조사해 R&D 방향 검토용 월간 리포트 작성, 전 연구소 배포\n베스트셀러 100여 개 분석, 임원 보고 자료로 활용",
+              "유럽 화장품 시장을 조사해 R&D 방향 검토용 시장 리포트를 월간 정기호와 특별판 포함 9건 작성\n리포트마다 베스트셀러 100개 이상 분석, 연구원 300명 이상에게 배포, 임원 보고 자료로 활용",
               "국문으로만 하던 연구소 투어에 영문 투어를 신설해 운영\n3년간 24팀이던 방문이 연 100팀 이상으로 늘어 해외 고객 필수 방문 코스로 정착",
-              "인도네시아 연구소와의 소통 단독 담당\n연수연구원 교육과 기술 이관 조율, 선크림 공동 기획 완성",
+              "인도네시아 연구소(60명)의 주 담당 창구\n문의 정리, 연수연구원 7명 지원",
               "제품 특징 정리를 엑셀 VBA와 AI로 자동화해 3시간으로 단축\nAI에게 줄 질문을 직접 설계하고, 무작위 표본을 원문과 대조해 정확도 확인",
-              "연구소 8개 층 전시공간 기획 주도\n방문객을 세 유형으로 나누고 유형별 기술 공개 범위 설계",
+              "연구소 4개 층, 7개 섹션의 전시공간 기획 주도\n방문객을 세 유형으로 나누고 유형별 기술 공개 범위 설계",
               "소비자 리포트를 분석해 신사업팀과 헤어사업팀에 직접 발표",
-              "기관생명윤리위원회(IRB) 행정간사, 월간 연구개발 데이터 정리와 시스템 등록"
+              "사내 기관생명윤리위원회(IRB) 행정간사, 월간 연구개발 데이터 정리와 시스템 등록"
             ],
             en: [
-              "Researched European cosmetics technology trends and wrote a monthly R&D direction report for every lab.\nAnalyzed 100+ best-sellers; the report was used in executive reporting.",
+              "Researched the European cosmetics market and wrote 9 market reports, monthly issues plus special editions, to guide R&D.\nEach analyzed 100+ best-sellers, was shared with 300+ R&D staff and was used in executive reporting.",
               "Launched an English version of the Korean-only R&D tour.\nVisits grew from 24 teams over three years to 100+ a year.",
-              "Sole communication lead for the Indonesian R&D center.\nCoordinated trainee education and technology transfer, and completed a joint sunscreen project.",
-              "Automated product-feature summaries with Excel VBA and AI, cutting the work to three hours.\nDesigned the prompts and checked accuracy by random sampling against the source.",
-              "Led planning of an eight-floor R&D exhibition space.\nDecided how much technology to show each of three visitor types.",
+              "Primary contact for the Indonesian R&D lab (60 staff).\nOrganized enquiries and supported 7 trainees.",
+              "Automated product-feature summaries with Excel VBA and AI, cutting the work to three hours.\nDesigned the prompts and checked accuracy against the source with random samples.",
+              "Led planning of an R&D exhibition space across 4 floors and 7 sections.\nDecided how much technology to show each of three visitor types.",
               "Analyzed consumer reports and presented them to the new business and hair care teams.",
-              "Served as administrative secretary of the IRB and registered monthly R&D data in the company system."
+              "Served as administrative secretary of the in-house IRB and registered monthly R&D data in the company system."
             ]
           }
         },
         {
           period: "2026.05 ~ 2026.07",
-          role: { ko: "해외영업", en: "Overseas Sales" },
+          role: { ko: "해외영업", en: "Project Coordinator, Overseas Sales Team" },
           points: {
-            ko: ["사내 이동으로 해외영업팀에서 근무"],
-            en: ["Internal transfer to the overseas sales team."]
+            ko: ["사내 이동, 고객사 11곳의 프로젝트 25개 이상에서 샘플링부터 생산까지 연락 창구"],
+            en: ["After an internal transfer, served as point of contact for 11 customers across 25+ projects, from sampling to production."]
           }
         }
       ]
     },
     {
       period: "2021.07 ~ 2022.01",
-      duration: { ko: "7개월", en: "7 mo" },
+      duration: { ko: "6개월", en: "6 mo" },
       org: { ko: "사노피 파스퇴르", en: "Sanofi Pasteur" }, orgSub: { ko: "글로벌 제약사", en: "global pharma" },
       roles: [
         {
-          role: { ko: "백신 마케팅 인턴", en: "Vaccine Marketing Intern" },
+          role: { ko: "백신 마케팅 인턴", en: "Marketing Intern, PMED Franchise (vaccines)" },
           points: {
             ko: [
-              "독감과 폐렴구균 등 백신 판촉 자료 12종 기획과 제작 (목표 10종)\n총 50여 개의 제작과 배포 관리",
-              "사수와 일하는 방식이 달라 일정이 밀리자 역할 재분배를 제안\n사수가 뼈대를 잡고, 근거 조사와 문구 검증으로 마무리하는 방식으로 12종 완성",
+              "독감과 폐렴구균 등 백신 판촉 자료 12종 완성 (목표 10종)\n일하는 방식이 다른 사수에게 역할 재분배를 제안해, 사수가 뼈대를 잡고 근거 조사와 문구 검증으로 마무리",
+              "판촉물 총 50여 개의 제작과 배포 관리",
+              "Medical(과학적 정확성)과 RA(규정 준수) 검토를 거쳐 수치마다 출처를 붙인 문구 작성",
+              "담당 백신의 근거를 문헌과 ClinicalTrials.gov에서 직접 조사, 다른 독감 백신 자료는 배경으로만 참고",
               "독감 백신 동시접종 메시지를 담은 신규 자료를 직접 제안해 완성",
               "영업 현장 워크숍에 자원해 참석, 영업사원에게 들은 의견을 자료에 반영"
             ],
             en: [
-              "Planned and produced 12 vaccine promotional pieces (target: 10).\nManaged 50+ materials in total.",
-              "When our different working styles delayed the schedule, I proposed splitting the work by stage.\nMy senior drafted, and I finished with evidence checks and copy review.",
+              "Delivered 12 vaccine promotional pieces against a target of 10.\nProposed splitting the work by stage: my senior drafted, and I finished with evidence checks and copy review.",
+              "Managed production and distribution of about 50 materials.",
+              "Wrote copy with a source for every figure, reviewed by Medical (scientific accuracy) and RA (compliance).",
+              "Searched the literature and ClinicalTrials.gov for evidence on my vaccine; read data on other influenza vaccines only for context.",
               "Proposed and completed new materials on flu vaccine co-administration.",
               "Volunteered for field sales workshops and fed sales reps' feedback into the materials."
             ]
@@ -247,19 +251,6 @@ window.SITE_DATA = {
   // 교육 및 자격 (별도 섹션). 형식은 대외활동과 같음
   training: [
     {
-      period: "2026 ~ 2026.11",
-      title: { ko: "LS Jump Up AI 부트캠프", en: "LS Jump Up AI Bootcamp" },
-      sub: { ko: "약 4개월 집중 과정, 진행 중", en: "Four-month intensive, in progress" },
-      summary: {
-        ko: ["제조 데이터 분석부터 AI 에이전트까지 실습 위주로 배우는 중", "3인 팀 프로젝트 조장으로 설비 고장 예측 대시보드 제작 (아래 프로젝트 참고)"],
-        en: ["Hands-on training from manufacturing data analysis to AI agents", "Team lead of a 3-person project that built an equipment failure dashboard (see Projects)"]
-      },
-      details: {
-        ko: ["배우는 내용: 제조업 디지털 전환, 데이터 분석과 시각화, 바이브 코딩 웹 개발, 생성형 AI 업무 자동화, AI 에이전트 구축", "팀 프로젝트에서 데이터 전처리, 부품별 고장 예측 모델, 대시보드 화면 통합을 맡음", "센서 데이터 87만 건으로 만든 모델의 AUC는 채택 부품 기준 0.88~0.94"],
-        en: ["Topics: manufacturing digital transformation, data analysis and visualization, vibe-coded web development, generative AI automation, AI agents", "In the team project I handled preprocessing, per-part failure models and dashboard integration", "AUC 0.88~0.94 for the adopted parts, trained on 870k sensor records"]
-      }
-    },
-    {
       period: "2026.07 ~ 2026.08",
       title: { ko: "의약품 인허가(RA) 기본교육", en: "Pharmaceutical regulatory affairs basics" },
       sub: { ko: "한국제약바이오협회, 6시간", en: "Korea Pharmaceutical and Bio-Pharma Manufacturers Association, 6 hours" },
@@ -278,8 +269,21 @@ window.SITE_DATA = {
       }
     },
     {
+      period: "2026 ~ 2026.11",
+      title: { ko: "LS Jump Up AI 부트캠프", en: "LS Jump Up AI Bootcamp" },
+      sub: { ko: "약 3개월 반 집중 과정, 진행 중", en: "3.5-month intensive, in progress" },
+      summary: {
+        ko: ["제조 데이터 분석부터 AI 에이전트까지 실습 위주로 배우는 중", "3인 팀 조장으로 설비 고장 예측 대시보드 제작, LightGBM 모델 36개 구축 (프로젝트 참고)"],
+        en: ["Hands-on training from manufacturing data analysis to AI agents", "Led a 3-person team building an equipment failure dashboard and built 36 LightGBM models (see Projects)"]
+      },
+      details: {
+        ko: ["배우는 내용: 제조업 디지털 전환, 데이터 분석과 시각화, 바이브 코딩 웹 개발, 생성형 AI 업무 자동화, AI 에이전트 구축", "팀 프로젝트에서 데이터 전처리, 부품별 고장 예측 모델, 대시보드 화면 통합을 맡음", "센서 데이터 87만 건으로 만든 모델의 AUC는 채택 부품 기준 0.88~0.94"],
+        en: ["Topics: manufacturing digital transformation, data analysis and visualization, vibe-coded web development, generative AI automation, AI agents", "In the team project I handled preprocessing, per-part failure models and dashboard integration", "AUC 0.88~0.94 for the adopted parts, trained on 870k sensor records"]
+      }
+    },
+    {
       period: "2024.01",
-      title: { ko: "바이오 미래인재스쿨 4기 고급과정", en: "Bio future talent school, advanced" },
+      title: { ko: "바이오 미래인재스쿨 4기 고급과정", en: "Bio Future Talent School, advanced course" },
       sub: { ko: "충북창조경제혁신센터, 10시간", en: "Chungbuk Center for Creative Economy & Innovation, 10 hours" },
       summary: {
         ko: ["제약 바이오 가치사슬, 글로벌 제약사와 M&A 동향을 분석"],
