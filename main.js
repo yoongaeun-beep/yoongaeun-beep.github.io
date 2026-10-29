@@ -115,8 +115,8 @@ window.SITE_MAIN = [
       },
       {
         tag: "USERS (MY PART)", title: { ko: "인터뷰와 가설 정정", en: "Interviews" },
-        line: { ko: "페르소나 5명과 인터뷰 질문지를 설계하고 답변을 패턴으로 묶어 처음 가설을 검증했습니다. 페르소나는 AI가 설정한 가상 인물이라 숫자는 현장 근거가 아니라 연습용 시나리오로 구분해 적었습니다.\n5명 모두가 종결 상태가 전달되지 않아 물으러 다닌다고 했고, 4명은 서명 직전에 여러 곳을 오간다고 했습니다.", en: "I designed five personas and the interview guide, then grouped the answers into patterns to test my first hypotheses. The personas are AI generated, so I marked the numbers as practice scenarios, not field evidence.\nAll five said they chase status because closures are not passed on, and four said they hop between several places before signing." },
-        key: { ko: "5명 인터뷰, 가설 3개 정정", en: "5 interviews, 3 hypotheses fixed" },
+        line: { ko: "페르소나 5명과 인터뷰 질문지를 설계하고 답변을 패턴으로 묶어 처음 가설을 검증했습니다. 페르소나는 AI가 설정한 가상 인물이라 숫자는 현장 근거가 아니라 연습용 시나리오로 구분해 적었습니다.\n5명 모두가 종결 상태가 전달되지 않아 물으러 다닌다고 했고, 4명은 서명 직전에 여러 곳을 오간다고 했습니다.\n10월 26일에는 실제 QC 3년차 현직자 1명을 직접 만나 편하게 물었고, 답은 대부분 가상 페르소나의 답과 같았습니다. 한 명이라 통계로 쓰지 않고 방향이 같은지 확인하는 용도로 썼습니다.", en: "I designed five personas and the interview guide, then grouped the answers into patterns to test my first hypotheses. The personas are AI generated, so I marked the numbers as practice scenarios, not field evidence.\nAll five said they chase status because closures are not passed on, and four said they hop between several places before signing.\nOn Oct 26 I also met one real QC practitioner with three years of experience and asked casually; the answers mostly matched the personas. With a single person I used it only to check the direction, not as statistics." },
+        key: { ko: "가상 5명과 현직 1명 인터뷰", en: "5 personas and 1 practitioner" },
         stuck: { ko: "처음 가설인 로트 확인에 약 30분, 이탈이 메일과 전화로 전달돼 누락된다는 말은 인터뷰에서 그대로 확인되지 않았습니다.", en: "My first hypotheses, about 30 minutes per lot and deviations lost in email and calls, were not confirmed as written." },
         fix: { ko: "30분은 환경에 따라 15분에서 3~4시간으로 고치고, 근거가 0명이던 메일 누락은 문제 문장에서 뺐습니다. 새로 나온 상태 전달 문제를 넣고, 공유표를 바꿔도 상대가 입력하지 않아 실패한 경험은 도입 위험으로 적었습니다.", en: "Corrected 30 minutes to a range of 15 minutes to 3 or 4 hours, dropped the email gap that nobody backed, added the status passing problem, and logged failed shared sheets as an adoption risk." }
       },
@@ -159,19 +159,19 @@ window.SITE_MAIN = [
     role: {
       ko: [
         "문제 정의를 직접 썼습니다. SCQA와 네 칸 표로 문제를 잡고, 확인할 것을 하나로 좁혔습니다.",
-        "페르소나 5명과 인터뷰 질문지를 설계하고, 답변을 패턴으로 정리해 처음 가설 3개를 고치는 근거를 만들었습니다.",
+        "페르소나 5명과 인터뷰 질문지를 설계하고, 실제 QC 현직자 1명도 직접 만나 확인했습니다. 답변을 패턴으로 정리해 처음 가설 3개를 고치는 근거를 만들었습니다.",
         "화면 UI 개편을 맡아 클리니컬 글라스 디자인, 홈 도식, 한 화면 비교를 만들고 디자인 결정을 문서로 남겼습니다.",
         "발표 자료를 문제, 해결, 증거 순서의 피치 형식으로 다시 디자인하고 발표자 안내문을 썼습니다."
       ],
       en: [
         "Wrote the problem definition: framed it with SCQA and a four box table and narrowed it to one question to test.",
-        "Designed five personas and the interview guide, and grouped the answers into patterns that corrected three first hypotheses.",
+        "Designed five personas and the interview guide, and met one real QC practitioner in person. Grouped the answers into patterns that corrected three first hypotheses.",
         "Led the UI redesign, building the clinical glass look, home charts and single-screen comparisons, and documented the design decisions.",
         "Redesigned the presentation deck as a problem, solution, evidence pitch and wrote the presenter guide."
       ]
     },
     stack: ["HTML", "CSS", "JavaScript", "Supabase", "Google 로그인", "Vercel", "식약처 공공데이터", "Slack 알림", "Claude API", "Claude Code"],
-    note: { ko: "회사, 로트, 시험값, 규격은 모두 교육용 가상 자료이고, 허가정보와 회수 등 공공데이터만 실제 자료입니다. 인터뷰한 5명도 AI가 설정한 가상 페르소나입니다.\n로그인 기록이 남는 앱이라 주소는 공개하지 않습니다. 화면의 사람 이름은 흐리게 가렸습니다.", en: "All companies, lots, results and specs are fictional training data; only the MFDS open data is real. The five interviewees are also AI generated personas.\nThe app records logins, so the address is not public. Names on screen are blurred." },
+    note: { ko: "회사, 로트, 시험값, 규격은 모두 교육용 가상 자료이고, 허가정보와 회수 등 공공데이터만 실제 자료입니다. 질문지로 인터뷰한 5명은 AI가 설정한 가상 페르소나이고, 실제 현직자는 QC 3년차 1명을 직접 만나 확인했습니다.\n로그인 기록이 남는 앱이라 주소는 공개하지 않습니다. 화면의 사람 이름은 흐리게 가렸습니다.", en: "All companies, lots, results and specs are fictional training data; only the MFDS open data is real. The five interviewees were AI generated personas; I also met one real QC practitioner with three years of experience.\nThe app records logins, so the address is not public. Names on screen are blurred." },
     images: [
       { src: "assets/pharmaflow/home.jpg", alt: { ko: "홈: 지금 할 일, 보류 로트, 로트 상태, 주별 품질 이슈, 이탈이 많은 항목, 최근 회수 공지", en: "Home: today's tasks, held lots, lot status, weekly issues, top deviations, recent recalls" } },
       { src: "assets/pharmaflow/lot.jpg", alt: { ko: "로트 상세: 출하 판단 근거와 시험값마다 규격, 관리기준, 같은 제품 로트 비교", en: "Lot page: release checklist and each result against spec, alert limits and sibling lots" } },
