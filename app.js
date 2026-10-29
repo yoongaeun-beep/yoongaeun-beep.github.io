@@ -12,7 +12,7 @@
       "log.title": "최근 수집 기록 ({date})", "log.auto": "자동 수집", "log.go": "서가 보러 가기 ↓", "log.count": "서가 {n}권",
       "shelf.kicker": "서가", "shelf.title": "사이드 프로젝트", "shelf.count": "{n}권",
       "side.kicker": "SIDE PROJECTS", "side.lede": "교육 중 Claude로 빠르게 만들어 본 작은 실험들입니다. 매일 새벽 자동으로 한 권씩 늘어납니다.",
-      "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.trouble": "막힌 곳 → 해결", "main.zoom": "크게 보기 ↗", "main.stack": "기술", "main.team": "팀", "main.outcome": "결과물", "main.stuck": "막힌 곳", "main.fix": "해결", "main.dialHint": "숫자에 마우스를 올리거나 눌러 보세요", "main.prev": "이전 단계", "main.next": "다음 단계", "main.process": "이렇게 풀었습니다",
+      "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.trouble": "막힌 곳 → 해결", "main.zoom": "크게 보기 ↗", "main.stack": "기술", "main.team": "팀", "main.outcome": "결과물", "main.stuck": "막힌 곳", "main.fix": "해결", "main.dialHint": "숫자에 마우스를 올리거나 눌러 보세요", "main.prev": "이전 단계", "main.next": "다음 단계", "main.process": "이렇게 풀었습니다", "main.screens": "화면",
       "shelf.lede": "책등을 누르면 표지가 뽑혀 나옵니다.",
       "shelf.all": "전체", "shelf.next": "다음 한 권은 오늘 새벽 2시에", "shelf.open": "{t} 표지 보기",
       "play": "▶ 이 페이지에서 바로 실행", "player.close": "닫기 ✕", "player.loading": "불러오는 중…",
@@ -32,7 +32,7 @@
       "log.title": "Latest collection ({date})", "log.auto": "auto", "log.go": "See the shelf ↓", "log.count": "{n} on the shelf",
       "shelf.kicker": "SHELF", "shelf.title": "Side projects", "shelf.count": "{n}",
       "side.kicker": "SIDE PROJECTS", "side.lede": "Small experiments built quickly with Claude during the course. One more arrives every night.",
-      "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.trouble": "Stuck → solved", "main.zoom": "View full size ↗", "main.stack": "Stack", "main.team": "Team", "main.outcome": "Outcome", "main.stuck": "Stuck", "main.fix": "Solved", "main.dialHint": "Hover or tap a number", "main.prev": "Previous step", "main.next": "Next step", "main.process": "How I solved it",
+      "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.trouble": "Stuck → solved", "main.zoom": "View full size ↗", "main.stack": "Stack", "main.team": "Team", "main.outcome": "Outcome", "main.stuck": "Stuck", "main.fix": "Solved", "main.dialHint": "Hover or tap a number", "main.prev": "Previous step", "main.next": "Next step", "main.process": "How I solved it", "main.screens": "Screens",
       "shelf.lede": "Click a spine to pull out its cover.",
       "shelf.all": "All", "shelf.next": "Next one tonight at 2 a.m.", "shelf.open": "Open {t}",
       "play": "▶ Run it on this page", "player.close": "Close ✕", "player.loading": "Loading…",
@@ -458,17 +458,18 @@
 
       // ② 대시보드: 화면(누르면 실행) + 결과 숫자 + 실행 버튼
       var frame = el("section", "mc-frame");
-      var im = (m.images || [])[0];
+      var imgs = m.images || [], im = imgs[0], img = null;
       if (im) {
         var shot = el("button", "mc-shot"); shot.type = "button";
         shot.setAttribute("aria-label", L(m.demo ? m.demo.label : im.alt));
-        var img = el("img"); img.src = im.src; img.alt = L(im.alt); img.loading = "lazy";
+        img = el("img"); img.src = im.src; img.alt = L(im.alt); img.loading = "lazy";
         shot.appendChild(img);
         if (m.demo) {
           var play = el("span", "mc-play");
           play.innerHTML = '<svg width="20" height="20" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>';
           shot.appendChild(play);
         }
+        // 실행본이 없으면 지금 보이는 화면을 크게 연다
         shot.addEventListener("click", function () { if (m.demo) openPlayer({ title: m.demo.title, link: m.demo.link }); else openImage(im.src, L(m.title)); });
         frame.appendChild(shot);
       }
@@ -487,6 +488,26 @@
         side.appendChild(demo);
         side.appendChild(el("span", "mc-demo-note", L(m.demo.note)));
       }
+      // 화면 사진이 여러 장이면 작은 사진을 눌러 큰 화면을 바꾼다
+      if (imgs.length > 1) {
+        var thumbs = el("div", "mc-thumbs");
+        imgs.forEach(function (x, k) {
+          var tb = el("button", "mc-thumb" + (k ? "" : " on")); tb.type = "button";
+          tb.setAttribute("aria-label", L(x.alt)); tb.title = L(x.alt);
+          var ti = el("img"); ti.src = x.src; ti.alt = ""; ti.loading = "lazy";
+          tb.appendChild(ti);
+          tb.addEventListener("click", function () {
+            im = x; img.src = x.src; img.alt = L(x.alt); cap.textContent = L(x.alt);
+            Array.prototype.forEach.call(thumbs.children, function (c) { c.classList.toggle("on", c === tb); });
+          });
+          thumbs.appendChild(tb);
+        });
+        side.appendChild(el("span", "mc-label mono", t("main.screens")));
+        side.appendChild(thumbs);
+        var cap = el("span", "mc-cap", L(im.alt));
+        side.appendChild(cap);
+      }
+      if (m.note) side.appendChild(el("span", "mc-note", L(m.note)));
       if (im) {
         var zoom = el("button", "mc-zoomlink", t("main.zoom")); zoom.type = "button";
         zoom.addEventListener("click", function () { openImage(im.src, L(m.title)); });
