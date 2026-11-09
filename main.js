@@ -103,7 +103,7 @@ window.SITE_MAIN = [
       { v: { ko: "3개", en: "3" }, l: { ko: "인터뷰로 고친 처음 가설\n30분, 메일 누락, 인허가 문의", en: "first hypotheses corrected by interviews\n30 minutes, email gaps, regulatory asks" } },
       { v: { ko: "10가지", en: "10" }, l: { ko: "하지 않기로 한 것\n특채 버튼, 국가출하승인 판정 등", en: "things we decided not to build\nlike a one click concession" } },
       { v: { ko: "59개", en: "59" }, l: { ko: "정보 구조(IA)로 설계한 화면\n그중 MVP 44개", en: "screens planned in the IA\n44 of them in the MVP" } },
-      { v: { ko: "24/25건", en: "24/25" }, l: { ko: "팀 직접 QA 통과\n자동 시험은 521개 통과", en: "manual QA checks passed\n521 automated tests pass" } }
+      { v: { ko: "25/25건", en: "25/25" }, l: { ko: "팀 직접 QA 통과\n자동 시험은 536개 통과", en: "manual QA checks passed\n536 automated tests pass" } }
     ],
     steps: [
       {
@@ -150,8 +150,8 @@ window.SITE_MAIN = [
       },
       {
         tag: "CHECK", title: { ko: "검증", en: "Checks" },
-        line: { ko: "자동 시험 521개를 모두 통과시키고, 사람이 직접 확인하는 QA 25건을 팀이 나눠 수행했습니다. 24건이 통과했고 아침 브리핑 자동 발송 1건은 10월 30일 아침에 확인할 예정입니다.\n공공데이터는 실제 키로 호출해 응답을 확인했고, 인터뷰로 고친 숫자는 문서에 근거를 남겼습니다.", en: "All 521 automated tests pass, and the team split 25 manual QA checks. 24 passed; the automatic morning briefing is still to be confirmed on the morning of Oct 30.\nOpen data calls were checked with a real key, and the numbers I corrected from interviews keep their evidence in the docs." },
-        key: { ko: "직접 QA 25건 중 24건 통과", en: "24 of 25 manual checks" },
+        line: { ko: "자동 시험 536개를 모두 통과시키고, 사람이 직접 확인하는 QA 25건을 팀이 나눠 수행해 모두 통과했습니다. 아침 브리핑 자동 발송도 10월 30일 08시 01분에 실제로 도착한 것을 확인했습니다.\n공공데이터는 실제 키로 호출해 응답을 확인했고, 인터뷰로 고친 숫자는 문서에 근거를 남겼습니다.", en: "All 536 automated tests pass, and the team split 25 manual QA checks and passed all of them. The automatic morning briefing was also confirmed to arrive at 08:01 on Oct 30.\nOpen data calls were checked with a real key, and the numbers I corrected from interviews keep their evidence in the docs." },
+        key: { ko: "직접 QA 25건 모두 통과", en: "25 of 25 manual checks" },
         stuck: { ko: "시험 자료에 없던 실제 응답의 날짜 형식 때문에 배포된 화면에서 GMP 칸이 비어 보였습니다.", en: "A date format that the test data did not have left the GMP panel looking empty on the live app." },
         fix: { ko: "실제 응답으로 원인을 찾고, 시험 2개를 먼저 써서 실패를 확인한 뒤 고쳤습니다.", en: "Found the cause from the real response, wrote two failing tests first, then fixed it." }
       }
