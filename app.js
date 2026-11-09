@@ -12,7 +12,7 @@
       "log.title": "최근 수집 기록 ({date})", "log.auto": "자동 수집", "log.go": "서가 보러 가기 ↓", "log.count": "서가 {n}권",
       "shelf.kicker": "서가", "shelf.title": "사이드 프로젝트", "shelf.count": "{n}권",
       "side.kicker": "SIDE PROJECTS", "side.lede": "교육 중 Claude로 빠르게 만들어 본 작은 실험들입니다. 매일 새벽 자동으로 한 권씩 늘어납니다.",
-      "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.trouble": "막힌 곳 → 해결", "main.zoom": "크게 보기 ↗", "main.stack": "기술", "main.team": "팀", "main.outcome": "결과물", "main.stuck": "막힌 곳", "main.fix": "해결", "main.dialHint": "숫자에 마우스를 올리거나 눌러 보세요", "main.prev": "이전 단계", "main.next": "다음 단계", "main.process": "이렇게 풀었습니다", "main.screens": "화면",
+      "main.kicker": "MAIN PROJECT", "main.problem": "문제", "main.approach": "접근", "main.result": "결과", "main.role": "내 역할", "main.trouble": "막힌 곳 → 해결", "main.zoom": "크게 보기 ↗", "main.stack": "기술", "main.team": "팀", "main.outcome": "결과물", "main.stuck": "막힌 곳", "main.fix": "해결", "main.dialHint": "숫자에 마우스를 올리거나 눌러 보세요", "main.prev": "이전 단계", "main.next": "다음 단계", "main.process": "이렇게 풀었습니다", "main.screens": "화면", "ptab.label": "메인 프로젝트", "ptab.side": "사이드 프로젝트 보기", "ptab.sum": "메인 프로젝트 {m}개\n사이드 프로젝트 {s}개", "ptab.mainH": "MAIN", "ptab.sideH": "SIDE",
       "shelf.lede": "책등을 누르면 표지가 뽑혀 나옵니다.",
       "shelf.all": "전체", "shelf.next": "다음 한 권은 오늘 새벽 2시에", "shelf.open": "{t} 표지 보기",
       "play": "▶ 이 페이지에서 바로 실행", "player.close": "닫기 ✕", "player.loading": "불러오는 중…",
@@ -32,7 +32,7 @@
       "log.title": "Latest collection ({date})", "log.auto": "auto", "log.go": "See the shelf ↓", "log.count": "{n} on the shelf",
       "shelf.kicker": "SHELF", "shelf.title": "Side projects", "shelf.count": "{n}",
       "side.kicker": "SIDE PROJECTS", "side.lede": "Small experiments built quickly with Claude during the course. One more arrives every night.",
-      "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.trouble": "Stuck → solved", "main.zoom": "View full size ↗", "main.stack": "Stack", "main.team": "Team", "main.outcome": "Outcome", "main.stuck": "Stuck", "main.fix": "Solved", "main.dialHint": "Hover or tap a number", "main.prev": "Previous step", "main.next": "Next step", "main.process": "How I solved it", "main.screens": "Screens",
+      "main.kicker": "MAIN PROJECT", "main.problem": "Problem", "main.approach": "Approach", "main.result": "Result", "main.role": "My role", "main.trouble": "Stuck → solved", "main.zoom": "View full size ↗", "main.stack": "Stack", "main.team": "Team", "main.outcome": "Outcome", "main.stuck": "Stuck", "main.fix": "Solved", "main.dialHint": "Hover or tap a number", "main.prev": "Previous step", "main.next": "Next step", "main.process": "How I solved it", "main.screens": "Screens", "ptab.label": "Main projects", "ptab.side": "See side projects", "ptab.sum": "{m} main projects\n{s} side projects", "ptab.mainH": "MAIN", "ptab.sideH": "SIDE",
       "shelf.lede": "Click a spine to pull out its cover.",
       "shelf.all": "All", "shelf.next": "Next one tonight at 2 a.m.", "shelf.open": "Open {t}",
       "play": "▶ Run it on this page", "player.close": "Close ✕", "player.loading": "Loading…",
@@ -441,8 +441,12 @@
     var wrap = document.getElementById("main-projects"); wrap.textContent = "";
     var list = window.SITE_MAIN || [];
     wrap.hidden = !list.length;
-    list.forEach(function (m) {
+    if (mainSel >= list.length) mainSel = 0;
+    wrap.appendChild(renderMainTabs(list));
+    list.forEach(function (m, mi) {
       var a = el("article", "mc");
+      a.id = "mc-" + m.id; a.hidden = mi !== mainSel;
+      a.setAttribute("role", "tabpanel"); a.setAttribute("aria-labelledby", "mtab-" + m.id);
       // ① 제목: 왼쪽 큰 한 줄 메시지, 오른쪽 설명
       var head = el("header", "mc-top");
       var hl = el("div", "mc-top-l");
@@ -543,6 +547,94 @@
       a.appendChild(foot);
       wrap.appendChild(a);
     });
+  }
+
+  /* ---------- 프로젝트 탭과 왼쪽 목록 ---------- */
+  // 메인 프로젝트는 탭으로 하나씩 보여 주고, 왼쪽 목록에는 메인과 사이드 프로젝트를 모두 띄워
+  // 빠르게 내려도 프로젝트가 여러 개라는 것이 보이게 한다.
+  var mainSel = 0;
+  // 탭을 바꿔도 레이아웃이 그대로이도록, 모든 카드의 제목 영역 높이를 가장 긴 카드에 맞춘다.
+  function equalizeTops() {
+    var arts = Array.prototype.slice.call(document.querySelectorAll("#main-projects .mc"));
+    var tops = arts.map(function (a) { return a.querySelector(".mc-top"); });
+    var was = arts.map(function (a) { return a.hidden; });
+    tops.forEach(function (h) { if (h) h.style.minHeight = ""; });
+    arts.forEach(function (a) { a.hidden = false; });
+    var max = 0; tops.forEach(function (h) { if (h) max = Math.max(max, h.offsetHeight); });
+    arts.forEach(function (a, i) { a.hidden = was[i]; });
+    tops.forEach(function (h) { if (h) h.style.minHeight = max + "px"; });
+  }
+  var eqTimer = null;
+  window.addEventListener("resize", function () { clearTimeout(eqTimer); eqTimer = setTimeout(equalizeTops, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { equalizeTops(); });
+  function mainName(m) { return L(m.short || m.title); }
+  function showMain(i, scroll) {
+    var list = window.SITE_MAIN || [];
+    mainSel = i;
+    list.forEach(function (m, k) {
+      var art = document.getElementById("mc-" + m.id), tb = document.getElementById("mtab-" + m.id);
+      if (art) art.hidden = k !== i;
+      if (tb) { tb.setAttribute("aria-selected", String(k === i)); tb.tabIndex = k === i ? 0 : -1; }
+    });
+    renderIndex();
+    if (scroll) document.getElementById("main-projects").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function goShelf(id) {
+    if (id) { shelf.tab = "all"; shelf.sel = id; renderShelf(false); }
+    document.querySelector(".shelf-wrap").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function renderMainTabs(list) {
+    var bar = el("div", "mtabs");
+    var tl = el("div", "mtab-list"); tl.setAttribute("role", "tablist"); tl.setAttribute("aria-label", t("ptab.label"));
+    list.forEach(function (m, i) {
+      var b = el("button", "mtab"); b.type = "button"; b.id = "mtab-" + m.id;
+      b.setAttribute("role", "tab"); b.setAttribute("aria-controls", "mc-" + m.id);
+      b.setAttribute("aria-selected", String(i === mainSel)); b.tabIndex = i === mainSel ? 0 : -1;
+      b.appendChild(el("span", "mtab-no mono", String(i + 1).padStart(2, "0")));
+      var tx = el("span", "mtab-tx");
+      tx.appendChild(el("span", "mtab-name", mainName(m)));
+      tx.appendChild(el("span", "mtab-sub mono", m.period || ""));
+      b.appendChild(tx);
+      b.addEventListener("click", function () { showMain(i, false); });
+      b.addEventListener("keydown", function (e) {
+        var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!d) return;
+        e.preventDefault(); var j = (i + d + list.length) % list.length; showMain(j, false);
+        document.getElementById("mtab-" + list[j].id).focus();
+      });
+      tl.appendChild(b);
+    });
+    bar.appendChild(tl);
+    var side = el("button", "mtab-side"); side.type = "button";
+    side.appendChild(el("span", "mono accent", "+" + P.length));
+    side.appendChild(el("span", null, t("ptab.side")));
+    side.addEventListener("click", function () { goShelf(null); });
+    bar.appendChild(side);
+    return bar;
+  }
+  function renderIndex() {
+    var nav = document.getElementById("pindex"); if (!nav) return;
+    var list = window.SITE_MAIN || [];
+    nav.textContent = "";
+    nav.appendChild(el("p", "pindex-sum", t("ptab.sum", { m: list.length, s: P.length })));
+    function group(head, items) {
+      nav.appendChild(el("span", "pindex-h mono", head));
+      var ol = el("ol", "pindex-list");
+      items.forEach(function (it) {
+        var li = el("li"), b = el("button", "pindex-btn" + (it.on ? " on" : "")); b.type = "button";
+        if (it.on) b.setAttribute("aria-current", "true");
+        b.appendChild(el("span", "mono", it.no)); b.appendChild(el("span", null, it.name));
+        b.addEventListener("click", it.go);
+        li.appendChild(b); ol.appendChild(li);
+      });
+      nav.appendChild(ol);
+    }
+    group(t("ptab.mainH"), list.map(function (m, i) {
+      return { no: String(i + 1).padStart(2, "0"), name: mainName(m), on: i === mainSel, go: function () { showMain(i, true); } };
+    }));
+    group(t("ptab.sideH"), P.slice().reverse().map(function (p, i) {
+      return { no: String(i + 1).padStart(2, "0"), name: L(p.title), on: false, go: function () { goShelf(p.id); } };
+    }));
   }
   function renderDial(steps) {
     var n = steps.length, active = 0;
@@ -769,7 +861,7 @@
     document.title = lang === "en" ? "Gaeun Yoon, Lab Notes" : "윤가은 실험 노트";
     document.querySelectorAll("[data-i18n]").forEach(function (n) { n.textContent = t(n.getAttribute("data-i18n")); });
     document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
-    renderHero(); renderAbout(); renderExperience(); renderActivities(); renderMain(); renderShelf(false);
+    renderHero(); renderAbout(); renderExperience(); renderActivities(); renderMain(); equalizeTops(); renderIndex(); renderShelf(false);
     document.getElementById("email").textContent = D.email;
     document.getElementById("mail-link").href = "mailto:" + D.email;
     document.getElementById("foot").textContent = t("foot", { date: dot(window.SITE_UPDATED) });

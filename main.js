@@ -6,13 +6,14 @@
 window.SITE_MAIN = [
   {
     id: "predictive-maintenance",
+    short: { ko: "설비 정비, 발주 대시보드", en: "Maintenance and ordering dashboard" },
     period: "2026.09.14 ~ 09.30",
     team: { ko: "LS Jump Up 2팀 (3인), 조장, 기여도 35%", en: "LS Jump Up Team 2 (3 people), team lead, 35% contribution" },
-    headline: { ko: "고장 확률을\n오늘 할 일로 바꾸는 정비 대시보드", en: "A maintenance dashboard that turns\nfailure scores into today's tasks" },
+    headline: { ko: "고장 시점과 총비용을 함께 따져\n최적의 발주 시점을 제안하는 정비 대시보드", en: "A maintenance dashboard that weighs failure timing\nagainst total cost to recommend the best order date" },
     title: { ko: "센서 데이터 기반 설비 고장 예측 및 정비, 발주 의사결정 지원 시스템", en: "Sensor-based failure prediction and maintenance/ordering decision support" },
     oneLiner: {
-      ko: "센서 데이터로 부품 고장을 예측합니다.\n그 결과를 '고장 확률 0.7'이 아니라 'D-8, 재고 없음, 오늘 발주'처럼 바로 움직일 수 있는 말로 보여줍니다.",
-      en: "Predicts part failures from sensor data.\nShows the result as an action, not 'failure probability 0.7' but 'D-8, no stock, order today'."
+      ko: "부품은 너무 일찍 사면 보관비가 들고, 늦게 사면 긴급 작업비와 설비가 멈춘 날의 손실이 붙습니다.\n센서 데이터로 부품이 언제 고장 날지 예측하고, 발주일마다 이 비용을 합산해 총비용이 최소가 되는 시점을 찾습니다. 결과는 '고장 확률 0.7'이 아니라 'D-8, 재고 없음, 오늘 발주'처럼 바로 움직일 수 있는 말로 보여 줍니다.",
+      en: "Buy a part too early and you pay to store it; too late and you pay for emergency work and every day the machine stands idle.\nThe dashboard predicts when each part will fail from sensor data, adds up these costs for every possible order date, and finds the one with the lowest total. It says 'D-8, no stock, order today' instead of 'failure probability 0.7'."
     },
     stats: [
       { v: { ko: "0.88~0.94", en: "0.88~0.94" }, l: { ko: "AUC (기존 규칙은 0.727)\n채택 부품 3종 기준", en: "AUC (old rule: 0.727)\n3 adopted parts" } },
@@ -38,14 +39,14 @@ window.SITE_MAIN = [
       },
       {
         tag: "MODEL", title: { ko: "모델 선택", en: "Model" },
-        line: { ko: "후보 5개를 같은 조건으로 비교해 LightGBM을 골랐습니다.\n랜덤포레스트와 성능 차이는 0.004였지만 학습이 2.5배 빨랐습니다. 부품과 기간별로 여러 번 다시 학습해야 하는 구조라 속도를 택했습니다.", en: "Compared 5 models under the same conditions and chose LightGBM.\nIt was within 0.004 AUC of random forest but 2.5× faster to retrain across parts and horizons." },
+        line: { ko: "후보 5개를 같은 조건으로 비교해 LightGBM을 골랐습니다.\n랜덤포레스트와 성능 차이는 0.004였지만 학습이 2.5배 빨랐습니다. 부품과 기간별로 여러 번 다시 학습해야 하는 구조라 속도를 택했습니다. 갑자기 생기는 센서 이상은 Isolation Forest로 보완해 고장 약 19.6시간 전에 신호를 잡습니다.", en: "Compared 5 models under the same conditions and chose LightGBM.\nIt was within 0.004 AUC of random forest but 2.5× faster to retrain across parts and horizons. Isolation Forest covers sudden anomalies, flagging them about 19.6 hours before failure." },
         key: { ko: "AUC 0.727 → 0.88~0.94", en: "AUC 0.727 → 0.88~0.94" },
         stuck: { ko: "comp2는 AUC 0.58로 기존 규칙(0.597)보다도 낮았습니다.", en: "comp2 scored 0.58, below the old rule (0.597)." },
         fix: { ko: "억지로 쓰지 않고 채택에서 뺐다고 명시했습니다. 화면에는 예측 대신 안전재고 안내를 넣었습니다.", en: "Excluded it explicitly and showed safety-stock guidance instead of a prediction." }
       },
       {
-        tag: "DECISION", title: { ko: "행동으로 번역", en: "Decision" },
-        line: { ko: "부품별 결정 시한(조달과 준비에 8일, 16일, 24일)으로 D-day와 발주 마감을 거꾸로 계산하고, 한정된 재고를 위험도 순으로 배정했습니다.\n갑자기 생기는 센서 이상은 Isolation Forest로 보완했습니다. 고장 약 19.6시간 전에 신호를 잡습니다.", en: "Back-calculated D-day and order deadlines from each part's lead time (8, 16, 24 days) and allocated limited stock by risk.\nAdded Isolation Forest for sudden anomalies, which flags them about 19.6 hours before failure." },
+        tag: "COST", title: { ko: "발주 시점과 비용", en: "Order timing and cost" },
+        line: { ko: "부품별 조달과 준비 기간(8일, 16일, 24일)으로 D-day와 발주 마감을 거꾸로 계산하고, 한정된 재고를 위험도 순으로 배정했습니다.\n발주를 오늘부터 하루씩 미룰 때마다 구매비, 보관비, 긴급 작업비, 설비 정지 손실을 더해 총비용 곡선을 그리고, 비용이 최소가 되는 시점을 오늘, 1주 뒤, 2주 뒤 발주안과 비교해 보여 줍니다. 단가는 가상 운영 데이터입니다.", en: "Back-calculated D-day and order deadlines from each part's lead time (8, 16, 24 days) and allocated limited stock by risk.\nFor every day an order is delayed, the dashboard adds purchase, storage, emergency work and downtime costs into one curve, and compares the lowest-cost date with ordering today, in 1 week or in 2 weeks. Unit costs are simulated." },
         key: { ko: "상위 위험군 Lift 4.4배", en: "Top-risk lift 4.4×" },
         stuck: { ko: "화면은 28일, 모델은 8일, 16일, 24일을 기준으로 써서 D-day가 서로 달랐습니다.", en: "The screen used 28 days while models used 8/16/24, so D-days disagreed." },
         fix: { ko: "공통 기준값을 한 파일로 모으고 테스트로 걸러내게 해서 불일치를 0건으로 만들었습니다.", en: "Centralized constants in one file and caught mismatches with tests: zero left." }
@@ -85,100 +86,97 @@ window.SITE_MAIN = [
     ]
   },
   {
-    // 두 번째 메인 프로젝트. 근거: 팀 저장소의 문제정의.md, interview.md, PRD.md(9절 하지 않을 것), DESIGN.md, README.md와 커밋 기록
-    // 이 사이트는 기획과 문제 해결 능력을 보여 주는 곳이라 개발 과정보다 문제 정의, 가설 검증, 범위 결정을 앞에 둔다.
+    // 두 번째 메인 프로젝트. 근거: PharmaFlow_포트폴리오_작성본.docx(2026-11-09), 팀 발표 자료(발표/PharmaFlow-발표.html), 본인 인터뷰(2026-10-29)
     // 저장소는 팀원 소유의 비공개 저장소라 링크하지 않는다. 배포 주소도 로그인 기록이 남아 공개하지 않는다.
-    // 화면 사진은 배포된 앱에 본인 계정으로 로그인해 찍었고, 사람 이름은 흐리게 가렸다.
-    // 2026-10-29 main(1725fe1) 기준으로 갱신. 인터뷰 5명은 AI가 설정한 가상 페르소나라서 숫자를 현장 근거처럼 쓰지 않는다.
+    // 화면 사진의 사람 이름은 흐리게 가렸다. 팀원 이름은 쓰지 않는다.
     id: "pharmaflow",
-    period: "2026.10.22 ~ 10.29",
-    team: { ko: "LS Jump Up 두 번째 팀 프로젝트 (3인), 10월 29일 발표", en: "LS Jump Up second team project (3 people), presented Oct 29" },
-    headline: { ko: "흩어진 품질 기록을\n로트 하나로 모으는 백신 QA 앱", en: "A vaccine QA app that pulls\nscattered quality records into one lot" },
-    title: { ko: "PharmaFlow Bio: 백신 제조 로트의 품질 이탈과 내부 출하 검토 관리", en: "PharmaFlow Bio: quality deviations and internal release review for vaccine lots" },
+    short: { ko: "PharmaFlow Bio 백신 QA", en: "PharmaFlow Bio vaccine QA" },
+    period: "2026.10.22 ~ 10.30",
+    team: { ko: "LS Jump Up 두 번째 팀 프로젝트 (3인), 기획과 화면 설계 담당, 10월 29일 발표", en: "LS Jump Up second team project (3 people), planning and UI design, presented Oct 29" },
+    headline: { ko: "출하 전 곳곳에 흩어져 있던 품질 기록을\n하나의 흐름으로 통합한 백신 QA 시스템", en: "A vaccine QA system that unifies scattered\npre-release quality records into one flow" },
+    title: { ko: "PharmaFlow Bio: 백신 제조 로트의 품질 이탈 추적과 내부 출하 검토 지원 웹 앱", en: "PharmaFlow Bio: tracking quality deviations and supporting internal release review for vaccine lots" },
     oneLiner: {
-      ko: "백신 QA 담당자가 출하 서명 직전에 시스템, 엑셀, 폴더를 오가며 기록을 맞추는 문제를 정의하고, 인터뷰로 처음 가설을 고쳐 가며 범위와 규칙을 정한 뒤 웹 앱으로 만들었습니다.\n저는 문제 정의, 인터뷰 설계, 화면 설계를 맡았고 구현은 팀원이 맡았습니다.",
-      en: "I defined the problem of vaccine QA staff juggling systems, spreadsheets and folders just before a release signature, corrected my first hypotheses through interviews, set the scope and rules, and the team built it as a web app.\nI owned the problem definition, the interview design and the screen design; teammates owned the implementation."
+      ko: "백신 QA 담당자는 로트(한 번에 만든 제품 묶음)를 내보내기 전, 시스템과 엑셀, 메일에 흩어진 시험 기록과 이탈 건을 하나씩 맞춰 봅니다. 그러다 끝나지 않은 이슈를 서명 직전에야 알기도 합니다.\nPharmaFlow Bio는 이 기록을 로트 하나에 모아 시험값 저장부터 이슈 종결, 내부 출하 검토까지 한 흐름으로 보여 줍니다. 열린 이슈가 있으면 출하를 고를 수 없고, 승인 이력은 자동으로 쌓입니다.",
+      en: "Before a vaccine lot leaves the plant, QA checks test records, production records and open deviations one by one across systems, spreadsheets and email. Sometimes an unresolved issue only turns up right before the release signature.\nPharmaFlow Bio gathers these records under one lot and shows them as a single flow, from saving a result to closing the issue and reviewing release. Release cannot be selected while an issue is open, and the approval history builds up on its own."
     },
     stats: [
-      { v: { ko: "3개", en: "3" }, l: { ko: "인터뷰로 고친 처음 가설\n30분, 메일 누락, 인허가 문의", en: "first hypotheses corrected by interviews\n30 minutes, email gaps, regulatory asks" } },
-      { v: { ko: "10가지", en: "10" }, l: { ko: "하지 않기로 한 것\n특채 버튼, 국가출하승인 판정 등", en: "things we decided not to build\nlike a one click concession" } },
-      { v: { ko: "59개", en: "59" }, l: { ko: "정보 구조(IA)로 설계한 화면\n그중 MVP 44개", en: "screens planned in the IA\n44 of them in the MVP" } },
-      { v: { ko: "25/25건", en: "25/25" }, l: { ko: "팀 직접 QA 통과\n자동 시험은 536개 통과", en: "manual QA checks passed\n536 automated tests pass" } }
+      { v: { ko: "536개", en: "536" }, l: { ko: "자동 시험 모두 통과\n2026.11.09 직접 실행", en: "automated tests, all passing\nrun on Nov 9, 2026" } },
+      { v: { ko: "25건", en: "25" }, l: { ko: "팀이 직접 한 QA 모두 통과\n아침 브리핑 실제 발송 포함", en: "manual team QA checks, all passing\nincl. a live morning briefing" } },
+      { v: { ko: "59개", en: "59" }, l: { ko: "정보 구조로 설계한 화면\n이 중 MVP 44개", en: "screens in the IA\n44 in the MVP" } },
+      { v: { ko: "4종", en: "4" }, l: { ko: "식약처 공공데이터\n실제 인증키로 연결 확인", en: "MFDS open datasets\nverified with real keys" } }
     ],
     steps: [
       {
         tag: "PROBLEM (MY PART)", title: { ko: "문제 정의", en: "Problem" },
-        line: { ko: "출하 서명 직전에 열린 이탈 건과 시험 기록, 생산 기록이 시스템, 엑셀, 폴더에 나뉘어 있다는 문제를 SCQA와 네 칸 표로 정의했습니다.\n확인할 것은 하나로 좁혔습니다. QA 관리자가 로트 상세와 품질 이슈 상세만 보고 1분 안에 내부 출하 검토를 할 수 있는가.", en: "I framed the problem with SCQA and a four box table: just before a release signature, open deviations and test and production records sit across systems, spreadsheets and folders.\nI narrowed what to test to one question: can a QA manager make the internal release call from the lot page and the issue page alone, in a minute?" },
-        key: { ko: "확인할 것을 하나로 좁힘", en: "One question to test" },
-        stuck: { ko: "처음 주제는 일반 의약품 배치의 두 단계 판정이어서 백신 현장의 판단을 담기 어려웠습니다.", en: "The first version covered generic drug batches with a two-level check, which missed how vaccine QA decides." },
-        fix: { ko: "팀과 함께 주제를 백신 로트로 바꾸고, 세 단계 판정과 품질 영향 평가를 문제에 넣었습니다.", en: "Together with the team we moved to vaccine lots and brought a three-level check and quality impact assessments into the problem." }
+        line: { ko: "QA 담당자는 출하 서명 직전에 열린 이탈 건, 시험 기록, 생산 기록이 시스템, 엑셀, 폴더에 나뉘어 있어 여러 곳을 오가며 상태를 맞춥니다.\n가상 페르소나 5명 인터뷰에서 로트 한 건 확인에 15분에서 3~4시간이 들었고, 3명은 열린 이탈 건을 서명 직전에야 안 적이 있었습니다. 이 문제를 SCQA와 네 칸 표로 정리했습니다.", en: "Right before signing a release, QA reconciles open deviations, test records and production records spread across systems, spreadsheets and folders.\nIn interviews with five virtual personas, checking one lot took 15 minutes to 3~4 hours, and three had learned of an open deviation only at signing. I framed this with SCQA and a four-box table." },
+        key: { ko: "서명 직전에야 안 경험 5명 중 3명", en: "3 of 5 found issues only at signing" },
+        stuck: { ko: "처음 가설은 '확인에 약 30분, 이탈이 메일로 전달되다 빠진다'였는데, 인터뷰에서 메일 누락을 말한 사람은 0명이었습니다.", en: "The first hypothesis was '30 minutes per lot, deviations lost in email', but no one in the interviews mentioned lost email." },
+        fix: { ko: "30분은 환경별 범위로 고치고 근거 없는 메일 누락은 뺐습니다. 대신 5명 모두 말한 '종결 상태가 전달되지 않는다'를 핵심 문제로 삼았습니다.", en: "Replaced 30 minutes with a range, dropped the email claim, and made 'closure status never reaches the other team', raised by all five, the core problem." }
       },
       {
-        tag: "USERS (MY PART)", title: { ko: "인터뷰와 가설 정정", en: "Interviews" },
-        line: { ko: "페르소나 5명과 인터뷰 질문지를 설계하고 답변을 패턴으로 묶어 처음 가설을 검증했습니다. 5명 모두가 종결 상태가 전달되지 않아 물으러 다닌다고 했고, 4명은 서명 직전에 여러 곳을 오간다고 했습니다.\n실제 QC 3년차 현직자 1명도 10월 26일에 직접 만났고, 답은 대부분 가상 페르소나와 같았습니다.", en: "I designed five personas and the interview guide, then grouped the answers into patterns to test my first hypotheses. All five said they chase status because closures are not passed on, and four said they hop between several places before signing.\nI also met one real QC practitioner with three years of experience on Oct 26, and the answers mostly matched the personas." },
-        key: { ko: "가상 5명과 현직 1명 인터뷰", en: "5 personas and 1 practitioner" },
-        stuck: { ko: "처음 가설인 로트 확인에 약 30분, 이탈이 메일과 전화로 전달돼 누락된다는 말은 인터뷰에서 그대로 확인되지 않았습니다.", en: "My first hypotheses, about 30 minutes per lot and deviations lost in email and calls, were not confirmed as written." },
-        fix: { ko: "30분은 환경에 따라 15분에서 3~4시간으로 고치고, 근거가 0명이던 메일 누락은 문제 문장에서 뺐습니다. 새로 나온 상태 전달 문제를 넣고, 공유표를 바꿔도 상대가 입력하지 않아 실패한 경험은 도입 위험으로 적었습니다.", en: "Corrected 30 minutes to a range of 15 minutes to 3 or 4 hours, dropped the email gap that nobody backed, added the status passing problem, and logged failed shared sheets as an adoption risk." }
+        tag: "USERS (MY PART)", title: { ko: "사용자 인터뷰", en: "Users" },
+        line: { ko: "QA 관리자, QC 시험 담당자, 생산 담당자 등 페르소나 5명과 인터뷰 질문지를 설계했습니다.\n페르소나는 AI로 만든 가상 인물이라, 10월 26일 실제 QC 3년차 현직자 1명을 대면으로 만나 같은 내용을 확인했습니다. 답은 대부분 페르소나와 같았습니다.", en: "Designed five personas, including the QA manager, QC analyst and production lead, plus the interview guide.\nSince the personas were AI-generated, I met a QC analyst with three years' experience in person on Oct 26 to check. Most answers matched." },
+        key: { ko: "5명 모두 다른 부서에 묻고 기다림", en: "5 of 5 wait on other teams for status" },
+        stuck: { ko: "기록 공유표나 통합 대장을 만들어 본 사람이 5명 모두였지만, 그중 3명은 상대가 입력하지 않아 실패했습니다.", en: "All five had tried a shared tracker, and three gave up because the other team never filled it in." },
+        fix: { ko: "따로 입력하는 대장을 또 만들지 않고, 업무를 처리하면 기록과 승인 이력이 저절로 쌓이는 구조를 요구사항으로 정했습니다.", en: "Instead of another tracker, the requirement became: records and approvals pile up automatically as people do their work." }
       },
       {
-        tag: "SCOPE", title: { ko: "범위와 규칙", en: "Scope" },
-        line: { ko: "무엇을 만들지보다 만들지 않을 것을 먼저 정했습니다. 규격 이탈 로트를 버튼 하나로 특채 출하하는 기능, 국가출하승인이나 법적 적합 판단, 전자서명은 만들지 않는 10가지에 넣었습니다.\n시험값은 시험 규격과 사내 관리기준으로 정상, 관리기준 이탈, 규격 이탈을 판정하고, 규격 이탈만 자동 보류합니다. 평가 승인은 출하 승인이 아니라고 화면에 밝혔습니다.", en: "I decided what not to build before what to build: a one click concession for out of spec lots, judging national release or legal compliance, and e-signatures are among the ten left out.\nResults are checked against the spec and the in-house alert limits as normal, alert deviation or spec deviation, and only spec deviations auto-hold. The screen states that assessment approval is not release approval." },
+        tag: "SCOPE", title: { ko: "범위와 규칙", en: "Scope and rules" },
+        line: { ko: "무엇을 만들지보다 만들지 않을 것을 먼저 정했습니다. 규격 이탈 로트를 버튼 하나로 내보내는 특채 출하, 국가출하승인이나 법적 적합 판단, 전자서명 등 10가지를 범위 밖에 두었습니다.\n시험값을 저장하면 시험 규격과 사내 관리기준으로 정상, 관리기준 이탈, 규격 이탈을 판정하고, 규격 이탈만 로트를 자동 보류합니다. 열린 이슈가 1건이라도 있으면 출하 가능을 고를 수 없고, 막힌 이유가 문장으로 나옵니다.", en: "Decided what not to build before what to build: a one-click concession release for out-of-spec lots, judging national lot release or legal compliance, and e-signatures are among the ten items left out.\nEach saved result is checked against the spec and in-house alert limits as normal, alert deviation or spec deviation, and only spec deviations put the lot on hold. With even one open issue, 'releasable' cannot be selected and the screen explains why." },
         key: { ko: "하지 않을 것 10가지", en: "10 things left out" },
-        stuck: { ko: "평가 승인과 출하 승인이 섞이면 규격을 벗어난 로트가 특채처럼 나갈 수 있고, 관리기준 이탈까지 보류하면 출하가 불필요하게 막힙니다.", en: "Mixing assessment approval with release approval could let an out of spec lot slip out as a concession, while holding every alert deviation would block release for no reason." },
-        fix: { ko: "열린 이슈가 있으면 출하를 고를 수 없게 하고, 보류는 규격 이탈에만 걸었습니다. 관리기준 이탈은 이슈를 열어 영향만 검토하게 나눴습니다.", en: "Release is blocked while an issue is open, and the hold applies to spec deviations only; alert deviations open an issue for review." }
+        stuck: { ko: "평가 승인과 출하 승인이 섞이면 규격을 벗어난 로트가 특채처럼 나갈 수 있고, 관리기준 이탈까지 보류하면 출하가 불필요하게 막힙니다.", en: "Mixing assessment approval with release approval could let an out-of-spec lot slip out as a concession, while holding every alert deviation would block release for no reason." },
+        fix: { ko: "평가 승인은 출하 승인이 아니라고 화면에 밝히고, 보류는 규격 이탈에만 걸었습니다. 관리기준 이탈은 이슈를 열어 영향만 검토하게 나눴습니다.", en: "The screen states that assessment approval is not release approval, and only spec deviations trigger a hold; alert deviations open an issue for review." }
       },
       {
         tag: "DESIGN (MY PART)", title: { ko: "화면 설계", en: "Design" },
-        line: { ko: "화면 UI 개편을 맡아 지금 할 일이 가장 먼저 보이는 홈과, 판단에 필요한 비교를 한 화면에서 하는 로트 상세를 만들었습니다.\n홈에는 로트 상태, 주별 품질 이슈, 이탈이 많은 항목, 회수 공지 도식을 넣었습니다. 각진 모서리의 밝고 투명한 클리니컬 글라스 디자인을 정하고, 결정 이유를 디자인 문서로 남겼습니다.", en: "Led the UI redesign: a home screen that shows today's tasks first, and a lot page that puts every comparison needed for a decision on one screen.\nThe home adds charts for lot status, weekly issues, top deviations and recalls. Chose a bright clinical glass look with squared corners and documented the reasons in a design doc." },
-        key: { ko: "홈 도식 4종과 디자인 문서", en: "4 home charts and a design doc" },
-        stuck: { ko: "사용자가 홈을 보고 뭘 해야 하는지 모르겠다고 했고, 단계 표시 1/5는 날짜로 읽혔습니다.", en: "Users said the home screen didn't tell them what to do, and a '1/5' step label read like a date." },
-        fix: { ko: "홈을 할 일, 현황, 도식 순서로 다시 짜고, 단계는 전체 5단계 중 4번째로 풀어 썼습니다.", en: "Rebuilt the home as tasks, status, then charts, and spelled steps out as '4th of 5 steps'." }
+        line: { ko: "화면 UI 개편을 맡아 '지금 할 일'이 가장 먼저 보이는 홈과, 판단에 필요한 비교를 한 화면에서 하는 로트 상세를 만들었습니다.\n밝고 투명한 클리니컬 글라스 디자인을 정하고, 결정 이유를 디자인 문서(DESIGN.md)와 참고 사례 문서로 남겼습니다.", en: "Led the UI redesign: a home screen that shows today's tasks first, and a lot page that puts every comparison needed for a decision on one screen.\nChose a bright clinical glass look and documented the reasons in DESIGN.md and a references file." },
+        key: { ko: "사용자 피드백 3건 반영", en: "3 pieces of user feedback applied" },
+        stuck: { ko: "홈을 본 사용자가 '뭘 해야 하는지 모르겠다'고 했고, 단계 표시 '1/5'는 날짜로 읽혔습니다.", en: "Users said the home screen didn't tell them what to do, and a '1/5' step label read like a date." },
+        fix: { ko: "홈을 할 일, 현황, 도식 순서로 다시 짜고, 단계는 '전체 5단계 중 4번째'로 풀어 썼습니다.", en: "Rebuilt the home as tasks, status, then charts, and spelled steps out as '4th of 5 steps'." }
       },
       {
         tag: "PUBLIC DATA", title: { ko: "공개 자료 연결", en: "Public data" },
-        line: { ko: "식약처 공공데이터로 백신 허가정보, 회수와 판매중지, GMP 유효기간, 국가출하승인 이력을 출처와 조회 시각과 함께 보여 줍니다.\n불러오지 못하면 그 칸만 안내하고, 이 기기에서 마지막으로 정상 조회한 결과를 보여 줍니다.", en: "Shows vaccine approvals, recalls, GMP validity and national lot release history from MFDS open data, each with its source and lookup time.\nIf a call fails, only that panel says so and shows the last good result stored on the device." },
-        key: { ko: "식약처 공공데이터 4종", en: "4 MFDS open datasets" },
-        stuck: { ko: "국가출하승인 이력이 조회 결과의 앞쪽에 나오지 않아 최신 승인을 놓쳤습니다.", en: "National lot release results did not list the latest approvals first, so recent ones were missed." },
-        fix: { ko: "최신 쪽부터 찾고, 어느 범위까지 조회했는지 화면에 함께 적었습니다.", en: "Now searches from the newest pages and shows the range it checked." }
+        line: { ko: "식약처 공공데이터 4종(허가정보, 회수와 판매중지, GMP 적합판정, 국가출하승인)을 서버 함수가 대신 불러와 출처와 조회 시각을 붙여 보여 줍니다. 인증키는 서버에만 둡니다.\n결과가 0건인 경우와 불러오지 못한 경우를 구분해서, 조회 실패가 '문제없음'으로 보이지 않게 했습니다.", en: "A server function calls four MFDS datasets (approvals, recalls, GMP certificates, national lot release) and shows each with its source and lookup time. Keys stay on the server.\n'No results' and 'could not load' are shown differently, so a failed lookup never reads as 'all clear'." },
+        key: { ko: "최신 335건 기준 조회 범위 표시", en: "Shows the range: latest 335 records" },
+        stuck: { ko: "국가출하승인 API가 오래된 순으로 쌓여 있어, 최근 승인을 찾는데 2016~2019년 자료만 나올 뻔했습니다.", en: "The national lot release API lists oldest first, so a search for recent approvals nearly returned only 2016~2019 records." },
+        fix: { ko: "전체 건수를 먼저 받고 끝 4쪽(최신)을 읽게 고쳤습니다. 화면에는 전체 6,035건 중 최근 335건에서 찾았다고 적습니다.", en: "Now fetches the total count first and reads the last four pages. The screen says it searched the latest 335 of 6,035 records." }
       },
       {
-        tag: "AI ASSIST", title: { ko: "AI 도우미와 아침 브리핑", en: "AI helper" },
-        line: { ko: "화면 오른쪽 아래 AI 도우미는 앱 안내서, 화면의 근거 표, 미리 정한 조회 결과 안에서만 답하고, 숫자와 링크와 승인 표현은 코드가 다시 검사합니다. 읽기 전용이고 대화는 저장하지 않습니다.\n평일 오전 8시에 직무별로 오늘 볼 것을 슬랙 개인 메시지로 보내는 아침 브리핑도 있습니다.", en: "The chat helper at the bottom right answers only from the app guide, the evidence tables on screen and fixed query results, and code re-checks every number, link and approval phrase. It is read only and stores no conversations.\nA morning briefing also sends each role a Slack direct message with what to look at, on weekdays at 8 am." },
-        key: { ko: "AI가 판정하지 않는 선", en: "AI never decides" },
-        stuck: { ko: "도우미가 지금 보는 화면에서만 찾아서 최근 문제가 자주 생긴 제품을 물으면 답하지 못했습니다.", en: "The helper only looked at the current screen, so it could not answer which product has had the most problems lately." },
-        fix: { ko: "앱 전체 기록을 읽는 조회 13가지를 미리 정해 두고, Claude가 그중에서 고르면 서버가 로그인한 사람의 권한으로 다시 검사해 읽게 했습니다.", en: "Thirteen fixed read only queries across the whole app were prepared. Claude picks among them and the server re-checks and runs the pick with the signed in user's permissions." }
+        tag: "ALERTS AND AI", title: { ko: "알림과 AI 도우미", en: "Alerts and AI" },
+        line: { ko: "조치 요청이 승인되거나 담당자가 배정되면 슬랙 개인 메시지가 가고, 평일 아침 8시에는 QA, QC, 생산 직무별 브리핑이 갑니다.\nAI 도우미(Claude API)는 로그인한 사람이 볼 수 있는 근거 표만 읽고 답합니다. 답 속 숫자, 링크, 승인 표현은 코드가 다시 검사하고, 판정과 승인은 사람만 합니다.", en: "Slack DMs go out when a request is approved or assigned, and every weekday at 8 a.m. QA, QC and production each get a briefing.\nThe AI assistant (Claude API) answers only from evidence tables the user is allowed to see. Code re-checks every number, link and approval phrase, and only people judge or approve." },
+        key: { ko: "실제 호출 10번, 범위 이탈 0번", en: "10 live tests, stayed in scope every time" },
+        stuck: { ko: "AI 도우미가 지금 열린 화면 안에서만 답한다는 지적을 받았습니다.", en: "Testers pointed out that the assistant only answered about the screen currently open." },
+        fix: { ko: "앱 전체를 조회하는 질문 13가지를 준비했습니다. 읽기 전용이고 대화는 저장하지 않으며, 한 사람이 하루 30번까지만 쓰게 했습니다.", en: "Added 13 app-wide lookups. It stays read-only, keeps no chat history and allows 30 questions per person per day." }
       },
       {
         tag: "CHECK", title: { ko: "검증", en: "Checks" },
-        line: { ko: "자동 시험 536개를 모두 통과시키고, 사람이 직접 확인하는 QA 25건을 팀이 나눠 수행해 모두 통과했습니다. 아침 브리핑 자동 발송도 10월 30일 08시 01분에 실제로 도착한 것을 확인했습니다.\n공공데이터는 실제 키로 호출해 응답을 확인했고, 인터뷰로 고친 숫자는 문서에 근거를 남겼습니다.", en: "All 536 automated tests pass, and the team split 25 manual QA checks and passed all of them. The automatic morning briefing was also confirmed to arrive at 08:01 on Oct 30.\nOpen data calls were checked with a real key, and the numbers I corrected from interviews keep their evidence in the docs." },
+        line: { ko: "자동 시험 536개를 모두 통과시키고, 사람이 직접 확인하는 QA 25건을 팀이 나눠 수행해 모두 통과했습니다. 아침 브리핑 자동 발송도 10월 30일 08시 01분에 실제로 도착한 것을 확인했습니다.\n공공데이터는 실제 인증키로 호출해 응답을 확인했고, 인터뷰로 고친 숫자는 문서에 근거를 남겼습니다.", en: "All 536 automated tests pass, and the team split 25 manual QA checks and passed every one. The automatic morning briefing was confirmed to arrive at 08:01 on Oct 30.\nOpen data calls were checked with real keys, and the numbers corrected after the interviews keep their evidence in the docs." },
         key: { ko: "직접 QA 25건 모두 통과", en: "25 of 25 manual checks" },
-        stuck: { ko: "시험 자료에 없던 실제 응답의 날짜 형식 때문에 배포된 화면에서 GMP 칸이 비어 보였습니다.", en: "A date format that the test data did not have left the GMP panel looking empty on the live app." },
-        fix: { ko: "실제 응답으로 원인을 찾고, 시험 2개를 먼저 써서 실패를 확인한 뒤 고쳤습니다.", en: "Found the cause from the real response, wrote two failing tests first, then fixed it." }
+        stuck: { ko: "시험 자료에 없던 실제 응답의 날짜 형식 때문에 배포된 화면에서 GMP 칸이 비어 보였습니다.", en: "A date format missing from the test data left the GMP panel looking empty on the live app." },
+        fix: { ko: "실제 응답으로 원인을 찾고, 시험 2개를 먼저 써서 실패를 확인한 뒤 고쳤습니다.", en: "Found the cause in the real response, wrote two failing tests first, then fixed it." }
       }
     ],
     role: {
       ko: [
-        "문제 정의를 직접 썼습니다. SCQA와 네 칸 표로 문제를 잡고, 확인할 것을 하나로 좁혔습니다.",
-        "페르소나 5명과 인터뷰 질문지를 설계하고, 실제 QC 현직자 1명도 직접 만나 확인했습니다. 답변을 패턴으로 정리해 처음 가설 3개를 고치는 근거를 만들었습니다.",
-        "화면 UI 개편을 맡아 클리니컬 글라스 디자인, 홈 도식, 한 화면 비교를 만들고 디자인 결정을 문서로 남겼습니다.",
-        "발표 자료를 문제, 해결, 증거 순서의 피치 형식으로 다시 디자인하고 발표자 안내문을 썼습니다."
+        "문제 정의 문서를 썼습니다. 처음 가설이 인터뷰와 어긋난 부분을 찾아 고치고, '서명 직전에야 열린 이탈 건을 안다'로 문제를 좁혔습니다.",
+        "페르소나 5명과 인터뷰 질문지를 설계하고, 실제 QC 현직자 1명을 대면으로 인터뷰해 방향을 확인했습니다.",
+        "화면 UI 개편(홈, 로트 상세, 공정 단계, 품질 이슈)과 디자인 문서를 맡았고, 발표 자료 디자인과 발표자 안내문을 만들었습니다. DB, 서버, AI 기능 구현은 팀원이 맡았습니다."
       ],
       en: [
-        "Wrote the problem definition: framed it with SCQA and a four box table and narrowed it to one question to test.",
-        "Designed five personas and the interview guide, and met one real QC practitioner in person. Grouped the answers into patterns that corrected three first hypotheses.",
-        "Led the UI redesign, building the clinical glass look, home charts and single-screen comparisons, and documented the design decisions.",
-        "Redesigned the presentation deck as a problem, solution, evidence pitch and wrote the presenter guide."
+        "Wrote the problem definition, caught where the first hypothesis disagreed with the interviews, and narrowed the problem to 'open deviations surface only at signing'.",
+        "Designed five personas and the interview guide, and checked the direction in a face-to-face interview with a working QC analyst.",
+        "Owned the UI redesign (home, lot, process and issue screens) and the design doc, and designed the presentation deck and presenter notes. Teammates built the database, server and AI features."
       ]
     },
-    stack: ["HTML", "CSS", "JavaScript", "Supabase", "Google 로그인", "Vercel", "식약처 공공데이터", "Slack 알림", "Claude API", "Claude Code"],
-    note: { ko: "회사, 로트, 시험값, 규격은 모두 교육용 가상 자료이고, 허가정보와 회수 등 공공데이터만 실제 자료입니다. 페르소나 5명은 AI가 설정한 가상 인물입니다.\n로그인 기록이 남는 앱이라 주소는 공개하지 않습니다. 화면의 사람 이름은 흐리게 가렸습니다.", en: "All companies, lots, results and specs are fictional training data; only the MFDS open data is real. The five personas are AI generated.\nThe app records logins, so the address is not public. Names on screen are blurred." },
+    stack: ["HTML", "CSS", "JavaScript", "Node.js", "Supabase (PostgreSQL)", "Google 로그인", "Vercel", "식약처 공공데이터", "Slack API", "Claude API", "Claude Code"],
+    note: { ko: "회사, 로트, 시험값, 규격은 모두 교육용 가상 자료이고, 공공데이터만 실제 자료입니다. 확인 시간 단축 효과는 측정하지 않았습니다.\n로그인 기록이 남는 앱이라 주소는 공개하지 않습니다. 화면의 사람 이름은 가렸습니다.", en: "All companies, lots, results and specs are fictional training data; only the MFDS open data is real. Time savings were not measured.\nThe app records logins, so the address is not public. Names on screen are blurred." },
     images: [
       { src: "assets/pharmaflow/home.jpg", alt: { ko: "홈: 지금 할 일, 보류 로트, 로트 상태, 주별 품질 이슈, 이탈이 많은 항목, 최근 회수 공지", en: "Home: today's tasks, held lots, lot status, weekly issues, top deviations, recent recalls" } },
-      { src: "assets/pharmaflow/lot.jpg", alt: { ko: "로트 상세: 출하 판단 근거와 시험값마다 규격, 관리기준, 같은 제품 로트 비교", en: "Lot page: release checklist and each result against spec, alert limits and sibling lots" } },
-      { src: "assets/pharmaflow/process.jpg", alt: { ko: "공정 단계: 세포 배양, 정제, 원액 여과, 충전, 포장 단계별 담당과 공정 조건", en: "Process steps: cell culture to packaging with owners and conditions" } },
+      { src: "assets/pharmaflow/lot.jpg", alt: { ko: "로트 상세(IFV-2610-001): 출하 판단 근거와 시험값마다 규격, 관리기준, 같은 제품 로트 비교", en: "Lot page: release checklist and each result against spec, alert limits and sibling lots" } },
+      { src: "assets/pharmaflow/process.jpg", alt: { ko: "공정 단계: 세포 배양에서 포장까지 단계별 담당과 공정 조건", en: "Process steps: cell culture to packaging, with owners and conditions" } },
       { src: "assets/pharmaflow/issue.jpg", alt: { ko: "품질 이슈: 이탈, 영향 평가, 조치, 종결, 내부 출하 검토 5단계와 품질 영향 평가", en: "Quality issue: five stages from deviation to release review, with the impact assessment" } },
       { src: "assets/pharmaflow/regulatory.jpg", alt: { ko: "공개 규제 현황: 식약처 GMP 유효기간과 국가출하승인 이력", en: "Public regulatory status: MFDS GMP validity and national lot release history" } },
-      { src: "assets/pharmaflow/assistant.jpg", alt: { ko: "AI 도우미: 오른쪽 아래 버튼으로 여는 대화 창과 예시 질문 세 개", en: "AI helper: the chat window opened from the bottom right button, with three example questions" } }
+      { src: "assets/pharmaflow/assistant.jpg", alt: { ko: "AI 도우미: 오른쪽 아래 버튼으로 여는 대화 창과 예시 질문", en: "AI assistant: chat panel opened from the bottom-right button, with sample questions" } }
     ]
   }
 ];
