@@ -150,3 +150,7 @@ h1, h2, h3, .mc-title, .mc-me b, .pd-title, .rfb-real, .rfb-first, .jr-changed, 
 .cv-dl-top:hover { filter: brightness(1.06); }
 @media (max-width: 700px) { .cv-dl-top { padding: 6px 9px; font-size: 12px; } }
 
+
+/* 구역 이름을 목차처럼 조금 더 드러나게(2026-11-24): 번호는 포인트색, 이름은 굵고 크게. 선은 바꾸지 않는다 */
+.label .lb-no { margin-right: 10px; font-size: 15px; font-weight: 700; color: var(--accent-ink); }
+.label .lb-name { font-size: 19px; font-weight: 800; letter-spacing: -.01em; color: var(--fg); }
