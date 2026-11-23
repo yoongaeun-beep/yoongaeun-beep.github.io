@@ -150,8 +150,3 @@ h1, h2, h3, .mc-title, .mc-me b, .pd-title, .rfb-real, .rfb-first, .jr-changed, 
 .cv-dl-top:hover { filter: brightness(1.06); }
 @media (max-width: 700px) { .cv-dl-top { padding: 6px 9px; font-size: 12px; } }
 
-/* 구역 경계(2026-11-24): 구역마다 위에 진한 선, 왼쪽에 큰 번호와 이름. 01 소개 → 02 기획 방식처럼 넘어가는 자리가 바로 보인다 */
-.section { border-top: 2px solid var(--fg); border-bottom: 0; }
-.label .lb-no { display: block; font-size: 40px; font-weight: 700; line-height: 1; letter-spacing: -.02em; color: var(--accent-ink); }
-.label .lb-name { display: block; margin-top: 8px; font-size: 16px; font-weight: 800; letter-spacing: 0; color: var(--fg); }
-@media (max-width: 900px) { .label .lb-no { display: inline; font-size: 26px; margin-right: 10px; } .label .lb-name { display: inline; } }

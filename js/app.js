@@ -3,11 +3,6 @@ function render() {
   document.documentElement.lang = lang;
   document.title = t("title");
   document.querySelectorAll("[data-i18n]").forEach(function (n) { n.textContent = t(n.getAttribute("data-i18n")); });
-  // 구역 이름 "01 소개"를 큰 번호와 이름 두 줄로 나눠, 구역이 바뀌는 자리가 또렷하게 보이게 한다
-  document.querySelectorAll("h2.label").forEach(function (n) {
-    var m = /^(\d{2})\s+(.*)$/.exec(n.textContent); if (!m) return;
-    n.textContent = ""; n.appendChild(el("span", "lb-no mono", m[1])); n.appendChild(el("span", "lb-name", m[2]));
-  });
   document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
   renderHero(); renderAbout(); renderTimeline(); renderExperience(); renderActivities();
   renderMain(); equalizeTops(); renderIndex(); renderAutoLog(); renderShelf(false);
