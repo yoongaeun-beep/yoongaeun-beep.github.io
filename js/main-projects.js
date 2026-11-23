@@ -49,7 +49,7 @@ function cardFoot(m) {
   if (m.demo) {
     var demo = el("button", "btn btn-primary mc-demo"); demo.type = "button";
     demo.innerHTML = PLAY_SVG; demo.appendChild(document.createTextNode(" " + L(m.demo.label)));
-    demo.addEventListener("click", function () { openPlayer({ title: m.demo.title, link: m.demo.link }); });
+    demo.addEventListener("click", function () { goDemo(m); });
     foot.appendChild(demo);
   }
   return foot;
@@ -77,7 +77,7 @@ function gallery(m) {
   shot.appendChild(img);
   if (m.demo) { var play = el("span", "mc-play"); play.innerHTML = PLAY_SVG; shot.appendChild(play); }
   shot.addEventListener("click", function () {
-    if (m.demo) openPlayer({ title: m.demo.title, link: m.demo.link }); else openImage(cur.src, mainName(m));
+    if (m.demo) goDemo(m); else openImage(cur.src, mainName(m));
   });
   box.appendChild(shot);
   var cap = el("span", "mc-cap", L(cur.alt));
@@ -200,4 +200,10 @@ function stepBody(s) {
   pair.appendChild(c1); pair.appendChild(c2);
   f.appendChild(pair);
   return f;
+}
+
+// 실행 버튼: 사이트 안 재현본은 플레이어 창으로, 외부 배포 체험은 새 탭으로 연다
+function goDemo(m) {
+  if (m.demo.external) { window.open(m.demo.link, "_blank", "noopener"); return; }
+  openPlayer({ title: m.demo.title, link: m.demo.link });
 }

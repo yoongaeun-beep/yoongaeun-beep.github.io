@@ -137,11 +137,11 @@ window.SITE_MAIN = [
     },
     tags: ["Supabase", "Vercel", "Claude API", { ko: "식약처 공공데이터", en: "MFDS open data" }, { ko: "기획과 화면 설계", en: "Planning and UI" }],
     plan: [
-      { mine: true, t: { ko: "서명 직전의 기록 맞추기", en: "Reconciling records at signing" }, d: { ko: "QA 담당자가 시스템, 엑셀, 메일을 오가며 로트 상태 확인", en: "QA checks lots across systems, sheets and email" }, line: { ko: "QA 담당자는 출하 서명 직전까지 시스템, 엑셀, 메일을 오가며 로트 상태를 맞춥니다. 가상 페르소나 5명을 인터뷰해 보니 로트 한 건 확인에 15분에서 3~4시간이 들었습니다.", en: "QA reconciles lot status across systems, sheets and email until signing; persona interviews put one lot at 15 minutes to 3~4 hours." }, key: { ko: "5명 중 3명, 서명 직전에야 알았다", en: "3 of 5 found out only at signing" }, img: "assets/pharmaflow/deck-problem.jpg" },
-      { mine: true, t: { ko: "기록이 아니라 종결 상태", en: "Not records but closure status" }, d: { ko: "5명 모두 처리 결과를 묻고 기다림, 공유표는 입력이 안 돼 실패", en: "All 5 wait for status; shared sheets failed" }, line: { ko: "기록이 흩어진 것보다 다른 부서의 처리 결과가 전달되지 않는 것이 문제였습니다. 공유표를 만든 사람도 상대가 입력하지 않아 실패했습니다.", en: "The issue was not scattered records but closure status never reaching other teams; shared sheets failed because no one filled them in." }, key: { ko: "5명 중 5명, 묻고 기다린다", en: "5 of 5 wait and ask" }, img: "assets/pharmaflow/deck-asis-tobe.jpg" },
-      { mine: false, t: { ko: "따로 적지 않아도 쌓이게", en: "Records that build themselves" }, d: { ko: "새 대장 대신 일하는 흐름 안에 기록, 판정은 코드와 승인은 사람", en: "Records inside the workflow; code judges, people approve" }, line: { ko: "대장을 하나 더 만드는 대신 일하는 흐름 안에 기록을 넣었습니다. 판정은 코드가, 승인은 사람이 하고, 만들지 않을 것 10가지를 먼저 정했습니다.", en: "Instead of another tracker, records live inside the workflow. Code judges, people approve, and ten things were ruled out first." }, key: { ko: "하지 않을 것 10가지", en: "10 things left out" }, img: "assets/pharmaflow/deck-workflow.jpg" },
+      { mine: true, t: { ko: "서명 직전의 기록 맞추기", en: "Reconciling records at signing" }, d: { ko: "QA 담당자가 시스템, 엑셀, 메일을 오가며 로트 상태 확인", en: "QA checks lots across systems, sheets and email" }, line: { ko: "QA 담당자는 출하 서명 직전까지 시스템, 엑셀, 메일을 오가며 로트 상태를 맞춥니다. 가상 페르소나 5명을 인터뷰해 보니 로트 한 건 확인에 15분에서 3~4시간이 들었습니다.", en: "QA reconciles lot status across systems, sheets and email until signing; persona interviews put one lot at 15 minutes to 3~4 hours." }, key: { ko: "5명 중 3명, 서명 직전에야 알았다", en: "3 of 5 found out only at signing" }, img: "assets/pharmaflow/lot.jpg" },
+      { mine: true, t: { ko: "기록이 아니라 종결 상태", en: "Not records but closure status" }, d: { ko: "5명 모두 처리 결과를 묻고 기다림, 공유표는 입력이 안 돼 실패", en: "All 5 wait for status; shared sheets failed" }, line: { ko: "기록이 흩어진 것보다 다른 부서의 처리 결과가 전달되지 않는 것이 문제였습니다. 공유표를 만든 사람도 상대가 입력하지 않아 실패했습니다.", en: "The issue was not scattered records but closure status never reaching other teams; shared sheets failed because no one filled them in." }, key: { ko: "5명 중 5명, 묻고 기다린다", en: "5 of 5 wait and ask" }, img: "assets/pharmaflow/issue.jpg" },
+      { mine: false, t: { ko: "따로 적지 않아도 쌓이게", en: "Records that build themselves" }, d: { ko: "새 대장 대신 일하는 흐름 안에 기록, 판정은 코드와 승인은 사람", en: "Records inside the workflow; code judges, people approve" }, line: { ko: "대장을 하나 더 만드는 대신 일하는 흐름 안에 기록을 넣었습니다. 판정은 코드가, 승인은 사람이 하고, 만들지 않을 것 10가지를 먼저 정했습니다.", en: "Instead of another tracker, records live inside the workflow. Code judges, people approve, and ten things were ruled out first." }, key: { ko: "하지 않을 것 10가지", en: "10 things left out" }, img: "assets/pharmaflow/process.jpg" },
       { mine: true, t: { ko: "로트 하나, 흐름 하나", en: "One lot, one flow" }, d: { ko: "시험값 저장부터 출하 검토까지 한 화면, 열린 이슈면 출하 차단", en: "One screen from result to release; open issues block release" }, line: { ko: "시험값 저장부터 이슈 종결, 내부 출하 검토까지 한 화면에서 이어집니다. 열린 이슈가 있으면 출하를 고를 수 없고, 홈에는 지금 할 일이 먼저 보입니다.", en: "From saving a result to closing the issue and reviewing release on one screen; open issues block release, and home shows today's tasks first." }, key: { ko: "한 화면 흐름, 열린 이슈면 출하 차단", en: "One flow; open issues block release" }, img: "assets/pharmaflow/home.jpg" },
-      { mine: false, t: { ko: "숫자로 확인", en: "Checked in numbers" }, d: { ko: "자동 시험 536개, 팀 QA 25건, 현직자 1명 대면 확인", en: "536 tests, 25 QA checks, one practitioner interview" }, line: { ko: "자동 시험 536개와 팀 직접 QA 25건을 모두 통과했고, 현직자 1명을 직접 만나 문제 방향을 확인했습니다.", en: "All 536 automated tests and 25 manual QA checks pass, and one practitioner confirmed the direction in person." }, key: { ko: "시험 536개, QA 25건 통과", en: "536 tests, 25 QA checks" }, img: "assets/pharmaflow/issue.jpg" }
+      { mine: false, t: { ko: "숫자로 확인", en: "Checked in numbers" }, d: { ko: "자동 시험 536개, 팀 QA 25건, 현직자 1명 대면 확인", en: "536 tests, 25 QA checks, one practitioner interview" }, line: { ko: "자동 시험 536개와 팀 직접 QA 25건을 모두 통과했고, 현직자 1명을 직접 만나 문제 방향을 확인했습니다.", en: "All 536 automated tests and 25 manual QA checks pass, and one practitioner confirmed the direction in person." }, key: { ko: "시험 536개, QA 25건 통과", en: "536 tests, 25 QA checks" }, img: "assets/pharmaflow/regulatory.jpg" }
     ],
     // 본인 작업물 샘플: 직접 디자인한 팀 발표 자료(10/29) 중 3장. 팀원 이름과 배포 주소가 없는 장만 골랐다
     samples: [
@@ -240,6 +240,288 @@ window.SITE_MAIN = [
       { src: "assets/pharmaflow/issue.jpg", alt: { ko: "품질 이슈: 이탈, 영향 평가, 조치, 종결, 내부 출하 검토 5단계와 품질 영향 평가", en: "Quality issue: five stages from deviation to release review, with the impact assessment" } },
       { src: "assets/pharmaflow/regulatory.jpg", alt: { ko: "공개 규제 현황: 식약처 GMP 유효기간과 국가출하승인 이력", en: "Public regulatory status: MFDS GMP validity and national lot release history" } },
       { src: "assets/pharmaflow/assistant.jpg", alt: { ko: "AI 도우미: 오른쪽 아래 버튼으로 여는 대화 창과 예시 질문", en: "AI assistant: chat panel opened from the bottom-right button, with sample questions" } }
+    ]
+  },
+  // 프로젝트3: 팀 저장소(비공개) README와 PR 기준. 공개 체험(/demo)은 가상 데이터라 링크한다. 화면은 2026-11-24 공개 체험에서 찍음. 팀원 실명은 쓰지 않는다.
+  {
+    "id": "voicefishing",
+    "short": {
+      "ko": "안물어(魚) 피싱 대응 훈련",
+      "en": "An-mul-eo anti-phishing drills"
+    },
+    "name": {
+      "ko": "안물어(魚)",
+      "en": "An-mul-eo (Don't Get Hooked)"
+    },
+    "desc": {
+      "ko": "새 사기 수법을 내 상황에 맞춘 연습 문자로 불시에 보내는 청년 피싱 대응 훈련 서비스",
+      "en": "Unannounced practice texts, matched to each young adult's situation, for the latest scam tactics"
+    },
+    "bullets": {
+      "ko": [
+        "문제를 다시 정의: 청년은 의심이 없어서가 아니라 **확인하려는 순간 위조된 경로**에 속는다",
+        "새 수법 수집은 자동, **사람 승인 2번**을 거쳐야 연습 연락이 나감",
+        "판정 규칙, **정답 샘플 147건** 채점, 위키 챗봇(고정 질문 **5/5**)을 맡음"
+      ],
+      "en": [
+        "Reframed: young adults are fooled not for lack of doubt but by **forged ways to check**",
+        "Tactics are collected automatically; practice messages go out only after **two human approvals**",
+        "I owned the judgement rules, scoring on **147 labeled samples**, and the wiki chatbot (**5/5** fixed questions)"
+      ]
+    },
+    "tags": [
+      "Next.js",
+      "Supabase",
+      "Vercel",
+      "Claude API",
+      {
+        "ko": "공공기관 공지 수집",
+        "en": "Public notice collection"
+      },
+      {
+        "ko": "판정 규칙과 채점",
+        "en": "Judgement and scoring"
+      }
+    ],
+    "plan": [
+      {
+        "mine": false,
+        "t": {
+          "ko": "확인하려는 순간에 속는다",
+          "en": "Fooled while checking"
+        },
+        "d": {
+          "ko": "기관 사칭형 피해자 중 20~30대 52.5%",
+          "en": "52.5% of impersonation victims in their 20s~30s"
+        },
+        "line": {
+          "ko": "기관 사칭형 피해자 중 20~30대가 52.5%였습니다(경찰청, 팀 리서치). 수칙은 알아도 확인에 쓰는 번호, 검색 결과, 고객센터가 이미 위조돼 있었습니다.",
+          "en": "52.5% of impersonation victims were in their 20s~30s (police data, team research). People knew the rules, but the numbers, search results and help lines they checked were already forged."
+        },
+        "key": {
+          "ko": "20~30대 52.5%",
+          "en": "52.5% aged 20~39"
+        },
+        "img": "assets/voicefishing/intro.jpg"
+      },
+      {
+        "mine": false,
+        "t": {
+          "ko": "읽는 교육 대신 겪는 연습",
+          "en": "Practice over reading"
+        },
+        "d": {
+          "ko": "읽기만 하는 교육은 몇 주면 효과가 사라짐",
+          "en": "Read-only training fades in weeks"
+        },
+        "line": {
+          "ko": "읽기만 하는 예방 교육은 몇 주면 효과가 사라집니다. 사기는 미끼, 재촉, 위조된 확인 경로, 노리는 것 순서로 오기 때문에 수법마다 이 순서를 해부도로 보여 주기로 했습니다.",
+          "en": "Read-only prevention fades within weeks. Scams arrive as bait, pressure, a forged way to check, then the target, so each tactic is shown as that anatomy."
+        },
+        "key": {
+          "ko": "수법 해부도 4단계",
+          "en": "4-step tactic anatomy"
+        },
+        "img": "assets/voicefishing/library.jpg"
+      },
+      {
+        "mine": true,
+        "t": {
+          "ko": "무반응이 최고점",
+          "en": "No reaction scores best"
+        },
+        "d": {
+          "ko": "3초 안에 나가면 판정 안 함, 같은 사람에게 48시간 간격",
+          "en": "Under 3 seconds isn't judged; 48 hours between drills"
+        },
+        "line": {
+          "ko": "가입해 두면 새 수법이 내 상황에 맞춘 연습 문자와 메일로 불시에 옵니다. 판정 규칙을 기획 문서에 맞춰 아무 반응이 없으면 최고점, 3초 안에 나가면 실수로 보고 판정하지 않게, 같은 사람에게는 48시간 간격을 두게 했습니다.",
+          "en": "Once signed up, new tactics arrive as unannounced practice texts and emails. I aligned the rules to the spec: no reaction scores best, exits under 3 seconds are not judged, and drills to one person are 48 hours apart."
+        },
+        "key": {
+          "ko": "무반응 = 최고점, 48시간 간격",
+          "en": "No reaction = best, 48h apart"
+        },
+        "img": "assets/voicefishing/sea.jpg"
+      },
+      {
+        "mine": false,
+        "t": {
+          "ko": "수집은 자동, 승인은 사람",
+          "en": "Auto collection, human approval"
+        },
+        "d": {
+          "ko": "출처 5곳 정기 수집, 수법과 문구를 사람이 두 번 승인",
+          "en": "5 sources collected; tactic and copy approved twice"
+        },
+        "line": {
+          "ko": "금감원, KISA 등 출처 5곳을 정기적으로 모읍니다. 새 수법은 운영자가 근거를 보고 승인하고, AI가 만든 문구와 가짜 사이트도 한 번 더 승인해야 연습 연락이 나갑니다.",
+          "en": "Five sources, including the FSS and KISA, are collected on a schedule. An operator approves each new tactic on its evidence, and the AI-drafted copy and decoy site need a second approval before anything is sent."
+        },
+        "key": {
+          "ko": "사람 승인 2번",
+          "en": "Two human approvals"
+        },
+        "img": "assets/voicefishing/admin.jpg"
+      },
+      {
+        "mine": true,
+        "t": {
+          "ko": "채점과 챗봇으로 확인",
+          "en": "Checked by scoring and chatbot"
+        },
+        "d": {
+          "ko": "정답 샘플 147건 채점, 위키 챗봇 5/5",
+          "en": "147 labeled samples; wiki chatbot 5/5"
+        },
+        "line": {
+          "ko": "수법 관련 글인지 가려내는 판정을 정답 샘플 147건으로 채점해 놓친 것 0건, 잘못 울린 것 5건을 확인했고, 그래서 사람 승인을 남겼습니다. 팀 위키 챗봇은 찾은 문서만 근거로 답하게 고쳐 고정 질문 5개를 모두 맞히게 했습니다(처음 3개).",
+          "en": "Scoring the relevance check on 147 labeled samples gave 0 misses and 5 false alarms, which is why human approval stays. The team wiki chatbot now answers only from retrieved pages and gets all 5 fixed questions right (3 at first)."
+        },
+        "key": {
+          "ko": "놓침 0건, 챗봇 5/5",
+          "en": "0 misses, chatbot 5/5"
+        },
+        "img": "assets/voicefishing/chat.jpg"
+      }
+    ],
+    "split": {
+      "mine": {
+        "ko": "판정 규칙, 정답 샘플 채점, 위키 챗봇, 연습 문자 문구, QA 기록, 소개와 이용자 화면 디자인 개편",
+        "en": "Judgement rules, sample scoring, wiki chatbot, practice SMS copy, QA logs, intro and user screen redesign"
+      },
+      "team": {
+        "ko": "팀원 3명이 앱 뼈대와 DB, 발송 연결, 데이터 수집, 발표 자료와 AI 인터뷰를 나눠 맡음",
+        "en": "Three teammates split the app skeleton and database, message delivery, data collection, slides and AI interviews"
+      },
+      "ai": {
+        "ko": "Claude Code로 구현과 검토, 서버 AI(Claude API)가 수법 카드와 연습 문구 초안을 쓰고 사람이 승인",
+        "en": "Claude Code for build and review; the server AI (Claude API) drafts tactic cards and practice copy, and people approve"
+      }
+    },
+    "period": "2026.11.17 ~ 11.23",
+    "team": {
+      "ko": "LS Jump Up 세 번째 팀 프로젝트 (4인), 11월 23일 해커톤 제출",
+      "en": "LS Jump Up third team project (4 people), submitted Nov 23"
+    },
+    "headline": {
+      "ko": "새 사기 수법을 내 상황에 맞춘 연습 연락으로\n먼저 겪어 보게 하는 피싱 대응 훈련",
+      "en": "Phishing drills that let young adults meet\nnew scam tactics first, matched to their situation"
+    },
+    "title": {
+      "ko": "안물어(魚): 청년을 위한 상황 맞춤 피싱 모의 훈련 서비스",
+      "en": "An-mul-eo: situation-matched phishing drills for young adults"
+    },
+    "oneLiner": {
+      "ko": "청년은 사기 연락을 의심하지 않아서가 아니라, 진위를 확인하려는 순간 위조된 번호와 사이트에 속습니다.\n안물어는 새 수법이 나오면 이용자 상황에 맞춘 연습 문자와 메일을 불시에 보내고, 누르는 순간 바로 해설합니다.",
+      "en": "Young adults are not fooled for lack of doubt; they are fooled at the moment they try to check, by forged numbers and sites.\nWhen a new tactic appears, An-mul-eo sends a situation-matched practice text or email unannounced and explains it the moment it is tapped."
+    },
+    "stats": [
+      {
+        "v": {
+          "ko": "147건",
+          "en": "147"
+        },
+        "l": {
+          "ko": "정답 샘플로 판정 채점\n놓침 0건",
+          "en": "labeled samples scored\n0 misses"
+        }
+      },
+      {
+        "v": {
+          "ko": "5/5",
+          "en": "5/5"
+        },
+        "l": {
+          "ko": "위키 챗봇 고정 질문\n처음 3/5에서 개선",
+          "en": "wiki chatbot fixed questions\nup from 3/5"
+        }
+      },
+      {
+        "v": {
+          "ko": "87개",
+          "en": "87"
+        },
+        "l": {
+          "ko": "팀 점검표 항목 모두 통과\n근거와 한계 함께 기록",
+          "en": "team checklist items passed\nwith evidence and limits"
+        }
+      }
+    ],
+    "role": {
+      "ko": [
+        "판정 규칙을 기획 문서에 맞췄습니다. 무반응은 최고점, 3초 안에 나가면 판정하지 않음, 48시간 간격, 로그인 없이 개인 링크로 기록.",
+        "수법 관련 판정을 정답 샘플 147건으로 채점하고, 팀 위키 챗봇을 찾은 문서만 근거로 답하게 만들었습니다.",
+        "소개 화면과 이용자 화면(나의 바다 레이더, 모의 배송과 청약 사이트) 디자인을 개편했습니다. 앱 뼈대, 수집, 발송 연결은 팀원이 맡았습니다."
+      ],
+      "en": [
+        "Aligned the judgement rules to the spec: no reaction scores best, sub-3-second exits are not judged, 48 hours between drills, and login-free per-link records.",
+        "Scored the relevance check on 147 labeled samples and built the team wiki chatbot to answer only from retrieved pages.",
+        "Redesigned the intro and user screens (the radar home, decoy delivery and housing sites). Teammates built the app skeleton, collection and delivery."
+      ]
+    },
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Vercel",
+      "Claude API",
+      "Resend",
+      "GitHub Actions",
+      "Claude Code"
+    ],
+    "note": {
+      "ko": "사람 인터뷰는 0건이고(AI 인터뷰 4건), 훈련이 실제 행동을 바꾸는지는 아직 검증하지 않았습니다. 체험 화면은 가상 데이터로만 움직입니다.",
+      "en": "There were no human interviews (four AI interviews), and the effect on real behaviour is not yet verified. The demo runs on virtual data only."
+    },
+    "demo": {
+      "external": true,
+      "link": "https://voicefishing.vercel.app/demo",
+      "label": {
+        "ko": "로그인 없이 체험하기",
+        "en": "Try the demo"
+      },
+      "title": {
+        "ko": "안물어 공개 체험",
+        "en": "An-mul-eo demo"
+      }
+    },
+    "images": [
+      {
+        "src": "assets/voicefishing/sea.jpg",
+        "alt": {
+          "ko": "이용자 홈 '나의 바다': 내 상황과 맞는 신종 수법 레이더",
+          "en": "User home: radar of new tactics matching my situation"
+        }
+      },
+      {
+        "src": "assets/voicefishing/admin.jpg",
+        "alt": {
+          "ko": "운영 현황: 레이더 수집부터 판정까지 7단계와 사람 승인 자리",
+          "en": "Operations: seven steps from collection to judgement, with human approvals"
+        }
+      },
+      {
+        "src": "assets/voicefishing/library.jpg",
+        "alt": {
+          "ko": "수법 모음집: 미끼, 재촉, 위조된 확인 경로, 노리는 것의 그림자 해부도",
+          "en": "Tactic library: anatomy of bait, pressure, forged check path and target"
+        }
+      },
+      {
+        "src": "assets/voicefishing/intro.jpg",
+        "alt": {
+          "ko": "소개 화면: 수면 아래를 먼저 보는 연습",
+          "en": "Intro: practice seeing beneath the surface"
+        }
+      },
+      {
+        "src": "assets/voicefishing/chat.jpg",
+        "alt": {
+          "ko": "팀 위키 챗봇: 찾은 문서만 근거로 답하고 출처를 붙임",
+          "en": "Team wiki chatbot: answers only from retrieved pages, with sources"
+        }
+      }
     ]
   }
 ];

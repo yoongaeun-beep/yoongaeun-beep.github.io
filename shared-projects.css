@@ -260,7 +260,7 @@
 .pd-line { margin: 0; font-size: 15px; line-height: 1.75; color: var(--soft); }
 .pd-key { align-self: flex-start; font-size: 14px; font-weight: 700; color: var(--accent-ink); background: var(--accent-soft); padding: 6px 12px; }
 .pd-shot { margin: 0; min-width: 0; }
-.pd-shot { display: flex; align-items: flex-start; }
+.pd-shot { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
 .pd-shot img { width: 100%; height: auto; max-height: 400px; object-fit: contain; object-position: top left; border: 1px solid var(--line-2); background: var(--surface); cursor: zoom-in; display: block; }
 .fade { animation: fd .45s ease both; }
 @keyframes fd { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -293,3 +293,7 @@
 .note-case-in { display: flex; align-items: flex-end; gap: 7px; padding: 14px 10px 0; }
 .note-case-in > .spine-btn { zoom: .78; }
 .note-case-in > .pulled { margin: 0 12px; }
+.pd-cap { display: flex; gap: 8px; align-items: baseline; font-size: 12.5px; line-height: 1.45; color: var(--soft); }
+.pd-cap-k { flex: none; font-size: 11px; font-weight: 700; padding: 2px 7px; background: var(--fg); color: var(--bg); }
+.pd-cap-k.deck { background: var(--surface-2); color: var(--fg); border: 1px solid var(--line-2); }
+.pd-shot img { max-height: 340px; }

@@ -54,11 +54,14 @@ window.SITE_JOURNEY = {
       notes: ["note-auto-collect", "note-recruiter"]
     },
     {
-      id: "p3", period: "2026.11.16 ~ 11.27", pending: true,
-      title: { ko: "프로젝트3", en: "Project 3" },
-      learned: { ko: "실시간 데이터, 사건 감지와 사람 승인, 위키와 챗봇, 서브에이전트", en: "Live data, incident detection with human approval, wiki and chatbot, subagents" },
-      changed: { ko: "진행 중. 마치면 추가합니다", en: "In progress. Will be added when done" },
-      proof: { ko: [], en: [] }
+      id: "p3", period: "2026.11.17 ~ 11.23", project: "voicefishing",
+      title: { ko: "프로젝트3 안물어(魚)", en: "Project 3 An-mul-eo" },
+      learned: { ko: "실시간 공공 데이터 수집, 사건 감지와 사람 승인, 위키와 챗봇, 4인 팀의 PR과 리뷰", en: "Live public data, incident detection with human approval, wiki and chatbot, PRs and reviews in a team of 4" },
+      changed: { ko: "코드를 고치기 전에 **채점부터**: 정답 샘플 147건으로 놓침 0건, 잘못 울림 5건을 확인하고 **사람 승인을 남김**", en: "**Scoring before fixing**: 147 labeled samples showed 0 misses and 5 false alarms, so **human approval stayed**" },
+      proof: { ko: ["PR #31 위키 챗봇과 채점", "PR #41 판정 규칙", "PR #71, #75 화면 개편", "리뷰 PR #14, #25, #35, #36", "챗봇 고정 질문 5/5"], en: ["PR #31 chatbot and scoring", "PR #41 judgement rules", "PR #71, #75 UI redesign", "Reviews on PR #14, #25, #35, #36", "Chatbot 5/5"] },
+      mine: { ko: "판정 규칙, 채점, 위키 챗봇, 문자 문구, QA 기록, 화면 개편", en: "Judgement rules, scoring, wiki chatbot, SMS copy, QA logs, UI redesign" },
+      team: { ko: "팀원 3명이 앱 뼈대와 DB, 발송, 데이터 수집, 발표와 AI 인터뷰", en: "Three teammates: skeleton and DB, delivery, collection, slides and AI interviews" },
+      ai: { ko: "Claude Code가 구현과 검토, 서버 AI가 문구 초안, 승인은 사람", en: "Claude Code built and reviewed; server AI drafts copy; people approve" }
     }
   ],
   next: {

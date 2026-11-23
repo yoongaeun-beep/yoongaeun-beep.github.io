@@ -51,10 +51,10 @@ window.SITE_EDITION = {
     en: "I check AI output against source samples, and the numbers and final calls stay with me."
   },
   // 채용담당자 점검(2026-11-23): '합격' 게임류는 가볍게 읽힐 수 있어 서가에서 뺀다(파일은 그대로)
-  shelfHide: ["hapgyeok-bomber", "hapgyeok-bomber-p0", "hapgyeok-beat"],
+  shelfHide: ["hapgyeok-bomber", "hapgyeok-bomber-p0", "hapgyeok-beat", "voicefishing"],
   // 리프레임 스크롤에 보여 줄 노트(순서대로)
   reframe: ["note-market-toolkit", "note-harness", "note-docking", "note-workflow-app", "note-recruiter"],
-  projectOrder: ["pharmaflow", "predictive-maintenance"],
+  projectOrder: ["pharmaflow", "voicefishing", "predictive-maintenance"],
   ui: {
     ko: {
       "kicker": "BIO & PHARMA PORTFOLIO",
