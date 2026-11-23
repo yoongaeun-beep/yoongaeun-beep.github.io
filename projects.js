@@ -215,7 +215,43 @@ window.SITE_PROJECTS = [
     link: "projects/market-insight-site/index.html",
     note: { ko: "로그인형 사이트라 실제 주소는 공개하지 않습니다. 표지는 샘플 데이터로 띄운 조사 화면입니다.", en: "Login-only site, so the real URL is private. The cover shows the research screen on sample data." },
     source: "desktop"
+  },
+  {
+    id: "voicefishing",
+    label: { ko: "팀으로 만든 안티피싱 훈련 서비스", en: "Team-built anti-phishing training service" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
+    category: "side",
+    design: "generic", spineH: 408,
+    palette: { bg: "#0E1B33", ink: "#F4EFE2", accent: "#FFCF5C" },
+    pattern: "stars", motif: "안 속기", stamp: "魚",
+    date: "2026-11-23",
+    title: { ko: "안물어(魚)", en: "An-mul-eo (Don't Get Hooked)" },
+    summary: {
+      ko: "교육 과정 마지막 팀 프로젝트(4명)입니다. 신종 보이스피싱 수법은 빠르게 바뀌는데 청년이 미리 대비할 실전형 훈련이 없다는 문제에서 출발했습니다.\n금융감독원 등 공공기관의 피싱 공지(실데이터)를 수집·AI 분류한 뒤, 이용자 상황에 맞춘 가짜 문자·사이트를 불시에 보내 '안 속는 연습'을 시킵니다. 미끼에 걸리지 않는 것(무반응)을 최고점으로 설계해, 속지 않는 능력 자체를 훈련합니다.\n저는 데이터 수집·판정 규칙·위키 챗봇과 전 화면 리디자인을 맡았습니다.",
+      en: "The final team project (4 people) of the program. It starts from a gap: new voice-phishing tactics change fast, but young people have no hands-on way to prepare.\nIt collects real phishing notices from public bodies (e.g. Korea's FSS), classifies the tactics with AI, then sends situation-matched fake texts and sites unannounced so users practice 'not getting hooked'. Not taking the bait (no response) is scored highest, training the skill of not being fooled.\nI owned data collection, the judgement rules, the wiki chatbot, and a full UI redesign."
+    },
+    tools: ["Next.js", "Supabase", "Claude API", "Gemini API", "GitHub", "팀 협업"],
+    role: {
+      ko: "실데이터 수집·정기 실행 파이프라인과 판정 규칙(무반응=최고점·48시간 재발송·로그인 없는 개인 링크 토큰)을 설계하고, 서버에서 출처를 검증하는 위키 챗봇을 붙였으며, 소개·대시보드·운영자·모의사이트를 '심해 관측 일지' 콘셉트로 전면 리디자인",
+      en: "Designed the real-data collection/scheduling pipeline and the judgement rules (no-response = top score, 48h re-send, login-free per-user link tokens), added a server-side source-checking wiki chatbot, and fully redesigned the intro, dashboard, operator and decoy-site screens"
+    },
+    time: { ko: "약 1주(팀 4명, 2026.11.17~23)", en: "About a week (team of 4, 2026.11.17–23)" },
+    story: {
+      why: { ko: "보이스피싱 수법은 계속 새로 나오는데, 예방 교육은 '이런 게 있으니 조심하세요' 수준에 그칩니다. 소방훈련처럼 실제와 비슷한 상황을 불시에 겪어 봐야 몸이 기억한다고 보고, 청년 대상 모의훈련 서비스를 잡았습니다.", en: "New phishing tactics keep appearing, but prevention education stays at 'be careful, this exists.' Like a fire drill, people remember only after facing a realistic situation unannounced, so we built a mock-training service for young adults." },
+      steps: [
+        { ko: "공공기관 피싱 공지를 실시간 수집하고 '사기 수법 관련'을 판정(정답 샘플 147건으로 채점 구조)", en: "Collected public phishing notices in real time and judged 'is this a scam tactic?' (scoring structure on 147 labeled samples)" },
+        { ko: "판정 규칙을 spec 경계값에 맞춤 — 무반응=최고점, 48시간 재발송, 로그인 없는 개인 링크 토큰", en: "Aligned judgement rules to spec thresholds — no-response = top score, 48h re-send, login-free per-user tokens" },
+        { ko: "서버에서 찾은 위키 쪽만 근거로 답하는 운영자 챗봇(출처 검증·사용 한도), 고정 5문항 5/5 통과", en: "An operator chatbot that answers only from retrieved wiki pages (source-checked, rate-limited); 5/5 on fixed questions" },
+        { ko: "소개·대시보드·운영자·모의사이트를 하나의 '심해' 브랜드로 전면 리디자인", en: "Redesigned intro, dashboard, operator and decoy sites into one 'deep sea' brand" }
+      ],
+      trouble: [
+        { problem: { ko: "수법을 승인해도 실제 AI 템플릿이 아니라 모의 템플릿으로 떨어지고 '이미 승인된 템플릿' 에러", en: "Approving a tactic produced a mock template with an 'already approved' error instead of the real AI one" }, fix: { ko: "API가 기본 patternId를 돌려주는 게 원인이라, 저장 시 실제 patternId로 덮어써서 해결(AI가 처음 제안한 수정은 엉뚱해 로그를 직접 따라감)", en: "The API returned a default patternId; overwrote it with the real one on save (the AI's first fix was wrong, so I traced the logs myself)" } },
+        { problem: { ko: "전화번호를 입력하면 바로 조회해 주고 싶었지만 무료 웹 조회 수단이 없음", en: "Wanted instant phone-number lookup, but no free web lookup exists" }, fix: { ko: "가짜(모의) 데이터를 넣느니 정직하게 방향을 바꿔, '문자 붙여넣기 → 실시간 위험신호 분석'으로 전환", en: "Rather than fake data, switched honestly to 'paste the message → real-time red-flag analysis'" } }
+      ],
+      special: { ko: "배운 점: 팀 프로젝트라 수집·생성·웹앱·문서로 역할을 나눴고, 저는 '수집·판정·챗봇·디자인'을 맡았습니다. AI는 반복 코드·요약을 빠르게 처리했지만, 판정 기준·버그 원인·'모의데이터 배제' 같은 판단은 제가 정했습니다.", en: "Lesson: as a team we split collection, generation, web app and docs; I took collection, judgement, chatbot and design. AI was fast at repetitive code and summaries, but the judgement rules, bug diagnosis and the 'no fake data' call were mine." }
+    },
+    link: "projects/voicefishing/index.html",
+    source: "desktop"
   }
 ];
-window.SITE_UPDATED = "2026-10-21";
+window.SITE_UPDATED = "2026-11-24";
 

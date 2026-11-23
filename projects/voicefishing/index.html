@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>안물어(魚) — 청년 안티피싱 모의훈련</title>
+<style>
+  :root {
+    --bg: #0e1b33; --bg2: #12254a; --card: #16294d; --line: #28406b;
+    --ink: #f4efe2; --muted: #a9b7d0; --accent: #ffcf5c; --accent-ink: #0e1b33;
+    --buoy: #ff7a59; --gutter: clamp(20px, 4vw, 64px);
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#eef3f8; --bg2:#e3edf6; --card:#ffffff; --line:#d3deea; --ink:#15233b; --muted:#51617a; --accent:#1f6f8b; --accent-ink:#ffffff; --buoy:#d2612f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background: radial-gradient(120% 90% at 80% -10%, var(--bg2), var(--bg)); color: var(--ink);
+    font: 16px/1.65 system-ui, "Malgun Gothic", sans-serif; min-height:100vh; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: clamp(28px,5vw,72px) var(--gutter) 64px; }
+  .eyebrow { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 800; margin: 0 0 14px; }
+  h1 { font-size: clamp(40px, 7vw, 86px); line-height: 1.02; letter-spacing: -.03em; margin: 0 0 10px; font-weight: 900; }
+  h1 .fish { color: var(--accent); }
+  .tag { font-size: clamp(18px, 2.4vw, 26px); color: var(--muted); margin: 0 0 30px; max-width: 30ch; }
+  .cta { display:inline-flex; align-items:center; gap:10px; background: var(--accent); color: var(--accent-ink);
+    font-weight: 900; font-size: 18px; text-decoration:none; padding: 15px 26px; border-radius: 999px;
+    box-shadow: 0 10px 30px -8px rgba(0,0,0,.45); transition: transform .12s ease; }
+  .cta:hover { transform: translateY(-2px); }
+  .meta { margin: 18px 0 0; font-size: 14px; color: var(--muted); }
+  .grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin: 44px 0; }
+  .pt { background: var(--card); border:1px solid var(--line); border-radius: 16px; padding: 18px 18px 20px; }
+  .pt b { display:block; font-size: 15px; margin: 0 0 4px; color: var(--accent); }
+  .pt span { font-size: 14px; color: var(--muted); }
+  h2 { font-size: 13px; letter-spacing:.1em; text-transform:uppercase; color: var(--muted); margin: 34px 0 10px; }
+  .role { font-size: 16px; color: var(--ink); max-width: 68ch; margin: 0 0 8px; }
+  .tools { display:flex; flex-wrap:wrap; gap:8px; margin: 10px 0 0; }
+  .tools span { font-size: 13px; border:1px solid var(--line); color: var(--muted); border-radius:999px; padding:5px 12px; }
+  .nums { display:flex; flex-wrap:wrap; gap:22px; margin: 14px 0 0; }
+  .nums div { font-size:14px; color:var(--muted); }
+  .nums b { display:block; font-size:26px; color:var(--ink); font-weight:900; letter-spacing:-.02em; }
+  @media (max-width:720px){ .grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">LS Jump Up · 프로젝트3 · 팀 4명</p>
+    <h1>안물어<span class="fish">(魚)</span></h1>
+    <p class="tag">신종 피싱을 불시에 보내 <b>“안 속는 연습”</b>을 시키는 청년 안티피싱 훈련 서비스</p>
+    <a class="cta" href="https://voicefishing.vercel.app" target="_blank" rel="noopener">서비스 바로가기 ↗</a>
+    <p class="meta">로그인 없이 <code>/demo</code>에서 바로 체험할 수 있어요 · 2026.11</p>
+
+    <div class="grid">
+      <div class="pt"><b>실데이터 수집·분류</b><span>금융감독원 등 공공 피싱 공지를 수집해 AI가 수법을 분류</span></div>
+      <div class="pt"><b>상황 맞춤 모의훈련</b><span>이용자 상황에 맞춘 가짜 문자·사이트를 불시에 발송, 무반응=최고점</span></div>
+      <div class="pt"><b>운영자 2단계 승인</b><span>수법→템플릿 승인 전엔 발송 차단, 출처 검증 위키 챗봇</span></div>
+    </div>
+
+    <h2>내 역할 (GE)</h2>
+    <p class="role">데이터 수집·정기 실행 파이프라인, 판정 규칙 설계(무반응=최고점·48시간 재발송), 서버 기반 위키 챗봇(출처 검증), 그리고 소개·대시보드·운영자·모의사이트를 ‘심해 관측 일지’ 콘셉트로 전면 리디자인했습니다.</p>
+
+    <h2>기술</h2>
+    <div class="tools">
+      <span>Next.js 16</span><span>React 19</span><span>TypeScript</span><span>Supabase (Auth·DB·RLS)</span><span>Claude / Gemini API</span><span>Vercel</span>
+    </div>
+
+    <h2>실측 결과</h2>
+    <div class="nums">
+      <div><b>147건</b>수집 글 판정 정답 샘플 채점</div>
+      <div><b>5/5</b>위키 챗봇 고정 문항 통과</div>
+      <div><b>4명</b>팀 협업 · PR/리뷰</div>
+    </div>
+  </main>
+</body>
+</html>
