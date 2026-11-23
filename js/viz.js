@@ -29,7 +29,7 @@ function vizFlow(v) {
 function vizCompare(v) {
   var ul = el("ul", "viz-compare");
   v.items.forEach(function (x, i) {
-    var li = el("li", i === 0 ? "hi" : null);
+    var li = el("li", i === 0 ? "lead" : null);
     li.appendChild(el("span", "viz-l", L(x.l)));
     var track = el("span", "viz-track"), fill = el("i"); fill.style.width = x.v + "%"; track.appendChild(fill); li.appendChild(track);
     li.appendChild(el("b", "mono", x.v + (v.unit || "")));

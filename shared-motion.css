@@ -103,7 +103,7 @@ a.hl-card, a.fig { transition: transform .25s ease, background-color .25s ease, 
 .viz-compare li { display: grid; grid-template-columns: 120px minmax(0, 1fr) 72px; align-items: center; gap: 10px; font-size: 13px; }
 .viz-track { height: 12px; background: #36415E; }
 .viz-track i { display: block; height: 12px; background: #7C86A3; animation: vizgrow .8s cubic-bezier(.2,.7,.2,1) both; transform-origin: left; }
-.viz-compare li.hi .viz-track i, .viz-verdict .v-strong .viz-track i, .viz-verdict .v-ok .viz-track i { background: var(--accent); }
+.viz-compare li.lead .viz-track i, .viz-verdict .v-strong .viz-track i, .viz-verdict .v-ok .viz-track i { background: var(--accent); }
 .viz-compare b { font-weight: 700; }
 .viz-verdict li { grid-template-columns: 44px minmax(0, 1fr) 88px; }
 @keyframes vizin { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }

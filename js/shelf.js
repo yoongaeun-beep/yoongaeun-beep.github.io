@@ -85,18 +85,20 @@
     var row = document.getElementById("shelf-row"); row.textContent = "";
     row.appendChild(el("span", "bookend l"));
     var selEl = null;
-    var dividerDone = false;
+    var box = null;
     l.forEach(function (p) {
-      if (isNote(p) && !dividerDone && shelf.tab !== "notes") { dividerDone = true; row.appendChild(noteDivider()); }
+      // 노트는 '노트 모음함' 하나에 함께 꽂는다(위에 이름표, 테두리로 묶음)
+      if (isNote(p) && !box) { box = noteCase(); row.appendChild(box); }
+      var dest = isNote(p) ? box.querySelector(".note-case-in") : row;
       if (p.id === shelf.sel) {
-        var wrap = el("div", "pulled"); wrap.innerHTML = coverHTML(p); row.appendChild(wrap); selEl = wrap;
+        var wrap = el("div", "pulled"); wrap.innerHTML = coverHTML(p); dest.appendChild(wrap); selEl = wrap;
         if (isLocal(p.link)) mountCoverScreen(wrap, p);
       } else {
         var b = el("button", "spine-btn"); b.type = "button";
         b.setAttribute("aria-label", t("shelf.open", { t: L(p.title) }));
         b.innerHTML = spineHTML(p);
         b.addEventListener("click", function () { pick(p.id, true); });
-        row.appendChild(b);
+        dest.appendChild(b);
       }
     });
     var ghost = el("div", "ghost");
@@ -145,15 +147,17 @@
     }
   }
 
-  // 결과물과 노트 사이의 북엔드: 누르면 노트만 모아 본다
-  function noteDivider() {
-    var b = el("button", "note-end"); b.type = "button";
-    b.setAttribute("aria-label", t("note.tab"));
-    b.appendChild(el("span", "mono", "NOTES"));
-    b.appendChild(el("span", "note-end-t", t("note.tab")));
-    b.appendChild(el("span", "mono", String(P.filter(isNote).length)));
-    b.addEventListener("click", function () { shelf.tab = "notes"; renderShelf(true); });
-    return b;
+  // 노트 모음함: 노트 전부를 테두리 하나로 묶고, 위 이름표에 무엇을 모았는지와 권수를 적는다. 이름표를 누르면 노트만 본다
+  function noteCase() {
+    var box = el("div", "note-case");
+    var tag = el("button", "note-case-tag"); tag.type = "button";
+    tag.appendChild(el("span", "mono", "NOTES"));
+    tag.appendChild(el("b", null, t("note.caseTitle", { n: P.filter(isNote).length })));
+    tag.appendChild(el("span", "note-case-go", t("note.caseGo")));
+    if (shelf.tab !== "notes") tag.addEventListener("click", function () { shelf.tab = "notes"; renderShelf(true); });
+    box.appendChild(tag);
+    box.appendChild(el("div", "note-case-in"));
+    return box;
   }
 
   // 제작 노트: 과정이 특이하거나 채용 담당자가 궁금해할 만한 프로젝트에만 있음. 기본은 접힌 한 줄

@@ -1,6 +1,6 @@
 # 윤가은 개인 저장소 (LS Jump Up 프로젝트3 개인 과제)
 
-LS Jump Up AI 부트캠프(2026.08 ~ 11) 개인 과제 제출용 저장소입니다. 바이브코딩 기초부터 프로젝트3까지의 여정을 포트폴리오와 이력서로 담았습니다.
+LS Jump Up AI 부트캠프(2026.08 ~ 11) 개인 과제 제출용 저장소입니다. 바이브코딩 기초부터 프로젝트3까지의 여정을 포트폴리오에 담고, 이력서는 PDF로 두었습니다.
 
 ## 제출 정보
 
@@ -11,9 +11,7 @@ LS Jump Up AI 부트캠프(2026.08 ~ 11) 개인 과제 제출용 저장소입니
 | 포트폴리오 (배포 사이트) | https://yoongaeun-beep.github.io |
 | 포트폴리오 (HTML 한 페이지 파일) | [portfolio.html](portfolio.html) |
 | LS 여정 (바이브코딩 기초 → 프로젝트3) | https://yoongaeun-beep.github.io/#journey-sec |
-| 이력서 (PDF, 2장) | [resume.pdf](resume.pdf) |
-| 이력서 (웹, PDF 저장 버튼) | https://yoongaeun-beep.github.io/resume.html |
-| vibelog | 추가 예정 |
+| 이력서 (PDF) | [resume.pdf](resume.pdf), 사이트 맨 위 '이력서 다운로드' 버튼 |
 
 ## 포트폴리오에서 볼 곳
 
@@ -38,5 +36,5 @@ LS Jump Up AI 부트캠프(2026.08 ~ 11) 개인 과제 제출용 저장소입니
 
 ## 참고
 
-- 비밀키, 비밀번호, 인터뷰 대상 신원, 개인 연락처(전화, 주소)는 넣지 않았습니다.
+- 비밀키, 비밀번호, 인터뷰 대상 신원은 넣지 않았고, 공개용 이력서 PDF에서는 전화번호를 가렸습니다.
 - 사이트는 정적 HTML이며 빌드 과정이 없습니다. `index.html`을 열면 됩니다.

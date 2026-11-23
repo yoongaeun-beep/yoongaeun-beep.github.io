@@ -142,3 +142,10 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) { .tlm.rv .tlm-cell { opacity: 1 !important; } .tlm-cell.now::after { animation: none; } }
 .tl1-legend li i.tlm-work { background: var(--accent); } .tl1-legend li i.tlm-train { background: var(--fg); }
 .tl1-legend li i.tlm-act { background: #D9A441; } .tl1-legend li i.tlm-edu { background: #7E9CC8; height: 10px; border: 0; }
+
+/* 줄바꿈 정리: 마지막 줄에 한두 글자만 남지 않게 하고, 제목과 오른쪽 짧은 블록은 줄 길이를 고르게 */
+p, li, dd, figcaption { text-wrap: pretty; }
+h1, h2, h3, .mc-title, .mc-me b, .pd-title, .rfb-real, .rfb-first, .jr-changed, .jr-step b, .note-t, .viz-cap, .mc-desc { text-wrap: balance; }
+.cv-dl-top { display: inline-flex; align-items: center; gap: 6px; margin-right: 10px; padding: 7px 12px; background: var(--accent); color: var(--on-accent); font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.cv-dl-top:hover { filter: brightness(1.06); }
+@media (max-width: 700px) { .cv-dl-top { padding: 6px 9px; font-size: 12px; } }

@@ -3,7 +3,6 @@
 // 근거: LS 시간표(xlsx), main.js(프로젝트 1~2), notes.js(노트 날짜와 결과). 공개 사이트에는 PR 번호만 쓰고 링크는 넣지 않는다.
 // 프로젝트3은 다른 컴퓨터에서 진행 중이라 pending으로 두고, 확정되면 그쪽에서 채운다.
 window.SITE_JOURNEY = {
-  vibelog: "",
   stages: [
     {
       id: "basics", period: "2026.08 ~ 09",

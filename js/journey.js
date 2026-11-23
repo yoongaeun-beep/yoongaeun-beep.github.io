@@ -69,8 +69,7 @@ function journeyFoot(J) {
   f.appendChild(el("span", "jr-k mono", t("jr.next")));
   f.appendChild(rich("p", "jr-next", L(J.next)));
   var acts = el("div", "jr-acts");
-  var cv = el("a", "btn btn-primary", t("jr.resume")); cv.href = "resume.html"; acts.appendChild(cv);
-  if (J.vibelog) { var v = el("a", "btn", t("jr.vibelog")); v.href = J.vibelog; v.target = "_blank"; v.rel = "noopener"; acts.appendChild(v); }
+  var cv = el("a", "btn btn-primary", t("jr.resume")); cv.href = "resume.pdf"; cv.setAttribute("download", "윤가은_이력서.pdf"); acts.appendChild(cv);
   f.appendChild(acts);
   return f;
 }

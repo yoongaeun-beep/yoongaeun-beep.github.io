@@ -2,19 +2,27 @@
 // 왼쪽 원호 위의 숫자(01 발견 ~ 05 확인)에 마우스를 올리거나 누르면 원호가 돌고, 가운데 설명과 오른쪽 사진이 바뀐다.
 // 예전 큰 다이얼의 느낌은 살리고 높이는 절반으로 줄였다. 내가 중점으로 맡은 단계는 숫자를 포인트색으로 표시한다.
 var PLAN_KEYS = ["plan.find", "plan.real", "plan.lens", "plan.fix", "plan.check"];
-var DIAL = { cx: -170, cy: 190, r: 290, step: 0.4 };
+// 바퀴(wheel)를 통째로 돌려 숫자가 원호를 따라 미끄러지게 한다. step이 작을수록 앞뒤 단계가 더 많이 보인다
+var DIAL = { cx: -170, cy: 190, r: 290, step: 0.3, hoverDelay: 220, lock: 600 };
 
 function planDial(m) {
   var plan = m.plan, box = el("section", "pd"), active = firstMine(plan);
   var arc = el("div", "pd-arc");
   arc.appendChild(el("span", "pd-ring"));
+  var wheel = el("div", "pd-wheel"); wheel.style.left = DIAL.cx + "px"; wheel.style.top = DIAL.cy + "px";
+  arc.appendChild(wheel);
+  var busyUntil = 0, hoverT = null;
   var orbs = plan.map(function (s, i) {
     var b = el("button", "pd-orb mono" + (s.mine ? " mine" : ""), String(i + 1).padStart(2, "0")); b.type = "button";
     b.setAttribute("aria-label", t(PLAN_KEYS[i]) + " " + L(s.t));
-    b.addEventListener("mouseenter", function () { go(i); });
+    b.style.left = Math.round(DIAL.r * Math.cos(i * DIAL.step)) + "px";
+    b.style.top = Math.round(DIAL.r * Math.sin(i * DIAL.step)) + "px";
+    // 마우스는 잠깐 머물러야 넘어가고, 도는 동안에는 다른 숫자가 지나가도 무시한다(1에서 5로 건너뛰던 문제)
+    b.addEventListener("mouseenter", function () { clearTimeout(hoverT); hoverT = setTimeout(function () { if (Date.now() > busyUntil) go(i); }, DIAL.hoverDelay); });
+    b.addEventListener("mouseleave", function () { clearTimeout(hoverT); });
     b.addEventListener("focus", function () { go(i); });
     b.addEventListener("click", function () { go(i); });
-    arc.appendChild(b);
+    wheel.appendChild(b);
     return b;
   });
   arc.appendChild(el("span", "pd-hint", t("main.dialHint")));
@@ -29,11 +37,12 @@ function planDial(m) {
   box.appendChild(arc); box.appendChild(tabs); box.appendChild(text); box.appendChild(shot);
 
   function go(i) {
-    active = i;
+    if (i === active && wheel.style.transform) return;
+    active = i; busyUntil = Date.now() + DIAL.lock;
+    var rad = -i * DIAL.step;
+    wheel.style.transform = "rotate(" + rad + "rad)";
     orbs.forEach(function (b, k) {
-      var th = (k - i) * DIAL.step;
-      b.style.left = Math.round(DIAL.cx + DIAL.r * Math.cos(th)) + "px";
-      b.style.top = Math.round(DIAL.cy + DIAL.r * Math.sin(th)) + "px";
+      b.style.transform = "translate(-50%, -50%) rotate(" + (-rad) + "rad)";
       b.classList.toggle("on", k === i);
       b.style.opacity = Math.abs(k - i) > 2 ? "0.25" : "1";
       b.setAttribute("aria-pressed", String(k === i));
