@@ -121,7 +121,13 @@
     var main = el("div", "d-main");
     main.appendChild(el("span", "d-meta", "No." + cur._no + " " + (L(cur.label) || catOf(cur)) + " " + dot(cur.date)));
     main.appendChild(el("span", "d-title", L(cur.title)));
-    main.appendChild(el("span", "d-sum", L(cur.summary)));
+    // 설명은 불릿(points)이 있으면 불릿으로, 핵심 구절은 **굵게**. 없으면 원래 문단
+    var pts = cur.points && cur.points[lang];
+    if (pts && pts.length) {
+      var pl = el("ul", "d-points");
+      pts.forEach(function (x) { pl.appendChild(rich("li", null, x)); });
+      main.appendChild(pl);
+    } else main.appendChild(el("span", "d-sum", L(cur.summary)));
     if (cur.tools && cur.tools.length) {
       var ul = el("ul", "methods");
       cur.tools.forEach(function (x) { ul.appendChild(el("li", "tag", toolName(x))); });

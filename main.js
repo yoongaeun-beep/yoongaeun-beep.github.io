@@ -25,11 +25,11 @@ window.SITE_MAIN = [
     tags: ["Python", "LightGBM", "Dash", "Claude Code", { ko: "3인 팀 조장", en: "Team lead of 3" }],
     // 기획 흐름(2026-11-23): 왜 이 문제였고, 진짜 문제를 무엇으로 다시 정했고, 어떤 관점으로 해법까지 갔는지. 근거: steps, dev/knowledge/profile-gaeun.md
     plan: [
-      { mine: false, t: { ko: "날짜만 보고 교체", en: "Replaced by age" }, d: { ko: "교체 3,286건 중 22.7%가 고장 난 뒤의 긴급 교체", en: "22.7% of 3,286 replacements were emergency fixes" }, line: { ko: "부품을 쓴 날짜만 보고 교체했고, 교체 3,286건 중 22.7%가 고장 난 뒤의 긴급 교체였습니다.", en: "Parts were replaced by age alone; 22.7% of 3,286 replacements were emergencies." }, key: { ko: "긴급 교체 22.7%", en: "22.7% emergency" }, img: "assets/main/dashboard-main.png" },
-      { mine: true, t: { ko: "예측이 아니라 발주 시점", en: "Not prediction but order timing" }, d: { ko: "팀 논의로 실무자의 어려움은 '언제 주문하나'라는 판단임을 확인", en: "Found the real struggle is deciding when to order" }, line: { ko: "처음에는 30일 안의 고장 확률을 보여 주려 했지만, 팀 논의에서 실무자가 어려워하는 건 '언제 주문하나'라는 판단임을 확인했습니다.", en: "We first planned a 30-day failure dashboard, then found the real struggle is deciding when to order." }, key: { ko: "예측보다 발주 시점", en: "Order timing over prediction" }, img: "assets/main/dashboard-main.png" },
-      { mine: false, t: { ko: "확률 말고 비용과 행동", en: "Cost and action, not odds" }, d: { ko: "일찍 사면 보관비, 늦으면 긴급 작업비와 정지 손실", en: "Too early costs storage, too late costs downtime" }, line: { ko: "일찍 사면 보관비가, 늦게 사면 긴급 작업비와 설비 정지 손실이 붙습니다. 결과는 확률이 아니라 D-day와 발주 마감으로 보여 주기로 했습니다.", en: "Early orders cost storage; late ones cost emergency work and downtime. Results show as D-day and order deadline, not odds." }, key: { ko: "확률 대신 비용과 행동", en: "Cost and action, not odds" }, img: "assets/main/dashboard-main.png" },
-      { mine: true, t: { ko: "고장 예측 + 총비용 곡선", en: "Prediction + cost curve" }, d: { ko: "부품별 예측 모델과 발주일별 총비용으로 최소 비용 시점 제안", en: "Per-part models and daily total cost give the best order date" }, line: { ko: "부품별 고장 예측 모델과 발주일별 총비용 곡선으로 비용이 최소가 되는 발주 시점을 제안합니다. 저는 모델과 화면 통합을 맡았습니다.", en: "Per-part models and a daily total-cost curve point to the lowest-cost order date. I built the models and integrated the screens." }, key: { ko: "총비용 최소 시점 제안", en: "Lowest-cost order date" }, img: "assets/main/dashboard-main.png" },
-      { mine: false, t: { ko: "믿을 수 있는 숫자로", en: "Numbers we can trust" }, d: { ko: "0.98을 의심해 정답 누출을 걷어내고 0.88~0.94, 테스트 47건", en: "Doubted 0.98, removed leakage: 0.88~0.94, 47 tests" }, line: { ko: "정확도가 0.98로 너무 높게 나오자 의심해 정답 누출을 찾아 걷어냈고, 믿을 수 있는 0.88~0.94를 얻었습니다. 합치기 전 테스트는 47건입니다.", en: "AUC of 0.98 looked too good, so we removed the leakage and got a trustworthy 0.88~0.94. 47 tests gate every merge." }, key: { ko: "AUC 0.88~0.94", en: "AUC 0.88~0.94" }, img: "assets/main/dashboard-main.png" }
+      { mine: false, t: { ko: "날짜만 보고 교체", en: "Replaced by age" }, d: { ko: "교체 3,286건 중 22.7%가 고장 난 뒤의 긴급 교체", en: "22.7% of 3,286 replacements were emergency fixes" }, line: { ko: "부품을 쓴 날짜만 보고 교체했고, 교체 3,286건 중 **22.7%가 고장 난 뒤의 긴급 교체**였습니다.", en: "Parts were replaced by age alone; 22.7% of 3,286 replacements were emergencies." }, key: { ko: "긴급 교체 22.7%", en: "22.7% emergency" }, img: "assets/main/dashboard-main.png" },
+      { mine: true, t: { ko: "예측이 아니라 발주 시점", en: "Not prediction but order timing" }, d: { ko: "팀 논의로 실무자의 어려움은 '언제 주문하나'라는 판단임을 확인", en: "Found the real struggle is deciding when to order" }, line: { ko: "처음에는 30일 안의 고장 확률을 보여 주려 했지만, 팀 논의에서 실무자가 어려워하는 건 **'언제 주문하나'라는 판단**임을 확인했습니다.", en: "We first planned a 30-day failure dashboard, then found the real struggle is deciding when to order." }, key: { ko: "예측보다 발주 시점", en: "Order timing over prediction" }, img: "assets/main/dashboard-main.png" },
+      { mine: false, t: { ko: "확률 말고 비용과 행동", en: "Cost and action, not odds" }, d: { ko: "일찍 사면 보관비, 늦으면 긴급 작업비와 정지 손실", en: "Too early costs storage, too late costs downtime" }, line: { ko: "일찍 사면 보관비가, 늦게 사면 긴급 작업비와 설비 정지 손실이 붙습니다. 결과는 **확률이 아니라 D-day와 발주 마감**으로 보여 주기로 했습니다.", en: "Early orders cost storage; late ones cost emergency work and downtime. Results show as D-day and order deadline, not odds." }, key: { ko: "확률 대신 비용과 행동", en: "Cost and action, not odds" }, img: "assets/main/dashboard-main.png" },
+      { mine: true, t: { ko: "고장 예측 + 총비용 곡선", en: "Prediction + cost curve" }, d: { ko: "부품별 예측 모델과 발주일별 총비용으로 최소 비용 시점 제안", en: "Per-part models and daily total cost give the best order date" }, line: { ko: "부품별 고장 예측 모델과 발주일별 총비용 곡선으로 **비용이 최소가 되는 발주 시점**을 제안합니다. 저는 모델과 화면 통합을 맡았습니다.", en: "Per-part models and a daily total-cost curve point to the lowest-cost order date. I built the models and integrated the screens." }, key: { ko: "총비용 최소 시점 제안", en: "Lowest-cost order date" }, img: "assets/main/dashboard-main.png" },
+      { mine: false, t: { ko: "믿을 수 있는 숫자로", en: "Numbers we can trust" }, d: { ko: "0.98을 의심해 정답 누출을 걷어내고 0.88~0.94, 테스트 47건", en: "Doubted 0.98, removed leakage: 0.88~0.94, 47 tests" }, line: { ko: "정확도가 0.98로 너무 높게 나오자 의심해 **정답 누출을 찾아 걷어냈고**, 믿을 수 있는 0.88~0.94를 얻었습니다. 합치기 전 테스트는 47건입니다.", en: "AUC of 0.98 looked too good, so we removed the leakage and got a trustworthy 0.88~0.94. 47 tests gate every merge." }, key: { ko: "AUC 0.88~0.94", en: "AUC 0.88~0.94" }, img: "assets/main/dashboard-main.png" }
     ],
     // 어디까지가 내 일인지(채용담당자 점검 2026-11-23). 근거: role, team(기여도 35%)
     split: {
@@ -137,11 +137,11 @@ window.SITE_MAIN = [
     },
     tags: ["Supabase", "Vercel", "Claude API", { ko: "식약처 공공데이터", en: "MFDS open data" }, { ko: "기획과 화면 설계", en: "Planning and UI" }],
     plan: [
-      { mine: true, t: { ko: "서명 직전의 기록 맞추기", en: "Reconciling records at signing" }, d: { ko: "QA 담당자가 시스템, 엑셀, 메일을 오가며 로트 상태 확인", en: "QA checks lots across systems, sheets and email" }, line: { ko: "QA 담당자는 출하 서명 직전까지 시스템, 엑셀, 메일을 오가며 로트 상태를 맞춥니다. 가상 페르소나 5명을 인터뷰해 보니 로트 한 건 확인에 15분에서 3~4시간이 들었습니다.", en: "QA reconciles lot status across systems, sheets and email until signing; persona interviews put one lot at 15 minutes to 3~4 hours." }, key: { ko: "5명 중 3명, 서명 직전에야 알았다", en: "3 of 5 found out only at signing" }, img: "assets/pharmaflow/lot.jpg" },
-      { mine: true, t: { ko: "기록이 아니라 종결 상태", en: "Not records but closure status" }, d: { ko: "5명 모두 처리 결과를 묻고 기다림, 공유표는 입력이 안 돼 실패", en: "All 5 wait for status; shared sheets failed" }, line: { ko: "기록이 흩어진 것보다 다른 부서의 처리 결과가 전달되지 않는 것이 문제였습니다. 공유표를 만든 사람도 상대가 입력하지 않아 실패했습니다.", en: "The issue was not scattered records but closure status never reaching other teams; shared sheets failed because no one filled them in." }, key: { ko: "5명 중 5명, 묻고 기다린다", en: "5 of 5 wait and ask" }, img: "assets/pharmaflow/issue.jpg" },
-      { mine: false, t: { ko: "따로 적지 않아도 쌓이게", en: "Records that build themselves" }, d: { ko: "새 대장 대신 일하는 흐름 안에 기록, 판정은 코드와 승인은 사람", en: "Records inside the workflow; code judges, people approve" }, line: { ko: "대장을 하나 더 만드는 대신 일하는 흐름 안에 기록을 넣었습니다. 판정은 코드가, 승인은 사람이 하고, 만들지 않을 것 10가지를 먼저 정했습니다.", en: "Instead of another tracker, records live inside the workflow. Code judges, people approve, and ten things were ruled out first." }, key: { ko: "하지 않을 것 10가지", en: "10 things left out" }, img: "assets/pharmaflow/process.jpg" },
-      { mine: true, t: { ko: "로트 하나, 흐름 하나", en: "One lot, one flow" }, d: { ko: "시험값 저장부터 출하 검토까지 한 화면, 열린 이슈면 출하 차단", en: "One screen from result to release; open issues block release" }, line: { ko: "시험값 저장부터 이슈 종결, 내부 출하 검토까지 한 화면에서 이어집니다. 열린 이슈가 있으면 출하를 고를 수 없고, 홈에는 지금 할 일이 먼저 보입니다.", en: "From saving a result to closing the issue and reviewing release on one screen; open issues block release, and home shows today's tasks first." }, key: { ko: "한 화면 흐름, 열린 이슈면 출하 차단", en: "One flow; open issues block release" }, img: "assets/pharmaflow/home.jpg" },
-      { mine: false, t: { ko: "숫자로 확인", en: "Checked in numbers" }, d: { ko: "자동 시험 536개, 팀 QA 25건, 현직자 1명 대면 확인", en: "536 tests, 25 QA checks, one practitioner interview" }, line: { ko: "자동 시험 536개와 팀 직접 QA 25건을 모두 통과했고, 현직자 1명을 직접 만나 문제 방향을 확인했습니다.", en: "All 536 automated tests and 25 manual QA checks pass, and one practitioner confirmed the direction in person." }, key: { ko: "시험 536개, QA 25건 통과", en: "536 tests, 25 QA checks" }, img: "assets/pharmaflow/regulatory.jpg" }
+      { mine: true, t: { ko: "서명 직전의 기록 맞추기", en: "Reconciling records at signing" }, d: { ko: "QA 담당자가 시스템, 엑셀, 메일을 오가며 로트 상태 확인", en: "QA checks lots across systems, sheets and email" }, line: { ko: "QA 담당자는 출하 서명 직전까지 시스템, 엑셀, 메일을 오가며 로트 상태를 맞춥니다. 가상 페르소나 5명을 인터뷰해 보니 **로트 한 건 확인에 15분에서 3~4시간**이 들었습니다.", en: "QA reconciles lot status across systems, sheets and email until signing; persona interviews put one lot at 15 minutes to 3~4 hours." }, key: { ko: "5명 중 3명, 서명 직전에야 알았다", en: "3 of 5 found out only at signing" }, img: "assets/pharmaflow/lot.jpg" },
+      { mine: true, t: { ko: "기록이 아니라 종결 상태", en: "Not records but closure status" }, d: { ko: "5명 모두 처리 결과를 묻고 기다림, 공유표는 입력이 안 돼 실패", en: "All 5 wait for status; shared sheets failed" }, line: { ko: "기록이 흩어진 것보다 **다른 부서의 처리 결과가 전달되지 않는 것**이 문제였습니다. 공유표를 만든 사람도 상대가 입력하지 않아 실패했습니다.", en: "The issue was not scattered records but closure status never reaching other teams; shared sheets failed because no one filled them in." }, key: { ko: "5명 중 5명, 묻고 기다린다", en: "5 of 5 wait and ask" }, img: "assets/pharmaflow/issue.jpg" },
+      { mine: false, t: { ko: "따로 적지 않아도 쌓이게", en: "Records that build themselves" }, d: { ko: "새 대장 대신 일하는 흐름 안에 기록, 판정은 코드와 승인은 사람", en: "Records inside the workflow; code judges, people approve" }, line: { ko: "대장을 하나 더 만드는 대신 **일하는 흐름 안에 기록**을 넣었습니다. 판정은 코드가, 승인은 사람이 하고, 만들지 않을 것 10가지를 먼저 정했습니다.", en: "Instead of another tracker, records live inside the workflow. Code judges, people approve, and ten things were ruled out first." }, key: { ko: "하지 않을 것 10가지", en: "10 things left out" }, img: "assets/pharmaflow/process.jpg" },
+      { mine: true, t: { ko: "로트 하나, 흐름 하나", en: "One lot, one flow" }, d: { ko: "시험값 저장부터 출하 검토까지 한 화면, 열린 이슈면 출하 차단", en: "One screen from result to release; open issues block release" }, line: { ko: "시험값 저장부터 이슈 종결, 내부 출하 검토까지 한 화면에서 이어집니다. **열린 이슈가 있으면 출하를 고를 수 없고**, 홈에는 지금 할 일이 먼저 보입니다.", en: "From saving a result to closing the issue and reviewing release on one screen; open issues block release, and home shows today's tasks first." }, key: { ko: "한 화면 흐름, 열린 이슈면 출하 차단", en: "One flow; open issues block release" }, img: "assets/pharmaflow/home.jpg" },
+      { mine: false, t: { ko: "숫자로 확인", en: "Checked in numbers" }, d: { ko: "자동 시험 536개, 팀 QA 25건, 현직자 1명 대면 확인", en: "536 tests, 25 QA checks, one practitioner interview" }, line: { ko: "**자동 시험 536개와 팀 직접 QA 25건**을 모두 통과했고, 현직자 1명을 직접 만나 문제 방향을 확인했습니다.", en: "All 536 automated tests and 25 manual QA checks pass, and one practitioner confirmed the direction in person." }, key: { ko: "시험 536개, QA 25건 통과", en: "536 tests, 25 QA checks" }, img: "assets/pharmaflow/regulatory.jpg" }
     ],
     // 본인 작업물 샘플: 직접 디자인한 팀 발표 자료(10/29) 중 3장. 팀원 이름과 배포 주소가 없는 장만 골랐다
     samples: [
@@ -295,7 +295,7 @@ window.SITE_MAIN = [
           "en": "52.5% of impersonation victims in their 20s~30s"
         },
         "line": {
-          "ko": "기관 사칭형 피해자 중 20~30대가 52.5%였습니다(경찰청, 팀 리서치). 수칙은 알아도 확인에 쓰는 번호, 검색 결과, 고객센터가 이미 위조돼 있었습니다.",
+          "ko": "기관 사칭형 피해자 중 20~30대가 52.5%였습니다(경찰청, 팀 리서치). 수칙은 알아도 **확인에 쓰는 번호, 검색 결과, 고객센터가 이미 위조돼** 있었습니다.",
           "en": "52.5% of impersonation victims were in their 20s~30s (police data, team research). People knew the rules, but the numbers, search results and help lines they checked were already forged."
         },
         "key": {
@@ -315,7 +315,7 @@ window.SITE_MAIN = [
           "en": "Read-only training fades in weeks"
         },
         "line": {
-          "ko": "읽기만 하는 예방 교육은 몇 주면 효과가 사라집니다. 사기는 미끼, 재촉, 위조된 확인 경로, 노리는 것 순서로 오기 때문에 수법마다 이 순서를 해부도로 보여 주기로 했습니다.",
+          "ko": "읽기만 하는 예방 교육은 **몇 주면 효과가 사라집니다**. 사기는 미끼, 재촉, 위조된 확인 경로, 노리는 것 순서로 오기 때문에 수법마다 이 순서를 해부도로 보여 주기로 했습니다.",
           "en": "Read-only prevention fades within weeks. Scams arrive as bait, pressure, a forged way to check, then the target, so each tactic is shown as that anatomy."
         },
         "key": {
@@ -335,7 +335,7 @@ window.SITE_MAIN = [
           "en": "Under 3 seconds isn't judged; 48 hours between drills"
         },
         "line": {
-          "ko": "가입해 두면 새 수법이 내 상황에 맞춘 연습 문자와 메일로 불시에 옵니다. 판정 규칙을 기획 문서에 맞춰 아무 반응이 없으면 최고점, 3초 안에 나가면 실수로 보고 판정하지 않게, 같은 사람에게는 48시간 간격을 두게 했습니다.",
+          "ko": "가입해 두면 새 수법이 내 상황에 맞춘 연습 문자와 메일로 불시에 옵니다. 판정 규칙을 기획 문서에 맞춰 **아무 반응이 없으면 최고점**, 3초 안에 나가면 실수로 보고 판정하지 않게, 같은 사람에게는 48시간 간격을 두게 했습니다.",
           "en": "Once signed up, new tactics arrive as unannounced practice texts and emails. I aligned the rules to the spec: no reaction scores best, exits under 3 seconds are not judged, and drills to one person are 48 hours apart."
         },
         "key": {
@@ -355,7 +355,7 @@ window.SITE_MAIN = [
           "en": "5 sources collected; tactic and copy approved twice"
         },
         "line": {
-          "ko": "금감원, KISA 등 출처 5곳을 정기적으로 모읍니다. 새 수법은 운영자가 근거를 보고 승인하고, AI가 만든 문구와 가짜 사이트도 한 번 더 승인해야 연습 연락이 나갑니다.",
+          "ko": "금감원, KISA 등 출처 5곳을 정기적으로 모읍니다. 새 수법은 운영자가 근거를 보고 승인하고, AI가 만든 문구와 가짜 사이트도 **한 번 더 승인해야** 연습 연락이 나갑니다.",
           "en": "Five sources, including the FSS and KISA, are collected on a schedule. An operator approves each new tactic on its evidence, and the AI-drafted copy and decoy site need a second approval before anything is sent."
         },
         "key": {
@@ -375,7 +375,7 @@ window.SITE_MAIN = [
           "en": "147 labeled samples; wiki chatbot 5/5"
         },
         "line": {
-          "ko": "수법 관련 글인지 가려내는 판정을 정답 샘플 147건으로 채점해 놓친 것 0건, 잘못 울린 것 5건을 확인했고, 그래서 사람 승인을 남겼습니다. 팀 위키 챗봇은 찾은 문서만 근거로 답하게 고쳐 고정 질문 5개를 모두 맞히게 했습니다(처음 3개).",
+          "ko": "수법 관련 글인지 가려내는 판정을 정답 샘플 147건으로 채점해 **놓친 것 0건, 잘못 울린 것 5건**을 확인했고, 그래서 사람 승인을 남겼습니다. 팀 위키 챗봇은 찾은 문서만 근거로 답하게 고쳐 고정 질문 5개를 모두 맞히게 했습니다(처음 3개).",
           "en": "Scoring the relevance check on 147 labeled samples gave 0 misses and 5 false alarms, which is why human approval stays. The team wiki chatbot now answers only from retrieved pages and gets all 5 fixed questions right (3 at first)."
         },
         "key": {

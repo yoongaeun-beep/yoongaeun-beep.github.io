@@ -1,4 +1,4 @@
-﻿// 프로젝트 카드의 기획 흐름 다이얼(캔버스 시안 C 확정 2026-11-23).
+// 프로젝트 카드의 기획 흐름 다이얼(캔버스 시안 C 확정 2026-11-23).
 // 왼쪽 원호 위의 숫자(01 발견 ~ 05 확인)에 마우스를 올리거나 누르면 원호가 돌고, 가운데 설명과 오른쪽 사진이 바뀐다.
 // 예전 큰 다이얼의 느낌은 살리고 높이는 절반으로 줄였다. 내가 중점으로 맡은 단계는 숫자를 포인트색으로 표시한다.
 var PLAN_KEYS = ["plan.find", "plan.real", "plan.lens", "plan.fix", "plan.check"];
@@ -62,8 +62,9 @@ function fillDialText(box, s, i) {
   top.appendChild(el("span", "pd-tag mono", String(i + 1).padStart(2, "0") + "  " + t(PLAN_KEYS[i])));
   if (s.mine) top.appendChild(el("span", "pd-mine", t("plan.mineBadge")));
   box.appendChild(top);
+  box.appendChild(dialProgress(i));
   box.appendChild(el("p", "pd-title", L(s.t)));
-  box.appendChild(el("p", "pd-line", L(s.line || s.d)));
+  box.appendChild(rich("p", "pd-line", L(s.line || s.d)));
   if (s.key) box.appendChild(el("span", "pd-key mono", L(s.key)));
 }
 function fillDialShot(box, s, m) {
@@ -83,4 +84,14 @@ function shotCaption(src, m) {
   var hit = (m.images || []).concat(m.samples || []).filter(function (x) { return x.src === src; })[0];
   if (hit) cap.appendChild(el("span", null, L(hit.alt)));
   return cap;
+}
+// 단계 구분 막대: 5칸 중 지금 단계까지 채워, 01에서 02로 넘어갈 때 단계가 바뀌었다는 것이 또렷하게 보이게 한다
+function dialProgress(i) {
+  var bar = el("div", "pd-prog");
+  PLAN_KEYS.forEach(function (k, n) {
+    var seg = el("span", n < i ? "done" : n === i ? "on" : null);
+    seg.appendChild(el("i", "mono", String(n + 1).padStart(2, "0"))); seg.title = t(k);
+    bar.appendChild(seg);
+  });
+  return bar;
 }

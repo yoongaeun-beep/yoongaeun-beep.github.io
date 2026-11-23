@@ -315,3 +315,17 @@
 @media (max-width: 700px) { .mc { padding: 18px 14px 22px; } }
 @media (prefers-reduced-motion: reduce) { .mc .mc-title, .mc .mc-me b, .mc .mc-nums li, .pd-text.fade .pd-title, .pd-text.fade .pd-key { animation: none; } }
 @media (min-width: 901px) { .mc-top { flex-wrap: nowrap; } .mc-top-l { flex: 1 1 auto; } .mc-me { flex: 0 1 340px; } }
+
+/* 다이얼 단계 막대와 설명 강조 */
+.pd-prog { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin: 2px 0 4px; }
+.pd-prog span { position: relative; height: 4px; background: var(--line); }
+.pd-prog span.done { background: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.pd-prog span.on { background: var(--accent); }
+.pd-prog i { position: absolute; top: 8px; left: 0; font-style: normal; font-size: 10.5px; letter-spacing: .04em; color: var(--dim); white-space: nowrap; }
+.pd-prog span.on i { color: var(--accent-ink); font-weight: 700; }
+.pd-prog { margin-bottom: 22px; }
+.pd-text { border-left: 1px solid var(--line); padding-left: 24px; }
+.pd-line strong.hi { color: var(--fg); }
+.d-points { margin: 6px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; line-height: 1.6; color: var(--soft); }
+.d-points li::marker { color: var(--accent); }
+@media (max-width: 900px) { .pd-text { border-left: 0; padding-left: 0; } }

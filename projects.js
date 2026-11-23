@@ -89,6 +89,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "inbox-diagnosis",
+    points: {"ko": ["Gmail 받은편지함 **2,173개 대화**의 패턴 분석", "필터를 걸면 메일이 얼마나 줄어드는지 **직접 눌러 보는 시뮬레이션**", "단계별 정리 체크리스트"], "en": ["Analyzed **2,173 inbox threads** in Gmail", "**A clickable simulator** of how much each filter cuts", "A step-by-step cleanup checklist"]},
     label: { ko: "메일함 데이터 분석", en: "Inbox data analysis" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "automation",
     design: "inbox", spineH: 392,
@@ -105,6 +106,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "career-timeline",
+    points: {"ko": ["이력서와 경력 문서 **여러 개에 흩어진 사실**을 연표 하나로", "학력, 경력, 연구, 활동별로 **걸러 보기**", "문서끼리 **어긋나는 날짜와 숫자**를 바로잡음"], "en": ["Facts **scattered across several resumes** in one timeline", "**Filter** by education, work, research and activities", "Fixed **dates and numbers that disagreed**"]},
     label: { ko: "경력 연표 시각화", en: "Career timeline viz" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "automation",
     design: "timeline", spineH: 356,
@@ -120,6 +122,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "daily-update",
+    points: {"ko": ["지금 보고 있는 이 페이지", "매일 새벽 Claude 작업을 **자동으로 모아** 프로젝트와 블로그 초안 작성", "**'올려' 한 마디**로 반영, 공개 전 **개인정보 점검**"], "en": ["The page you are reading", "Every night it **collects my Claude work** and drafts project and blog entries", "Publishes on **a one-word approval**, with a **privacy check** first"]},
     label: { ko: "포트폴리오 자동화", en: "Portfolio automation" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "automation",
     design: "daily", spineH: 416,
@@ -154,6 +157,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "sunblock-helper",
+    points: {"ko": ["공개 날씨 API에서 **지금 자외선 지수와 시간별 예보**를 받아 옴", "직접 설계한 판단 함수로 **선크림 바를 시각과 횟수**를 정해 줌", "불러오는 중, 데이터 없음, 실패 **세 가지 상태를 모두 처리**, 실패하면 '실제 날씨 아님' 표시"], "en": ["Pulls **the current UV index and hourly forecast** from a public weather API", "A decision function I designed sets **when and how often to apply sunscreen**", "**Handles loading, no-data and failure**, marking fallback data as not real"]},
     label: { ko: "날씨 API 연동 웹앱", en: "Weather-API web app" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "life",
     design: "generic", spineH: 388,
@@ -188,6 +192,7 @@ window.SITE_PROJECTS = [
   },
   {
     id: "market-insight-site",
+    points: {"ko": ["해외 시장조사에서 AI 결과가 **뻔하고 맞는지 확신하기 어려웠던** 불편에서 출발", "문제 정의, 정보 구조, 요구사항, 개발 계획을 **AI 인터뷰로 차례로** 만들고 단계별로 개발", "결과: **한 줄 결론, 근거 번호, 확신도**를 갖춘 트렌드 브리프 사이트", "로그인형이라 주소는 비공개, 샘플 데이터로 띄운 화면만 실음"], "en": ["Started from AI market research that felt **obvious and hard to trust**", "Built problem, IA, requirements and plan **through AI interviews**, then developed in phases", "Result: trend briefs with **a one-line verdict, numbered evidence and confidence**", "Login-only, so the URL stays private; the cover uses sample data"]},
     label: { ko: "AI 조사 브리프 사이트", en: "AI research brief site" },  // 책등에 쓰는 분류명(누구나 알아볼 수 있게)
     category: "side",
     design: "brief", spineH: 420, cover: "assets/covers/market-insight-site.jpg",
