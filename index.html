@@ -3,11 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>윤가은 실험 노트</title>
-<meta name="description" content="윤가은의 포트폴리오. 바이오와 제약 도메인, 해외 커뮤니케이션, AI 자동화. 매일 새벽 2시에 스스로 업데이트됩니다.">
+<title>윤가은 포트폴리오</title>
+<meta name="description" content="윤가은의 포트폴리오. 바이오 제약 실무, 시장 분석 리포트, AI 업무 자동화.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@500;700;800;900&family=Hahmlet:wght@300;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@500;700;800;900&family=Hahmlet:wght@300;500&family=IBM+Plex+Mono:wght@400;500&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared-projects.css">
+<link rel="stylesheet" href="shared-motion.css">
+<link rel="stylesheet" href="shared-journey.css">
 <link rel="stylesheet" href="styles.css">
 
 </head>
@@ -17,10 +22,13 @@
     <a class="brand" href="#top" data-i18n="name"></a>
     <nav class="nav" aria-label="섹션">
       <a href="#about" data-i18n="nav.about"></a>
+      <a href="#reframe-sec" data-i18n="nav.reframe"></a>
+      <a href="#timeline-sec" data-i18n="nav.timeline"></a>
       <a href="#experience" data-i18n="nav.experience"></a>
-      <a href="#projects" data-i18n="nav.projects"></a>
-      <a href="#activities" data-i18n="nav.activities"></a>
       <a href="#training" data-i18n="nav.training"></a>
+      <a href="#projects" data-i18n="nav.projects"></a>
+      <a href="#journey-sec" data-i18n="nav.journey"></a>
+      <a href="#activities" data-i18n="nav.activities"></a>
       <a href="#contact" data-i18n="nav.contact"></a>
     </nav>
     <div class="lang" role="group" aria-label="Language">
@@ -34,21 +42,22 @@
   <section class="hero">
     <div class="hero-copy">
       <p class="kicker mono" data-i18n="kicker"></p>
-      <h1 class="hero-name-big" data-i18n="name"></h1>
-      <p class="identity" id="identity"></p>
-      <p class="headline" id="headline"></p>
+      <p class="hero-name" data-i18n="name"></p>
+      <h1 class="hero-line" id="hero-line"></h1>
+      <p class="hero-sub" id="hero-sub"></p>
+      <p class="ai-rule" id="ai-rule"></p>
       <ul class="kw-chips" id="keywords"></ul>
       <ul class="highlights" id="highlights"></ul>
-      <div class="cta">
-        <a class="btn btn-primary" href="#contact" data-i18n="cta.contact"></a>
-        <a class="btn" href="#projects" data-i18n="cta.projects"></a>
-      </div>
     </div>
     <aside class="profile" aria-label="프로필 요약">
       <dl class="profile-facts" id="glance"></dl>
       <div class="profile-mail">
         <span class="mono profile-k" data-i18n="profile.mail"></span>
         <span class="profile-email" id="profile-email"></span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#contact" data-i18n="cta.contact"></a>
+        <a class="btn" href="#projects" data-i18n="cta.projects"></a>
       </div>
     </aside>
   </section>
@@ -61,11 +70,32 @@
     </div>
   </section>
 
+  <section id="reframe-sec" class="section reframe-sec">
+    <h2 class="label mono" data-i18n="nav.reframe.n"></h2>
+    <div class="body">
+      <p class="rf-lede" data-i18n="rf.lede"></p>
+      <div class="rf" id="reframe"></div>
+    </div>
+  </section>
+
+  <section id="timeline-sec" class="section">
+    <h2 class="label mono" data-i18n="nav.timeline.n"></h2>
+    <div class="body" id="timeline"></div>
+  </section>
+
   <section id="experience" class="section">
     <h2 class="label mono" data-i18n="nav.experience.n2"></h2>
     <div class="body">
       <ol class="jobs" id="exp-work"></ol>
       <div class="school" id="school"></div>
+    </div>
+  </section>
+
+  <section id="training" class="section">
+    <h2 class="label mono" data-i18n="nav.training.n"></h2>
+    <div class="body">
+      <ol class="rows" id="training-list"></ol>
+      <div class="certs" id="certs"></div>
     </div>
   </section>
 
@@ -75,63 +105,63 @@
       <nav class="pindex" id="pindex" aria-label="프로젝트 목록"></nav>
     </div>
     <div class="body">
-    <div class="main-projects" id="main-projects"></div>
-    <div class="side-block">
-    <div class="side-label"><span class="mono" data-i18n="side.kicker"></span><span data-i18n="side.lede"></span></div>
-    <div class="auto">
-      <div class="auto-intro">
-        <div class="clock" aria-hidden="true"><span class="moon"></span><span class="clock-time mono">02:00</span></div>
-        <h3 class="auto-hook" id="hook"></h3>
-        <p class="auto-sub" id="hook-sub"></p>
-        <details class="how">
-          <summary data-i18n="how.q"></summary>
-          <ol id="how"></ol>
+      <div class="main-projects" id="main-projects"></div>
+      <div class="side-block">
+        <div class="side-label"><span class="mono" data-i18n="side.kicker"></span><span data-i18n="side.lede"></span></div>
+        <details class="auto-wrap">
+          <summary data-i18n="auto.q"></summary>
+        <div class="auto">
+          <div class="auto-intro">
+            <div class="clock" aria-hidden="true"><span class="moon"></span><span class="clock-time mono">02:00</span></div>
+            <h3 class="auto-hook" id="hook"></h3>
+            <p class="auto-sub" id="hook-sub"></p>
+            <details class="how">
+              <summary data-i18n="how.q"></summary>
+              <ol id="how"></ol>
+            </details>
+          </div>
+          <aside class="log" aria-labelledby="log-title">
+            <div class="log-head">
+              <span class="log-title mono" id="log-title"></span>
+              <span class="live mono"><span class="live-dot" aria-hidden="true"></span><span data-i18n="log.auto"></span></span>
+            </div>
+            <ol class="log-list mono" id="log"></ol>
+          </aside>
+        </div>
         </details>
-      </div>
-      <aside class="log" aria-labelledby="log-title">
-        <div class="log-head">
-          <span class="log-title mono" id="log-title"></span>
-          <span class="live mono"><span class="live-dot" aria-hidden="true"></span><span data-i18n="log.auto"></span></span>
+        <div class="shelf-wrap">
+          <div class="shelf-head">
+            <div class="shelf-title">
+              <span class="mono accent" data-i18n="shelf.kicker"></span>
+              <h3><span data-i18n="shelf.title"></span> <span class="mono accent shelf-count" id="shelf-count"></span></h3>
+              <p data-i18n="shelf.lede"></p>
+            </div>
+            <div class="shelf-controls">
+              <div class="tabs" id="tabs" role="group" aria-label="묶음"></div>
+              <button type="button" class="arrow" id="prev" aria-label="이전 프로젝트">←</button>
+              <button type="button" class="arrow arrow-on" id="next" aria-label="다음 프로젝트">→</button>
+            </div>
+          </div>
+          <div class="shelf">
+            <div class="shelf-row" id="shelf-row"></div>
+            <div class="plank" aria-hidden="true"><span></span></div>
+          </div>
+          <div class="detail" id="detail" aria-live="polite"></div>
+          <div class="story" id="story"></div>
         </div>
-        <ol class="log-list mono" id="log"></ol>
-      </aside>
-    </div>
-    <div class="shelf-wrap">
-      <div class="shelf-head">
-        <div class="shelf-title">
-          <span class="mono accent" data-i18n="shelf.kicker"></span>
-          <h3><span data-i18n="shelf.title"></span> <span class="mono accent shelf-count" id="shelf-count"></span></h3>
-          <p data-i18n="shelf.lede"></p>
-        </div>
-        <div class="shelf-controls">
-          <div class="tabs" id="tabs" role="group" aria-label="묶음"></div>
-          <button type="button" class="arrow" id="prev" aria-label="이전 프로젝트">←</button>
-          <button type="button" class="arrow arrow-on" id="next" aria-label="다음 프로젝트">→</button>
-        </div>
       </div>
-      <div class="shelf">
-        <div class="shelf-row" id="shelf-row"></div>
-        <div class="plank" aria-hidden="true"><span></span></div>
-      </div>
-      <div class="detail" id="detail" aria-live="polite"></div>
-      <div class="story" id="story"></div>
     </div>
-    </div>
-    </div>
+  </section>
+
+  <section id="journey-sec" class="section">
+    <h2 class="label mono" data-i18n="nav.journey.n"></h2>
+    <div class="body"><div class="jr" id="journey"></div></div>
   </section>
 
   <section id="activities" class="section">
     <h2 class="label mono" data-i18n="nav.activities.n"></h2>
     <div class="body">
       <ol class="rows" id="activity-list"></ol>
-    </div>
-  </section>
-
-  <section id="training" class="section">
-    <h2 class="label mono" data-i18n="nav.training.n"></h2>
-    <div class="body">
-      <ol class="rows" id="training-list"></ol>
-      <div class="certs" id="certs"></div>
     </div>
   </section>
 
@@ -163,7 +193,22 @@
 <script src="projects.js"></script>
 <script src="feature.js"></script>
 <script src="main.js"></script>
-<script src="app.js"></script>
-<script src="gate.js"></script>
+<script src="notes.js"></script>
+<script src="journey.js"></script>
+<script src="edition.js"></script>
+<script src="js/core.js"></script>
+<script src="js/notes.js"></script>
+<script src="js/covers.js"></script>
+<script src="js/shelf.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/project-tabs.js"></script>
+<script src="js/plan-dial.js"></script>
+<script src="js/main-projects.js"></script>
+<script src="js/viz.js"></script>
+<script src="js/reframe.js"></script>
+<script src="js/journey.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

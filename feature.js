@@ -14,12 +14,12 @@ window.SITE_FEATURE = {
   // 키워드 3개와 근거. {projects}, {days}는 자동 계산
   keywords: [
     {
-      tag: { ko: "근거 조사와 검증", en: "Evidence & verification" },
-      proof: { ko: "판촉 자료 12종 Medical, RA 검토 통과", en: "12 promotional pieces cleared Medical and RA review" }
+      tag: { ko: "해외 고객 커뮤니케이션", en: "Overseas customer communication" },
+      proof: { ko: "영문 투어 방문 연 100팀 이상, 인도네시아 연구소 단독 소통 창구", en: "100+ overseas tour visits a year, sole contact for the Indonesian lab" }
     },
     {
-      tag: { ko: "바이오 제약 도메인", en: "Bio & pharma domain" },
-      proof: { ko: "연구소 경영 2년, 백신 마케팅, 연구 2건", en: "2 yrs R&D management, vaccine marketing, 2 lab projects" }
+      tag: { ko: "해외 시장 조사", en: "Overseas market research" },
+      proof: { ko: "유럽 시장 리포트 9건, 리포트마다 베스트셀러 100개 이상 분석", en: "9 European market reports, each analyzing 100+ best-sellers" }
     },
     {
       tag: { ko: "AI 업무 자동화", en: "AI workflow automation" },

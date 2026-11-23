@@ -1,0 +1,52 @@
+/* LS 여정: 단계 6칸 한 줄 + 아래 상세. 둥근 카드 없이 선과 색 블록만 쓴다. */
+.jr-line { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.jr-line li + li { border-left: 1px solid var(--line); }
+.jr-step { all: unset; box-sizing: border-box; cursor: pointer; display: flex; flex-direction: column; gap: 6px; width: 100%; height: 100%; padding: 14px 14px 16px; position: relative; transition: background .2s; }
+.jr-step::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 3px; background: transparent; transition: background .2s; }
+.jr-step:hover, .jr-step:focus-visible { background: var(--surface-2); }
+.jr-step[aria-pressed="true"] { background: var(--accent-soft); }
+.jr-step[aria-pressed="true"]::before { background: var(--accent); }
+.jr-step:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.jr-no { font-size: 26px; font-weight: 700; color: var(--fg); line-height: 1; }
+.jr-step[aria-pressed="true"] .jr-no { color: var(--accent-ink); }
+.jr-period { font-size: 11px; color: var(--dim); }
+.jr-step b { font-size: 14px; line-height: 1.35; color: var(--fg); }
+.jr-step.pending { background-image: repeating-linear-gradient(135deg, transparent 0 8px, var(--surface-2) 8px 9px); }
+.jr-step.pending .jr-no, .jr-step.pending b { color: var(--dim); }
+
+.jr-detail { display: grid; grid-template-columns: 1fr 1.6fr 1.4fr; gap: 0; border-bottom: 1px solid var(--line); min-height: 210px; }
+.jr-detail > * { padding: 20px 22px; }
+.jr-detail > * + * { border-left: 1px solid var(--line); }
+.jr-k { display: block; font-size: 11px; letter-spacing: .08em; color: var(--dim); margin-bottom: 10px; }
+.jr-col p { margin: 0; line-height: 1.6; color: var(--soft); }
+.jr-changed { font-size: 17px; color: var(--fg) !important; }
+.jr-proof { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.jr-proof li { font-size: 12px; padding: 4px 8px; border: 1px solid var(--line-2); color: var(--fg); }
+.jr-go { display: flex; gap: 14px; margin-top: 14px; }
+.jr-split { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 14px; align-content: start; }
+.jr-split dt { font-size: 11px; color: var(--dim); padding-top: 3px; white-space: nowrap; }
+.jr-split dd { margin: 0; line-height: 1.5; color: var(--fg); font-size: 14px; }
+.jr-split dt:first-child { color: var(--accent-ink); }
+
+.jr-foot { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; padding: 18px 0 0; }
+.jr-foot .jr-k { margin: 0; }
+.jr-next { margin: 0; line-height: 1.6; color: var(--soft); }
+.jr-acts { display: flex; gap: 8px; }
+
+@media (max-width: 900px) {
+  .jr-line { grid-template-columns: repeat(3, 1fr); }
+  .jr-line li:nth-child(4) { border-left: 0; }
+  .jr-line li:nth-child(n+4) { border-top: 1px solid var(--line); }
+  .jr-detail { grid-template-columns: 1fr; }
+  .jr-detail > * + * { border-left: 0; border-top: 1px solid var(--line); }
+  .jr-foot { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .jr-line { grid-template-columns: repeat(2, 1fr); }
+  .jr-line li:nth-child(4) { border-left: 1px solid var(--line); }
+  .jr-line li:nth-child(odd) { border-left: 0; }
+  .jr-line li:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .jr-no { font-size: 20px; }
+}
+.jr-open { border: 0; border-bottom: 1px solid var(--accent); background: none; padding: 3px 0; color: var(--accent-ink); font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; }
+.jr-open::after { content: " →"; }
