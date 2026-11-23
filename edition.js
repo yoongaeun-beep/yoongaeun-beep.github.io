@@ -38,8 +38,13 @@ window.SITE_EDITION = {
       en: "I find the evidence, put it in words the customer can decide with, and *cut repetitive work with AI*."
     },
     // 카드는 누르면 해당 경력 묶음으로 이동한다
-    // 소개 숫자 카드는 첫 화면 숫자와 겹쳐 뺐다(채용담당자 검토, 2026-11-24)
-    cards: []
+    // 소개 숫자 카드: 첫 화면 숫자(12종, 연 100팀+, 3시간)와 겹치지 않게 경력의 다른 사실로(2026-11-24)
+    cards: [
+      { figure: { ko: "50여 개", en: "50+" }, title: { ko: "판촉물 제작과 배포 관리", en: "Promo items produced and distributed" }, where: { ko: "사노피 파스퇴르", en: "Sanofi Pasteur" }, to: "#exp-sanofi-material" },
+      { figure: { ko: "출처 표기", en: "Sourced" }, title: { ko: "Medical·RA 검토를 거친 근거 문구", en: "Claims cleared by Medical and RA" }, where: { ko: "사노피 파스퇴르", en: "Sanofi Pasteur" }, to: "#exp-sanofi-evidence" },
+      { figure: { ko: "9건", en: "9" }, title: { ko: "유럽 시장 리포트, 연구소 300명+ 배포", en: "European market reports for 300+ staff" }, where: { ko: "코스맥스", en: "COSMAX" }, to: "#exp-cosmax-market" },
+      { figure: { ko: "단독 창구", en: "Sole contact" }, title: { ko: "인도네시아 연구소(현지 60명) 협업", en: "Indonesian lab (60 staff)" }, where: { ko: "코스맥스", en: "COSMAX" }, to: "#exp-cosmax-indonesia" }
+    ]
   },
   // AI를 어떻게 쓰는지 한 줄(첫 화면). 근거: 코스맥스 자동화의 표본 대조, PharmaFlow AI 도우미의 숫자 재검사
   aiRule: {
