@@ -464,7 +464,7 @@ h1, h2, h3, .mc-title, .mc-me b, .pd-title, .rfb-real, .rfb-first, .jr-changed, 
 .pd-shot img { max-height: 340px; }
 
 /* 메인 프로젝트를 다른 구역과 분리(2026-11-24 요청): 흰 바탕 판 + 위쪽 포인트색 굵은 선. 둥근 모서리와 떠 있는 그림자는 쓰지 않는다 */
-.mc { background: var(--surface); border-top: 4px solid var(--accent); padding: 26px clamp(18px, 2.6vw, 34px) 30px; box-shadow: 0 0 0 1px var(--line); }
+.mc { background: color-mix(in srgb, var(--surface) 40%, transparent); border-top: 4px solid var(--accent); padding: 26px clamp(18px, 2.6vw, 34px) 30px; box-shadow: 0 0 0 1px var(--line); }
 .mc .pd-shot img { background: var(--bg); }
 /* 글자가 살짝 떠오르는 효과: 탭을 바꾸거나 다이얼을 돌릴 때마다 제목, 핵심 한 줄, 숫자가 차례로 올라온다 */
 @keyframes pop { 0% { opacity: 0; transform: translateY(14px) scale(.97); } 65% { opacity: 1; transform: translateY(-3px) scale(1.01); } 100% { opacity: 1; transform: none; } }
