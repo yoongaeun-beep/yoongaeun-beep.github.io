@@ -125,11 +125,11 @@ window.SITE_DATA = {
     { lane: "act", from: "2020-03", to: "2021-02", label: { ko: "방송국 기술실장, 광고 동아리, UN 청년위원단 등 4개", en: "Campus broadcasting, ad club, UN youth committee and more" } },
     { lane: "work", from: "2021-07", to: "2022-01", label: { ko: "사노피 파스퇴르 백신 마케팅 인턴", en: "Sanofi Pasteur vaccine marketing intern" } },
     { lane: "act", from: "2022-07", to: "2022-11", label: { ko: "학습 멘토링 55시간", en: "55 hours of mentoring" } },
-    { lane: "act", from: "2022-08", to: "2023-05", label: { ko: "학부 연구 (경희대 연구실, KIST)", en: "Undergraduate research (KHU lab, KIST)" } },
-    { lane: "train", from: "2024-01", to: "2024-01", label: { ko: "바이오 미래인재스쿨 10시간", en: "Bio Future Talent School, 10 h" } },
+    { lane: "act", from: "2022-08", to: "2023-05", ed: "bio", label: { ko: "학부 연구 (경희대 연구실, KIST)", en: "Undergraduate research (KHU lab, KIST)" } },
+    { lane: "train", from: "2024-01", to: "2024-01", ed: "bio", label: { ko: "바이오 미래인재스쿨 10시간", en: "Bio Future Talent School, 10 h" } },
     { lane: "train", from: "2024-02", to: "2024-03", label: { ko: "GMP 전문가 양성과정 192시간", en: "GMP specialist training, 192 h" } },
     { lane: "work", from: "2024-06", to: "2026-07", label: { ko: "코스맥스 연구소 경영, 해외영업", en: "COSMAX R&D management, overseas sales" } },
-    { lane: "train", from: "2026-07", to: "2026-08", label: { ko: "의약품 인허가(RA) 기본교육", en: "Pharmaceutical RA basics" } },
+    { lane: "train", from: "2026-07", to: "2026-08", ed: "bio", label: { ko: "의약품 인허가(RA) 기본교육", en: "Pharmaceutical RA basics" } },
     { lane: "train", from: "2026-08", to: "2026-11", label: { ko: "LS Jump Up AI 부트캠프", en: "LS Jump Up AI Bootcamp" }, now: true }
   ],
   // 대외활동: summary는 닫힌 상태에 보이는 줄(줄마다 bullet), details는 '자세히'를 눌러야 보이는 줄
@@ -202,6 +202,7 @@ window.SITE_DATA = {
     },
     {
       period: "2022.12 ~ 2023.05",
+      ed: "bio",
       title: { ko: "KIST 뇌과학연구소 뇌질환연구단", en: "KIST Brain Science Institute" }, compactIn: "global",
       sub: { ko: "학부연구생", en: "Undergraduate researcher" },
       summary: {
@@ -215,6 +216,7 @@ window.SITE_DATA = {
     },
     {
       period: "2022.08 ~ 2022.12",
+      ed: "bio",
       title: { ko: "경희대 줄기세포 및 암 연구실", en: "Kyung Hee Univ. stem cell & cancer lab" }, compactIn: "global",
       sub: { ko: "학부연구생", en: "Undergraduate researcher" },
       summary: {
@@ -230,25 +232,27 @@ window.SITE_DATA = {
       title: { ko: "LS Jump Up AI 부트캠프", en: "LS Jump Up AI Bootcamp" },
       sub: { ko: "약 3개월 반 집중 과정, 2026.11 수료 예정", en: "3.5-month intensive, finishing Nov 2026" },
       summary: {
-        ko: ["제조 데이터 분석부터 AI 에이전트까지 실습 위주로 배우는 중", "3인 팀 조장으로 설비 고장 예측과 발주 시점 대시보드 제작, 두 번째 팀 프로젝트로 백신 품질 관리 시스템 기획 (프로젝트 참고)"],
-        en: ["Hands-on training from manufacturing data analysis to AI agents", "Led a 3-person team on a failure prediction and ordering dashboard, then planned a vaccine quality system in a second team project (see Projects)"]
+        ko: ["제조 데이터 분석부터 AI 에이전트까지 실습 위주로 배우는 중", "팀 프로젝트 3개: 설비 고장 예측과 발주 시점 대시보드(3인, 조장), 백신 품질 관리 시스템(3인, 기획), 피싱 대응 훈련 서비스(4인, 판정 규칙과 챗봇) (프로젝트 참고)"],
+        en: ["Hands-on training from manufacturing data analysis to AI agents", "Three team projects: a failure prediction and ordering dashboard (3, team lead), a vaccine quality system (3, planning) and an anti-phishing drill service (4, judgement rules and chatbot) (see Projects)"]
       },
       details: {
-        ko: ["배우는 내용: 제조업 디지털 전환, 데이터 분석과 시각화, 바이브 코딩 웹 개발, 생성형 AI 업무 자동화, AI 에이전트 구축", "첫 팀 프로젝트에서 데이터 전처리, 부품별 고장 예측 모델, 대시보드 화면 통합을 맡음", "센서 데이터 87만 건으로 만든 모델의 AUC는 채택 부품 기준 0.88~0.94"],
-        en: ["Topics: manufacturing digital transformation, data analysis and visualization, vibe-coded web development, generative AI automation, AI agents", "In the first team project I handled preprocessing, per-part failure models and dashboard integration", "AUC 0.88~0.94 for the adopted parts, trained on 870k sensor records"]
+        ko: ["배우는 내용: 제조업 디지털 전환, 데이터 분석과 시각화, 바이브 코딩 웹 개발, 생성형 AI 업무 자동화, AI 에이전트 구축", "첫 팀 프로젝트에서 데이터 전처리, 부품별 고장 예측 모델, 대시보드 화면 통합을 맡음", "센서 데이터 87.6만 행으로 만든 모델의 AUC는 채택 부품 기준 0.88~0.94"],
+        en: ["Topics: manufacturing digital transformation, data analysis and visualization, vibe-coded web development, generative AI automation, AI agents", "In the first team project I handled preprocessing, per-part failure models and dashboard integration", "AUC 0.88~0.94 for the adopted parts, trained on 876k sensor rows"]
       }
     },
     {
       period: "2024.02 ~ 2024.03",
+      summaryBio: { ko: ["관련 프로젝트: PharmaFlow Bio(백신 품질 이탈과 출하 검토 흐름 기획)"], en: ["Related project: PharmaFlow Bio (vaccine deviation and release review flow)"] },
       title: { ko: "GMP 전문가 양성과정", en: "GMP specialist training" },
       sub: { ko: "한국산업기술시험원(KTL), 192시간", en: "KTL, 192 hours" },
       summary: {
-        ko: ["제조 품질관리 규정(GMP)과 품질관리 체계, 밸리데이션 이론을 배우고 분석 장비를 실습", "관련 프로젝트: PharmaFlow Bio(백신 품질 이탈과 출하 검토 흐름 기획)"],
-        en: ["Manufacturing quality rules (GMP), quality systems and validation theory, with hands-on analytical equipment", "Related project: PharmaFlow Bio (vaccine deviation and release review flow)"]
+        ko: ["제조 품질관리 규정(GMP)과 품질관리 체계, 밸리데이션 이론을 배우고 분석 장비를 실습"],
+        en: ["Manufacturing quality rules (GMP), quality systems and validation theory, with hands-on analytical equipment"]
       }
     },
     {
       period: "2026.07 ~ 2026.08",
+      ed: "bio",
       title: { ko: "의약품 인허가(RA) 기본교육", en: "Pharmaceutical regulatory affairs basics" },
       sub: { ko: "한국제약바이오협회, 6시간", en: "Korea Pharmaceutical and Bio-Pharma Manufacturers Association, 6 hours" },
       summary: {
@@ -258,6 +262,7 @@ window.SITE_DATA = {
     },
     {
       period: "2024.01",
+      ed: "bio",
       title: { ko: "바이오 미래인재스쿨 4기 고급과정", en: "Bio Future Talent School, advanced course" },
       sub: { ko: "충북창조경제혁신센터, 10시간", en: "Chungbuk Center for Creative Economy & Innovation, 10 hours" },
       summary: {

@@ -26,7 +26,7 @@ function timelineMonths(items, from) {
 function renderTimeline() {
   var box = document.getElementById("timeline"); if (!box) return;
   box.textContent = "";
-  var tm = timelineMonths(D.timeline || [], D.timelineFrom);
+  var tm = timelineMonths(forEdition(D.timeline), D.timelineFrom);
   var wrap = el("div", "tlm");
   var yrs = el("div", "tlm-years mono");
   yrs.style.gridTemplateColumns = tm.years.map(function (y) { return y.n + "fr"; }).join(" ");

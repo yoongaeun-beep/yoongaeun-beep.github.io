@@ -125,7 +125,8 @@ function renderRows(list, target) {
     ol.appendChild(li);
     if (a.compactIn === E.id) return; // 이 사이트에서는 제목과 기간만
     var sum = el("ul", "row-sum");
-    ((a.summary && a.summary[lang]) || []).forEach(function (x) { sum.appendChild(rich("li", null, x)); });
+    // summaryBio: 유관산업 사이트에서만 덧붙이는 줄(예: GMP 교육의 관련 프로젝트)
+    ((a.summary && a.summary[lang]) || []).concat(E.id === "bio" && a.summaryBio ? a.summaryBio[lang] || [] : []).forEach(function (x) { sum.appendChild(rich("li", null, x)); });
     body.appendChild(sum);
     var more = rowMore(a, target + "-d" + k);
     if (more) { head.appendChild(more.btn); body.appendChild(more.panel); }

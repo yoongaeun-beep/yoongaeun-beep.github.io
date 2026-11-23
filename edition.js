@@ -7,8 +7,8 @@ window.SITE_EDITION = {
   // 사실 근거: dev/knowledge/profile-gaeun.md. 코스맥스는 화장품 ODM이므로 '바이오 제약 현장'이라고 쓰지 않는다.
   hero: {
     line: {
-      ko: "판촉 자료는 목표보다 *2종 더*,\n이틀 걸리던 분석은 *AI로 3시간*",
-      en: "*2 more* promo pieces than the target,\nand two days of analysis cut to *3 hours with AI*"
+      ko: "근거를 찾아 *검토를 통과하는 자료*로 만들고,\n반복되는 정리는 *AI로 줄입니다*",
+      en: "I turn evidence into *materials that pass review*,\nand cut repetitive sorting *with AI*"
     },
     sub: {
       ko: "생명공학을 전공하고 사노피 백신 마케팅과 코스맥스 연구소 경영을 거쳐, 지금은 LS Jump Up에서 AI로 제조 현장의 문제를 풀고 있습니다.",
@@ -38,12 +38,8 @@ window.SITE_EDITION = {
       en: "I find the evidence, put it in words the customer can decide with, and *cut repetitive work with AI*."
     },
     // 카드는 누르면 해당 경력 묶음으로 이동한다
-    cards: [
-      { figure: { ko: "12종", en: "12" }, title: { ko: "목표를 넘긴 판촉 자료", en: "Promo pieces beyond target" }, where: { ko: "사노피 파스퇴르", en: "Sanofi Pasteur" }, to: "#exp-sanofi-material" },
-      { figure: { ko: "연 100팀+", en: "100+/yr" }, title: { ko: "영문 연구소 투어 신설", en: "English R&D tour I launched" }, where: { ko: "코스맥스", en: "COSMAX" }, to: "#exp-cosmax-global" },
-      { figure: { ko: "3시간", en: "3 h" }, title: { ko: "이틀 걸리던 정리를 AI로", en: "Two days of work with AI" }, where: { ko: "코스맥스", en: "COSMAX" }, to: "#exp-cosmax-ai" },
-      { figure: { ko: "단독 창구", en: "Sole contact" }, title: { ko: "인도네시아 연구소와 협업", en: "Indonesian R&D lab" }, where: { ko: "코스맥스", en: "COSMAX" }, to: "#exp-cosmax-indonesia" }
-    ]
+    // 소개 숫자 카드는 첫 화면 숫자와 겹쳐 뺐다(채용담당자 검토, 2026-11-24)
+    cards: []
   },
   // AI를 어떻게 쓰는지 한 줄(첫 화면). 근거: 코스맥스 자동화의 표본 대조, PharmaFlow AI 도우미의 숫자 재검사
   aiRule: {
@@ -54,17 +50,17 @@ window.SITE_EDITION = {
   shelfHide: ["hapgyeok-bomber", "hapgyeok-bomber-p0", "hapgyeok-beat", "voicefishing"],
   // 리프레임 스크롤에 보여 줄 노트(순서대로)
   reframe: ["note-market-toolkit", "note-harness", "note-docking", "note-workflow-app", "note-recruiter"],
-  projectOrder: ["pharmaflow", "voicefishing", "predictive-maintenance"],
+  projectOrder: ["pharmaflow", "predictive-maintenance", "voicefishing"],
   ui: {
     ko: {
       "kicker": "BIO & PHARMA PORTFOLIO",
-      "nav.about.n": "01 소개", "nav.reframe.n": "02 기획 방식", "nav.timeline.n": "03 걸어온 길", "nav.experience.n2": "04 경력과 학력", "nav.training.n": "05 교육 및 자격",
-      "nav.projects.n": "06 프로젝트", "nav.journey.n": "07 LS 여정", "nav.activities.n": "08 대외활동과 연구", "nav.contact.n": "09 연락"
+      "nav.about.n": "01 소개", "nav.reframe.n": "05 기획 방식", "nav.timeline.n": "07 걸어온 길", "nav.experience.n2": "02 경력과 학력", "nav.training.n": "06 교육 및 자격",
+      "nav.projects.n": "03 프로젝트", "nav.journey.n": "04 LS 여정", "nav.activities.n": "08 대외활동과 연구", "nav.contact.n": "09 연락"
     },
     en: {
       "kicker": "BIO & PHARMA PORTFOLIO",
-      "nav.about.n": "01 About", "nav.reframe.n": "02 How I plan", "nav.timeline.n": "03 Timeline", "nav.experience.n2": "04 Experience & education", "nav.training.n": "05 Training & certificates",
-      "nav.projects.n": "06 Projects", "nav.journey.n": "07 LS journey", "nav.activities.n": "08 Activities & research", "nav.contact.n": "09 Contact"
+      "nav.about.n": "01 About", "nav.reframe.n": "05 How I plan", "nav.timeline.n": "07 Timeline", "nav.experience.n2": "02 Experience & education", "nav.training.n": "06 Training & certificates",
+      "nav.projects.n": "03 Projects", "nav.journey.n": "04 LS journey", "nav.activities.n": "08 Activities & research", "nav.contact.n": "09 Contact"
     }
   }
 };
