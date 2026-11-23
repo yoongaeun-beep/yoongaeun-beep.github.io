@@ -297,3 +297,21 @@
 .pd-cap-k { flex: none; font-size: 11px; font-weight: 700; padding: 2px 7px; background: var(--fg); color: var(--bg); }
 .pd-cap-k.deck { background: var(--surface-2); color: var(--fg); border: 1px solid var(--line-2); }
 .pd-shot img { max-height: 340px; }
+
+/* 메인 프로젝트를 다른 구역과 분리(2026-11-24 요청): 흰 바탕 판 + 위쪽 포인트색 굵은 선. 둥근 모서리와 떠 있는 그림자는 쓰지 않는다 */
+.mc { background: var(--surface); border-top: 4px solid var(--accent); padding: 26px clamp(18px, 2.6vw, 34px) 30px; box-shadow: 0 0 0 1px var(--line); }
+.mc .pd-shot img { background: var(--bg); }
+/* 글자가 살짝 떠오르는 효과: 탭을 바꾸거나 다이얼을 돌릴 때마다 제목, 핵심 한 줄, 숫자가 차례로 올라온다 */
+@keyframes pop { 0% { opacity: 0; transform: translateY(14px) scale(.97); } 65% { opacity: 1; transform: translateY(-3px) scale(1.01); } 100% { opacity: 1; transform: none; } }
+.mc:not([hidden]) .mc-title { animation: pop .55s cubic-bezier(.2,.8,.2,1) both; }
+.mc:not([hidden]) .mc-me b { animation: pop .55s .08s cubic-bezier(.2,.8,.2,1) both; }
+.mc:not([hidden]) .mc-nums li { animation: pop .5s cubic-bezier(.2,.8,.2,1) both; }
+.mc:not([hidden]) .mc-nums li:nth-child(2) { animation-delay: .08s; }
+.mc:not([hidden]) .mc-nums li:nth-child(3) { animation-delay: .16s; }
+.pd-text.fade .pd-title { animation: pop .5s .04s cubic-bezier(.2,.8,.2,1) both; }
+.pd-text.fade .pd-key { animation: pop .5s .16s cubic-bezier(.2,.8,.2,1) both; }
+.mc-nums b { transition: transform .2s, color .2s; display: inline-block; }
+.mc-nums li:hover b { transform: translateY(-3px); color: var(--accent-ink); }
+@media (max-width: 700px) { .mc { padding: 18px 14px 22px; } }
+@media (prefers-reduced-motion: reduce) { .mc .mc-title, .mc .mc-me b, .mc .mc-nums li, .pd-text.fade .pd-title, .pd-text.fade .pd-key { animation: none; } }
+@media (min-width: 901px) { .mc-top { flex-wrap: nowrap; } .mc-top-l { flex: 1 1 auto; } .mc-me { flex: 0 1 340px; } }
