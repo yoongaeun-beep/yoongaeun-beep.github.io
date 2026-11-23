@@ -8,12 +8,20 @@ LS Jump Up AI 부트캠프(2026.08 ~ 11) 개인 과제 제출용 저장소입니
 |---|---|
 | 이름 | 윤가은 |
 | 개인 저장소 | https://github.com/yoongaeun-beep/yoongaeun-beep.github.io |
-| 포트폴리오 (배포 사이트) | https://yoongaeun-beep.github.io |
-| 포트폴리오 (HTML 한 페이지 파일) | [portfolio.html](portfolio.html) |
+| 포트폴리오 1: 제약·바이오 지원용 | https://yoongaeun-beep.github.io |
+| 포트폴리오 2: 해외영업·사업기획 지원용 | https://yoongaeun-beep.github.io/global-portfolio (저장소 [global-portfolio](https://github.com/yoongaeun-beep/global-portfolio)) |
+| 포트폴리오 (HTML 한 페이지 파일) | [portfolio.html](portfolio.html) (제약·바이오용). 해외영업용은 global-portfolio 저장소의 portfolio.html |
 | LS 여정 (바이브코딩 기초 → 프로젝트3) | https://yoongaeun-beep.github.io/#journey-sec |
 | 이력서 (PDF) | [resume.pdf](resume.pdf), 사이트 맨 위 '이력서 다운로드' 버튼 |
 
-## 포트폴리오에서 볼 곳
+## 포트폴리오가 두 개인 이유
+
+같은 사실과 프로젝트를 지원 산업에 맞춰 두 가지로 보여 줍니다. 내용과 증거는 같고, 첫 화면 문장, 강조하는 경력, 프로젝트 순서만 다릅니다.
+
+- **제약·바이오용**: 백신 마케팅과 품질 관련 경험을 앞에 두고, PharmaFlow Bio(백신 QA)를 첫 프로젝트로.
+- **해외영업·사업기획용**: 해외 고객 응대(연 100팀 이상)와 AI 업무 자동화를 앞에 두고, 안물어(프로젝트3)를 첫 프로젝트로. 'LS 여정'은 04번 구역에 있습니다.
+
+## 포트폴리오에서 볼 곳 (제약·바이오용 번호 기준)
 
 - **07 LS 여정**: 단계 6개(데이터 기초, 프로젝트1, 바이브 코딩과 AI 작업 규칙, 프로젝트2, 업무 자동화, 프로젝트3). 단계마다 배운 것, 달라진 점과 증거, 내가 한 일 / 팀 / Claude를 나눠 적었습니다.
 - **06 프로젝트**: 프로젝트1(부품 발주 시점 대시보드), 프로젝트2(PharmaFlow Bio), 프로젝트3(안물어, 피싱 대응 훈련). 기획 흐름(발견 → 진짜 문제 → 관점 → 해법 → 확인)과 역할 분담.
