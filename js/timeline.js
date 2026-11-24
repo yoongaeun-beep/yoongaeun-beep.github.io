@@ -29,18 +29,30 @@ function renderTimeline() {
   var tm = timelineMonths(forEdition(D.timeline), D.timelineFrom);
   var wrap = el("div", "tlm");
   var yrs = el("div", "tlm-years mono");
-  yrs.style.gridTemplateColumns = tm.years.map(function (y) { return y.n + "fr"; }).join(" ");
+  // 달력 시작(2020.01)보다 먼저 시작한 일(2018.03 입학)은 앞에 좁은 칸 하나로 줄여 보여 준다(물결 표시로 생략 구간임을 알림)
+  var pre = timelinePre(forEdition(D.timeline), D.timelineFrom);
+  yrs.style.gridTemplateColumns = (pre ? PRE_W + "fr " : "") + tm.years.map(function (y) { return y.n + "fr"; }).join(" ");
+  if (pre) yrs.appendChild(el("span", "tlm-pre-y", pre.label));
   tm.years.forEach(function (y) { yrs.appendChild(el("span", null, String(y.y))); });
   wrap.appendChild(yrs);
   var row = el("div", "tlm-row");
   var detail = el("div", "tlm-detail");
   if (tlSel == null) tlSel = tm.months.length - 1;
+  if (pre) {
+    var pc = el("button", "tlm-pre"); pc.type = "button"; pc.style.flex = PRE_W + " 1 0";
+    pc.setAttribute("aria-label", pre.label + " " + pre.items.map(function (x) { return L(x.label); }).join(", "));
+    pre.items.forEach(function (x) { pc.appendChild(el("span", "tlm-" + x.lane)); });
+    pc.appendChild(el("i", "tlm-break", "≈"));
+    function pickPre() { tlSel = -1; fillTimelineDetail(detail, { m: 0, items: pre.items, text: pre.range }); row.querySelectorAll(".tlm-cell, .tlm-pre").forEach(function (b) { b.classList.toggle("sel", b === pc); }); }
+    pc.addEventListener("mouseenter", pickPre); pc.addEventListener("focus", pickPre); pc.addEventListener("click", pickPre);
+    row.appendChild(pc);
+  }
   tm.months.forEach(function (mo, i) {
     var c = el("button", "tlm-cell" + (mo.now ? " now" : "")); c.type = "button";
     c.setAttribute("aria-label", monthLabel(mo.m) + " " + mo.items.map(function (x) { return L(x.label); }).join(", "));
     (mo.items.length ? mo.items : [null]).forEach(function (x) { c.appendChild(el("span", x ? "tlm-" + x.lane : "tlm-none")); });
     c.style.transitionDelay = (i * 6) + "ms";
-    function pick() { tlSel = i; fillTimelineDetail(detail, tm.months[i]); row.querySelectorAll(".tlm-cell").forEach(function (b, k) { b.classList.toggle("sel", k === i); }); }
+    function pick() { tlSel = i; fillTimelineDetail(detail, tm.months[i]); row.querySelectorAll(".tlm-cell").forEach(function (b, k) { b.classList.toggle("sel", k === i); }); var pp = row.querySelector(".tlm-pre"); if (pp) pp.classList.remove("sel"); }
     c.addEventListener("mouseenter", pick); c.addEventListener("focus", pick); c.addEventListener("click", pick);
     if (i === tlSel) c.classList.add("sel");
     row.appendChild(c);
@@ -51,9 +63,19 @@ function renderTimeline() {
   fillTimelineDetail(detail, tm.months[tlSel]);
   box.appendChild(timelineLegend());
 }
+var PRE_W = 9;
+// 달력 시작 전에 시작한 일: 앞 칸에 넣을 항목과 표시 문구
+function timelinePre(items, from) {
+  var start = monthIndex(from);
+  var early = items.filter(function (x) { return monthIndex(x.from) < start; });
+  if (!early.length) return null;
+  var first = Math.min.apply(null, early.map(function (x) { return monthIndex(x.from); }));
+  var y0 = Math.floor(first / 12), y1 = Math.floor((start - 1) / 12);
+  return { items: early, label: y0 + "~", range: monthLabel(first) + " ~ " + monthLabel(start - 1) };
+}
 function fillTimelineDetail(box, mo) {
   box.textContent = "";
-  box.appendChild(el("span", "tlm-ym mono", monthLabel(mo.m)));
+  box.appendChild(el("span", "tlm-ym mono", mo.text || monthLabel(mo.m)));
   var ul = el("ul", "tlm-items");
   mo.items.forEach(function (x) {
     var li = el("li"); li.appendChild(el("i", "tlm-" + x.lane));

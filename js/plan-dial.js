@@ -17,9 +17,6 @@ function planDial(m) {
     b.setAttribute("aria-label", t(PLAN_KEYS[i]) + " " + L(s.t));
     b.style.left = Math.round(DIAL.r * Math.cos(i * DIAL.step)) + "px";
     b.style.top = Math.round(DIAL.r * Math.sin(i * DIAL.step)) + "px";
-    // 마우스는 잠깐 머물러야 넘어가고, 도는 동안에는 다른 숫자가 지나가도 무시한다(1에서 5로 건너뛰던 문제)
-    b.addEventListener("mouseenter", function () { clearTimeout(hoverT); hoverT = setTimeout(function () { if (Date.now() > busyUntil) go(i); }, DIAL.hoverDelay); });
-    b.addEventListener("mouseleave", function () { clearTimeout(hoverT); });
     b.addEventListener("focus", function () { go(i); });
     b.addEventListener("click", function () { go(i); });
     wheel.appendChild(b);

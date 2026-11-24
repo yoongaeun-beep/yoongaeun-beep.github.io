@@ -11,7 +11,7 @@ function render() {
   document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
   renderHero(); renderAbout(); renderTimeline(); renderExperience(); renderActivities();
   renderMain(); equalizeTops(); renderIndex(); renderAutoLog(); renderShelf(false);
-  renderReframe(); renderJourney(); initMotion();
+  renderReframe(); renderJourney(); renderToc(); initMotion();
   document.getElementById("email").textContent = D.email;
   document.getElementById("mail-link").href = "mailto:" + D.email;
   document.getElementById("foot").textContent = t("foot", { date: dot(window.SITE_UPDATED) });

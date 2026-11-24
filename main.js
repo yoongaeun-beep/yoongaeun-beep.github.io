@@ -26,10 +26,10 @@ window.SITE_MAIN = [
     // 기획 흐름(2026-11-23): 왜 이 문제였고, 진짜 문제를 무엇으로 다시 정했고, 어떤 관점으로 해법까지 갔는지. 근거: steps, dev/knowledge/profile-gaeun.md
     plan: [
       { mine: false, t: { ko: "날짜만 보고 교체", en: "Replaced by age" }, d: { ko: "교체 3,286건 중 22.7%가 고장 난 뒤의 긴급 교체", en: "22.7% of 3,286 replacements were emergency fixes" }, line: { ko: "부품을 쓴 날짜만 보고 교체했고, 교체 3,286건 중 **22.7%가 고장 난 뒤의 긴급 교체**였습니다.", en: "Parts were replaced by age alone; 22.7% of 3,286 replacements were emergencies." }, key: { ko: "긴급 교체 22.7%", en: "22.7% emergency" }, img: "assets/main/dashboard-main.png" },
-      { mine: true, t: { ko: "예측이 아니라 발주 시점", en: "Not prediction but order timing" }, d: { ko: "팀 논의로 실무자의 어려움은 '언제 주문하나'라는 판단임을 확인", en: "Found the real struggle is deciding when to order" }, line: { ko: "처음에는 30일 안의 고장 확률을 보여 주려 했지만, 팀 논의에서 실무자가 어려워하는 건 **'언제 주문하나'라는 판단**임을 확인했습니다.", en: "We first planned a 30-day failure dashboard, then found the real struggle is deciding when to order." }, key: { ko: "예측보다 발주 시점", en: "Order timing over prediction" }, img: "assets/main/dashboard-main.png" },
-      { mine: false, t: { ko: "확률 말고 비용과 행동", en: "Cost and action, not odds" }, d: { ko: "일찍 사면 보관비, 늦으면 긴급 작업비와 정지 손실", en: "Too early costs storage, too late costs downtime" }, line: { ko: "일찍 사면 보관비가, 늦게 사면 긴급 작업비와 설비 정지 손실이 붙습니다. 결과는 **확률이 아니라 D-day와 발주 마감**으로 보여 주기로 했습니다.", en: "Early orders cost storage; late ones cost emergency work and downtime. Results show as D-day and order deadline, not odds." }, key: { ko: "확률 대신 비용과 행동", en: "Cost and action, not odds" }, img: "assets/main/dashboard-main.png" },
-      { mine: true, t: { ko: "고장 예측 + 총비용 곡선", en: "Prediction + cost curve" }, d: { ko: "부품별 예측 모델과 발주일별 총비용으로 최소 비용 시점 제안", en: "Per-part models and daily total cost give the best order date" }, line: { ko: "부품별 고장 예측 모델과 발주일별 총비용 곡선으로 **비용이 최소가 되는 발주 시점**을 제안합니다. 저는 모델과 화면 통합을 맡았습니다.", en: "Per-part models and a daily total-cost curve point to the lowest-cost order date. I built the models and integrated the screens." }, key: { ko: "총비용 최소 시점 제안", en: "Lowest-cost order date" }, img: "assets/main/dashboard-main.png" },
-      { mine: false, t: { ko: "믿을 수 있는 숫자로", en: "Numbers we can trust" }, d: { ko: "0.98을 의심해 정답 누출을 걷어내고 0.88~0.94, 테스트 47건", en: "Doubted 0.98, removed leakage: 0.88~0.94, 47 tests" }, line: { ko: "정확도가 0.98로 너무 높게 나오자 의심해 **정답 누출을 찾아 걷어냈고**, 믿을 수 있는 0.88~0.94를 얻었습니다. 합치기 전 테스트는 47건입니다.", en: "AUC of 0.98 looked too good, so we removed the leakage and got a trustworthy 0.88~0.94. 47 tests gate every merge." }, key: { ko: "AUC 0.88~0.94", en: "AUC 0.88~0.94" }, img: "assets/main/dashboard-main.png" }
+      { mine: true, t: { ko: "예측이 아니라 발주 시점", en: "Not prediction but order timing" }, d: { ko: "팀 논의로 실무자의 어려움은 '언제 주문하나'라는 판단임을 확인", en: "Found the real struggle is deciding when to order" }, line: { ko: "처음에는 30일 안의 고장 확률을 보여 주려 했지만, 팀 논의에서 실무자가 어려워하는 건 **'언제 주문하나'라는 판단**임을 확인했습니다.", en: "We first planned a 30-day failure dashboard, then found the real struggle is deciding when to order." }, key: { ko: "예측보다 발주 시점", en: "Order timing over prediction" }, img: "assets/main/pm-calendar.jpg" },
+      { mine: false, t: { ko: "확률 말고 비용과 행동", en: "Cost and action, not odds" }, d: { ko: "일찍 사면 보관비, 늦으면 긴급 작업비와 정지 손실", en: "Too early costs storage, too late costs downtime" }, line: { ko: "일찍 사면 보관비가, 늦게 사면 긴급 작업비와 설비 정지 손실이 붙습니다. 결과는 **확률이 아니라 D-day와 발주 마감**으로 보여 주기로 했습니다.", en: "Early orders cost storage; late ones cost emergency work and downtime. Results show as D-day and order deadline, not odds." }, key: { ko: "확률 대신 비용과 행동", en: "Cost and action, not odds" }, img: "assets/main/pm-dday.jpg" },
+      { mine: true, t: { ko: "고장 예측 + 총비용 곡선", en: "Prediction + cost curve" }, d: { ko: "부품별 예측 모델과 발주일별 총비용으로 최소 비용 시점 제안", en: "Per-part models and daily total cost give the best order date" }, line: { ko: "부품별 고장 예측 모델과 발주일별 총비용 곡선으로 **비용이 최소가 되는 발주 시점**을 제안합니다. 저는 모델과 화면 통합을 맡았습니다.", en: "Per-part models and a daily total-cost curve point to the lowest-cost order date. I built the models and integrated the screens." }, key: { ko: "총비용 최소 시점 제안", en: "Lowest-cost order date" }, img: "assets/main/pm-cost.jpg" },
+      { mine: false, t: { ko: "믿을 수 있는 숫자로", en: "Numbers we can trust" }, d: { ko: "0.98을 의심해 정답 누출을 걷어내고 0.88~0.94, 테스트 47건", en: "Doubted 0.98, removed leakage: 0.88~0.94, 47 tests" }, line: { ko: "정확도가 0.98로 너무 높게 나오자 의심해 **정답 누출을 찾아 걷어냈고**, 믿을 수 있는 0.88~0.94를 얻었습니다. 합치기 전 테스트는 47건입니다.", en: "AUC of 0.98 looked too good, so we removed the leakage and got a trustworthy 0.88~0.94. 47 tests gate every merge." }, key: { ko: "AUC 0.88~0.94", en: "AUC 0.88~0.94" }, img: "assets/main/pm-risk.jpg" }
     ],
     // 어디까지가 내 일인지(채용담당자 점검 2026-11-23). 근거: role, team(기여도 35%)
     split: {
@@ -112,6 +112,10 @@ window.SITE_MAIN = [
       title: { ko: "설비보전 대시보드 웹 재현본", en: "Maintenance dashboard web replica" }
     },
     images: [
+      { src: "assets/main/pm-calendar.jpg", alt: { ko: "To-Do 달력: 날짜별로 점검과 부품 교체 할 일을 보여 줌", en: "To-do calendar: inspections and part swaps by date" } },
+      { src: "assets/main/pm-dday.jpg", alt: { ko: "부품 위치: 부품마다 위험 상승까지 남은 D-day와 발주 검토", en: "Part map: days left before risk rises, with order review" } },
+      { src: "assets/main/pm-cost.jpg", alt: { ko: "언제 발주하면 가장 쌀까: 발주일별 총비용 곡선과 발주 시나리오 비교", en: "When to order: total-cost curve by order date and scenarios" } },
+      { src: "assets/main/pm-risk.jpg", alt: { ko: "설비별 이상 위험: 설비 100대의 센서 패턴 이상 정도", en: "Anomaly risk across 100 machines" } },
       { src: "assets/main/dashboard-main.png", alt: { ko: "대시보드 메인 화면: AI 한 줄 요약, 경고 KPI, To-Do 달력, 위험 TOP5, 재고와 위험 교차표", en: "Dashboard home: AI summary, KPIs, to-do calendar, top-5 risk, stock and risk table" } }
     ]
   },
@@ -302,7 +306,7 @@ window.SITE_MAIN = [
           "ko": "20~30대 52.5%",
           "en": "52.5% aged 20~39"
         },
-        "img": "assets/voicefishing/intro.jpg"
+        "img": "assets/voicefishing/why.jpg"
       },
       {
         "mine": false,
@@ -322,7 +326,7 @@ window.SITE_MAIN = [
           "ko": "수법 해부도 4단계",
           "en": "4-step tactic anatomy"
         },
-        "img": "assets/voicefishing/library.jpg"
+        "img": "assets/voicefishing/anatomy.jpg"
       },
       {
         "mine": true,
@@ -342,7 +346,7 @@ window.SITE_MAIN = [
           "ko": "무반응 = 최고점, 48시간 간격",
           "en": "No reaction = best, 48h apart"
         },
-        "img": "assets/voicefishing/sea.jpg"
+        "img": "assets/voicefishing/radar.jpg"
       },
       {
         "mine": false,
@@ -362,7 +366,7 @@ window.SITE_MAIN = [
           "ko": "사람 승인 2번",
           "en": "Two human approvals"
         },
-        "img": "assets/voicefishing/admin.jpg"
+        "img": "assets/voicefishing/flow.jpg"
       },
       {
         "mine": true,
@@ -487,6 +491,10 @@ window.SITE_MAIN = [
       }
     },
     "images": [
+      {"src": "assets/voicefishing/why.jpg", "alt": {"ko": "소개 화면 '왜 필요한가요': 20~30대 52.5%, 읽는 교육의 한계", "en": "Intro: why it matters"}},
+      {"src": "assets/voicefishing/anatomy.jpg", "alt": {"ko": "수법 해부도: 미끼, 재촉, 위조된 확인 경로, 노리는 것", "en": "Tactic anatomy: bait, pressure, forged check, target"}},
+      {"src": "assets/voicefishing/radar.jpg", "alt": {"ko": "이용자 홈 레이더: 내 상황과 맞는 신종 수법", "en": "User radar: new tactics matching my situation"}},
+      {"src": "assets/voicefishing/flow.jpg", "alt": {"ko": "운영 흐름: 수집부터 판정까지 7단계, 사람 승인 2번", "en": "Operations flow: 7 steps with two human approvals"}},
       {
         "src": "assets/voicefishing/sea.jpg",
         "alt": {

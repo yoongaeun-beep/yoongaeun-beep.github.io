@@ -9,7 +9,7 @@ function cvHead() {
   h.appendChild(el("h1", null, L(D.name)));
   h.appendChild(el("p", "cv-line", plain(L(E.about && E.about.line))));
   var meta = el("p", "cv-meta mono");
-  meta.textContent = [D.email, E.id === "global" ? "yoongaeun-beep.github.io/global-portfolio" : "yoongaeun-beep.github.io"].filter(Boolean).join("   ");
+  meta.textContent = [D.email, E.id === "global" ? "yoongaeun-beep.github.io" : "yoongaeun-beep.github.io/global-portfolio"].filter(Boolean).join("   ");
   h.appendChild(meta);
   var kw = el("ul", "cv-kw");
   (E.keywords || (E.hero || {}).keywords || []).forEach(function (k) { kw.appendChild(el("li", null, L(k))); });
